@@ -12,28 +12,28 @@ function checkControls(frames) {
 
   const { tileHeight, tileWidth } = this.game.state.states.Game.map;
 
-  if (upPressed) {
+  if (upPressed && !this.moving) {
     this.frame = frames.STAND_UP;
     tryMove.call(this, {
       x: this.x,
       y: this.y - tileHeight,
     });
   }
-  if (leftPressed) {
+  if (leftPressed && !this.moving) {
     this.frame = frames.STAND_LEFT;
     tryMove.call(this, {
       x: this.x - tileWidth,
       y: this.y,
     });
   }
-  if (downPressed) {
+  if (downPressed && !this.moving) {
     this.frame = frames.STAND_DOWN;
     tryMove.call(this, {
       x: this.x,
       y: this.y + tileHeight,
     });
   }
-  if (rightPressed) {
+  if (rightPressed && !this.moving) {
     this.frame = frames.STAND_RIGHT;
     tryMove.call(this, {
       x: this.x + tileWidth,
@@ -55,5 +55,11 @@ function tryMove(nextCoord) {
 function tweenMove(nextCoord) {
   const move = this.game.add.tween(this);
 
+  this.moving = true;
+
   move.to(nextCoord, 50, null, true);
+
+  move.onComplete.add(function() {
+    this.moving = false;
+  }, this);
 }
