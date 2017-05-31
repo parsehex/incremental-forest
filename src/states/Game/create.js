@@ -14,6 +14,7 @@ function addMap() {
   this.map.addTilesetImage('Ground', 'tiles_ground', 32, 32);
 
   this.layers = {};
+
   this.layers.background = this.map.createLayer('background');
   this.layers.foreground = this.map.createLayer('foreground');
 
@@ -24,12 +25,17 @@ function addMap() {
 }
 
 function addPlayer() {
-  const playerStart = findObjByKey(this.map.objects.objects, 'name', 'playerStart');
+  const playerStartObj = findObjByKey(this.map.objects.objects, 'name', 'playerStart');
+
+  const playerStart = {
+    x: playerStartObj.x + (this.map.tileWidth / 2),
+    y: playerStartObj.y - (this.map.tileHeight / 2),
+  };
 
   this.player = new Player({
     game: this.game,
     x: playerStart.x,
-    y: playerStart. y
+    y: playerStart.y
   });
 
   this.game.add.existing(this.player);
