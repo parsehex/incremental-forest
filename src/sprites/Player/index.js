@@ -8,7 +8,7 @@ export default class extends Phaser.Sprite {
   constructor({ game, x, y }) {
     super(game, x, y, 'guy', frames.GUY.STAND_DOWN);
 
-    this.anchor.setTo(0, 1);
+    this.anchor.setTo(0.5, 0.5);
 
     this.update = update.bind(this);
 
