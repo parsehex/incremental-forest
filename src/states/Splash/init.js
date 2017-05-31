@@ -1,3 +1,1 @@
-export default function init() {
-  // console.log('Splash init');
-}
+export default function init() {}
