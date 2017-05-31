@@ -18,6 +18,8 @@ function addMap() {
   this.layers.background = this.map.createLayer('background');
   this.layers.foreground = this.map.createLayer('foreground');
 
+  this.map.createFromObjects('objects', 'generator', 'tiles_generator', 0);
+
   this.layers.background.resizeWorld();
 
   // set up tilemap walker
