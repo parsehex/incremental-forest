@@ -43,13 +43,42 @@ function checkControls(frames) {
 }
 
 function tryMove(nextCoord) {
+  const collision = checkCollide.call(this, nextCoord);
+
+  if (!collision) {
+    tweenMove.call(this, nextCoord);
+  }
+}
+
+function checkCollide(nextCoord) {
   const game = this.game.state.states.Game;
 
   const nextTile = game.map.getTileWorldXY(nextCoord.x, nextCoord.y, 32, 32, 'foreground');
 
-  if (nextTile !== null) {
-    tweenMove.call(this, nextCoord);
+  // if nextTile is null, there is no foreground tile at nextTile
+  if (nextTile === null) return true;
+
+  const nextTileCoord = {
+    x: nextTile.left,
+    y: nextTile.bottom,
+  };
+
+  const objects = game.map.objects.objects;
+
+  // check if any objects are at next tile and have collisions on
+  for (let i = 0, len = objects.length; i < len; i++) {
+    const object = objects[i];
+
+    const hasProperties = object.hasOwnProperty('properties') && object.properties;
+    const collidable = hasProperties && object.properties.collides === true;
+
+    const sameCoords = object.x === nextTileCoord.x && object.y === nextTileCoord.y;
+
+    if (sameCoords && collidable) return true;
   }
+
+  // no collisions with nextTile
+  return false;
 }
 
 function tweenMove(nextCoord) {
