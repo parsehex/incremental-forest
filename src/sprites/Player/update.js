@@ -1,3 +1,5 @@
+import frames from '../../sprite-frames';
+
 export default function update() {
   checkControls.call(this);
 }
@@ -13,24 +15,28 @@ function checkControls() {
   const { tileHeight, tileWidth } = this.game.state.states.Game.map;
 
   if (upPressed) {
+    this.frame = frames.GUY.STAND_UP;
     tryMove.call(this, {
       x: this.x,
       y: this.y - tileHeight,
     });
   }
   if (leftPressed) {
+    this.frame = frames.GUY.STAND_LEFT;
     tryMove.call(this, {
       x: this.x - tileWidth,
       y: this.y,
     });
   }
   if (downPressed) {
+    this.frame = frames.GUY.STAND_DOWN;
     tryMove.call(this, {
       x: this.x,
       y: this.y + tileHeight,
     });
   }
   if (rightPressed) {
+    this.frame = frames.GUY.STAND_RIGHT;
     tryMove.call(this, {
       x: this.x + tileWidth,
       y: this.y,
