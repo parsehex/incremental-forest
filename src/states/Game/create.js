@@ -5,6 +5,7 @@ import TilemapWalker from 'tilemap-walker';
 export default function create() {
   addMap.call(this);
   addPlayer.call(this);
+  setupKeys.call(this);
 }
 
 function addMap() {
@@ -35,4 +36,16 @@ function addPlayer() {
   this.game.add.existing(this.player);
 
   this.game.camera.follow(this.player);
+}
+
+function setupKeys() {
+  const keyboard = this.game.input.keyboard;
+
+  this.keys = {
+    LEFT: keyboard.addKey(Phaser.Keyboard.LEFT),
+    RIGHT: keyboard.addKey(Phaser.Keyboard.RIGHT),
+    UP: keyboard.addKey(Phaser.Keyboard.UP),
+    DOWN: keyboard.addKey(Phaser.Keyboard.DOWN),
+    SPACE: keyboard.addKey(Phaser.Keyboard.SPACEBAR),
+  };
 }

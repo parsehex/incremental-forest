@@ -3,13 +3,12 @@ export default function update() {
 }
 
 function checkControls() {
-  const keyboard = this.game.input.keyboard;
-  const Keys = Phaser.Keyboard;
+  const keys = this.game.state.states.Game.keys;
 
-  const upPressed = keyboard.downDuration(Keys.UP || Keys.W);
-  const leftPressed = keyboard.downDuration(Keys.LEFT || Keys.A);
-  const downPressed = keyboard.downDuration(Keys.DOWN || Keys.S);
-  const rightPressed = keyboard.downDuration(Keys.RIGHT || Keys.D);
+  const upPressed = keys.UP.justPressed();
+  const leftPressed = keys.LEFT.justPressed();
+  const downPressed = keys.DOWN.justPressed();
+  const rightPressed = keys.RIGHT.justPressed();
 
   const tileSize = 32;
 
