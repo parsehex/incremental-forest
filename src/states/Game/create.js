@@ -20,7 +20,6 @@ function addMap() {
   this.layers.background.resizeWorld();
 
   // set up tilemap walker
-
   this.mapWalker = new TilemapWalker(this.game, this.map);
 }
 
@@ -48,4 +47,13 @@ function setupKeys() {
     DOWN: keyboard.addKey(Phaser.Keyboard.DOWN),
     SPACE: keyboard.addKey(Phaser.Keyboard.SPACEBAR),
   };
+
+  // prevent the following keys from being handled by the browser
+  keyboard.addKeyCapture([
+    Phaser.Keyboard.LEFT,
+    Phaser.Keyboard.RIGHT,
+    Phaser.Keyboard.UP,
+    Phaser.Keyboard.DOWN,
+    Phaser.Keyboard.SPACEBAR,
+  ]);
 }
