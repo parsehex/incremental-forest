@@ -22,3 +22,22 @@ export const findObjByKey = (array, key, value) => {
 }
 
 export const clone = (obj) => JSON.parse(JSON.stringify(obj));
+
+export function directionToWASD(direction) {
+  direction = direction.toLowerCase();
+  
+  switch (direction) {
+    case 'up': {
+      return 'w';
+    }
+    case 'left': {
+      return 'a';
+    }
+    case 'down': {
+      return 's';
+    }
+    case 'right': {
+      return 'd';
+    }
+  }
+}
