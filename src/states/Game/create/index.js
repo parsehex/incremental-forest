@@ -4,6 +4,10 @@ import addPlayer from './add-player';
 import setupKeys from './setup-keys';
 
 export default function create() {
+  this.hud = {
+    hint: null,
+  };
+
   setupKeys.call(this);
 
   addMap.call(this);
