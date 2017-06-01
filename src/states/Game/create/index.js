@@ -1,11 +1,13 @@
-import addMap from './add-map';
-import addObjects from './add-objects';
-import addPlayer from './add-player';
 import setupKeys from './setup-keys';
+import addMap from './add-map';
+import addPlayer from './add-player';
+import addObjects from './add-objects';
+import setupHUD from './setup-hud';
 
 export default function create() {
   this.hud = {
     hint: null,
+    water: null,
   };
 
   setupKeys.call(this);
@@ -14,4 +16,6 @@ export default function create() {
 
   addPlayer.call(this);
   addObjects.call(this);
+
+  setupHUD.call(this);
 }
