@@ -3,6 +3,7 @@ import Phaser from 'phaser';
 import frames from '../../sprite-frames';
 
 import update from './update';
+import Inventory from './inventory';
 
 export default class extends Phaser.Sprite {
   constructor({ game, x, y }) {
@@ -13,9 +14,7 @@ export default class extends Phaser.Sprite {
     this.faceDirection = 'DOWN';
     this.faceObject = null;
 
-    this.inventory = {
-      water: 0
-    };
+    this.inventory = new Inventory(this.game);
 
     this.update = update.bind(this);
   }
