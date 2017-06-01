@@ -10,7 +10,11 @@ export default class extends Phaser.Sprite {
 
     this.anchor.setTo(0.5, 0.5);
 
+    this.water = 0;
+
     this.facing = facing.bind(this);
     this.notFacing = notFacing.bind(this);
+
+    this.interact = interact.bind(this);
   }
 }
