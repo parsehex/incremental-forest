@@ -13,6 +13,10 @@ export default class extends Phaser.Sprite {
     this.faceDirection = 'DOWN';
     this.faceObject = null;
 
+    this.inventory = {
+      water: 0
+    };
+
     this.update = update.bind(this);
   }
 }
