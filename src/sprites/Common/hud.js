@@ -1,15 +1,12 @@
-export function addHint(text) {
-  const game = this.game.state.states.Game;
+import { drawText } from '../../ui';
 
-  game.hud.hint = this.game.add.text(
-    this.game.camera.width - 100,
+export function addHint(text) {
+  this.game.state.states.Game.hud.hint = drawText.call(this,
+    this.game.camera.width - 175,
     this.game.camera.height - 20,
     text,
     { font: '15px Courier', fill: 'white', align: 'center', stroke: 'black', strokeThickness: 6 }
   );
-
-  game.hud.hint.anchor.setTo(0.5, 0.5);
-  game.hud.hint.fixedToCamera = true;
 }
 
 export function clearHint() {
