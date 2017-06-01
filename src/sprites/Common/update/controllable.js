@@ -6,10 +6,20 @@ import {
 import { directionToWASD } from '../../../utils';
 
 export default function(frames) {
-  checkControl.call(this, 'up', frames);
-  checkControl.call(this, 'left', frames);
-  checkControl.call(this, 'down', frames);
-  checkControl.call(this, 'right', frames);
+  checkControl = checkControl.bind(this);
+
+  // early-return if any single key is being pressed
+  if (checkControl('up', frames)) return;
+  if (checkControl('left', frames)) return;
+  if (checkControl('down', frames)) return;
+  if (checkControl('right', frames)) return;
+
+  if (this.faceObject !== null && this.game.state.states.Game.keys.SPACE.justPressed()) {
+    // player is interacting with object we're facing
+    if (this.faceObject.hasOwnProperty('interact')) {
+      this.faceObject.interact();
+    }
+  }
 }
 
 function checkControl(direction, frames) {
@@ -31,6 +41,8 @@ function checkControl(direction, frames) {
     const nextCoord = adjustCoords.call(this, thisCoord, direction);
 
     tryMove.call(this, nextCoord, direction, frames);
+
+    return true;
   }
 }
 
