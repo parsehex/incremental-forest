@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 
 import frames from '../../sprite-frames';
+import Inventory from '../Common/inventory';
 
 import update from './update';
 import { facing, notFacing } from './facing';
@@ -12,7 +13,7 @@ export default class extends Phaser.Sprite {
 
     this.anchor.setTo(0.5, 0.5);
 
-    this.water = 0;
+    this.inventory = new Inventory(this.game);
 
     this.facing = facing.bind(this);
     this.notFacing = notFacing.bind(this);

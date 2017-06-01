@@ -4,7 +4,8 @@ export default function interact() {
   const player = game.player;
 
   if (player.inventory.water > 0) {
+    // player loses a water, generator gets a water
     player.inventory.water--;
-    this.water++;
+    this.inventory.water++;
   }
 }
