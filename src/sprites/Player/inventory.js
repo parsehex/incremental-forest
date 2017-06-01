@@ -1,15 +1,10 @@
-import { clamp } from '../../utils';
+import CommonInventory from '../Common/inventory';
 
-export default class Inventory {
-  constructor(game) {
-    this.game = game;
-
-    this.waterValue = 0;
-  }
-
+export default class Inventory extends CommonInventory {
   get water() { return this.waterValue; }
   set water(value) {
-    this.waterValue = clamp(value, 0, 15); // clamp to 'carrying limit'
-    this.game.state.states.Game.hud.water.setText('Water: ' + this.waterValue);
+    super.water = value;
+
+    this.game.state.states.Game.hud.water.setText('Water: ' + this.water);
   }
 }
