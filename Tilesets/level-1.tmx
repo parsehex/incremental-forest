@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" nextobjectid="20">
+<map version="1.0.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" nextobjectid="74">
  <tileset firstgid="1" name="Ground" tilewidth="32" tileheight="32" tilecount="171" columns="9">
   <image source="../assets/sprites/ground.png" width="288" height="608"/>
  </tileset>
  <tileset firstgid="172" name="generator" tilewidth="32" tileheight="32" tilecount="2" columns="2">
   <image source="../assets/sprites/other/generator.png" width="64" height="32"/>
  </tileset>
- <layer name="background" width="100" height="100">
+ <layer name="background" width="100" height="100" visible="0">
   <data encoding="csv">
 19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,
 19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,19,
@@ -250,10 +250,65 @@
   </object>
  </objectgroup>
  <objectgroup name="generators">
-  <object id="12" type="interact" gid="172" x="1600" y="1792" width="32" height="32">
+  <object id="12" type="interact" gid="172" x="1600" y="1472" width="32" height="32">
    <properties>
     <property name="collides" type="bool" value="true"/>
    </properties>
   </object>
+ </objectgroup>
+ <objectgroup name="water">
+  <object id="20" gid="19" x="1728" y="1600" width="32" height="32"/>
+  <object id="21" gid="19" x="1760" y="1568" width="32" height="32"/>
+  <object id="22" gid="19" x="1792" y="1536" width="32" height="32"/>
+  <object id="23" gid="19" x="1824" y="1504" width="32" height="32"/>
+  <object id="24" gid="19" x="1824" y="1472" width="32" height="32"/>
+  <object id="25" gid="19" x="1792" y="1440" width="32" height="32"/>
+  <object id="26" gid="19" x="1760" y="1408" width="32" height="32"/>
+  <object id="27" gid="19" x="1728" y="1408" width="32" height="32"/>
+  <object id="28" gid="19" x="1696" y="1408" width="32" height="32"/>
+  <object id="29" gid="19" x="1664" y="1408" width="32" height="32"/>
+  <object id="30" gid="19" x="1632" y="1440" width="32" height="32"/>
+  <object id="31" gid="19" x="1600" y="1408" width="32" height="32"/>
+  <object id="32" gid="19" x="1568" y="1408" width="32" height="32"/>
+  <object id="33" gid="19" x="1536" y="1408" width="32" height="32"/>
+  <object id="34" gid="19" x="1504" y="1440" width="32" height="32"/>
+  <object id="35" gid="19" x="1504" y="1472" width="32" height="32"/>
+  <object id="36" gid="19" x="1472" y="1440" width="32" height="32"/>
+  <object id="37" gid="19" x="1440" y="1440" width="32" height="32"/>
+  <object id="38" gid="19" x="1408" y="1408" width="32" height="32"/>
+  <object id="39" gid="19" x="1376" y="1440" width="32" height="32"/>
+  <object id="40" gid="19" x="1344" y="1472" width="32" height="32"/>
+  <object id="41" gid="19" x="1344" y="1504" width="32" height="32"/>
+  <object id="42" gid="19" x="1344" y="1536" width="32" height="32"/>
+  <object id="43" gid="19" x="1376" y="1568" width="32" height="32"/>
+  <object id="44" gid="19" x="1408" y="1568" width="32" height="32"/>
+  <object id="45" gid="19" x="1408" y="1600" width="32" height="32"/>
+  <object id="46" gid="19" x="1376" y="1632" width="32" height="32"/>
+  <object id="47" gid="19" x="1344" y="1664" width="32" height="32"/>
+  <object id="48" gid="19" x="1344" y="1696" width="32" height="32"/>
+  <object id="49" gid="19" x="1376" y="1728" width="32" height="32"/>
+  <object id="50" gid="19" x="1408" y="1760" width="32" height="32"/>
+  <object id="51" gid="19" x="1408" y="1792" width="32" height="32"/>
+  <object id="52" gid="19" x="1408" y="1824" width="32" height="32"/>
+  <object id="53" gid="19" x="1376" y="1856" width="32" height="32"/>
+  <object id="54" gid="19" x="1408" y="1888" width="32" height="32"/>
+  <object id="55" gid="19" x="1440" y="1888" width="32" height="32"/>
+  <object id="56" gid="19" x="1472" y="1856" width="32" height="32"/>
+  <object id="57" gid="19" x="1504" y="1888" width="32" height="32"/>
+  <object id="58" gid="19" x="1536" y="1888" width="32" height="32"/>
+  <object id="59" gid="19" x="1568" y="1888" width="32" height="32"/>
+  <object id="60" gid="19" x="1600" y="1888" width="32" height="32"/>
+  <object id="61" gid="19" x="1632" y="1888" width="32" height="32"/>
+  <object id="62" gid="19" x="1664" y="1888" width="32" height="32"/>
+  <object id="63" gid="19" x="1696" y="1856" width="32" height="32"/>
+  <object id="64" gid="19" x="1728" y="1888" width="32" height="32"/>
+  <object id="65" gid="19" x="1760" y="1856" width="32" height="32"/>
+  <object id="66" gid="19" x="1760" y="1824" width="32" height="32"/>
+  <object id="67" gid="19" x="1792" y="1792" width="32" height="32"/>
+  <object id="68" gid="19" x="1824" y="1760" width="32" height="32"/>
+  <object id="69" gid="19" x="1824" y="1728" width="32" height="32"/>
+  <object id="70" gid="19" x="1792" y="1696" width="32" height="32"/>
+  <object id="72" gid="19" x="1792" y="1664" width="32" height="32"/>
+  <object id="73" gid="19" x="1760" y="1632" width="32" height="32"/>
  </objectgroup>
 </map>
