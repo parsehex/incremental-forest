@@ -77,8 +77,19 @@ function checkFacing() {
 
   const facingObject = checkCollide.call(this, facingCoord);
 
-  if (facingObject !== NO_COLLISION && facingObject !== WATER_COLLISION) {
-    if (facingObject.hasOwnProperty('facing')) {
+  if (this.faceObject !== null) {
+    if (this.faceObject && this.faceObject.hasOwnProperty('notFacing')) {
+      // object has a .notFacing() method we should call
+      this.faceObject.notFacing();
+    }
+
+    this.faceObject = null;
+  }
+
+  if (facingObject !== NO_COLLISION && facingObject !== WATER_COLLISION) { // we're facing an object
+    this.faceObject = facingObject;
+
+    if (facingObject && facingObject.hasOwnProperty('facing')) {
       // object has a .facing() method we should call
       facingObject.facing();
     }
