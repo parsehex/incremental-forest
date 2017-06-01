@@ -25,7 +25,7 @@ export const clone = (obj) => JSON.parse(JSON.stringify(obj));
 
 export function directionToWASD(direction) {
   direction = direction.toLowerCase();
-  
+
   switch (direction) {
     case 'up': {
       return 'w';
@@ -40,4 +40,8 @@ export function directionToWASD(direction) {
       return 'd';
     }
   }
+}
+
+export function clamp(number, min, max) {
+  return Math.min(Math.max(number, min), max);
 }
