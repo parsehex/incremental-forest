@@ -10,39 +10,25 @@ export default function addObjects() {
     generators: [],
   };
 
-  trees.call(this);
-  generators.call(this);
+  objects = objects.bind(this);
+
+  objects('trees', Tree);
+  objects('generators', Generator);
 }
 
-function trees() {
-  const treesArr = this.map.objects.trees;
-  for (let i = 0, len = treesArr.length; i < len; i++) {
-    const treeStart = centerOfObject(treesArr[i], this.map);
+function objects(name, objectClass) {
+  const arr = this.map.objects[name];
+  for (let i = 0, len = arr.length; i < len; i++) {
+    const start = centerOfObject(arr[i], this.map);
 
-    const tree = new Tree({
+    const object = new objectClass({
       game: this.game,
-      x: treeStart.x,
-      y: treeStart.y,
+      x: start.x,
+      y: start.y,
     });
 
-    this.objects.trees.push(tree);
+    this.objects[name].push(object);
 
-    this.game.add.existing(tree);
-  }
-}
-function generators() {
-  const genArr = this.map.objects.generators;
-  for (let i = 0, len = genArr.length; i < len; i++) {
-    const genStart = centerOfObject(genArr[i], this.map);
-
-    const generator = new Generator({
-      game: this.game,
-      x: genStart.x,
-      y: genStart.y,
-    });
-
-    this.objects.generators.push(generator);
-
-    this.game.add.existing(generator);
+    this.game.add.existing(object);
   }
 }
