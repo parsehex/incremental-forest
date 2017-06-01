@@ -14,6 +14,6 @@ export default function preload() {
 
   this.game.load.tilemap('island', '/assets/tilemaps/level-1.json', null, Phaser.Tilemap.TILED_JSON);
 
-  this.game.load.image('tiles_ground', '/assets/sprites/ground.png');
+  this.game.load.spritesheet('tiles_ground', '/assets/sprites/ground.png', 32, 32);
   this.game.load.spritesheet('tiles_generator', '/assets/sprites/other/generator.png', 32, 32);
 }

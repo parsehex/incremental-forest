@@ -58,27 +58,26 @@ function checkCollide(nextCoord) {
   // if nextTile is null, there is no foreground tile at nextTile
   if (nextTile === null) return true;
 
-  const nextTileCoord = {
-    x: nextTile.left,
-    y: nextTile.bottom,
-  };
+  let collision = false;
 
-  const objects = game.map.objects.objects;
+  this.game.world.forEach(function(object) {
+    if (collision === true || !object.key || object.key === 'guy') return;
 
-  // check if any objects are at next tile and have collisions on
-  for (let i = 0, len = objects.length; i < len; i++) {
-    const object = objects[i];
+    const {
+      top,
+      left,
+      bottom,
+      right,
+    } = object;
 
-    const hasProperties = object.hasOwnProperty('properties') && object.properties;
-    const collidable = hasProperties && object.properties.collides === true;
+    const withinX = nextCoord.x <= right && nextCoord.x >= left;
+    const withinY = nextCoord.y <= bottom && nextCoord.y >= top;
 
-    const sameCoords = object.x === nextTileCoord.x && object.y === nextTileCoord.y;
-
-    if (sameCoords && collidable) return true;
-  }
-
-  // no collisions with nextTile
-  return false;
+    if (withinX && withinY) {
+      collision = true;
+    }
+  });
+  return collision;
 }
 
 function tweenMove(nextCoord) {
