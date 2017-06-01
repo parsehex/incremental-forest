@@ -1,15 +1,7 @@
 // returns either:
   // false if there's no colliding object at coord
-  // null if there's water at coord
   // the colliding object at coord
 export function checkCollide(coord) {
-  const map = this.game.state.states.Game.map;
-
-  const nextTile = map.getTileWorldXY(coord.x, coord.y, map.tileWidth, map.tileHeight, 'foreground');
-
-  // if nextTile is null, there is no foreground tile at nextTile (i.e. water is at this tile)
-  if (nextTile === null) return null;
-
   let collision = false;
   let collidingObject = false;
 
