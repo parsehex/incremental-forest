@@ -9,6 +9,8 @@ export default function interact() {
     // player loses a water, generator gets a water
     player.inventory.water--;
     this.inventory.water++;
+    
+    this.powered = true;
 
     // use the water
     if (this.timer === null) {
@@ -19,6 +21,7 @@ export default function interact() {
         if (this.inventory.water <= 0) {
           // no more water
           this.timer.timer.pause();
+          this.powered = false;
         }
       }, this);
     } else if (!this.timer.timer.running) {

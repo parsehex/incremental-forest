@@ -15,6 +15,7 @@ export default class extends Phaser.Sprite {
 
     this.inventory = new Inventory(this.game);
     this.timer = null;
+    this.powered = false;
 
     this.facing = facing.bind(this);
     this.notFacing = notFacing.bind(this);
