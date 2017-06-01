@@ -4,7 +4,4 @@ export default function interact() {
   const player = game.player;
 
   player.inventory.water++;
-
-  // this should be its own function somewhere
-  game.hud.water.setText('Water: ' + player.inventory.water);
 }
