@@ -14,7 +14,9 @@ export default function(frames) {
   if (checkControl('down', frames)) return;
   if (checkControl('right', frames)) return;
 
-  if (this.faceObject !== null && this.game.state.states.Game.keys.SPACE.justPressed()) {
+  const { SPACE } = this.game.state.states.Game.keys;
+
+  if (this.faceObject !== null && SPACE.justPressed()) {
     // player is interacting with object we're facing
     if (this.faceObject.hasOwnProperty('interact')) {
       this.faceObject.interact();
@@ -54,7 +56,11 @@ function tryMove(nextCoord, direction, frames) {
 
   const collision = checkCollide.call(this, nextCoord);
 
-  if (collision === NO_COLLISION) {
+  if (collision === NO_COLLISION || collision.collides === false) {
+    if (collision.hasOwnProperty('collide')) {
+      collision.collide();
+    }
+
     tweenMove.call(this, nextCoord);
   } else {
     checkFacing.call(this);
