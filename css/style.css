@@ -42,4 +42,6 @@ div#hint {
 }
 div#hint #key, div#hint #action {
   color: white;
+
+  text-transform: uppercase;
 }
