@@ -23,7 +23,7 @@ export default function(frames) {
 }
 
 function checkControl(direction, frames) {
-  direction = direction.toUpperCase()
+  direction = direction.toUpperCase();
   const directionKey = directionToWASD(direction).toUpperCase();
 
   const keys = this.game.state.states.Game.keys;
