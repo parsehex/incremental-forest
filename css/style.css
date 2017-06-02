@@ -22,5 +22,5 @@ div#content canvas {
 
  /*hud panels should be hidden until game is ready (game will unhide when it's ready) */
  div#carrying, div#hint, div#inventory {
-   display: none;
+   /*display: none;*/
  }

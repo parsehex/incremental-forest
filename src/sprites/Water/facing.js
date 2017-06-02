@@ -1,7 +1,7 @@
 import { showHint, hideHint } from '../../ui';
 
 export function facing() {
-  showHint('space', 'collect water');
+  showHint('water', 'space', 'collect');
 }
 
 export function notFacing() {
