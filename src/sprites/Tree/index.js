@@ -10,7 +10,7 @@ export default class extends Phaser.Sprite {
 
     this.anchor.setTo(0.5, 0.5);
 
-    // this.facing = facing.bind(this);
-    // this.notFacing = notFacing.bind(this);
+    this.facing = facing.bind(this);
+    this.notFacing = notFacing.bind(this);
   }
 }
