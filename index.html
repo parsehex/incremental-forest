@@ -9,12 +9,27 @@
     <meta name="MobileOptimized" content="320">
     <meta http-equiv="cleartype" content="on">
 
-    <link rel='stylesheet' href='style.css' />
+    <link rel='stylesheet' href='/css/utility.css' />
+    <link rel='stylesheet' href='/css/style.css' />
 </head>
 
 <body>
-
-    <div id="content"></div>
+  <div id='container'>
+    <div id='carrying'>
+      <ul>
+        <li id='water' class='text-stroke-black'>
+          Water: <span id='value'>0</span>
+        </li>
+      </ul>
+    </div>
+    <div id='content'></div>
+    <div id='hint'>
+      <span>press</span>
+      <span id='key' class='text-stroke-black'>SPACE</span>
+      <span>to</span>
+      <span id='action' class='text-stroke-black'>interact</span>
+    </div>
+  </div>
     <script src="dist/vendor.bundle.js"></script>
     <script src="dist/bundle.js"></script>
 

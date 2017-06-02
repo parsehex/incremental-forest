@@ -1,0 +1,45 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+
+  font-weight: bold;
+  font-size: 17px;
+  font-family: Courier, monospace;
+}
+div#container {
+  padding: 0.4em;
+  margin: 0.2em;
+
+  background-color: #E0E0E0;
+
+  border: 3px inset #BDBDBD;
+}
+
+div#carrying {
+  cursor: default;
+  padding-left: 0.3em;
+}
+div#carrying ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+div#carrying #water {
+  color: lightblue;
+}
+
+div#content canvas {
+  margin: auto;
+}
+
+div#hint {
+  cursor: default;
+  text-align: right;
+  min-height: 20px;
+  padding: 0.2em;
+
+  visibility: hidden;
+}
+div#hint #key, div#hint #action {
+  color: white;
+}

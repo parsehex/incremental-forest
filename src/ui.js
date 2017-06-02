@@ -1,8 +1,19 @@
-export function drawText(x, y, text, options) {
-  const drawnText = this.game.add.text(x, y, text, options);
+export function updateInventory(name, value) {
+  const elem = document.querySelector('div#carrying #' + name + '#value');
 
-  drawnText.anchor.setTo(0, 0.5);
-  drawnText.fixedToCamera = true;
+  elem.textContent = value;
+}
 
-  return drawnText;
+export function showHint(key, action) {
+  const hintKey = document.querySelector('div#hint #key');
+  const hintAction = document.querySelector('div#hint #action');
+
+  hintKey.textContent = key;
+  hintAction.textContent = action;
+
+  document.getElementById('hint').style.visibility = 'visible';
+}
+
+export function hideHint() {
+  document.getElementById('hint').style.visibility = 'hidden';
 }

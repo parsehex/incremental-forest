@@ -1,9 +1,9 @@
-import { addHint, clearHint } from '../Common/hud';
+import { showHint, hideHint } from '../../ui';
 
 export function facing() {
-  addHint.call(this, 'SPACE to interact');
+  showHint('SPACE', 'interact');
 }
 
 export function notFacing() {
-  clearHint.call(this);
+  hideHint();
 }
