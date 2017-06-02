@@ -3,6 +3,7 @@ import Phaser from 'phaser';
 import frames from '../../sprite-frames';
 
 import { facing, notFacing } from './facing';
+import interact from './interact';
 
 export default class extends Phaser.Sprite {
   constructor({ game, x, y }) {
@@ -12,5 +13,7 @@ export default class extends Phaser.Sprite {
 
     this.facing = facing.bind(this);
     this.notFacing = notFacing.bind(this);
+
+    this.interact = interact.bind(this);
   }
 }
