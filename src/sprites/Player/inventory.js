@@ -6,6 +6,7 @@ export default class Inventory {
     this.game = game;
 
     this.waterValue = 0;
+    this.logsValue = 0;
 
     this.itemsList = {
       wood_axe: true,
@@ -30,6 +31,13 @@ export default class Inventory {
     this.itemsList[name] = false;
 
     removeInventoryItem(item);
+  }
+
+  get logs() { return this.logsValue; }
+  set logs(value) {
+    this.logsValue = clamp(value, 0, 15); //  should clamp to limit specified in contructor
+
+    updateInventory('logs', this.logsValue);
   }
 
   get water() { return this.waterValue; }
