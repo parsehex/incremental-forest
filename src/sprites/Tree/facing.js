@@ -1,7 +1,7 @@
 import { showHint, hideHint } from '../../ui';
 
 export function facing() {
-  showHint('SPACE', 'interact');
+  showHint('space', 'chop down tree');
 }
 
 export function notFacing() {
