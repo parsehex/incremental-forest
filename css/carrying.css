@@ -25,14 +25,4 @@ div#carrying #water {
 div#carrying #logs {
   color: #4E342E;
 }
-
-button#sell {
-  float: right;
-
-  display: inline-block;
-
-  padding: 0.7em;
-
-  background-color: #ECEFF1;
-  outline: 0;
 }

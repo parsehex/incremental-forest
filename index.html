@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 
 <head>
-    <meta charset="UTF-8">
-    <title>Phaser - ES6 - Webpack</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="MobileOptimized" content="320">
-    <meta http-equiv="cleartype" content="on">
+    <meta charset='UTF-8'>
+    <title>Phaser Game</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1, user-scalable=no'>
+    <meta name='HandheldFriendly' content='True'>
+    <meta name='MobileOptimized' content='320'>
+    <meta http-equiv='cleartype' content='on'>
 
+    <link rel='stylesheet' href='/assets//css/tippy.min.css' />
     <link rel='stylesheet' href='/css/utility.css' />
     <link rel='stylesheet' href='/css/carrying.css' />
     <link rel='stylesheet' href='/css/hint.css' />
@@ -23,11 +24,10 @@
         <li id='water' class='text-stroke-black'>
           Water: <span id='value'>0</span>
         </li>
-        <li id='logs' class='text-stroke-white'>
+        <li id='logs' class='text-stroke-white' title='Sell 1 log'>
           Logs: <span id='value'>0</span>
         </li>
       </ul>
-      <button type='button' id='sell'>Sell</button>
     </div>
     <div id='content'></div>
     <div id='hint'>
@@ -44,8 +44,9 @@
       <ul id='items'></ul>
     </div>
   </div>
-    <script src="dist/vendor.bundle.js"></script>
-    <script src="dist/bundle.js"></script>
+    <script src='/assets/js/tippy.min.js'></script>
+    <script src='/dist/vendor.bundle.js'></script>
+    <script src='/dist/bundle.js'></script>
 
 </body>
 

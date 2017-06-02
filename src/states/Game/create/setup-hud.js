@@ -8,6 +8,10 @@ export default function setupHUD() {
   carryingEl.style.display = 'block';
   hintEl.style.display = 'block';
   inventoryEl.style.display = 'block';
+
+  Tippy('div#carrying li', {
+    hideOnClick: false
+  });
 }
 
 function setupItems() {
