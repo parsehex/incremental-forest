@@ -1,10 +1,40 @@
-import CommonInventory from '../Common/inventory';
-import { updateInventory } from '../../ui';
+import { updateInventory, addInventoryItem, removeInventoryItem } from '../../ui';
+import { clamp } from '../../utils';
 
-export default class Inventory extends CommonInventory {
+export default class Inventory {
+  constructor(game) {
+    this.game = game;
+
+    this.waterValue = 0;
+
+    this.itemsList = {
+      wood_axe: true,
+      bucket: true,
+    };
+
+    for (let item in this.itemsList) {
+      if (!this.itemsList[item]) continue;
+
+      addInventoryItem(item);
+    }
+  }
+
+  get items() { return this.itemsList; }
+  set items(value) { throw new Error("don't directly set items list, use .addItem or .removeItem"); }
+  addItem(name) {
+    this.itemsList[name] = true;
+
+    addInventoryItem(item);
+  }
+  removeItem(name) {
+    this.itemsList[name] = false;
+
+    removeInventoryItem(item);
+  }
+
   get water() { return this.waterValue; }
   set water(value) {
-    super.water = value;
+    this.waterValue = clamp(value, 0, 15); //  should clamp to limit specified in contructor
 
     updateInventory('water', this.water);
   }

@@ -24,6 +24,7 @@ div#inventory ul li.item {
   border: 1px solid black;
 
   text-align: center;
+  margin: 0 0.5em;
 }
 div#inventory .item.selected {
   background-color: white;
@@ -32,4 +33,7 @@ div#inventory .item img {
   width: 100%;;
 
   margin: auto;
+}
+div#inventory .item .name {
+  text-transform: capitalize;
 }

@@ -75,7 +75,7 @@ function tweenMove(nextCoord) {
   }, this);
 }
 
-function checkFacing() {
+export function checkFacing() {
   const map = this.game.state.states.Game.map;
 
   const thisCoord = {

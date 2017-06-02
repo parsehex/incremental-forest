@@ -1,9 +1,3 @@
-export function updateInventory(name, value) {
-  const elem = document.querySelector('div#carrying #' + name + '#value');
-
-  elem.textContent = value;
-}
-
 export function showHint(objectName, key, action) {
   const hintObjectName = document.querySelector('div#hint #object-name');
   const hintKey = document.querySelector('div#hint #key');

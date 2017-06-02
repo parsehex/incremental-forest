@@ -14,8 +14,8 @@ export default function create() {
 
   addMap.call(this);
 
-  addPlayer.call(this);
   addObjects.call(this);
+  addPlayer.call(this);
 
   setupHUD();
 }

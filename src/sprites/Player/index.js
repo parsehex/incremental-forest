@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 
 import frames from '../../sprite-frames';
 
+import { checkFacing } from '../Common/update/controllable';
 import update from './update';
 import Inventory from './inventory';
 
@@ -17,5 +18,8 @@ export default class extends Phaser.Sprite {
     this.inventory = new Inventory(this.game);
 
     this.update = update.bind(this);
+
+    // run checkFacing once so that hints will show properly at game start
+    checkFacing.call(this);
   }
 }
