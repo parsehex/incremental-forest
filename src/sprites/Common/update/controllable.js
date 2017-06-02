@@ -101,11 +101,15 @@ export function checkFacing() {
       this.faceObject.notFacing();
     }
 
+    this.faceObject.alpha = 1;
+
     this.faceObject = null;
   }
 
   if (facingObject !== NO_COLLISION && facingObject !== WORLD_COLLISION) { // we're facing an object
     this.faceObject = facingObject;
+
+    this.faceObject.alpha = 0.5;
 
     if (facingObject && facingObject.hasOwnProperty('facing')) {
       // object has a .facing() method we should call
