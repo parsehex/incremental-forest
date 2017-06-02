@@ -25,4 +25,7 @@ div#carrying #water {
 div#carrying #logs {
   color: #4E342E;
 }
+div#carrying #money {
+  color: #4CAF50;
+  margin: 0 0.5em;
 }
