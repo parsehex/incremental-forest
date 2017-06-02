@@ -1,7 +1,7 @@
 import {
   checkCollide,
   NO_COLLISION,
-  WATER_COLLISION,
+  WORLD_COLLISION,
 } from './collisions';
 import { directionToWASD } from '../../../utils';
 
@@ -98,7 +98,7 @@ export function checkFacing() {
     this.faceObject = null;
   }
 
-  if (facingObject !== NO_COLLISION && facingObject !== WATER_COLLISION) { // we're facing an object
+  if (facingObject !== NO_COLLISION && facingObject !== WORLD_COLLISION) { // we're facing an object
     this.faceObject = facingObject;
 
     if (facingObject && facingObject.hasOwnProperty('facing')) {
