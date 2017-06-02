@@ -9,7 +9,7 @@ export default class Inventory {
 
     this.itemsList = {
       wood_axe: true,
-      bucket: true,
+      bucket: false,
     };
 
     for (let item in this.itemsList) {
