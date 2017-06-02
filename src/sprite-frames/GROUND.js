@@ -6,6 +6,6 @@ export default {
   WATER_DIM:   19,
   WATER_DARK:  20,
   TREE_LIGHT:  60,
-  TREE_DIM:    71,
-  TREE_DARK:   72,
+  TREE_DIM:    61,
+  TREE_DARK:   62,
 };
