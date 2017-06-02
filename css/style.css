@@ -16,32 +16,11 @@ div#container {
   border: 3px inset #BDBDBD;
 }
 
-div#carrying {
-  cursor: default;
-  padding-left: 0.3em;
-}
-div#carrying ul {
-  list-style-type: none;
-  padding-left: 0;
-}
-div#carrying #water {
-  color: lightblue;
-}
-
 div#content canvas {
   margin: auto;
 }
 
-div#hint {
-  cursor: default;
-  text-align: right;
-  min-height: 20px;
-  padding: 0.2em;
-
-  visibility: hidden;
-}
-div#hint #key, div#hint #action {
-  color: white;
-
-  text-transform: uppercase;
-}
+ /*hud panels should be hidden until game is ready (game will unhide when it's ready) */
+ div#carrying, div#hint, div#inventory {
+   display: none;
+ }

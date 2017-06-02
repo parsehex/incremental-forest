@@ -1,0 +1,15 @@
+div#carrying {
+  cursor: default;
+  padding-left: 0.3em;
+  user-select: none;
+}
+div#carrying ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+div#carrying ul li {
+  display: inline-block;
+}
+div#carrying #water {
+  color: lightblue;
+}
