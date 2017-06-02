@@ -9,7 +9,12 @@ div#carrying ul {
 }
 div#carrying ul li {
   display: inline-block;
+
+  margin: 0 0.2em;
 }
 div#carrying #water {
   color: lightblue;
+}
+div#carrying #logs {
+  color: brown;
 }
