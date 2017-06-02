@@ -2,20 +2,17 @@ import frames from '../../../sprite-frames';
 import { centerOfObject } from '../../../utils';
 
 import Tree from '../../../sprites/Tree';
-import Generator from '../../../sprites/Generator';
 import Water from '../../../sprites/Water';
 
 export default function addObjects() {
   this.objects = {
     trees: [],
-    generators: [],
     water: [],
   };
 
   objects = objects.bind(this);
 
   objects('trees', Tree);
-  objects('generators', Generator);
   objects('water', Water);
 }
 

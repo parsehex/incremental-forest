@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0.0" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="32" tileheight="32" nextobjectid="707">
+<map version="1.0.0" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="32" tileheight="32" nextobjectid="710">
  <tileset firstgid="1" name="Ground" tilewidth="32" tileheight="32" tilecount="171" columns="9">
   <image source="../assets/sprites/ground.png" width="288" height="608"/>
  </tileset>
@@ -509,6 +509,9 @@
   <object id="704" gid="61" x="224" y="256" width="32" height="32"/>
   <object id="705" gid="61" x="128" y="224" width="32" height="32"/>
   <object id="706" gid="61" x="32" y="256" width="32" height="32"/>
+  <object id="707" gid="61" x="288" y="288" width="32" height="32"/>
+  <object id="708" gid="61" x="288" y="320" width="32" height="32"/>
+  <object id="709" gid="61" x="320" y="320" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="water">
   <object id="21" gid="19" x="416" y="384" width="32" height="32"/>
@@ -516,8 +519,5 @@
   <object id="23" gid="19" x="448" y="448" width="32" height="32"/>
   <object id="24" gid="19" x="448" y="416" width="32" height="32"/>
   <object id="25" gid="19" x="448" y="384" width="32" height="32"/>
- </objectgroup>
- <objectgroup name="generators">
-  <object id="19" gid="172" x="288" y="320" width="32" height="32"/>
  </objectgroup>
 </map>

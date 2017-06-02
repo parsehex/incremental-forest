@@ -5736,6 +5736,42 @@
                  "width":32,
                  "x":32,
                  "y":256
+                }, 
+                {
+                 "gid":61,
+                 "height":32,
+                 "id":707,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":288,
+                 "y":288
+                }, 
+                {
+                 "gid":61,
+                 "height":32,
+                 "id":708,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":288,
+                 "y":320
+                }, 
+                {
+                 "gid":61,
+                 "height":32,
+                 "id":709,
+                 "name":"",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":32,
+                 "x":320,
+                 "y":320
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -5812,30 +5848,8 @@
          "visible":true,
          "x":0,
          "y":0
-        }, 
-        {
-         "draworder":"topdown",
-         "name":"generators",
-         "objects":[
-                {
-                 "gid":172,
-                 "height":32,
-                 "id":19,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":288,
-                 "y":320
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
         }],
- "nextobjectid":707,
+ "nextobjectid":710,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tileheight":32,
