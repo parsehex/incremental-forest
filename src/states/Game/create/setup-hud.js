@@ -1,9 +1,12 @@
+import itemPrices from '../../../item-prices';
+
 export default function setupHUD() {
   const carryingEl = document.getElementById('carrying');
   const hintEl = document.getElementById('hint');
   const inventoryEl = document.getElementById('inventory');
 
   setupItems();
+  setupCarrying.call(this);
 
   carryingEl.style.display = 'block';
   hintEl.style.display = 'block';
@@ -12,6 +15,17 @@ export default function setupHUD() {
   Tippy('div#carrying li', {
     hideOnClick: false
   });
+}
+
+function setupCarrying() {
+  document.querySelector('div#carrying #logs').addEventListener('click', function() {
+    const player = this.game.state.states.Game.player;
+
+    if (player.inventory.logs === 0) return;
+
+    player.inventory.logs--;
+    player.inventory.money += itemPrices.LOG;
+  }.bind(this));
 }
 
 function setupItems() {

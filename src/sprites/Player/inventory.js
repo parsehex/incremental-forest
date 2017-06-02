@@ -5,14 +5,18 @@ export default class Inventory {
   constructor(game) {
     this.game = game;
 
-    this.waterValue = 0;
-    this.logsValue = 0;
+    this.carrying = {
+      water: 0,
+      logs: 0,
+      money: 0,
+    };
 
     this.itemsList = {
       wood_axe: true,
       bucket: false,
     };
 
+    // add items we started with have to ui
     for (let item in this.itemsList) {
       if (!this.itemsList[item]) continue;
 
@@ -33,17 +37,19 @@ export default class Inventory {
     removeInventoryItem(item);
   }
 
-  get logs() { return this.logsValue; }
-  set logs(value) {
-    this.logsValue = clamp(value, 0, 15); //  should clamp to limit specified in contructor
+  get water() { return this.getCarryingItemValue('water'); }
+  set water(value) { this.setCarryingItemValue('water', value, 15); }
 
-    updateInventory('logs', this.logsValue);
-  }
+  get logs() { return this.getCarryingItemValue('logs'); }
+  set logs(value) { this.setCarryingItemValue('logs', value, 10); }
 
-  get water() { return this.waterValue; }
-  set water(value) {
-    this.waterValue = clamp(value, 0, 15); //  should clamp to limit specified in contructor
+  get money() { return this.getCarryingItemValue('money'); }
+  set money(value) { this.setCarryingItemValue('money', value, 1000000000); }
 
-    updateInventory('water', this.water);
+  getCarryingItemValue(name) {return this.carrying[name]; }
+  setCarryingItemValue(name, value, max) {
+    this.carrying[name] = clamp(value, 0, max || 15);
+
+    updateInventory(name, this.carrying[name]);
   }
 }

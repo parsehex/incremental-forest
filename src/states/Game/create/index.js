@@ -17,5 +17,5 @@ export default function create() {
   addObjects.call(this);
   addPlayer.call(this);
 
-  setupHUD();
+  setupHUD.call(this);
 }
