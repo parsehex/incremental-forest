@@ -1,5 +1,5 @@
 export function updateInventory(name, value) {
-  const elem = document.querySelector('div#carrying #' + name + '#value');
+  const elem = document.querySelector('div#carrying #' + name + ' #value');
 
   elem.textContent = value;
 }
