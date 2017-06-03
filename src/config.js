@@ -1,5 +1,5 @@
 export default {
-  gameWidth: 384,
-  gameHeight: 384,
+  gameWidth: 416,
+  gameHeight: 416,
   localStorageName: 'phaseres6webpack'
 };
