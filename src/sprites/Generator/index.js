@@ -9,9 +9,9 @@ import interact from './interact';
 
 export default class extends Phaser.Sprite {
   constructor({ game, x, y }) {
-    super(game, x, y, 'tiles_generator', frames.GENERATOR.OFF);
 
     this.anchor.setTo(0.5, 0.5);
+    super(game, x, y, 'tiles', frames.MAIN.GENERATOR_OFF);
 
     this.inventory = new Inventory(this.game);
     this.timer = null;

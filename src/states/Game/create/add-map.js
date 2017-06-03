@@ -5,7 +5,7 @@ import frames from '../../../sprite-frames';
 export default function addMap() {
   this.map = this.game.add.tilemap('forest');
 
-  this.map.addTilesetImage('Ground', 'tiles_ground', 32, 32);
+  this.map.addTilesetImage('sprites', 'tiles', 32, 32);
 
   this.layers = {};
 

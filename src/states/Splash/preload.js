@@ -10,12 +10,8 @@ export default function preload() {
   this.load.setPreloadSprite(this.loaderBar);
 
   // load assets
-  this.game.load.spritesheet('guy', '/assets/sprites/chars/guy.png', 32, 32);
-
   this.game.load.tilemap('forest', '/assets/tilemaps/forest.json', null, Phaser.Tilemap.TILED_JSON);
 
-  this.game.load.spritesheet('logs', '/assets/sprites/other/logs.png', 32, 32);
-
-  this.game.load.spritesheet('tiles_ground', '/assets/sprites/ground.png', 32, 32);
-  this.game.load.spritesheet('tiles_generator', '/assets/sprites/other/generator.png', 32, 32);
+  this.game.load.spritesheet('guy', '/assets/sprites/chars/worker.png', 32, 32);
+  this.game.load.spritesheet('tiles', '/assets/sprites/sprites.png', 32, 32);
 }

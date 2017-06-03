@@ -1,11 +1,11 @@
 import frames from '../../sprite-frames';
 
-const { GENERATOR } = frames;
+const { MAIN } = frames;
 
 export default function update() {
-  if (this.powered && this.frame !== GENERATOR.ON) {
-    this.frame = GENERATOR.ON;
-  } else if (this.frame !== GENERATOR.OFF) {
-    this.frame = GENERATOR.OFF;
+  if (this.powered && this.frame !== MAIN.GENERATOR_ON) {
+    this.frame = MAIN.GENERATOR_ON;
+  } else if (this.frame !== MAIN.GENERATOR_OFF) {
+    this.frame = MAIN.GENERATOR_OFF;
   }
 }
