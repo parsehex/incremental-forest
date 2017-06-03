@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 
 import frames from '../../sprite-frames';
-import Inventory from '../Common/inventory';
+import Inventory from './inventory';
 
 import update from './update';
 import { facing, notFacing } from './facing';
