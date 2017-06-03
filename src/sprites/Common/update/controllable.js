@@ -1,3 +1,5 @@
+import Phaser from 'phaser';
+
 import {
   checkCollide,
   NO_COLLISION,
@@ -24,13 +26,13 @@ export default function(frames) {
   }
 }
 
-function checkControl(direction, frames) {
+function checkControl(direction, frames, bypass) {
   direction = direction.toUpperCase();
   const directionKey = directionToWASD(direction).toUpperCase();
 
   const keys = this.game.state.states.Game.keys;
 
-  const pressed = keys[direction].justPressed() || keys[directionKey].justPressed();
+  const pressed = keys[direction].justPressed() || keys[directionKey].justPressed() || bypass;
 
   if (pressed && !this.moving) {
     const { tileHeight, tileWidth } = this.game.state.states.Game.map;
@@ -43,6 +45,14 @@ function checkControl(direction, frames) {
     const nextCoord = adjustCoords.call(this, thisCoord, direction);
 
     tryMove.call(this, nextCoord, direction, frames);
+
+    this.game.time.events.add(Phaser.Timer.SECOND / 5, function() {
+      if (!keys[direction].isDown && !keys[directionKey].isDown) {
+        return;
+      }
+
+      checkControl.call(this, direction, frames, true);
+    }, this);
 
     return true;
   }
