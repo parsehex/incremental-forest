@@ -14,5 +14,5 @@ export default function addMap() {
   this.layers.background.resizeWorld();
 
   // set up tilemap walker
-  this.mapWalker = new TilemapWalker(this.game, this.map);
+  // this.mapWalker = new TilemapWalker(this.game, this.map);
 }
