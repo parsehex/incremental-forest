@@ -56,7 +56,10 @@ function tryMove(nextCoord, direction, frames) {
 
   const collision = checkCollide.call(this, nextCoord);
 
-  if (collision === NO_COLLISION || collision.collides === false) {
+  if (
+    collision !== WORLD_COLLISION &&
+    (collision.collides === false || collision === NO_COLLISION)
+  ) {
     if (collision.hasOwnProperty('collide')) {
       collision.collide();
     }
