@@ -1,13 +1,11 @@
-import Phaser from 'phaser';
+import CommonObject from '../Common';
 
 import frames from '../../sprite-frames';
 
 import collide from './collide';
 
-export default class extends Phaser.Sprite {
+export default class extends CommonObject {
   constructor({ game, x, y }) {
-
-    this.anchor.setTo(0.5, 0.5);
     super(game, x, y, 'tiles', frames.MAIN.LOGS);
 
     this.collides = false;

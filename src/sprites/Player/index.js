@@ -1,4 +1,4 @@
-import Phaser from 'phaser';
+import CommonObject from '../Common';
 
 import frames from '../../sprite-frames';
 
@@ -6,11 +6,9 @@ import { checkFacing } from '../Common/update/controllable';
 import update from './update';
 import Inventory from './inventory';
 
-export default class extends Phaser.Sprite {
+export default class extends CommonObject {
   constructor({ game, x, y }) {
     super(game, x, y, 'guy', frames.GUY.STAND_DOWN);
-
-    this.anchor.setTo(0.5, 0.5);
 
     this.faceDirection = 'DOWN';
     this.faceObject = null;
