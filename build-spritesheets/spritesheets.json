@@ -1,0 +1,42 @@
+[
+  {
+    "name": "tiles",
+    "sprites": [
+      "sprites/grass.png",
+      "sprites/mud.png",
+      "sprites/logs.png",
+      "sprites/pinecone.png",
+      "sprites/generator-off.png",
+      "sprites/generator-on.png",
+      "sprites/tree.png",
+      "sprites/water.png"
+    ]
+  },
+  {
+    "name": "guy",
+    "sprites": [
+      "sprites/guy/stand-down.png",
+      "sprites/guy/stand-up.png",
+      "sprites/worker/stand-left.png",
+      "sprites/worker/stand-right.png"
+    ]
+  },
+  {
+    "name": "worker",
+    "sprites": [
+      "sprites/worker/stand-down.png",
+      "sprites/worker/stand-up.png",
+      "sprites/worker/stand-left.png",
+      "sprites/worker/stand-right.png"
+    ]
+  },
+  {
+    "name": "guy-green",
+    "sprites": [
+      "sprites/guy-green/stand-down.png",
+      "sprites/guy-green/stand-up.png",
+      "sprites/guy-green/stand-left.png",
+      "sprites/guy-green/stand-right.png"
+    ]
+  }
+]
