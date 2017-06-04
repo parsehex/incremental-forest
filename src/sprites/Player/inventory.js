@@ -8,6 +8,7 @@ export default class Inventory {
     this.carrying = {
       water: 0,
       logs: 0,
+      'tree-seeds': 0,
       money: 0,
     };
 
@@ -42,6 +43,9 @@ export default class Inventory {
 
   get logs() { return this.getCarryingItemValue('logs'); }
   set logs(value) { this.setCarryingItemValue('logs', value, 10); }
+
+  get treeSeeds() { return this.getCarryingItemValue('tree-seeds'); }
+  set treeSeeds(value) { this.setCarryingItemValue('tree-seeds', value); }
 
   get money() { return this.getCarryingItemValue('money'); }
   set money(value) { this.setCarryingItemValue('money', value, 1000000000); }
