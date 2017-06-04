@@ -20,14 +20,13 @@ export default class extends Phaser.Sprite {
     this.tile = tile.call(this);
 
     add.call(this, null);
+  }
 
-    const oldDestroy = this.destroy;
-    this.destroy = function() {
-      const player = this.game.state.states.Game.player;
-      remove.call(this);
+  destroy() {
+    const player = this.game.state.states.Game.player;
+    remove.call(this);
 
-      oldDestroy.call(this);
-      player.checkFacing();
-    }.bind(this);
+    super.destroy();
+    player.checkFacing();
   }
 }
