@@ -121,7 +121,7 @@ export function checkFacing() {
   }
 
   this.faceObjects = facingObjects.objects;
-  this.faceObjects.forEach((obj) => { obj.alpha = 0.5; });
+  this.faceObjects.forEach((obj) => { obj.alpha = 0.7; });
 
   interfaceWithObjects(this.faceObjects, 'facing');
 }
