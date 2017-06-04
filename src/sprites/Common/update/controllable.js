@@ -1,11 +1,13 @@
 import Phaser from 'phaser';
 
+import { movedTo } from '../../../world';
+import { tile, nextTile } from '../../../tiles';
+import { checkCollide } from './collisions';
 import {
-  checkCollide,
-  NO_COLLISION,
-  WORLD_COLLISION,
-} from './collisions';
-import { directionToWASD } from '../../../utils';
+  directionToWASD,
+  nextCoord as getNextCoord,
+  circularJSONReplacer
+} from '../../../utils';
 
 export default function(frames) {
   checkControl = checkControl.bind(this);
@@ -18,11 +20,8 @@ export default function(frames) {
 
   const { SPACE } = this.game.state.states.Game.keys;
 
-  if (this.faceObject !== null && SPACE.justPressed()) {
-    // player is interacting with object we're facing
-    if (this.faceObject.hasOwnProperty('interact')) {
-      this.faceObject.interact();
-    }
+  if (this.faceObjects.length > 0 && SPACE.justPressed()) {
+    interfaceWithObjects(this.faceObjects, 'interact');
   }
 }
 
@@ -42,7 +41,7 @@ function checkControl(direction, frames, bypass) {
       y: this.y,
     };
 
-    const nextCoord = adjustCoords.call(this, thisCoord, direction);
+    const nextCoord = getNextCoord.call(this, thisCoord, direction, 32);
 
     tryMove.call(this, nextCoord, direction, frames);
 
@@ -51,6 +50,7 @@ function checkControl(direction, frames, bypass) {
         return;
       }
 
+      // TODO just directly call tryMove?
       checkControl.call(this, direction, frames, true);
     }, this);
 
@@ -64,15 +64,11 @@ function tryMove(nextCoord, direction, frames) {
 
   this.faceDirection = direction;
 
-  const collision = checkCollide.call(this, nextCoord);
+  const collisions = checkCollide.call(this, nextCoord);
 
-  if (
-    collision !== WORLD_COLLISION &&
-    (collision.collides === false || collision === NO_COLLISION)
-  ) {
-    if (collision.hasOwnProperty('collide')) {
-      collision.collide();
-    }
+  if (collisions.collides === false) {
+
+    interfaceWithObjects(collisions.objects, 'collide');
 
     tweenMove.call(this, nextCoord);
   } else {
@@ -81,6 +77,8 @@ function tryMove(nextCoord, direction, frames) {
 }
 
 function tweenMove(nextCoord) {
+  const oldTile = this.tile;
+
   const move = this.game.add.tween(this);
 
   this.moving = true;
@@ -90,74 +88,48 @@ function tweenMove(nextCoord) {
   move.onComplete.add(function() {
     this.moving = false;
 
+    this.tile = tile.call(this);
+
+    movedTo.call(this, oldTile);
+
     checkFacing.call(this);
   }, this);
 }
 
 export function checkFacing() {
+  // TODO maybe check if already facing direction and early-return?
+
   const map = this.game.state.states.Game.map;
 
-  const thisCoord = {
+  const thisPixelCoord = {
     x: this.x,
     y: this.y,
   };
 
   const direction = this.faceDirection;
 
-  const facingCoord = adjustCoords.call(this, thisCoord, direction);
+  const facingPixelCoord = getNextCoord.call(this, thisPixelCoord, direction, 32);
 
-  const facingObject = checkCollide.call(this, facingCoord);
+  const facingObjects = checkCollide.call(this, facingPixelCoord);
 
-  if (this.faceObject !== null) {
-    if (this.faceObject && this.faceObject.hasOwnProperty('notFacing')) {
-      // object has a .notFacing() method we should call
-      this.faceObject.notFacing();
-    }
+  if (this.faceObjects.length > 0) {
+    interfaceWithObjects(this.faceObjects, 'notFacing');
 
-    this.faceObject.alpha = 1;
+    this.faceObjects.forEach((obj) => { obj.alpha = 1; });
 
-    this.faceObject = null;
+    this.faceObjects.length = 0;
   }
 
-  if (facingObject !== NO_COLLISION && facingObject !== WORLD_COLLISION) { // we're facing an object
-    this.faceObject = facingObject;
+  this.faceObjects = facingObjects.objects;
+  this.faceObjects.forEach((obj) => { obj.alpha = 0.5; });
 
-    this.faceObject.alpha = 0.5;
-
-    if (facingObject && facingObject.hasOwnProperty('facing')) {
-      // object has a .facing() method we should call
-      facingObject.facing();
-    }
-  }
+  interfaceWithObjects(this.faceObjects, 'facing');
 }
 
-function adjustCoords(coord, direction) {
-  const { tileWidth, tileHeight } = this.game.state.states.Game.map;
-
-  switch (direction) {
-    case 'UP': {
-      return {
-        x: coord.x,
-        y: coord.y - tileHeight,
-      };
-    }
-    case 'LEFT': {
-      return {
-        x: coord.x - tileWidth,
-        y: coord.y,
-      };
-    }
-    case 'DOWN': {
-      return {
-        x: coord.x,
-        y: coord.y + tileHeight,
-      };
-    }
-    case 'RIGHT': {
-      return {
-        x: coord.x + tileWidth,
-        y: coord.y,
-      };
+function interfaceWithObjects(objects, method) {
+  for (let i = 0, len = objects.length; i < len; i++) {
+    if (objects[i].hasOwnProperty(method)) {
+      objects[i][method]();
     }
   }
 }

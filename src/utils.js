@@ -1,4 +1,4 @@
-export const centerGameObjects = (objects) => {
+export function centerGameObjects(objects) {
   objects.forEach(function (object) {
     object.anchor.setTo(0.5);
   });
@@ -11,7 +11,7 @@ export function centerOfObject(object, map) {
   };
 }
 
-export const findObjByKey = (array, key, value) => {
+export function findObjByKey(array, key, value) {
   for(let i = 0, len = array.length; i < len; i++) {
     let object = array[i];
     if (typeof object === 'object' && object.hasOwnProperty(key) && object[key] === value) {
@@ -42,6 +42,30 @@ export function directionToWASD(direction) {
   }
 }
 
-export function clamp(number, min, max) {
-  return Math.min(Math.max(number, min), max);
+export const clamp = (number, min, max) => Math.min(Math.max(number, min), max);
+
+export function nextCoord(coord, direction, size) {
+  const { x, y } = coord;
+
+  switch (direction) {
+    case 'UP': {
+      return { x: x, y: y - size };
+    }
+    case 'LEFT': {
+      return { x: x - size, y: y };
+    }
+    case 'DOWN': {
+      return { x: x, y: y + size };
+    }
+    case 'RIGHT': {
+      return { x: x + size, y: y };
+    }
+  }
+}
+
+export function indexOfObject(arr, name, value) {
+  for (let i = 0, len = arr.length; i < len; i++) {
+    if (arr[i][name] === value) return i;
+  }
+  return -1;
 }

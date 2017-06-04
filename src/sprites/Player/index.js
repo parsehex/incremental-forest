@@ -11,13 +11,15 @@ export default class extends CommonObject {
     super(game, x, y, 'guy', frames.GUY.STAND_DOWN);
 
     this.faceDirection = 'DOWN';
-    this.faceObject = null;
+    this.faceObjects = [];
 
     this.inventory = new Inventory(this.game);
 
     this.update = update.bind(this);
 
     // run checkFacing once so that hints will show properly at game start
-    checkFacing.call(this);
+    this.checkFacing = checkFacing.bind(this);
+
+    this.checkFacing();
   }
 }
