@@ -47,7 +47,6 @@ export function remove() {
   mapTile.splice(index, 1);
 
   delete objects[this.id];
-  if (this.tile.x === 10 && this.tile.y === 9) console.log('removed, new map:', map['10,9']);
 }
 
 export function objectsAtTile(tileCoord) {
