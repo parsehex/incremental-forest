@@ -1,9 +1,11 @@
 import { nextCoord } from './utils';
 
-export function tile() {
+export function tile(coord) {
+  coord = coord || { x: this.x, y: this.y };
+
   return pixelToTile({
-    x: this.x,
-    y: this.y,
+    x: coord.x,
+    y: coord.y,
   });
 }
 
