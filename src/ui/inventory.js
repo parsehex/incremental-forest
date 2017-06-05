@@ -1,34 +1,38 @@
+import { bindItem } from './bind-item';
+
 export function updateInventory(name, value, sellable) {
-  name = name.toLowerCase().replace(' ', '-');
+  const niceName = name.toLowerCase().replace('-', ' ');
 
   const elem = document.querySelector('#' + name + ' .count');
 
   if (elem) {
     elem.textContent = value;
   } else {
-    addInventoryItem(name, value, sellable);
+    addInventoryItem.call(this, name, value, sellable);
   }
 }
 
-export function addInventoryItem(name, count, sellable) {
-  name = name.toLowerCase().replace(' ', '-');
-
+export function addInventoryItem(name, count, sellable, selected) {
   const itemsEl = document.querySelector('div#inventory ul#items');
 
-  itemsEl.appendChild(item(name, count, sellable));
+  itemsEl.appendChild(item.call(this, name, count, sellable, selected));
 }
 
 export function removeInventoryItem(name) {
-  name = name.toLowerCase().replace(' ', '-');
-  //
+  document.querySelector('#' + name).remove();
 }
 
-function item(name, count, sellable) {
+export function selectItem(itemName, selected) {
+  const action = selected ? 'add' : 'remove';
+
+  document.getElementById(itemName).classList[action]('selected');
+}
+
+function item(name, count, sellable, selected) {
   const niceName = name.replace('-', ' ');
 
-  // click listener not being set up (is setup in game)
   const itemLi = document.createElement('li');
-  itemLi.className = 'item';
+  itemLi.className = 'item' + (selected ? ' selected' : '');
   itemLi.id = name;
 
   const iconDiv = document.createElement('div');
@@ -41,7 +45,7 @@ function item(name, count, sellable) {
   iconDiv.appendChild(iconImg);
 
   if (typeof count === 'number') {
-    const countDiv = document.createElement('count');
+    const countDiv = document.createElement('div');
     countDiv.className = 'count';
     countDiv.textContent = count;
     iconDiv.appendChild(countDiv);
@@ -54,8 +58,14 @@ function item(name, count, sellable) {
 
   if (sellable) {
     itemLi.title = 'Right-click to sell 1 ' + niceName;
-    Tippy(itemLi);
+    Tippy(itemLi, {
+      appendTo: itemLi,
+      size: 'small',
+      hideOnClick: false,
+    });
   }
+
+  bindItem(itemLi, this);
 
   return itemLi;
 }

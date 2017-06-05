@@ -4,7 +4,7 @@
     "sprites": [
       "sprites/grass.png",
       "sprites/mud.png",
-      "sprites/logs.png",
+      "sprites/log.png",
       "sprites/pinecone.png",
       "sprites/generator-off.png",
       "sprites/generator-on.png",

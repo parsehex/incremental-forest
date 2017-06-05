@@ -1,7 +1,7 @@
 export default {
   GRASS:         0,
   MUD:           1,
-  LOGS:          2,
+  LOG:           2,
   PINE_CONE:     3,
   GENERATOR_OFF: 4,
   GENERATOR_ON:  5,

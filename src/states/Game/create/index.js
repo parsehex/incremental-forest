@@ -2,7 +2,7 @@ import setupKeys from './setup-keys';
 import addMap from './add-map';
 import addPlayer from './add-player';
 import addObjects from './add-objects';
-import setupHUD from './setup-hud';
+import setupHUD from '../../../ui/setup';
 
 export default function create() {
   this.hud = {

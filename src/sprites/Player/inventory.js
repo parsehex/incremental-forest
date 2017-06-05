@@ -1,101 +1,174 @@
-import { updateInventory, addInventoryItem, removeInventoryItem } from '../../ui';
-import { clamp, REALLY_BIG_NUMBER } from '../../utils';
+import {
+  updateInventory,
+  addInventoryItem,
+  removeInventoryItem,
+  selectItem,
+} from '../../ui';
+import { clamp, REALLY_BIG_NUMBER, clone } from '../../utils';
 
 export default class Inventory {
   constructor(game) {
     this.game = game;
 
-    this.carryingList = {
-      money: {
-        name: 'Money',
-        value: 0,
-        max: REALLY_BIG_NUMBER,
-      },
+    this.money = {
+      value: 0,
+      max: REALLY_BIG_NUMBER,
     };
-    this.itemsList = {
-      woodAxe: {
+
+    this.items = {
+      'wood-axe': {
         name: 'Wood Axe',
         value: true,
+        sellable: false,
+        selected: true,
       },
       bucket: {
         name: 'Bucket',
         value: false,
+        sellable: false,
+        selected: false,
       },
       water: {
         name: 'Water',
         value: 0,
         max: 15,
+        sellable: false,
+        selected: null,
       },
-      logs: {
-        name: 'Logs',
+      log: {
         value: 0,
         max: 10,
-        sell: {
-          price: 50,
-        },
+        sellable: true,
+        selected: null,
       },
-      pineCones: {
-        name: 'Pine Cone',
+      'pine-cone': {
         value: 0,
         max: 100,
-        sell: {
-          price: 5,
-        },
+        sellable: true,
+        selected: null, // FIXME still selectable
+        // TODO how is it selectable AFTER being created?
       },
     };
 
-    this.items = {};
-    createGettersSetters(this.itemsList, this.items);
+    setupObj = setupObj.bind(this);
 
-    this.carrying = {};
-    createGettersSetters(this.carryingList, this.carrying);
+    setupObj(this.items);
+    setupObj(this.money, 'money');
 
     // add items we started with to ui
-    for (let itemName in this.itemsList) {
-      let value = this.items[itemName];
+    for (let itemName in this.items) {
+      let value = this.items[itemName].value;
 
-      if (value === false || value === 0) continue;
+      if (value === false || value <= 0) continue;
 
-      const { name, conut, sell } = this.itemsList[itemName];
+      value = typeof value === 'boolean' ? undefined : value;
 
-      const sellable = typeof sell !== 'undefined';
+      const { sellable, selected } = this.items[itemName];
 
-      addInventoryItem(name, count, sellable);
+      addInventoryItem.call(this, itemName, value, sellable, selected);
     }
   }
 
-  get isMax() {
-    const itemsMax = {};
+  select(id) {
+    if (this.items[id].selected || this.items[id].selected === null) return; // already selected or not selectable
 
-    const items = Object.keys(this.itemsList);
+    for (let name in this.items) {
+      let item = this.items[name];
 
-    for (let i = 0; i < items.length; i++) {
-      const itemValue = this.items[items[i]];
+      if (!item.selected) continue;
 
-      if (typeof itemValue !== 'number') continue;
-
-      itemsMax[items[i]] = itemValue >= this.itemsList[items[i]].max;
+      item.selected = false;
     }
 
-    return itemsMax;
+    this.items[id].selected = true;
   }
 }
 
-function createGettersSetters(sourceObj, obj) {
-  const keys = Object.keys(sourceObj);
+// set 'values' prop to read/write (clamped to max if present) and all other props to read only
+function setupObj(obj, objName) {
+  processObject = processObject.bind(this);
 
-  for (let i = 0; i < keys.length; i++) {
-    Object.defineProperty(obj, keys[i], {
-      get: function() { return this.value; }.bind(sourceObj[keys[i]]),
-      set: function(value) {
-        if (typeof this.value !== 'number') this.value = value;
+  if (objName === undefined) {
+    const itemNames = Object.keys(obj);
 
-        this.value = clamp(value, 0, this.max || REALLY_BIG_NUMBER);
-
-        const sellable = typeof this.sell !== 'undefined';
-
-        updateInventory(this.name, this.value, sellable);
-      }.bind(sourceObj[keys[i]]),
-    });
+    for (let i = 0; i < itemNames.length; i++) {
+      processObject(obj[itemNames[i]], itemNames[i]);
+    }
+  } else {
+    processObject(obj, objName);
   }
+
+
+  function processObject(item, itemName) {
+    for (let keyName in item) {
+      if (keyName === 'value' || keyName === 'selected') { // TODO make work with selected too
+        readWriteKey.call(this, item, itemName, keyName);
+      } else {
+        readKey(item, keyName);
+      }
+    }
+
+    Object.defineProperty(item, 'isMax', { get: isMax.bind(item) });
+  }
+}
+
+function isMax() {
+  let maxed = false;
+
+  const { value, max } = this;
+
+  const type = typeof value;
+
+  if (type === 'number') {
+    maxed = value >= max;
+  } else if (type === 'boolean') {
+    maxed = value;
+  }
+
+  return maxed;
+}
+
+// sets up a getter-setter for 'value' prop, clamping it to obj.max
+function readWriteKey(obj, itemName, keyName) {
+  const privName = '_' + keyName;
+
+  obj[privName] = obj[keyName];
+  delete obj[keyName];
+
+  Object.defineProperty(obj, keyName, {
+    get: function() { return this[privName]; }.bind(obj),
+    set: function(name, self, value) {
+      if (typeof this[privName] !== 'number') {
+        this[privName] = value;
+      } else {
+        this[privName] = clamp(value, 0, this.max || REALLY_BIG_NUMBER);
+      }
+
+      switch (keyName) {
+        case 'value': {
+          if (this[privName] <= 0 || this[privName] === false) {
+            removeInventoryItem(name);
+          } else {
+            updateInventory.call(self, name, this[privName], this.sellable);
+          }
+          break;
+        }
+        case 'selected': {
+          selectItem(name, this[privName]);
+          break;
+        }
+      }
+    }.bind(obj, itemName, this), // TODO why pass itemName?
+  });
+}
+
+// sets up a getter only for 'key' prop, making it read-only
+function readKey(obj, keyName) {
+  const oldKeyValue = obj[keyName];
+
+  delete obj[keyName];
+
+  Object.defineProperty(obj, keyName, {
+    get: function() { return oldKeyValue; },
+  });
 }
