@@ -8,7 +8,7 @@ import Inventory from './inventory';
 
 export default class extends CommonObject {
   constructor({ game, x, y }) {
-    super(game, x, y, 'guy', frames.GUY.STAND_DOWN);
+    super(game, x, y, 'guy', frames.GUY.STAND_DOWN, 'player');
 
     this.faceDirection = 'DOWN';
     this.faceObjects = [];

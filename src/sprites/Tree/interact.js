@@ -12,8 +12,6 @@ export default function interact() {
     y: this.y,
   });
 
-  this.game.add.existing(log);
-
   const randomNumber = Math.floor(Math.random() * 100);
   const seedChance = 25;
   if (randomNumber <= seedChance) {
@@ -22,8 +20,6 @@ export default function interact() {
       x: this.x,
       y: this.y,
     });
-
-    this.game.add.existing(treeSeed);
   }
 
   this.destroy();

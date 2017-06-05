@@ -16,7 +16,5 @@ export default function addPlayer() {
     y: playerStart.y,
   });
 
-  this.game.add.existing(this.player);
-
   this.game.camera.follow(this.player);
 }

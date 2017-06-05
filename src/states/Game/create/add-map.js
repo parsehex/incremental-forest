@@ -1,15 +1,27 @@
+import Phaser from 'phaser';
+
 import TilemapWalker from 'tilemap-walker';
 
 import frames from '../../../sprite-frames';
+import config from '../../../config';
 
 export default function addMap() {
-  this.map = this.game.add.tilemap('forest');
+  this.map = new Phaser.Tilemap(
+    this.game,
+    'forest',
+    32,
+    32,
+    config.mapWidth,
+    config.mapHeight
+  );
 
   this.map.addTilesetImage('sprites', 'tiles', 32, 32);
 
-  this.layers = {};
+  this.layers = {
+    background: this.map.createLayer('background'),
+  };
 
-  this.layers.background = this.map.createLayer('background');
+  this.groups.map.add(this.layers.background);
 
   this.layers.background.resizeWorld();
 

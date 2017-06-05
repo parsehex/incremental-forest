@@ -10,6 +10,12 @@ export default function create() {
     water: null,
   };
 
+  this.groups = {
+    map: this.game.add.group(),
+    objects: this.game.add.group(),
+    player: this.game.add.group(),
+  };
+
   setupKeys.call(this);
 
   addMap.call(this);

@@ -5,6 +5,7 @@ import Tree from '../../../sprites/Tree';
 import Water from '../../../sprites/Water';
 
 export default function addObjects() {
+  // TODO is this object used (outside of this script)?
   this.objects = {
     trees: [],
     water: [],
@@ -28,7 +29,5 @@ function objects(name, objectClass) {
     });
 
     this.objects[name].push(object);
-
-    this.game.add.existing(object);
   }
 }
