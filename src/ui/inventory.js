@@ -34,7 +34,7 @@ function item(name, count) {
   itemLi.appendChild(iconDiv);
 
   const iconImg = document.createElement('img');
-  iconImg.src = '/assets/images/' + name + '.png';
+  iconImg.src = '/assets/sprites/' + name + '.png';
   iconImg.alt = name;
   iconDiv.appendChild(iconImg);
 
