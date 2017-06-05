@@ -7,8 +7,11 @@ export function tile() {
   });
 }
 
-export function nextTile() {
-  return nextCoord(this.tile, this.faceDirection, 1);
+export function nextTile(tile, faceDirection) {
+  tile = tile || this.tile;
+  faceDirection = faceDirection || this.faceDirection;
+
+  return nextCoord(tile, faceDirection, 1);
 }
 
 export function pixelToTile(pixelCoord) {
