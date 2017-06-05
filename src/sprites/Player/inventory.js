@@ -30,11 +30,17 @@ export default class Inventory {
         name: 'Logs',
         value: 0,
         max: 10,
+        sell: {
+          price: 50,
+        },
       },
       pineCones: {
         name: 'Pine Cone',
         value: 0,
         max: 100,
+        sell: {
+          price: 5,
+        },
       },
     };
 
@@ -50,7 +56,11 @@ export default class Inventory {
 
       if (value === false || value === 0) continue;
 
-      addInventoryItem(this.itemsList[itemName].name);
+      const { name, conut, sell } = this.itemsList[itemName];
+
+      const sellable = typeof sell !== 'undefined';
+
+      addInventoryItem(name, count, sellable);
     }
   }
 
@@ -82,7 +92,9 @@ function createGettersSetters(sourceObj, obj) {
 
         this.value = clamp(value, 0, this.max || REALLY_BIG_NUMBER);
 
-        updateInventory(this.name, this.value);
+        const sellable = typeof this.sell !== 'undefined';
+
+        updateInventory(this.name, this.value, sellable);
       }.bind(sourceObj[keys[i]]),
     });
   }

@@ -1,4 +1,4 @@
-export function updateInventory(name, value) {
+export function updateInventory(name, value, sellable) {
   name = name.toLowerCase().replace(' ', '-');
 
   const elem = document.querySelector('#' + name + ' .count');
@@ -6,16 +6,16 @@ export function updateInventory(name, value) {
   if (elem) {
     elem.textContent = value;
   } else {
-    addInventoryItem(name, value);
+    addInventoryItem(name, value, sellable);
   }
 }
 
-export function addInventoryItem(name, count) {
+export function addInventoryItem(name, count, sellable) {
   name = name.toLowerCase().replace(' ', '-');
 
   const itemsEl = document.querySelector('div#inventory ul#items');
 
-  itemsEl.appendChild(item(name, count));
+  itemsEl.appendChild(item(name, count, sellable));
 }
 
 export function removeInventoryItem(name) {
@@ -23,7 +23,9 @@ export function removeInventoryItem(name) {
   //
 }
 
-function item(name, count) {
+function item(name, count, sellable) {
+  const niceName = name.replace('-', ' ');
+
   // click listener not being set up (is setup in game)
   const itemLi = document.createElement('li');
   itemLi.className = 'item';
@@ -47,8 +49,13 @@ function item(name, count) {
 
   const nameDiv = document.createElement('div');
   nameDiv.className = 'name';
-  nameDiv.textContent = name.replace('-', ' ');
+  nameDiv.textContent = niceName;
   itemLi.appendChild(nameDiv);
+
+  if (sellable) {
+    itemLi.title = 'Right-click to sell 1 ' + niceName;
+    Tippy(itemLi);
+  }
 
   return itemLi;
 }
