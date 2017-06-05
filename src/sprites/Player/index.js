@@ -50,7 +50,7 @@ export default class extends CommonObject {
       const playerGroup = this.game.state.states.Game.groups.player;
       const cursor = new Phaser.Graphics(this.game, fixedCoord.x, fixedCoord.y);
 
-      cursor.alpha = 0.4;
+      cursor.alpha = 0.2;
       cursor.beginFill(Phaser.Color.getColor(255, 255, 255));
 
       cursor.drawRect(0, 0, 32, 32);
