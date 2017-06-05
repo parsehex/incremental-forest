@@ -20,8 +20,8 @@ export function pixelToTile(pixelCoord) {
 
 export function tileToPixel(tileCoord) {
   return {
-    x: (tileCoord.x * 16) + 16,
-    y: (tileCoord.y * 16) + 16,
+    x: (tileCoord.x * 32) + 16,
+    y: (tileCoord.y * 32) + 16,
   };
 }
 
