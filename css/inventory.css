@@ -22,6 +22,7 @@ div#inventory ul li.item {
   width: 64px;
 
   border: 1px solid black;
+  border-radius: 3px;
 
   text-align: center;
   margin: 0 0.5em;
@@ -29,10 +30,24 @@ div#inventory ul li.item {
 div#inventory .item.selected {
   background-color: white;
 }
+div#inventory .item .icon {
+  position: relative;
+}
 div#inventory .item img {
   width: 100%;;
 
   margin: auto;
+}
+div#inventory .icon .count {
+  position: absolute;
+  bottom: 0;
+  right: 2px;
+
+  background-color: #E0F7FA;
+  font-size: 0.7em;
+  padding: 0.15em;
+  border: 1px solid #006064;
+  border-radius: 3px;
 }
 div#inventory .item .name {
   text-transform: capitalize;

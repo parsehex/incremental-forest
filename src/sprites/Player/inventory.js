@@ -1,59 +1,89 @@
 import { updateInventory, addInventoryItem, removeInventoryItem } from '../../ui';
-import { clamp } from '../../utils';
+import { clamp, REALLY_BIG_NUMBER } from '../../utils';
 
 export default class Inventory {
   constructor(game) {
     this.game = game;
 
-    this.carrying = {
-      water: 0,
-      logs: 0,
-      'tree-seeds': 0,
-      money: 0,
+    this.carryingList = {
+      money: {
+        name: 'Money',
+        value: 0,
+        max: REALLY_BIG_NUMBER,
+      },
     };
-
     this.itemsList = {
-      wood_axe: true,
-      bucket: false,
+      woodAxe: {
+        name: 'Wood Axe',
+        value: true,
+      },
+      bucket: {
+        name: 'Bucket',
+        value: false,
+      },
+      water: {
+        name: 'Water',
+        value: 0,
+        max: 15,
+      },
+      logs: {
+        name: 'Logs',
+        value: 0,
+        max: 10,
+      },
+      pineCones: {
+        name: 'Pine Cone',
+        value: 0,
+        max: 100,
+      },
     };
 
-    // add items we started with have to ui
-    for (let item in this.itemsList) {
-      if (!this.itemsList[item]) continue;
+    this.items = {};
+    createGettersSetters(this.itemsList, this.items);
 
-      addInventoryItem(item);
+    this.carrying = {};
+    createGettersSetters(this.carryingList, this.carrying);
+
+    // add items we started with to ui
+    for (let itemName in this.itemsList) {
+      let value = this.items[itemName];
+
+      if (value === false || value === 0) continue;
+
+      addInventoryItem(this.itemsList[itemName].name);
     }
   }
 
-  get items() { return this.itemsList; }
-  set items(value) { throw new Error("don't directly set items list, use .addItem or .removeItem"); }
-  addItem(name) {
-    this.itemsList[name] = true;
+  get isMax() {
+    const itemsMax = {};
 
-    addInventoryItem(item);
+    const items = Object.keys(this.itemsList);
+
+    for (let i = 0; i < items.length; i++) {
+      const itemValue = this.items[items[i]];
+
+      if (typeof itemValue !== 'number') continue;
+
+      itemsMax[items[i]] = itemValue >= this.itemsList[items[i]].max;
+    }
+
+    return itemsMax;
   }
-  removeItem(name) {
-    this.itemsList[name] = false;
+}
 
-    removeInventoryItem(item);
-  }
+function createGettersSetters(sourceObj, obj) {
+  const keys = Object.keys(sourceObj);
 
-  get water() { return this.getCarryingItemValue('water'); }
-  set water(value) { this.setCarryingItemValue('water', value, 15); }
+  for (let i = 0; i < keys.length; i++) {
+    Object.defineProperty(obj, keys[i], {
+      get: function() { return this.value; }.bind(sourceObj[keys[i]]),
+      set: function(value) {
+        if (typeof this.value !== 'number') this.value = value;
 
-  get logs() { return this.getCarryingItemValue('logs'); }
-  set logs(value) { this.setCarryingItemValue('logs', value, 10); }
+        this.value = clamp(value, 0, this.max || REALLY_BIG_NUMBER);
 
-  get treeSeeds() { return this.getCarryingItemValue('tree-seeds'); }
-  set treeSeeds(value) { this.setCarryingItemValue('tree-seeds', value); }
-
-  get money() { return this.getCarryingItemValue('money'); }
-  set money(value) { this.setCarryingItemValue('money', value, 1000000000); }
-
-  getCarryingItemValue(name) {return this.carrying[name]; }
-  setCarryingItemValue(name, value, max) {
-    this.carrying[name] = clamp(value, 0, max || 15);
-
-    updateInventory(name, this.carrying[name]);
+        updateInventory(this.name, this.value);
+      }.bind(sourceObj[keys[i]]),
+    });
   }
 }

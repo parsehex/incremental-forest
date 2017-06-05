@@ -18,14 +18,15 @@ export default function setupHUD() {
 }
 
 function setupCarrying() {
-  document.querySelector('div#carrying #logs').addEventListener('click', function() {
-    const player = this.game.state.states.Game.player;
-
-    if (player.inventory.logs === 0) return;
-
-    player.inventory.logs--;
-    player.inventory.money += itemPrices.LOG;
-  }.bind(this));
+  // TODO disabled for now ('carrying' items got relocated)
+  // document.querySelector('div#carrying #logs').addEventListener('click', function() {
+  //   const player = this.game.state.states.Game.player;
+  //
+  //   if (player.inventory.logs === 0) return;
+  //
+  //   player.inventory.logs--;
+  //   player.inventory.money += itemPrices.LOG;
+  // }.bind(this));
 }
 
 function setupItems() {

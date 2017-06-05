@@ -1,5 +1,9 @@
 export default function collide() {
-  this.game.state.states.Game.player.inventory.logs++;
+  const player = this.game.state.states.Game.player;
 
-  this.destroy();
+  if (!player.inventory.isMax.logs) {
+    player.inventory.items.logs++;
+
+    this.destroy();
+  }
 }

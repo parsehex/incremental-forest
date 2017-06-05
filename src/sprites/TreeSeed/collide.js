@@ -1,5 +1,9 @@
 export default function collide() {
-  this.game.state.states.Game.player.inventory.treeSeeds++;
+  const player = this.game.state.states.Game.player;
 
-  this.destroy();
+  if (!player.inventory.isMax.pineCones) {
+    player.inventory.items.pineCones++;
+
+    this.destroy();
+  }
 }

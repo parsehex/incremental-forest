@@ -1,3 +1,5 @@
+export const REALLY_BIG_NUMBER = 999999999999999;
+
 export function centerGameObjects(objects) {
   objects.forEach(function (object) {
     object.anchor.setTo(0.5);
