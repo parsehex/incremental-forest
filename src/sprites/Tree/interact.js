@@ -1,7 +1,7 @@
 import { hideHint } from '../../ui';
 
 import Log from '../Log';
-import TreeSeed from '../TreeSeed';
+import PineCone from '../PineCone';
 
 export default function interact() {
   const player = this.game.state.states.Game.player;
@@ -15,7 +15,7 @@ export default function interact() {
   const randomNumber = Math.floor(Math.random() * 100);
   const seedChance = 25;
   if (randomNumber <= seedChance) {
-    const treeSeed = new TreeSeed({
+    const treeSeed = new PineCone({
       game: this.game,
       x: this.x,
       y: this.y,
