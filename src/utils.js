@@ -26,20 +26,18 @@ export function findObjByKey(array, key, value) {
 export const clone = (obj) => JSON.parse(JSON.stringify(obj));
 
 export function directionToWASD(direction) {
-  direction = direction.toLowerCase();
-
   switch (direction) {
-    case 'up': {
-      return 'w';
+    case 'UP': {
+      return 'W';
     }
-    case 'left': {
-      return 'a';
+    case 'LEFT': {
+      return 'A';
     }
-    case 'down': {
-      return 's';
+    case 'DOWN': {
+      return 'S';
     }
-    case 'right': {
-      return 'd';
+    case 'RIGHT': {
+      return 'D';
     }
   }
 }
