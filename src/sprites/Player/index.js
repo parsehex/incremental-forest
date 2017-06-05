@@ -27,7 +27,7 @@ export default class extends CommonObject {
 
     this.drawCursor();
   }
-  
+
   drawCursor(nextNextTile) {
     let cursorCoord;
     if (nextNextTile) {
@@ -45,7 +45,7 @@ export default class extends CommonObject {
     if (this.cursor) {
       const move = this.game.add.tween(this.cursor);
 
-      move.to(fixedCoord, 50, null, true);
+      move.to(fixedCoord, 25, null, true);
     } else {
       const playerGroup = this.game.state.states.Game.groups.player;
       const cursor = new Phaser.Graphics(this.game, fixedCoord.x, fixedCoord.y);

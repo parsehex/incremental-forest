@@ -85,7 +85,7 @@ function tweenMove(nextCoord) {
 
   this.moving = true;
 
-  move.to(nextCoord, 50, null, true);
+  move.to(nextCoord, 25, null, true);
 
   this.drawCursor(true);
 
