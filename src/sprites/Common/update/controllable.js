@@ -73,6 +73,8 @@ function tryMove(nextCoord, direction, frames) {
     tweenMove.call(this, nextCoord);
   } else {
     checkFacing.call(this);
+
+    this.drawCursor();
   }
 }
 
@@ -84,6 +86,8 @@ function tweenMove(nextCoord) {
   this.moving = true;
 
   move.to(nextCoord, 50, null, true);
+
+  this.drawCursor(true);
 
   move.onComplete.add(function() {
     this.moving = false;
@@ -115,13 +119,10 @@ export function checkFacing() {
   if (this.faceObjects.length > 0) {
     interfaceWithObjects(this.faceObjects, 'notFacing');
 
-    this.faceObjects.forEach((obj) => { obj.alpha = 1; });
-
     this.faceObjects.length = 0;
   }
 
   this.faceObjects = facingObjects.objects;
-  this.faceObjects.forEach((obj) => { obj.alpha = 0.7; });
 
   interfaceWithObjects(this.faceObjects, 'facing');
 }
