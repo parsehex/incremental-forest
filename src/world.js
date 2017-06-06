@@ -1,6 +1,6 @@
 import config from './config';
 import { indexOfObject } from './utils';
-import { pixelToTile } from './tiles';
+import { tileToPixel } from './tiles';
 
 const map = {};
 const objects = {};
@@ -51,7 +51,7 @@ export function remove() {
 }
 
 export function objectsAtTile(tileCoord) {
-  const pixelCoord = pixelToTile(tileCoord);
+  const pixelCoord = tileToPixel(tileCoord);
   const boundsWidth = config.mapWidth * config.tileWidth;
   const boundsHeight = config.mapHeight * config.tileHeight;
 
