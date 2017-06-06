@@ -4,7 +4,7 @@ import frames from '../../sprite-frames';
 
 import update from './update';
 import Inventory from './inventory';
-import drawCursor from './cursor';
+import Cursor from './Cursor';
 
 export default class extends CommonObject {
   constructor({ game, x, y }) {
@@ -17,8 +17,6 @@ export default class extends CommonObject {
 
     this.update = update.bind(this);
 
-    this.drawCursor = drawCursor.bind(this);
-
-    this.drawCursor();
+    this.cursor = new Cursor(this);
   }
 }

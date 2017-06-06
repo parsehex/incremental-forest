@@ -1,6 +1,6 @@
 import { nextCoord } from '../../../utils';
 import checkCollide from '../../../collisions';
-import { tile } from '../../../tiles';
+import { pixelToTile } from '../../../tiles';
 import frames from '../../../sprite-frames';
 
 import interfaceWithObjects from '../interface-objects';
@@ -22,6 +22,6 @@ export default function tryMove(direction) {
 
     this.move(nextPixelCoord);
   } else {
-    this.drawCursor();
+    this.cursor.move();
   }
 }

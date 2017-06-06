@@ -44,7 +44,7 @@ export default class extends Phaser.Sprite {
     this.moving = true;
 
     if (this.cursor) {
-      this.drawCursor(true);
+      this.cursor.move(true);
     }
 
     tween.call(this, nextPixelCoord, 25, function() {
@@ -66,6 +66,6 @@ export default class extends Phaser.Sprite {
 
     super.destroy();
 
-    player.drawCursor();
+    player.cursor.move();
   }
 }
