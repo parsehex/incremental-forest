@@ -1,11 +1,11 @@
-import { objectsAtTile } from '../../../world';
-import { pixelToTile } from '../../../tiles';
+import { objectsAtTile } from './world';
+import { pixelToTile } from './tiles';
 
-export function checkCollide(pixelCoord) {
-  if (
-    pixelCoord.x < 0 || pixelCoord.x > this.game.world.bounds.width ||
-    pixelCoord.y < 0 || pixelCoord.y > this.game.world.bounds.height
-  ) {
+export default function checkCollide(pixelCoord) {
+  const { x, y } = pixelCoord;
+  const { bounds } = this.game.world;
+
+  if (x < 0 || x > bounds.width || y < 0 || y > bounds.height) {
     return {
       collides: true,
       objects: [],
@@ -23,7 +23,7 @@ export function checkCollide(pixelCoord) {
       };
     }
   }
-  
+
   return {
     collides: false,
     objects,

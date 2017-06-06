@@ -1,19 +1,19 @@
 import { nextCoord } from './utils';
 
-export function tile(coord) {
-  coord = coord || { x: this.x, y: this.y };
+export function tile(pixelCoord) {
+  pixelCoord = pixelCoord || { x: this.x, y: this.y };
 
   return pixelToTile({
-    x: coord.x,
-    y: coord.y,
+    x: pixelCoord.x,
+    y: pixelCoord.y,
   });
 }
 
-export function nextTile(tile, faceDirection) {
-  tile = tile || this.tile;
+export function nextTile(tileCoord, faceDirection) {
+  tileCoord = tileCoord || this.tile;
   faceDirection = faceDirection || this.faceDirection;
 
-  return nextCoord(tile, faceDirection, 1);
+  return nextCoord(tileCoord, faceDirection, 1);
 }
 
 export function pixelToTile(pixelCoord) {

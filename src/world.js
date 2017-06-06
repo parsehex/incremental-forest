@@ -1,5 +1,6 @@
 import config from './config';
 import { indexOfObject } from './utils';
+import { pixelToTile } from './tiles';
 
 const map = {};
 const objects = {};
@@ -25,7 +26,7 @@ export function movedTo(oldTileCoord) {
   const newY = this.tile.y;
   const mapNewTile = map[newX + ',' + newY];
 
-  if (oldTileCoord !== null) {
+  if (oldTileCoord !== null && Object.keys(oldTileCoord).length > 0) {
     // remove object ref from previous tile
 
     const oldX = oldTileCoord.x;
@@ -50,6 +51,17 @@ export function remove() {
 }
 
 export function objectsAtTile(tileCoord) {
+  const pixelCoord = pixelToTile(tileCoord);
+  const boundsWidth = config.mapWidth * config.tileWidth;
+  const boundsHeight = config.mapHeight * config.tileHeight;
+
+  if (
+    pixelCoord.x < 0 || pixelCoord.x > boundsWidth ||
+    pixelCoord.y < 0 || pixelCoord.y > boundsHeight
+  ) {
+    return [];
+  }
+
   const mapTile = map[tileCoord.x + ',' + tileCoord.y];
   const tileObjects = [];
 

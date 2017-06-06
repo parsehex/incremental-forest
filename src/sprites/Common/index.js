@@ -1,7 +1,10 @@
 import Phaser from 'phaser';
 
-import { tile, alignToGrid } from '../../tiles';
-import { add, remove } from '../../world';
+import { tile, nextTile, alignToGrid, pixelToTile } from '../../tiles';
+import { add, remove, movedTo } from '../../world';
+import { clone } from '../../utils';
+
+import tween from './tween';
 
 export default class extends Phaser.Sprite {
   constructor(game, x, y, sprite, frame, id) {
@@ -19,16 +22,42 @@ export default class extends Phaser.Sprite {
 
     const groups = this.game.state.states.Game.groups;
     if (this.id === 'player') {
-      // add to player group
       groups.player.add(this);
     } else {
-      // add to objects group
       groups.objects.add(this);
+
+      this.placed = null;
     }
 
-    this.tile = tile.call(this);
+    this.tile = {};
+
+    this.setTile();
 
     add.call(this, null);
+
+    this.timers = [];
+  }
+
+  move(nextPixelCoord) {
+    const oldTileCoord = tile.call(this);
+
+    this.moving = true;
+
+    if (this.cursor) {
+      this.drawCursor(true);
+    }
+
+    tween.call(this, nextPixelCoord, 25, function() {
+      this.moving = false;
+
+      this.setTile();
+
+      movedTo.call(this, oldTileCoord);
+    });
+  }
+
+  setTile() {
+    this.tile = tile.call(this);
   }
 
   destroy() {
@@ -36,6 +65,7 @@ export default class extends Phaser.Sprite {
     remove.call(this);
 
     super.destroy();
-    player.checkFacing();
+
+    player.drawCursor();
   }
 }
