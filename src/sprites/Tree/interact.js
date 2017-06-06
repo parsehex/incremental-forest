@@ -1,5 +1,3 @@
-import { hideHint } from '../../ui';
-
 import Log from '../Log';
 import PineCone from '../PineCone';
 
@@ -23,6 +21,4 @@ export default function interact() {
   }
 
   this.destroy();
-
-  hideHint();
 }

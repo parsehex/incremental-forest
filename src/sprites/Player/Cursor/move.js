@@ -26,14 +26,14 @@ export default function move(nextNextTile) {
 
   move.onComplete.add(function() {
     this.tile = tile(cursorPixelCoord);
+
+    const objectsAtCurrentCursor = this.objects;
+    if (objectsAtCurrentCursor.length > 0) {
+      interfaceWithObjects(objectsAtCurrentCursor, 'facing');
+    }
   }, this);
 
   if (objectsAtOldCursor.length > 0) {
     interfaceWithObjects(objectsAtOldCursor, 'notFacing');
-  }
-
-  const objectsAtCurrentCursor = this.objects;
-  if (objectsAtCurrentCursor.length > 0) {
-    interfaceWithObjects(objectsAtCurrentCursor, 'facing');
   }
 }
