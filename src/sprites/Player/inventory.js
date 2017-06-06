@@ -6,6 +6,8 @@ import {
 } from '../../ui';
 import { clamp, REALLY_BIG_NUMBER, clone } from '../../utils';
 
+import items from '../../items';
+
 export default class Inventory {
   constructor(game) {
     this.game = game;
@@ -21,6 +23,7 @@ export default class Inventory {
         value: true,
         sellable: false,
         selected: true,
+        use: items.WoodAxe.use.bind(this.game),
       },
       bucket: {
         name: 'Bucket',
@@ -46,6 +49,7 @@ export default class Inventory {
         max: 100,
         sellable: true,
         selected: false,
+        use: items.PineCone.use.bind(this.game),
       },
     };
 
@@ -65,6 +69,12 @@ export default class Inventory {
       const { sellable, selected } = this.items[itemName];
 
       addInventoryItem.call(this, itemName, value, sellable, selected);
+    }
+  }
+
+  get selected() {
+    for (let name in this.items) {
+      if (this.items[name].selected) return name;
     }
   }
 
@@ -147,6 +157,8 @@ function readWriteKey(obj, itemName, keyName) {
         case 'value': {
           if (this[privName] <= 0 || this[privName] === false) {
             removeInventoryItem(name);
+            
+            self.select('wood-axe'); // default back to wood-axe
           } else {
             updateInventory.call(self, name, this[privName], this.sellable);
           }
@@ -157,7 +169,7 @@ function readWriteKey(obj, itemName, keyName) {
           break;
         }
       }
-    }.bind(obj, itemName, this), // TODO why pass itemName?
+    }.bind(obj, itemName, this),
   });
 }
 

@@ -8,7 +8,7 @@ import interact from './interact';
 
 export default class extends CommonObject {
   constructor({ game, x, y }) {
-    super(game, x, y, 'tiles', frames.MAIN.TREE);
+    super(game, x, y, 'tiles', frames.MAIN.TREE, null, 'tree');
 
     this.facing = facing.bind(this);
     this.notFacing = notFacing.bind(this);

@@ -24,8 +24,11 @@ export function removeInventoryItem(name) {
 
 export function selectItem(itemName, selected) {
   const action = selected ? 'add' : 'remove';
+  const itemEl = document.getElementById(itemName);
 
-  document.getElementById(itemName).classList[action]('selected');
+  if (!itemEl) return;
+
+  itemEl.classList[action]('selected');
 }
 
 function item(name, count, sellable, selected) {

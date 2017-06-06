@@ -1,10 +1,8 @@
 import interfaceWithObjects from '../interface-objects';
 
 export default function tryInteract() {
-  // interact with all listening objects under cursor
-  const facingObjects = this.cursor.objects;
+  const selectedItemName = this.inventory.selected;
+  const selectedItem = this.inventory.items[selectedItemName];
 
-  if (facingObjects.length > 0) {
-    interfaceWithObjects(facingObjects, 'interact');
-  }
+  selectedItem.use();
 }

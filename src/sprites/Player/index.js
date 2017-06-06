@@ -8,7 +8,7 @@ import Cursor from './Cursor';
 
 export default class extends CommonObject {
   constructor({ game, x, y }) {
-    super(game, x, y, 'guy', frames.GUY.STAND_DOWN, 'player');
+    super(game, x, y, 'guy', frames.GUY.STAND_DOWN, 'player', 'player');
 
     this.faceDirection = 'DOWN';
     this.faceObjects = [];

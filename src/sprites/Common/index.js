@@ -7,7 +7,7 @@ import { clone } from '../../utils';
 import tween from './tween';
 
 export default class extends Phaser.Sprite {
-  constructor(game, x, y, sprite, frame, id) {
+  constructor(game, x, y, sprite, frame, id, objectType) {
     const alignedCoords = alignToGrid({ x, y });
 
     x = alignedCoords.x;
@@ -20,13 +20,15 @@ export default class extends Phaser.Sprite {
     // use a bunch of different properties to hopefully achieve a unique id
     this.id = id || this.key + this.frame + this.x + this.y + (Math.floor(Math.random() * 100) + 1);
 
+    this.objectType = objectType || 'generic';
+
     const groups = this.game.state.states.Game.groups;
     if (this.id === 'player') {
       groups.player.add(this);
     } else {
       groups.objects.add(this);
 
-      this.placed = null;
+      // this.placed = null;
     }
 
     this.tile = {};
