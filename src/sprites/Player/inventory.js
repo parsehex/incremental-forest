@@ -45,8 +45,7 @@ export default class Inventory {
         value: 0,
         max: 100,
         sellable: true,
-        selected: null, // FIXME still selectable
-        // TODO how is it selectable AFTER being created?
+        selected: false,
       },
     };
 
