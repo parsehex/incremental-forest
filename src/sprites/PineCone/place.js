@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 import Tree from '../Tree';
 
-const chance = 15;
+const chanceToGrow = 10;
 
 export default function place() {
   this.placed = true;
@@ -11,7 +11,13 @@ export default function place() {
 
     const number = Math.floor(Math.random() * 100) + 1;
 
-    if (chance <= number) {
+    const playerTile = this.game.state.states.Game.player.tile;
+    const thisTile = this.tile;
+
+    if (
+      chanceToGrow <= number &&
+      (playerTile.x !== thisTile.x || playerTile.y !== thisTile.y)
+    ) {
       new Tree({
         game: this.game,
         x: this.x,
