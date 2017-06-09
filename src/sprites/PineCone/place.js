@@ -8,10 +8,10 @@ export default function place() {
 
   this.game.time.events.add(Phaser.Timer.SECOND * 5, function() {
     if (this.destroyed) return;
-    
+
     const number = Math.floor(Math.random() * 100) + 1;
 
-    if (chance <= number) {
+    if (false && chance <= number) {
       new Tree({
         game: this.game,
         x: this.x,
