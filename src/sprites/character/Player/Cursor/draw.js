@@ -1,8 +1,8 @@
 import Phaser from 'phaser';
 
-import interfaceWithObjects from '../interface-objects';
-import { tile, tileToPixel } from '../../../tiles';
-import { nextCoord } from '../../../utils';
+import interfaceWithObjects from '../../Common/interface-objects';
+import { tile, tileToPixel } from '../../../../tiles';
+import { nextCoord } from '../../../../utils';
 
 export default function draw() {
   let cursorTileCoord = nextCoord(this.player.tile, this.player.faceDirection, 1);

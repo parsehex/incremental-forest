@@ -1,6 +1,6 @@
 import CommonObject from '../Common';
 
-import frames from '../../sprite-frames';
+import frames from '../../../sprite-frames';
 
 import collide from './collide';
 

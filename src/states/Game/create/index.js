@@ -14,6 +14,7 @@ export default function create() {
     map: this.game.add.group(),
     objects: this.game.add.group(),
     player: this.game.add.group(),
+    character: this.game.add.group(),
   };
 
   setupKeys.call(this);

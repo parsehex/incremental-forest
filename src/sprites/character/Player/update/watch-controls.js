@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 
-import { directionToWASD } from '../../../utils';
+import { directionToWASD } from '../../../../utils';
 
 export default function(moveCallback, interactCallback) {
   const checkMove = checkMoveKeys.bind(this, moveCallback);

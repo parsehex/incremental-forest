@@ -1,7 +1,7 @@
 import CommonObject from '../Common';
 
-import frames from '../../sprite-frames';
-import { hideHint } from '../../ui';
+import frames from '../../../sprite-frames';
+import { hideHint } from '../../../ui';
 
 import collide from './collide';
 import interact from './interact';

@@ -1,9 +1,8 @@
 import CommonObject from '../Common';
 
-import frames from '../../sprite-frames';
+import frames from '../../../sprite-frames';
 
 import { facing, notFacing } from './facing';
-
 import interact from './interact';
 
 export default class extends CommonObject {

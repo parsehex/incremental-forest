@@ -1,4 +1,4 @@
-import interfaceWithObjects from '../interface-objects';
+import interfaceWithObjects from '../../Common/interface-objects';
 
 export default function tryInteract() {
   const { cursor, inventory } = this;

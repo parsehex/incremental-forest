@@ -1,8 +1,8 @@
 import frames from '../../../sprite-frames';
 import { centerOfObject } from '../../../utils';
 
-import Tree from '../../../sprites/Tree';
-import Water from '../../../sprites/Water';
+import Tree from '../../../sprites/object/Tree';
+import Water from '../../../sprites/object/Water';
 
 export default function addObjects() {
   // TODO is this object used (outside of this script)?

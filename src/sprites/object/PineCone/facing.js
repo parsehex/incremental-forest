@@ -1,4 +1,4 @@
-import { showHint, hideHint } from '../../ui';
+import { showHint, hideHint } from '../../../ui';
 
 export function facing() {
   if (!this.placed) return;

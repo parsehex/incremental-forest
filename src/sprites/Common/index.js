@@ -22,13 +22,6 @@ export default class extends Phaser.Sprite {
 
     this.objectType = objectType || 'generic';
 
-    const groups = this.game.state.states.Game.groups;
-    if (this.id === 'player') {
-      groups.player.add(this);
-    } else {
-      groups.objects.add(this);
-    }
-
     this.tile = {};
 
     this.setTile();
@@ -38,14 +31,10 @@ export default class extends Phaser.Sprite {
     this.timers = [];
   }
 
-  move(nextPixelCoord) {
+  move(nextPixelCoord, callback) {
     const oldTileCoord = tile.call(this);
 
     this.moving = true;
-
-    if (this.cursor) {
-      this.cursor.move(true);
-    }
 
     tween.call(this, nextPixelCoord, 25, function() {
       this.moving = false;

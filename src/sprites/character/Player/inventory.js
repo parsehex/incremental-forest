@@ -3,10 +3,10 @@ import {
   addInventoryItem,
   removeInventoryItem,
   selectItem,
-} from '../../ui';
-import { clamp, REALLY_BIG_NUMBER, clone } from '../../utils';
+} from '../../../ui';
+import { clamp, REALLY_BIG_NUMBER, clone } from '../../../utils';
 
-import PineCone from '../PineCone';
+import PineCone from '../../object/PineCone';
 
 export default class Inventory {
   constructor(game) {

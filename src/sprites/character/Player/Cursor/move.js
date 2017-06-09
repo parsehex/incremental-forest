@@ -1,9 +1,9 @@
 import Phaser from 'phaser';
 
-import interfaceWithObjects from '../interface-objects';
-import { objectsAtTile } from '../../../world';
-import { tile, nextTile, tileToPixel } from '../../../tiles';
-import { nextCoord } from '../../../utils';
+import interfaceWithObjects from '../../Common/interface-objects';
+import { objectsAtTile } from '../../../../world';
+import { tile, nextTile, tileToPixel } from '../../../../tiles';
+import { nextCoord } from '../../../../utils';
 
 export default function move() {
   let cursorTileCoord = nextCoord(this.player.tile, this.player.faceDirection, 1);

@@ -1,7 +1,7 @@
 import draw from './draw';
 import move from './move';
 
-import { objectsAtTile } from '../../../world';
+import { objectsAtTile } from '../../../../world';
 
 export default class Cursor {
   constructor(player) {

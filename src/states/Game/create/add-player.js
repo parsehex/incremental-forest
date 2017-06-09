@@ -1,4 +1,4 @@
-import Player from '../../../sprites/Player';
+import Player from '../../../sprites/character/Player';
 import {
   findObjByKey,
   centerOfObject,

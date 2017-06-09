@@ -1,4 +1,4 @@
-import frames from '../../sprite-frames';
+import frames from '../../../sprite-frames';
 
 const { MAIN } = frames;
 
