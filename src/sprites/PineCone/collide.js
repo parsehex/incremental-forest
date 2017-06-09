@@ -1,9 +1,5 @@
 export default function collide() {
-  const player = this.game.state.states.Game.player;
+  if (this.placed) return;
 
-  if (!player.inventory.items['pine-cone'].isMax) {
-    player.inventory.items['pine-cone'].value++;
-
-    this.destroy();
-  }
+  this.pickUp();
 }

@@ -27,8 +27,6 @@ export default class extends Phaser.Sprite {
       groups.player.add(this);
     } else {
       groups.objects.add(this);
-
-      // this.placed = null;
     }
 
     this.tile = {};
@@ -68,6 +66,8 @@ export default class extends Phaser.Sprite {
     if (this.id !== 'player') remove.call(this);
 
     super.destroy();
+
+    this.destroyed = true;
 
     player.cursor.move();
   }

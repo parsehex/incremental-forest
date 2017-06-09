@@ -6,7 +6,7 @@ import {
 } from '../../ui';
 import { clamp, REALLY_BIG_NUMBER, clone } from '../../utils';
 
-import items from '../../items';
+import PineCone from '../PineCone';
 
 export default class Inventory {
   constructor(game) {
@@ -23,7 +23,6 @@ export default class Inventory {
         value: true,
         sellable: false,
         selected: true,
-        use: items.WoodAxe.use.bind(this.game),
       },
       bucket: {
         name: 'Bucket',
@@ -49,7 +48,7 @@ export default class Inventory {
         max: 100,
         sellable: true,
         selected: false,
-        use: items.PineCone.use.bind(this.game),
+        place: PineCone,
       },
     };
 
@@ -157,7 +156,7 @@ function readWriteKey(obj, itemName, keyName) {
         case 'value': {
           if (this[privName] <= 0 || this[privName] === false) {
             removeInventoryItem(name);
-            
+
             self.select('wood-axe'); // default back to wood-axe
           } else {
             updateInventory.call(self, name, this[privName], this.sellable);

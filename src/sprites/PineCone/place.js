@@ -3,8 +3,12 @@ import Tree from '../Tree';
 
 const chance = 15;
 
-export default function placed() {
+export default function place() {
+  this.placed = true;
+
   this.game.time.events.add(Phaser.Timer.SECOND * 5, function() {
+    if (this.destroyed) return;
+    
     const number = Math.floor(Math.random() * 100) + 1;
 
     if (chance <= number) {
@@ -16,7 +20,7 @@ export default function placed() {
 
       this.destroy();
     } else {
-      placed.call(this);
+      place.call(this);
     }
   }, this);
 }
