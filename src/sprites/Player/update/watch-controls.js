@@ -19,7 +19,10 @@ export default function(moveCallback, interactCallback) {
     return;
   }
 
-  checkSpace.call(this, interactCallback, 'SPACE');
+  checkKey.call(this, interactCallback, 'SPACE');
+
+  checkKey.call(this, this.inventory.seek, 'Q', 'previous');
+  checkKey.call(this, this.inventory.seek, 'E', 'next');
 }
 
 function checkMoveKeys(callback, key) {
@@ -33,22 +36,22 @@ function checkMoveKeys(callback, key) {
   }
 }
 
-function checkSpace(callback, key) {
+function checkKey(callback, key, arg) {
   const keys = this.game.state.states.Game.keys;
 
-  if (keys.SPACE.justPressed()) {
-    callback();
+  if (keys[key].justPressed()) {
+    callback(arg);
 
-    loop.call(this, keys, callback);
+    loop.call(this, keys, key, callback, arg);
   }
 }
 
-function loop(keys, callback) {
+function loop(keys, key, callback, arg) {
   this.game.time.events.add(Phaser.Timer.SECOND / 5, function() {
-    if (!keys.SPACE.isDown) return;
+    if (!keys[key].isDown) return;
 
-    callback();
+    callback(arg);
 
-    loop.call(this, keys, callback);
+    loop.call(this, keys, key, callback, arg);
   }, this);
 }

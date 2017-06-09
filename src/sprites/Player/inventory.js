@@ -69,6 +69,8 @@ export default class Inventory {
 
       addInventoryItem.call(this, itemName, value, sellable, selected);
     }
+
+    this.seek = this.seek.bind(this);
   }
 
   get selected() {
@@ -90,6 +92,27 @@ export default class Inventory {
 
     this.items[id].selected = true;
   }
+
+  seek(direction) {
+    const names = Object.keys(this.items).filter(function(itemName) {
+      let item = this.items[itemName];
+
+      return item.selected !== null && (item.value > 0 || item.value === true);
+    }.bind(this));
+
+    let i = names.indexOf(this.selected) + (direction === 'next' ? 1 : -1);
+    i = wrap(i, names.length);
+
+    const newName = names[i];
+
+    this.select(newName);
+  }
+}
+
+function wrap(value, length) {
+  if (value < 0) return length - 1;
+  if (value >= length) return 0;
+  return value;
 }
 
 // set 'values' prop to read/write (clamped to max if present) and all other props to read only
