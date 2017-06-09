@@ -1,7 +1,5 @@
 import Phaser from 'phaser';
 
-import TilemapWalker from 'tilemap-walker';
-
 import frames from '../../../sprite-frames';
 import config from '../../../config';
 
@@ -24,7 +22,4 @@ export default function addMap() {
   this.groups.map.add(this.layers.background);
 
   this.layers.background.resizeWorld();
-
-  // set up tilemap walker
-  // this.mapWalker = new TilemapWalker(this.game, this.map);
 }

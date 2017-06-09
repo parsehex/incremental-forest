@@ -8,7 +8,7 @@ var phaser = path.join(phaserModule, 'build/custom/phaser-split.js');
 var pixi = path.join(phaserModule, 'build/custom/pixi.js');
 var p2 = path.join(phaserModule, 'build/custom/p2.js');
 
-var tilemapWalker = path.join(__dirname, '/plugins/TilemapWalker');
+// var tilemapWalker = path.join(__dirname, '/plugins/TilemapWalker');
 var phasetips = path.join(__dirname, '/plugins/Phasetips');
 
 var definePlugin = new webpack.DefinePlugin({
@@ -21,7 +21,13 @@ module.exports = {
       'babel-polyfill',
       path.resolve(__dirname, 'src/main.js')
     ],
-    vendor: ['pixi', 'p2', 'phaser', 'tilemap-walker', 'phasetips'],
+    vendor: [
+      'pixi',
+      'p2',
+      'phaser',
+      // 'tilemap-walker',
+      'phasetips',
+    ],
   },
   devtool: 'cheap-source-map',
   output: {
@@ -60,7 +66,7 @@ module.exports = {
       'phaser': phaser,
       'pixi': pixi,
       'p2': p2,
-      'tilemap-walker': tilemapWalker,
+      // 'tilemap-walker': tilemapWalker,
       'phasetips': phasetips,
     }
   }
