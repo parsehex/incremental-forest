@@ -13,7 +13,9 @@ export default function tryMove(direction) {
 
   this.faceDirection = direction;
 
-  const nextPixelCoord = nextCoord({ x: this.x, y: this.y }, direction, 32);
+  const moveSpeed = 10;
+
+  const nextPixelCoord = nextCoord({ x: this.x, y: this.y }, direction, moveSpeed);
 
   const collisions = checkCollide.call(this, nextPixelCoord);
 

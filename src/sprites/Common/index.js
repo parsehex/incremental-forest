@@ -35,7 +35,7 @@ export default class extends Phaser.Sprite {
 
     this.setTile();
 
-    add.call(this, null);
+    if (this.id !== 'player') add.call(this, null);
 
     this.timers = [];
   }
@@ -54,7 +54,7 @@ export default class extends Phaser.Sprite {
 
       this.setTile();
 
-      movedTo.call(this, oldTileCoord);
+      if (this.id !== 'player') movedTo.call(this, oldTileCoord);
     });
   }
 
@@ -64,7 +64,8 @@ export default class extends Phaser.Sprite {
 
   destroy() {
     const player = this.game.state.states.Game.player;
-    remove.call(this);
+
+    if (this.id !== 'player') remove.call(this);
 
     super.destroy();
 

@@ -5,15 +5,9 @@ import { objectsAtTile } from '../../../world';
 import { tile, nextTile, tileToPixel } from '../../../tiles';
 import { nextCoord } from '../../../utils';
 
-export default function move(nextNextTile) {
+export default function move() {
   let cursorTileCoord = nextCoord(this.player.tile, this.player.faceDirection, 1);
-  let cursorPixelCoord;
-  if (nextNextTile) {
-    let nextTileCoord = nextTile(cursorTileCoord, this.player.faceDirection);
-    cursorPixelCoord = tileToPixel(nextTileCoord);
-  } else {
-    cursorPixelCoord = tileToPixel(cursorTileCoord);
-  }
+  let cursorPixelCoord = tileToPixel(cursorTileCoord);
 
   cursorPixelCoord.x -= 16;
   cursorPixelCoord.y -= 16;

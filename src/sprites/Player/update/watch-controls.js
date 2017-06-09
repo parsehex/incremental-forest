@@ -1,12 +1,9 @@
 import Phaser from 'phaser';
 
-import frames from '../../../sprite-frames';
 import { directionToWASD } from '../../../utils';
 
 export default function(moveCallback, interactCallback) {
-  checkKey = checkKey.bind(this);
-
-  const checkMove = checkKey.bind(this, moveCallback);
+  const checkMove = checkMoveKeys.bind(this, moveCallback);
 
   // early-return if any single key is being pressed
   if (checkMove('UP')) {
@@ -22,36 +19,36 @@ export default function(moveCallback, interactCallback) {
     return;
   }
 
-  if (checkKey(interactCallback, 'SPACE')) {
-    return;
-  }
+  checkSpace.call(this, interactCallback, 'SPACE');
 }
 
-function checkKey(callback, key) {
+function checkMoveKeys(callback, key) {
   const keys = this.game.state.states.Game.keys;
   const directionKey = directionToWASD(key);
 
   const adjKey = directionKey || key;
 
-  let pressed = keys[adjKey].justPressed();
-
-  if (adjKey !== 'SPACE') {
-    pressed = pressed || keys[directionKey].justPressed();
-  }
-
-  if (pressed) {
+  if (keys[adjKey].isDown) {
     callback(key);
-
-    loop.call(this, keys, adjKey, callback, key);
   }
 }
 
-function loop(keys, name, callback, callbackArg) {
+function checkSpace(callback, key) {
+  const keys = this.game.state.states.Game.keys;
+
+  if (keys.SPACE.justPressed()) {
+    callback();
+
+    loop.call(this, keys, callback);
+  }
+}
+
+function loop(keys, callback) {
   this.game.time.events.add(Phaser.Timer.SECOND / 5, function() {
-    if (!keys[name].isDown) return;
+    if (!keys.SPACE.isDown) return;
 
-    callback(callbackArg);
+    callback();
 
-    loop.call(this, keys, name, callback, callbackArg);
+    loop.call(this, keys, callback);
   }, this);
 }
