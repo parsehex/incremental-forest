@@ -14,8 +14,7 @@ export default function draw() {
   const playerGroup = this.game.state.states.Game.groups.player;
   const cursorGraphic = new Phaser.Graphics(this.game, cursorPixelCoord.x, cursorPixelCoord.y);
 
-  cursorGraphic.alpha = 0.2;
-  cursorGraphic.beginFill(Phaser.Color.getColor(255, 255, 255));
+  cursorGraphic.lineStyle(1, Phaser.Color.getColor(244, 67, 54), 1);
 
   cursorGraphic.drawRect(0, 0, 32, 32);
   cursorGraphic.endFill();
