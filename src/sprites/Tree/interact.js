@@ -4,6 +4,8 @@ import PineCone from '../PineCone';
 export default function interact() {
   const player = this.game.state.states.Game.player;
 
+  if (player.inventory.selected !== 'wood-axe') return;
+
   new Log({
     game: this.game,
     x: this.x,
