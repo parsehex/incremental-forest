@@ -11,7 +11,7 @@ export default function place() {
 
     const number = Math.floor(Math.random() * 100) + 1;
 
-    if (false && chance <= number) {
+    if (chance <= number) {
       new Tree({
         game: this.game,
         x: this.x,
