@@ -15,14 +15,29 @@ export default class extends CommonCharacter {
       selected: 'wood-axe',
     };
 
+    this.waitLastTime = this.game.time.totalElapsedSeconds();
+
     this.working = false;
     this.path = [];
-    this.onPath = false;
+    this.noPath = false;
     this.speed = config.test ? 0.4 : 1.5;
 
     this.sendToBack();
 
     this.update = update.bind(this);
+  }
+
+  get waiting() {
+    if (this.moving) return true;
+
+    let diff = this.game.time.totalElapsedSeconds() - this.waitLastTime;
+    if (diff < this.speed) return true;
+
+    return false;
+  }
+
+  wait() {
+    this.waitLastTime = this.game.time.totalElapsedSeconds();
   }
 
   cancelWork(noPath) {
