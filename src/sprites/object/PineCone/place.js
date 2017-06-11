@@ -1,7 +1,8 @@
 import Phaser from 'phaser';
 import Tree from '../Tree';
+import config from '../../../config';
 
-const chanceToGrow = 10;
+const chanceToGrow = config.test ? 60 : 10;
 
 export default function place() {
   this.placed = true;
