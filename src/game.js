@@ -1,5 +1,11 @@
 import Phaser from 'phaser';
 
+let game;
+
 export default function() {
-  return Phaser.GAMES[0];
+  if (!game) {
+    game = Phaser.GAMES[0];
+  }
+
+  return game;
 }
