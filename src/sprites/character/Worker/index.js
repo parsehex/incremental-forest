@@ -24,4 +24,10 @@ export default class extends CommonCharacter {
 
     this.update = update.bind(this);
   }
+
+  cancelWork(noPath) {
+    this.working = false;
+    this.path = [];
+    this.noPath = !!noPath;
+  }
 }

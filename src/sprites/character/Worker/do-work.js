@@ -7,12 +7,9 @@ export default function doWork() {
   const objects = objectsAtTile(nextTile);
   const facingTree = findObjByKey(objects, 'objectType', 'tree');
 
-  if (facingTree === false) {
-    // not facing a tree; cancel job so that another one can be found
-    this.working = false;
-    return;
+  if (facingTree !== false) {
+    facingTree.interact(this);
   }
 
-  facingTree.interact();
-  this.working = false;
+  this.cancelWork();
 }

@@ -24,8 +24,6 @@ export default function followPath() {
   } else {
     // path is blocked; reset path and don't try to recalculate
     // TODO could check if collision is a tree and chop it down if so
-    this.path = [];
-    this.onPath = false;
-    this.working = false;
+    this.cancelWork(true);
   }
 }
