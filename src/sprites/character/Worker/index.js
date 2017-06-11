@@ -1,6 +1,6 @@
 import CommonCharacter from '../Common';
-
 import frames from '../../../sprite-frames';
+import config from '../../../config';
 
 import update from './update';
 
@@ -20,6 +20,7 @@ export default class extends CommonCharacter {
     this.working = false;
     this.path = [];
     this.onPath = false;
+    this.speed = config.test ? 0.4 : 1.5;
 
     this.sendToBack();
 

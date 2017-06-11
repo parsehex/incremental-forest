@@ -4,15 +4,13 @@ import findWork from '../find-work';
 import doWork from '../do-work';
 import followPath from './follow-path';
 
-const moveSpeed = 0.4; // seconds
-
 export default function update() {
   if (this.moving) return; // don't try to do anything while moving
 
   this.lastTime = this.lastTime || this.game.time.totalElapsedSeconds(); // default lastTime to now
 
   let diff = this.game.time.totalElapsedSeconds() - this.lastTime;
-  if (diff < moveSpeed) return; // hasn't been long enough; wait
+  if (diff < this.speed) return; // hasn't been long enough; wait
 
   if (!this.working) {
     findWork.call(this);
