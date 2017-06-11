@@ -1,5 +1,4 @@
 node_modules/
-dist/
 .vscode/
 *.log
 assets/spritesheets
@@ -7,3 +6,8 @@ assets/spritesheets
 # test map(s)
 **/tile*/test*
 **/Tile*/test*
+
+src/
+plugins/
+build-spritesheets
+Tilesets/
