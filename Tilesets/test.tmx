@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0.0" orientation="orthogonal" renderorder="right-down" width="20" height="20" tilewidth="32" tileheight="32" nextobjectid="962">
+ <tileset firstgid="1" name="sprites" tilewidth="32" tileheight="32" tilecount="8" columns="8">
+  <image source="../assets/spritesheets/tiles.png" width="256" height="32"/>
+ </tileset>
+ <layer name="background" width="20" height="20">
+  <data encoding="csv">
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+</data>
+ </layer>
+ <objectgroup name="objects">
+  <object id="1" name="playerStart" gid="1" x="224" y="224" width="32" height="32"/>
+  <object id="741" name="workerStart" gid="1" x="32" y="160" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup name="trees">
+  <object id="947" gid="7" x="160" y="160" width="32" height="32"/>
+  <object id="948" gid="7" x="192" y="160" width="32" height="32"/>
+  <object id="949" gid="7" x="224" y="160" width="32" height="32"/>
+  <object id="950" gid="7" x="256" y="160" width="32" height="32"/>
+  <object id="951" gid="7" x="480" y="128" width="32" height="32"/>
+  <object id="952" gid="7" x="352" y="416" width="32" height="32"/>
+  <object id="953" gid="7" x="160" y="352" width="32" height="32"/>
+  <object id="954" gid="7" x="352" y="288" width="32" height="32"/>
+  <object id="955" gid="7" x="512" y="416" width="32" height="32"/>
+  <object id="956" gid="7" x="480" y="544" width="32" height="32"/>
+  <object id="957" gid="7" x="256" y="544" width="32" height="32"/>
+  <object id="958" gid="7" x="192" y="480" width="32" height="32"/>
+  <object id="959" gid="7" x="416" y="544" width="32" height="32"/>
+  <object id="960" gid="7" x="544" y="192" width="32" height="32"/>
+  <object id="961" gid="7" x="448" y="288" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup name="water"/>
+</map>
