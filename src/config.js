@@ -5,5 +5,6 @@ export default {
   mapHeight: 20,
   tileWidth: 32,
   tileHeight: 32,
-  localStorageName: 'phaseres6webpack'
+  test: true,
+  localStorageName: 'phaseres6webpack',
 };
