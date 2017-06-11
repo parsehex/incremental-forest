@@ -28,6 +28,6 @@ export default function draw() {
 
   const objectsAtCursor = this.objects;
   if (objectsAtCursor.length > 0) {
-    interfaceWithObjects(objectsAtCursor, 'facing');
+    interfaceWithObjects(objectsAtCursor, 'facing', this.player);
   }
 }

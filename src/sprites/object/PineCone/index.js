@@ -24,11 +24,10 @@ export default class extends CommonObject {
     this.notFacing = notFacing.bind(this);
   }
 
-  pickUp() {
-    const player = this.game.state.states.Game.player;
-    if (player.inventory.items['pine-cone'].isMax) return;
+  pickUp(character) {
+    if (character.inventory.items['pine-cone'].isMax) return;
 
-    player.inventory.items['pine-cone'].value++;
+    character.inventory.items['pine-cone'].value++;
 
     this.destroy();
   }

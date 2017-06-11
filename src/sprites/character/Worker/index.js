@@ -12,9 +12,7 @@ export default class extends CommonCharacter {
 
     // make a static inventory
     this.inventory = {
-      items: {
-        'wood-axe': { value: true, selected: true },
-      },
+      selected: 'wood-axe',
     };
 
     this.working = false;

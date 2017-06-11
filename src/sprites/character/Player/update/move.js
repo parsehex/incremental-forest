@@ -16,7 +16,7 @@ export default function tryMove(direction) {
   const collisions = checkCollide.call(this, nextPixelCoord);
 
   if (collisions.collides === false) {
-    interfaceWithObjects(collisions.objects, 'collide');
+    interfaceWithObjects(collisions.objects, 'collide', this);
 
     this.move(nextPixelCoord);
   } else {

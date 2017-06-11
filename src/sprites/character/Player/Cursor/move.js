@@ -23,11 +23,11 @@ export default function move() {
 
     const objectsAtCurrentCursor = this.objects;
     if (objectsAtCurrentCursor.length > 0) {
-      interfaceWithObjects(objectsAtCurrentCursor, 'facing');
+      interfaceWithObjects(objectsAtCurrentCursor, 'facing', this.player);
     }
   }, this);
 
   if (objectsAtOldCursor.length > 0) {
-    interfaceWithObjects(objectsAtOldCursor, 'notFacing');
+    interfaceWithObjects(objectsAtOldCursor, 'notFacing', this.player);
   }
 }
