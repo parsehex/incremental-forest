@@ -6,6 +6,7 @@ export default function() {
   const inventoryEl = document.getElementById('inventory');
 
   setupItems.call(this);
+  setupHire.call(this);
 
   carryingEl.style.display = 'block';
   hintEl.style.display = 'block';
@@ -22,4 +23,10 @@ function setupItems() {
   for (let i = 0, len = itemEls.length; i < len; i++) {
     bindItem(itemEls[i], playerInventory);
   }
+}
+
+function setupHire() {
+  document.getElementById('hire-worker').addEventListener('click', function() {
+    this.player.hireWorker();
+  }.bind(this));
 }

@@ -75,3 +75,36 @@ export function objectsAtTile(tileCoord) {
 
   return tileObjects;
 }
+
+// returns a tile with no objects near `tileCoord`
+// if fallback is true and there are no tiles available, `tileCoord` is returned
+// returned tile is not guaranteed to be the one nearest `tileCoord`
+export function availableTileNear(tileCoord, fallback) {
+  const mapTiles = Object.keys(map);
+  const i = mapTiles.indexOf(tileCoord.x + ',' + tileCoord.y);
+
+  // check all tiles after tileCoord for an empty tile
+  for (let k = i + 1; k < mapTiles.length; k++) {
+    if (map[mapTiles[k]].length === 0) {
+      return {
+        x: +mapTiles[k].split(',')[0],
+        y: +mapTiles[k].split(',')[1],
+      };
+    }
+  }
+
+  // check all tiles before tileCoord for an empty tile
+  for (let k = i - 1; k >= 0; k--) {
+    if (map[mapTiles[k]].length === 0) {
+      return {
+        x: +mapTiles[k].split(',')[0],
+        y: +mapTiles[k].split(',')[1],
+      };
+    }
+  }
+
+  // no empty tiles
+
+  // return fallback if set
+  if (fallback) return tileCoord;
+}

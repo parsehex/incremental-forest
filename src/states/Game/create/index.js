@@ -3,6 +3,14 @@ import addMap from './add-map';
 import addPlayer from './add-player';
 import addObjects from './add-objects';
 import setupHUD from '../../../ui/setup';
+import config from '../../../config';
+
+// below imports are for testing
+import Worker from '../../../sprites/character/Worker';
+import {
+  findObjByKey,
+  centerOfObject,
+} from '../../../utils';
 
 export default function create() {
   this.hud = {
@@ -25,4 +33,16 @@ export default function create() {
   addPlayer.call(this);
 
   setupHUD.call(this);
+
+  if (config.test) {
+    const workerStartObj = findObjByKey(this.map.objects.objects, 'name', 'workerStart');
+
+    const workerStart = centerOfObject(workerStartObj, this.map);
+
+    this.worker = new Worker({
+      game: this.game,
+      x: workerStart.x,
+      y: workerStart.y,
+    });
+  }
 }
