@@ -1,9 +1,13 @@
 import config from './config';
-import { indexOfObject } from './utils';
+import { indexOfObject, clone } from './utils';
 import { tileToPixel } from './tiles';
 
 const map = {};
 const objects = {};
+
+export function getMap() {
+  return clone(map);
+}
 
 (function generateMap() {
   for (let i = 0; i < config.mapHeight; i++) {
