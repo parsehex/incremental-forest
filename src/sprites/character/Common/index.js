@@ -1,4 +1,5 @@
 import Common from '../../Common';
+import frames from '../../../sprite-frames';
 
 export default class CommonCharacter extends Common {
   constructor(game, x, y, sprite, frame, id, objectType) {
@@ -13,5 +14,12 @@ export default class CommonCharacter extends Common {
     }
 
     super.move(nextPixelCoord);
+  }
+
+  face(direction) {
+    const frameName = frames.CHARACTER['STAND_' + direction];
+    this.frame = frameName;
+
+    this.faceDirection = direction;
   }
 }

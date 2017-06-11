@@ -1,17 +1,13 @@
 import { nextCoord } from '../../../../utils';
 import checkCollide from '../../../../collisions';
 import { pixelToTile } from '../../../../tiles';
-import frames from '../../../../sprite-frames';
 
 import interfaceWithObjects from '../../Common/interface-objects';
 
 export default function tryMove(direction) {
   if (this.moving) return;
 
-  const frameName = 'STAND_' + direction;
-  this.frame = frames.GUY[frameName];
-
-  this.faceDirection = direction;
+  this.face(direction);
 
   const moveSpeed = 10;
 
