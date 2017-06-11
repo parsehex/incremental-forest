@@ -19,19 +19,16 @@ export default class Inventory {
 
     this.items = {
       'wood-axe': {
-        name: 'Wood Axe',
         value: true,
         sellable: false,
         selected: true,
       },
       bucket: {
-        name: 'Bucket',
         value: false,
         sellable: false,
         selected: false,
       },
       water: {
-        name: 'Water',
         value: 0,
         max: 15,
         sellable: false,
