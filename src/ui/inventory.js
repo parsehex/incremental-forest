@@ -43,7 +43,7 @@ function item(name, count, sellable, selected) {
   itemLi.appendChild(iconDiv);
 
   const iconImg = document.createElement('img');
-  iconImg.src = '/assets/sprites/' + name + '.png';
+  iconImg.src = 'assets/sprites/' + name + '.png';
   iconImg.alt = name;
   iconDiv.appendChild(iconImg);
 
