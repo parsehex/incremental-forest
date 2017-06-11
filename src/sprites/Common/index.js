@@ -1,7 +1,6 @@
 import Phaser from 'phaser';
 
 import { tile, nextTile, alignToGrid, pixelToTile } from '../../tiles';
-import { add, remove, movedTo } from '../../world';
 import { clone } from '../../utils';
 
 import tween from './tween';
@@ -22,18 +21,14 @@ export default class extends Phaser.Sprite {
 
     this.objectType = objectType || 'generic';
 
+    this.timers = [];
+
     this.tile = {};
 
     this.setTile();
-
-    if (this.id !== 'player') add.call(this, null);
-
-    this.timers = [];
   }
 
   move(nextPixelCoord, callback) {
-    const oldTileCoord = tile.call(this);
-
     this.moving = true;
 
     tween.call(this, nextPixelCoord, 25, function() {
@@ -41,7 +36,7 @@ export default class extends Phaser.Sprite {
 
       this.setTile();
 
-      if (this.id !== 'player') movedTo.call(this, oldTileCoord);
+      if (callback) callback.call(this);
     });
   }
 
@@ -50,14 +45,10 @@ export default class extends Phaser.Sprite {
   }
 
   destroy() {
-    const player = this.game.state.states.Game.player;
-
-    if (this.id !== 'player') remove.call(this);
-
     super.destroy();
 
     this.destroyed = true;
 
-    player.cursor.move();
+    Phaser.GAMES[0].state.states.Game.player.cursor.move();
   }
 }
