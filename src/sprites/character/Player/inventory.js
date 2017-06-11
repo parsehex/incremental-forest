@@ -5,6 +5,7 @@ import {
   selectItem,
 } from '../../../ui';
 import { clamp, REALLY_BIG_NUMBER, clone } from '../../../utils';
+import config from '../../../config';
 
 import PineCone from '../../object/PineCone';
 
@@ -36,12 +37,12 @@ export default class Inventory {
       },
       log: {
         value: 0,
-        max: 10,
+        max: config.test ? 1000 : 10,
         sellable: true,
         selected: null,
       },
       'pine-cone': {
-        value: 0,
+        value: config.test ? 100 : 0,
         max: 100,
         sellable: true,
         selected: false,
