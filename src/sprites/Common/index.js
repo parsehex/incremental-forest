@@ -31,7 +31,7 @@ export default class extends Phaser.Sprite {
   move(nextPixelCoord, callback) {
     this.moving = true;
 
-    tween.call(this, nextPixelCoord, 25, function() {
+    tween.call(this, nextPixelCoord, 35, function() {
       this.moving = false;
 
       this.setTile();
