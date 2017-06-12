@@ -25,22 +25,10 @@ export function add() {
 
 // move
 
-export function movedTo(oldTileCoord) {
-  const newX = this.tile.x;
-  const newY = this.tile.y;
-  const mapNewTile = map[newX + ',' + newY];
 
-  if (oldTileCoord !== null && Object.keys(oldTileCoord).length > 0) {
-    // remove object ref from previous tile
 
-    const oldX = oldTileCoord.x;
-    const oldY = oldTileCoord.y;
-    const mapOldTile = map[oldX + ',' + oldY];
 
-    const index = mapOldTile.indexOf(this.id);
 
-    mapOldTile.splice(index, 1);
-  }
 
   mapNewTile.push(objects[this.id]);
 }

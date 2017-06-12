@@ -1,6 +1,6 @@
 import Common from '../../Common';
 
-import { add, remove, movedTo } from '../../../world';
+import { add, remove } from '../../../world';
 
 export default class CommonObject extends Common {
   constructor(game, x, y, sprite, frame, id, objectType) {
@@ -9,14 +9,6 @@ export default class CommonObject extends Common {
     this.game.state.states.Game.groups.objects.add(this);
 
     add.call(this, null);
-  }
-
-  move(nextPixelCoord) {
-    const oldTileCoord = tile.call(this);
-
-    super.move(nextPixelCoord, function() {
-      movedTo.call(this, oldTileCoord);
-    });
   }
 
   destroy() {
