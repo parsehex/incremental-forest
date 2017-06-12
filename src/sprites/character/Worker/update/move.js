@@ -5,8 +5,6 @@ export default function move(direction) {
 
   this.face(direction);
 
-  const moveSpeed = 10;
-
   const nextPixelCoord = nextCoord({ x: this.x, y: this.y }, direction, 32);
 
   this.move(nextPixelCoord);
