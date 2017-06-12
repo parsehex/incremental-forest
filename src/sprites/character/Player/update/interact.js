@@ -1,7 +1,10 @@
 import interfaceWithObjects from '../../Common/interface-objects';
+import { tileOutOfBounds } from '../../../../utils';
 
 export default function tryInteract() {
   const { cursor, inventory } = this;
+
+  if (tileOutOfBounds(cursor.tile)) return;
 
   const cursorObjects = cursor.objects;
 
