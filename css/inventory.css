@@ -1,6 +1,9 @@
 div#inventory {
   cursor: default;
   user-select: none;
+
+  margin-left: 0.4em;
+  margin-bottom: 0.4em;
 }
 div#inventory h4 {
   margin: 1em 0;
