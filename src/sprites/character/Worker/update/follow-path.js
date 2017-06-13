@@ -1,5 +1,5 @@
 import { tileToPixel } from '../../../../tiles';
-import checkCollide from '../../../../collisions';
+import { quickCheckCollide } from '../../../../collisions';
 import { nextCoord } from '../../../../utils';
 
 import move from './move';
@@ -15,9 +15,9 @@ export default function followPath() {
     return;
   }
 
-  const collision = checkCollide(tileToPixel(nextCoord(this.tile, this.path[0], 1)));
+  const collision = quickCheckCollide(nextCoord(this.tile, this.path[0], 1), ['worker']);
 
-  if (!collision.collides) {
+  if (!collision) {
     move.call(this, this.path[0]); // move according to next path direction
 
     this.path.shift(); // remove first path item

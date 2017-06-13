@@ -1,11 +1,15 @@
 import Common from '../../Common';
 import frames from '../../../sprite-frames';
+import { addCharacter, moveCharacter, removeCharacter } from '../../../world';
+import { clone } from '../../../utils';
 
 export default class CommonCharacter extends Common {
   constructor(game, x, y, sprite, frame, id, objectType) {
     super(game, x, y, sprite, frame, id, objectType);
 
     this.game.state.states.Game.groups.character.add(this);
+
+    addCharacter(this.tile, this.objectType);
   }
 
   move(nextPixelCoord) {
@@ -13,7 +17,11 @@ export default class CommonCharacter extends Common {
       this.cursor.move();
     }
 
-    super.move(nextPixelCoord);
+    const oldTileCoord = this.tile;
+
+    super.move(nextPixelCoord, function() {
+      moveCharacter(oldTileCoord, this.tile, this.objectType);
+    });
   }
 
   face(direction) {
@@ -21,5 +29,11 @@ export default class CommonCharacter extends Common {
     this.frame = frameName;
 
     this.faceDirection = direction;
+  }
+
+  destroy() {
+    removeCharacter(this.tile, this.objectType);
+
+    super.destroy();
   }
 }

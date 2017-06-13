@@ -25,6 +25,8 @@ export default class extends CommonCharacter {
     this.sendToBack();
 
     this.update = update.bind(this);
+
+    this.pathFindWorker = new Worker('../web-worker/path-find.js');
   }
 
   get waiting() {
