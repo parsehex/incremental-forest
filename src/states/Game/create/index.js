@@ -47,4 +47,5 @@ export default function create() {
   }
 
   this.game.gameTime = 0;
+  this.game.stage.disableVisibilityChange = true;
 }

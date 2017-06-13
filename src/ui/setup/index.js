@@ -7,6 +7,7 @@ export default function() {
 
   setupItems.call(this);
   setupButtons.call(this);
+  setupPause.call(this);
 
   carryingEl.style.display = 'block';
   hintEl.style.display = 'block';
@@ -28,6 +29,51 @@ function setupItems() {
 function setupButtons() {
   bindMenu.call(this, 'workers');
   bindMenu.call(this, 'settings');
+}
+
+function setupPause() {
+  // button and onUnfocus
+  const pauseButton = document.getElementById('pause-button');
+
+  pauseButton.addEventListener('click', pause.bind(this, 'toggle'));
+
+  document.body.addEventListener('keydown', (event) => {
+    if (event.which === 80) {
+      pause.call(this, 'toggle');
+
+      event.preventDefault();
+    }
+  });
+
+  var hidden, visibilityChange;
+  if (typeof document.hidden !== 'undefined') {
+    hidden = 'hidden';
+    visibilityChange = 'visibilitychange';
+  } else if (typeof document.msHidden !== 'undefined') {
+    hidden = 'msHidden';
+    visibilityChange = 'msvisibilitychange';
+  } else if (typeof document.webkitHidden !== 'undefined') {
+    hidden = 'webkitHidden';
+    visibilityChange = 'webkitvisibilitychange';
+  }
+
+  document.addEventListener(visibilityChange, () => {
+    if (document[hidden]) {
+      pause.call(this, true); // force pause
+    } else {
+      pause.call(this, false); // force resume
+    }
+  }, false);
+
+  function pause(state) {
+    if (state === 'toggle') {
+      this.game.paused = !this.game.paused;
+    } else if (typeof state === 'boolean') {
+      this.game.paused = state;
+    }
+
+    pauseButton.textContent = this.game.paused ? 'Resume' : 'Pause';
+  }
 }
 
 function bindMenu(name) {
