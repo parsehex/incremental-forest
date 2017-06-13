@@ -94,7 +94,7 @@ function bindMenu(name) {
         break;
       }
       case 'fire-worker': {
-        listener = () => { console.log('fire worker'); };
+        listener = () => { this.player.fireWorker(); };
         break;
       }
     }

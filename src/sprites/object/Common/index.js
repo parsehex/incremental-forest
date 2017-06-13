@@ -7,7 +7,7 @@ export default class CommonObject extends Common {
     super(game, x, y, sprite, frame, id, objectType);
 
     props = props || {};
-    
+
     let propKeys = Object.keys(props);
     for (let i = 0; i < propKeys.length; i++) {
       this[propKeys[i]] = props[propKeys[i]];
