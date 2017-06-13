@@ -35,11 +35,11 @@ function setupPause() {
   // button and onUnfocus
   const pauseButton = document.getElementById('pause-button');
 
-  pauseButton.addEventListener('click', pause.bind(this, 'toggle'));
+  pauseButton.addEventListener('click', pause.bind(this, 'toggle', true));
 
   document.body.addEventListener('keydown', (event) => {
     if (event.which === 80) {
-      pause.call(this, 'toggle');
+      pause.call(this, 'toggle', true);
 
       event.preventDefault();
     }
@@ -58,6 +58,8 @@ function setupPause() {
   }
 
   document.addEventListener(visibilityChange, () => {
+    if (this.game.manuallyPaused) return;
+
     if (document[hidden]) {
       pause.call(this, true); // force pause
     } else {
@@ -65,12 +67,14 @@ function setupPause() {
     }
   }, false);
 
-  function pause(state) {
+  function pause(state, manual) {
     if (state === 'toggle') {
       this.game.paused = !this.game.paused;
     } else if (typeof state === 'boolean') {
       this.game.paused = state;
     }
+
+    this.game.manuallyPaused = manual && this.game.paused;
 
     pauseButton.textContent = this.game.paused ? 'Resume' : 'Pause';
   }
