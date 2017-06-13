@@ -15,10 +15,4 @@ export default class extends CommonObject {
 
     this.interact = interact.bind(this);
   }
-
-  destroy() {
-    hideHint();
-
-    super.destroy();
-  }
 }

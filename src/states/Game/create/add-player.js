@@ -3,7 +3,6 @@ import {
   findObjByKey,
   centerOfObject,
 } from '../../../utils';
-import frames from '../../../sprite-frames';
 
 export default function addPlayer() {
   const playerStartObj = findObjByKey(this.map.objects.objects, 'name', 'playerStart');

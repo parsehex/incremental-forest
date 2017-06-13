@@ -50,3 +50,7 @@
     2px -1px 0 #fff,
     -2px -1px 0 #fff;
 }
+
+.hidden {
+  display: none !important;
+}

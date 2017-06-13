@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 
 import interfaceWithObjects from '../../Common/interface-objects';
 import { objectsAtTile } from '../../../../world';
-import { tile, nextTile, tileToPixel } from '../../../../tiles';
+import { nextTile, tileToPixel } from '../../../../tiles';
 import { nextCoord } from '../../../../utils';
 
 export default function move() {
@@ -19,15 +19,17 @@ export default function move() {
   move.to(cursorPixelCoord, 25, null, true);
 
   move.onComplete.add(function() {
-    this.tile = tile(cursorPixelCoord);
+    this.setTile();
 
     const objectsAtCurrentCursor = this.objects;
     if (objectsAtCurrentCursor.length > 0) {
-      interfaceWithObjects(objectsAtCurrentCursor, 'facing');
+      interfaceWithObjects(objectsAtCurrentCursor, 'facing', this.player);
     }
+
+    this.showHints();
   }, this);
 
   if (objectsAtOldCursor.length > 0) {
-    interfaceWithObjects(objectsAtOldCursor, 'notFacing');
+    interfaceWithObjects(objectsAtOldCursor, 'notFacing', this.player);
   }
 }

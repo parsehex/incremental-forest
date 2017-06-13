@@ -1,3 +1,5 @@
+import config from './config';
+
 export const REALLY_BIG_NUMBER = 999999999999999;
 
 export function centerGameObjects(objects) {
@@ -68,4 +70,23 @@ export function indexOfObject(arr, name, value) {
     if (arr[i][name] === value) return i;
   }
   return -1;
+}
+
+export function pixelOutOfBounds(pixelCoord) {
+  return (
+    pixelCoord.x < 0 || pixelCoord.x >= config.gameWidth ||
+    pixelCoord.y < 0 || pixelCoord.y >= config.gameHeight
+  );
+}
+export function tileOutOfBounds(tileCoord) {
+  return (
+    tileCoord.x < 0 || tileCoord.x >= config.mapWidth ||
+    tileCoord.y < 0 || tileCoord.y >= config.mapHeight
+  );
+}
+
+export function tryChance(chance) {
+  const randomNumber = Math.floor(Math.random() * 100) + 1;
+
+  return randomNumber <= chance;
 }

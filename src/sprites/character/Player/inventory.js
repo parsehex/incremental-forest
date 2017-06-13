@@ -5,6 +5,7 @@ import {
   selectItem,
 } from '../../../ui';
 import { clamp, REALLY_BIG_NUMBER, clone } from '../../../utils';
+import config from '../../../config';
 
 import PineCone from '../../object/PineCone';
 
@@ -13,25 +14,22 @@ export default class Inventory {
     this.game = game;
 
     this.money = {
-      value: 0,
+      value: config.test ? 10000 : 0,
       max: REALLY_BIG_NUMBER,
     };
 
     this.items = {
       'wood-axe': {
-        name: 'Wood Axe',
         value: true,
         sellable: false,
         selected: true,
       },
       bucket: {
-        name: 'Bucket',
         value: false,
         sellable: false,
         selected: false,
       },
       water: {
-        name: 'Water',
         value: 0,
         max: 15,
         sellable: false,
@@ -39,12 +37,12 @@ export default class Inventory {
       },
       log: {
         value: 0,
-        max: 10,
+        max: config.test ? 1000 : 10,
         sellable: true,
         selected: null,
       },
       'pine-cone': {
-        value: 0,
+        value: config.test ? 100 : 0,
         max: 100,
         sellable: true,
         selected: false,
@@ -177,7 +175,7 @@ function readWriteKey(obj, itemName, keyName) {
 
       switch (keyName) {
         case 'value': {
-          if (this[privName] <= 0 || this[privName] === false) {
+          if ((this[privName] <= 0 || this[privName] === false) && itemName !== 'money') {
             removeInventoryItem(name);
 
             self.select('wood-axe'); // default back to wood-axe

@@ -14,6 +14,7 @@
     <link rel='stylesheet' href='css/carrying.css' />
     <link rel='stylesheet' href='css/hint.css' />
     <link rel='stylesheet' href='css/inventory.css' />
+    <link rel='stylesheet' href='css/menu.css' />
     <link rel='stylesheet' href='css/style.css' />
 </head>
 
@@ -25,6 +26,31 @@
           $<span class='count'>0</span>
         </li>
       </ul>
+      <button type='button' id='workers'>Workers</button>
+      <ul id='workers-menu' class='menu hidden'>
+        <li>
+          <button type='button' id='hire-worker'>Hire</button>
+          <span> | </span>
+          <button type='button' class='fire' id='fire-worker'>Fire</button>
+        </li>
+      </ul>
+      <!-- <button type='button' id='settings'>Settings</button>
+      <ul id='settings-menu' class='menu hidden'>
+        <li>
+          Game size
+          <br />
+          <button type='button' id='game-size-small'>Small</button>
+          <span> | </span>
+          <button type='button' class='selected' id='game-size-medium'>Medium</button>
+          <span> | </span>
+          <button type='button' id='game-size-Large'>Large</button>
+          <br />
+          <button type='button' class='selected' id='game-size-square'>Square</button>
+          <span> | </span>
+          <button type='button' id='game-size-wide'>Wide</button>
+        </li>
+      </ul> -->
+      <button type='button' id='pause-button'>Pause</button>
     </div>
     <div id='content'></div>
     <div id='hint'>

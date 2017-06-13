@@ -5,6 +5,8 @@ import frames from '../../../sprite-frames';
 import update from './update';
 import Inventory from './inventory';
 import Cursor from './Cursor';
+import hireWorker from './hire-worker';
+import fireWorker from './fire-worker';
 
 export default class extends CommonCharacter {
   constructor({ game, x, y }) {
@@ -18,5 +20,8 @@ export default class extends CommonCharacter {
     this.update = update.bind(this);
 
     this.cursor = new Cursor(this);
+
+    this.hireWorker = hireWorker.bind(this);
+    this.fireWorker = fireWorker.bind(this);
   }
 }

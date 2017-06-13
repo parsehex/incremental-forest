@@ -3,7 +3,3 @@ dist/
 .vscode/
 *.log
 assets/spritesheets
-
-# test map(s)
-**/tile*/test*
-**/Tile*/test*

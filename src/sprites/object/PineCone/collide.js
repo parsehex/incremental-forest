@@ -1,5 +1,5 @@
-export default function collide() {
+export default function collide(character) {
   if (this.placed) return;
 
-  this.pickUp();
+  this.pickUp(character);
 }
