@@ -175,7 +175,7 @@ function readWriteKey(obj, itemName, keyName) {
 
       switch (keyName) {
         case 'value': {
-          if (this[privName] <= 0 || this[privName] === false) {
+          if ((this[privName] <= 0 || this[privName] === false) && itemName !== 'money') {
             removeInventoryItem(name);
 
             self.select('wood-axe'); // default back to wood-axe
