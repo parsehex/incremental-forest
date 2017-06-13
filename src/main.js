@@ -21,7 +21,7 @@ class Game extends Phaser.Game {
       parent: 'content',
       state: null,
       antialias: false,
-      enableDebug: __DEV__,
+      enableDebug: false,
     };
     super(gameConfig);
 
