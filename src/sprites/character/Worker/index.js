@@ -24,6 +24,7 @@ export default class extends CommonCharacter {
     this.speed = config.test ? 0.4 : 1.5;
 
     this.salary = salaries.worker;
+    this.payTime = 180; // seconds
 
     this.sendToBack();
 
@@ -49,7 +50,7 @@ export default class extends CommonCharacter {
 
     this.timeSincePaid += this.waitLastTime - oldTime;
 
-    if (this.timeSincePaid >= 10) this.getPaid(); // pay every 3 minutes
+    if (this.timeSincePaid >= this.payTime) this.getPaid(); // pay every 3 minutes
   }
 
   getPaid() {
