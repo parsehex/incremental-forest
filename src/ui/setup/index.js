@@ -28,7 +28,7 @@ function setupItems() {
 
 function setupButtons() {
   bindMenu.call(this, 'workers');
-  bindMenu.call(this, 'settings');
+  // bindMenu.call(this, 'settings');
 }
 
 function setupPause() {
