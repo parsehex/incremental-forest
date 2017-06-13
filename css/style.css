@@ -24,3 +24,13 @@ div#content canvas {
  div#carrying, div#hint, div#inventory {
    display: none;
  }
+
+button {
+  background-color: #616161;
+  color: white;
+  font-size: 1rem;
+  border-radius: 2px;
+}
+button:focus {
+  outline: 0;
+}
