@@ -14,7 +14,7 @@ export default class Inventory {
     this.game = game;
 
     this.money = {
-      value: 0,
+      value: config.test ? 10000 : 0,
       max: REALLY_BIG_NUMBER,
     };
 
