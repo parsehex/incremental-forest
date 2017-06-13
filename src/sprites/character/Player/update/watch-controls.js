@@ -23,6 +23,8 @@ export default function(moveCallback, interactCallback) {
 
   checkKey.call(this, this.inventory.seek, 'Q', 'previous');
   checkKey.call(this, this.inventory.seek, 'E', 'next');
+
+  checkKey.call(this, this.hireWorker, 'H');
 }
 
 function checkMoveKeys(callback, key) {
