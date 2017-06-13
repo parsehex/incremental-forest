@@ -45,4 +45,6 @@ export default function create() {
       y: workerStart.y,
     });
   }
+
+  this.game.gameTime = 0;
 }
