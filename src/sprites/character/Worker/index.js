@@ -16,7 +16,7 @@ export default class extends CommonCharacter {
       selected: 'wood-axe',
     };
 
-    this.waitLastTime = this.game.time.totalElapsedSeconds();
+    this.waitLastTime = this.game.gameTime;
 
     this.working = false;
     this.path = [];
@@ -38,7 +38,7 @@ export default class extends CommonCharacter {
   get waiting() {
     if (this.moving) return true;
 
-    let diff = this.game.time.totalElapsedSeconds() - this.waitLastTime;
+    let diff = this.game.gameTime - this.waitLastTime;
     if (diff < this.speed) return true;
 
     return false;
@@ -46,7 +46,7 @@ export default class extends CommonCharacter {
 
   wait() {
     const oldTime = this.waitLastTime;
-    this.waitLastTime = this.game.time.totalElapsedSeconds();
+    this.waitLastTime = this.game.gameTime;
 
     this.timeSincePaid += this.waitLastTime - oldTime;
 
