@@ -41,17 +41,5 @@ function checkKey(callback, key, arg) {
 
   if (keys[key].justPressed()) {
     callback(arg);
-
-    loop.call(this, keys, key, callback, arg);
   }
-}
-
-function loop(keys, key, callback, arg) {
-  this.game.time.events.add(Phaser.Timer.SECOND / 5, function() {
-    if (!keys[key].isDown) return;
-
-    callback(arg);
-
-    loop.call(this, keys, key, callback, arg);
-  }, this);
 }
