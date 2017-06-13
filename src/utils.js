@@ -84,3 +84,9 @@ export function tileOutOfBounds(tileCoord) {
     tileCoord.y < 0 || tileCoord.y >= config.mapHeight
   );
 }
+
+export function tryChance(chance) {
+  const randomNumber = Math.floor(Math.random() * 100) + 1;
+
+  return randomNumber <= chance;
+}
