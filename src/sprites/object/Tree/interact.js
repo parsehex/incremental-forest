@@ -1,5 +1,10 @@
+import config from '../../../config';
+import { tryChance } from '../../../utils';
+
 import Log from '../Log';
 import PineCone from '../PineCone';
+
+const seedDropChance = config.test ? 50 : 25;
 
 export default function interact(character) {
   if (character.inventory.selected !== 'wood-axe') return;
@@ -10,9 +15,7 @@ export default function interact(character) {
     y: this.y,
   });
 
-  const randomNumber = Math.floor(Math.random() * 100);
-  const seedChance = 25;
-  if (randomNumber <= seedChance) {
+  if (tryChance(seedDropChance)) {
     new PineCone({
       game: this.game,
       x: this.x,
