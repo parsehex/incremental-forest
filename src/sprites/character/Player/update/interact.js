@@ -20,6 +20,7 @@ export default function tryInteract() {
         game: this.game,
         x: cursor.graphic.x + 16,
         y: cursor.graphic.y + 16,
+        placed: true,
       });
 
       selectedItem.value--;

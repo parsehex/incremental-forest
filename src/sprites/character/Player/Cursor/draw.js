@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 
 import interfaceWithObjects from '../../Common/interface-objects';
-import { tile, tileToPixel } from '../../../../tiles';
+import { tileToPixel } from '../../../../tiles';
 import { nextCoord } from '../../../../utils';
 
 export default function draw() {
@@ -22,7 +22,7 @@ export default function draw() {
   playerGroup.add(cursorGraphic);
 
   this.graphic = cursorGraphic;
-  this.tile = tile(cursorPixelCoord);
+  this.setTile();
 
   playerGroup.sort('type', Phaser.Group.SORT_DESCENDING);
 
@@ -30,4 +30,6 @@ export default function draw() {
   if (objectsAtCursor.length > 0) {
     interfaceWithObjects(objectsAtCursor, 'facing', this.player);
   }
+
+  this.showHints();
 }

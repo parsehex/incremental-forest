@@ -48,7 +48,5 @@ export default class extends Phaser.Sprite {
     super.destroy();
 
     this.destroyed = true;
-
-    Phaser.GAMES[0].state.states.Game.player.cursor.move();
   }
 }

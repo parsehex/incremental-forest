@@ -1,9 +1,5 @@
 import { showHint, hideHint } from '../../../ui';
 
-export function facing() {
-  showHint('generator', 'space', 'power with water');
-}
+export function facing() {}
 
-export function notFacing() {
-  hideHint();
-}
+export function notFacing() {}

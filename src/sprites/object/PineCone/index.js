@@ -9,15 +9,19 @@ import place from './place';
 import { facing, notFacing } from './facing';
 
 export default class extends CommonObject {
-  constructor({ game, x, y }) {
-    super(game, x, y, 'tiles', frames.MAIN.PINE_CONE, null, 'pine-cone');
+  constructor({ game, x, y, placed }) {
+    const importantProps = {
+      placed: !!placed,
+    };
+
+    super(game, x, y, 'tiles', frames.MAIN.PINE_CONE, null, 'pine-cone', importantProps);
 
     this.collides = false;
     this.collide = collide.bind(this);
 
     this.interact = interact.bind(this);
 
-    this.placed = false;
+    this.placed = !!placed;
     this.place = place.bind(this);
 
     this.facing = facing.bind(this);
@@ -30,11 +34,5 @@ export default class extends CommonObject {
     character.inventory.items['pine-cone'].value++;
 
     this.destroy();
-  }
-
-  destroy() {
-    hideHint();
-
-    super.destroy();
   }
 }
