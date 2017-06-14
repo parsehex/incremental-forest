@@ -90,3 +90,9 @@ export function tryChance(chance) {
 
   return randomNumber <= chance;
 }
+
+export function wrap(value, length) {
+  if (value < 0) return length - 1;
+  if (value >= length) return 0;
+  return value;
+}

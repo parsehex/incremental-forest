@@ -1,17 +1,19 @@
-import { bindItem } from '../bind-item';
+import { bindItemSlot } from '../bind-item';
 
 export default function() {
-  const carryingEl = document.getElementById('carrying');
-  const hintEl = document.getElementById('hint');
-  const inventoryEl = document.getElementById('inventory');
+  // const carryingEl = document.getElementById('carrying');
+  // const hintEl = document.getElementById('hint');
+  // const inventoryEl = document.getElementById('inventory');
 
   setupItems.call(this);
   setupButtons.call(this);
   setupPause.call(this);
 
-  carryingEl.style.display = 'block';
-  hintEl.style.display = 'block';
-  inventoryEl.style.display = 'block';
+  // TODO setup shortcuts (that are related to DOM, like pause)
+
+  // carryingEl.style.display = 'block';
+  // hintEl.style.display = 'block';
+  // inventoryEl.style.display = 'block';
 }
 
 function setupItems() {
@@ -20,9 +22,9 @@ function setupItems() {
 
   const inventoryEl = document.getElementById('inventory');
 
-  const itemEls = inventoryEl.querySelectorAll('.item');
+  const itemEls = inventoryEl.querySelectorAll('.item-slot');
   for (let i = 0, len = itemEls.length; i < len; i++) {
-    bindItem(itemEls[i], playerInventory);
+    bindItemSlot(i, playerInventory);
   }
 }
 

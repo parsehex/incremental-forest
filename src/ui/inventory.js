@@ -1,74 +1,56 @@
 import { bindItem } from './bind-item';
 
-export function updateInventory(name, value, sellable) {
+export function updateInventory(slotNum, name, value) {
   const niceName = name.toLowerCase().replace('-', ' ');
 
-  const elem = document.querySelector('#' + name + ' .count');
+  const countEl = document.querySelector('#item-slot-' + slotNum + ' .item-count');
 
-  if (elem) {
-    elem.textContent = value;
+  if (countEl) {
+    countEl.textContent = value;
   } else {
-    addInventoryItem.call(this, name, value, sellable);
+    addInventoryItem(slotNum, name, value);
   }
 }
 
-export function addInventoryItem(name, count, sellable, selected) {
-  const itemsEl = document.querySelector('div#inventory ul#items');
-
-  itemsEl.appendChild(item.call(this, name, count, sellable, selected));
+export function addInventoryItem(slotNum, name, count) {
+  item(slotNum, name, count);
 }
 
-export function removeInventoryItem(name) {
-  document.querySelector('#' + name).remove();
+export function removeInventoryItem(slotNum) {
+  if (name === 'money') return;
+
+  const slot = document.querySelector('#item-slot-' + slotNum);
+  slot.title = '';
+  slot.querySelector('.item').innerHTML = '';
 }
 
-export function selectItem(itemName, selected) {
-  const action = selected ? 'add' : 'remove';
-  const itemEl = document.getElementById(itemName);
+export function selectSlot(slotNum) {
+  // deselect previous slot
+  document.querySelector('.item-slot.selected').classList.remove('selected');
 
-  if (!itemEl) return;
-
-  itemEl.classList[action]('selected');
+  document.getElementById('item-slot-' + slotNum).classList.add('selected');
 }
 
-function item(name, count, sellable, selected) {
-  const niceName = name.replace('-', ' ');
+function item(slotTargetNum, name, count) {
+  // this ugly line converts 'im-a-spooky-skeleton' to 'Im A Spooky Skeleton'
+  const niceName = name.replace(/-/g, ' ').split(' ').map((val)=>val.substr(0, 1).toUpperCase() + val.substr(1)).join(' ');
 
-  const itemLi = document.createElement('li');
-  itemLi.className = 'item' + (selected ? ' selected' : '');
-  itemLi.id = name;
+  const itemSlot = document.getElementById('item-slot-' + slotTargetNum);
+  itemSlot.title = niceName;
 
   const iconDiv = document.createElement('div');
   iconDiv.className = 'icon';
-  itemLi.appendChild(iconDiv);
+  itemSlot.querySelector('.item').appendChild(iconDiv);
 
-  const iconImg = document.createElement('img');
-  iconImg.src = 'assets/sprites/' + name + '.png';
-  iconImg.alt = name;
-  iconDiv.appendChild(iconImg);
+  const itemImg = document.createElement('img');
+  itemImg.src = 'assets/sprites/' + name + '.png';
+  itemImg.alt = niceName;
+  iconDiv.appendChild(itemImg);
 
   if (typeof count === 'number') {
     const countDiv = document.createElement('div');
-    countDiv.className = 'count';
+    countDiv.className = 'item-count';
     countDiv.textContent = count;
     iconDiv.appendChild(countDiv);
   }
-
-  const nameDiv = document.createElement('div');
-  nameDiv.className = 'name';
-  nameDiv.textContent = niceName;
-  itemLi.appendChild(nameDiv);
-
-  if (sellable) {
-    itemLi.title = 'Right-click to sell 1 ' + niceName;
-    Tippy(itemLi, {
-      appendTo: itemLi,
-      size: 'small',
-      hideOnClick: false,
-    });
-  }
-
-  bindItem(itemLi, this);
-
-  return itemLi;
 }
