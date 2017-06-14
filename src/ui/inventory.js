@@ -1,9 +1,9 @@
 import { bindItem } from './bind-item';
 
 export function updateInventory(slotNum, name, value) {
-  const niceName = name.toLowerCase().replace('-', ' ');
+  const id = name === 'money' ? '#money' : '#item-slot-' + slotNum;
 
-  const countEl = document.querySelector('#item-slot-' + slotNum + ' .item-count');
+  const countEl = document.querySelector(id + ' .item-count');
 
   if (countEl) {
     countEl.textContent = value;

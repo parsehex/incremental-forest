@@ -8,6 +8,8 @@ export function bindItemSlot(slotNum, inventory) {
 
   // bind to right click
   slotEl.addEventListener('contextmenu', function() {
+    event.preventDefault();
+
     inventory.sell(slotNum, 1);
   });
 }

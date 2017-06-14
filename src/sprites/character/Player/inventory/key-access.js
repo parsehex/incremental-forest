@@ -24,16 +24,20 @@ export function readWrite(obj, itemName, keyName) {
 
       switch (keyName) {
         case 'value': {
-          if (!oldValue && this[privName]) {
+          if (!oldValue && this[privName] && name !== 'money') {
             // item value was falsy (i.e. didn't have the item)
             // now the value is truthy (i.e. we have at least one), so add it to item slots
             self.addToSlots(name);
             return;
           }
+
+          const slotNum = self.slots.indexOf(name);
           if (this[privName] <= 0 || this[privName] === false) {
-            removeInventoryItem(self.slots.indexOf(name));
+            removeInventoryItem(slotNum);
+
+            if (slotNum > 0) self.slots[slotNum] = null;
           } else {
-            updateInventory(self.slots.indexOf(name), name, this[privName]);
+            updateInventory(slotNum, name, this[privName]);
           }
           break;
         }

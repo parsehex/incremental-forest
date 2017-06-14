@@ -51,10 +51,10 @@ export default class Inventory {
     // TODO handle amount
     if (slotNum === undefined) slotNum = this.selectedSlot;
 
-    const slot = this.slot[slotNum];
+    const slot = this.slots[slotNum];
 
     const item = this.items[slot];
-    if (slot === null || !item || !item.sellable || item.value >= 0) return;
+    if (slot === null || !item || !item.sellable || item.value <= 0) return;
 
     item.value--;
     this.money.value += itemPrices.sell[slot];
