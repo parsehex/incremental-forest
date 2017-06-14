@@ -25,6 +25,10 @@ export default function(moveCallback, interactCallback) {
   checkKey.call(this, this.inventory.seek, 'E', 'next');
 
   checkKey.call(this, this.hireWorker, 'H');
+
+  checkKey.call(this, () => {
+    this.inventory.sell(null, 1);
+  }, 'L');
 }
 
 function checkMoveKeys(callback, key) {

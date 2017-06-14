@@ -16,6 +16,7 @@ export default function setupKeys() {
     Q: keyboard.addKey(Phaser.Keyboard.Q),
     E: keyboard.addKey(Phaser.Keyboard.E),
     H: keyboard.addKey(Phaser.Keyboard.H),
+    L: keyboard.addKey(Phaser.Keyboard.L),
   };
 
   // prevent the following keys from being handled by the browser
@@ -27,5 +28,6 @@ export default function setupKeys() {
     Phaser.Keyboard.SPACEBAR,
     Phaser.Keyboard.Q,
     Phaser.Keyboard.H,
+    Phaser.Keyboard.L,
   ]);
 }
