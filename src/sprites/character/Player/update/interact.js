@@ -14,7 +14,7 @@ export default function tryInteract() {
     // no objects under cursor; if selected item is placeable, place it
     const selectedItem = inventory.items[inventory.selected];
 
-    if (selectedItem.hasOwnProperty('place') && selectedItem.value > 0) {
+    if (selectedItem && selectedItem.value > 0 && selectedItem.hasOwnProperty('place')) {
       const Item = selectedItem.place;
       const placedItem = new Item({
         game: this.game,
