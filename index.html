@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang='en'>
-
 <head>
     <meta charset='UTF-8'>
     <title>Phaser Game</title>
@@ -9,68 +8,153 @@
     <meta name='MobileOptimized' content='320'>
     <meta http-equiv='cleartype' content='on'>
 
+    <link href='https://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet'>
     <link rel='stylesheet' href='assets/css/tippy.min.css' />
-    <link rel='stylesheet' href='css/utility.css' />
-    <link rel='stylesheet' href='css/carrying.css' />
-    <link rel='stylesheet' href='css/hint.css' />
-    <link rel='stylesheet' href='css/inventory.css' />
-    <link rel='stylesheet' href='css/menu.css' />
     <link rel='stylesheet' href='css/style.css' />
 </head>
 
 <body>
   <div id='container'>
-    <div id='carrying'>
-      <ul>
-        <li id='money' class='text-stroke-black' title='Your money'>
+    <div id='game' class='panel'>
+      <div id='game-target'>
+        <!-- <img src='small-square.png' width=500 height=400 /> -->
+      </div>
+      <div id='hint'>
+        <span id='object-hint'>
+          <span>press</span>
+          <span id='key' class='text-stroke-black'>space</span>
+          <span>to</span>
+          <span id='action' class='text-stroke-black'>chop down</span>
+        </span>
+      </div>
+      <div id='inventory'>
+        <h4>Inventory</h4>
+        <ul id='items'>
+          <li id='item-slot-1' class='item-slot' title='Wood Axe'>
+            <div class='item-slot-number'>1</div>
+            <div class='item'>
+              <div class='icon'>
+                <img src='assets/sprites/wood-axe.png' />
+              </div>
+            </div>
+          </li>
+          <li id='item-slot-2' class='item-slot selected' title='Bucket'>
+            <div class='item-slot-number'>2</div>
+            <div class='item'>
+              <div class='icon'>
+                <img src='assets/sprites/bucket.png' />
+              </div>
+            </div>
+          </li>
+          <li id='item-slot-3' class='item-slot' title='Pine Cone'>
+            <div class='item-slot-number'>3</div>
+            <div class='item'>
+              <div class='icon'>
+                <img src='assets/sprites/pine-cone.png' />
+                <div class='item-count'>30</div>
+              </div>
+            </div>
+          </li>
+          <li id='item-slot-4' class='item-slot'>
+            <div class='item-slot-number'>4</div>
+            <div class='item'></div>
+          </li>
+          <li id='item-slot-5' class='item-slot'>
+            <div class='item-slot-number'>5</div>
+            <div class='item'></div>
+          </li>
+          <li id='item-slot-6' class='item-slot'>
+            <div class='item-slot-number'>6</div>
+            <div class='item'></div>
+          </li>
+          <li id='item-slot-7' class='item-slot'>
+            <div class='item-slot-number'>7</div>
+            <div class='item'></div>
+          </li>
+          <li id='item-slot-8' class='item-slot'>
+            <div class='item-slot-number'>8</div>
+            <div class='item'></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div id='right-wrapper' class='panel'>
+      <div id='top' class='panel'>
+        <span id='money' class='text-stroke-black' title='Your money'>
           $<span class='count'>0</span>
-        </li>
-      </ul>
-      <button type='button' id='workers'>Workers</button>
-      <ul id='workers-menu' class='menu hidden'>
-        <li>
-          <button type='button' id='hire-worker'>Hire</button>
-          <span> | </span>
-          <button type='button' class='fire' id='fire-worker'>Fire</button>
-        </li>
-      </ul>
-      <!-- <button type='button' id='settings'>Settings</button>
-      <ul id='settings-menu' class='menu hidden'>
-        <li>
-          Game size
-          <br />
-          <button type='button' id='game-size-small'>Small</button>
-          <span> | </span>
-          <button type='button' class='selected' id='game-size-medium'>Medium</button>
-          <span> | </span>
-          <button type='button' id='game-size-Large'>Large</button>
-          <br />
-          <button type='button' class='selected' id='game-size-square'>Square</button>
-          <span> | </span>
-          <button type='button' id='game-size-wide'>Wide</button>
-        </li>
-      </ul> -->
-      <button type='button' id='pause-button'>Pause</button>
+        </span>
+        <button type='button' id='pause-button'>Pause</button>
+      </div>
+      <div id='notifications' class='panel'>
+        <h1>Notifications</h1>
+        <ul>
+          <li class='danger'>
+            <div class='dismiss'>x</div>
+            4 of your workers quit!
+          </li>
+          <li class='warning'>
+            <div class='dismiss'>x</div>
+            4 of your workers will quit if they're not paid soon.
+          </li>
+          <li class='danger'>
+            <div class='dismiss'>x</div>
+            You have no more money!
+          </li>
+          <li class='warning'>
+            <div class='dismiss'>x</div>
+            You're getting low on trees. You might want to plant some Pine Cones.
+          </li>
+          <li class='warning'>
+            <div class='dismiss'>x</div>
+            3 workers can't chop any trees. They'll be fired soon.
+          </li>
+          <li class='info'>
+            <div class='dismiss'>x</div>
+            You will need to pick up logs from the trees your workers chop down.
+          </li>
+          <li class='tip'>
+            <div class='dismiss'>x</div>
+            If you don't want to keep paying your workers, you should let them go (Fire them).
+          </li>
+          <li class='info'>
+            <div class='dismiss'>x</div>
+            You automatically pay your workers every 3 minutes.
+          </li>
+          <li class='info'>
+            <div class='dismiss'>x</div>
+            Hire a worker to help you chop down trees.
+          </li>
+          <li class='info'>
+            <div class='dismiss'>x</div>
+            Right-click Logs in your inventory to sell them.
+          </li>
+          <li class='info'>
+            <div class='dismiss'>x</div>
+            Chop down some trees.
+          </li>
+        </ul>
+      </div>
     </div>
-    <div id='content'></div>
-    <div id='hint'>
-      <span id='object-name'>tree</span>
-      <soan id='object-hint'>
-        <span>press</span>
-        <span id='key' class='text-stroke-black'>space</span>
-        <span>to</span>
-        <span id='action' class='text-stroke-black'>chop down</span>
-      </soan>
-    </div>
-    <div id='inventory'>
-      <h4>Inventory</h4>
-      <ul id='items'></ul>
+    <div id='menu-holder' class='panel'>
+      <div class='tabs'>
+        <button type='button' id='workers' class='tab selected'>Workers</button>
+      </div>
+      <div id='workers-menu' class='menu'>
+        <div class='line'>
+          <span>
+            You have <span id='workers-count'>0</span> workers
+          </span>
+        </div>
+        <div class='line'>
+          <button type='button' class='disabled' id='hire-worker' title='H for shortcut key'>Hire</button>
+          <span> | </span>
+          <button type='button' class='disabled' id='fire-worker'>Fire</button>
+        </div>
+      </div>
     </div>
   </div>
-    <script src='assets/js/tippy.min.js' defer></script>
-    <script src='dist/vendor.bundle.js' defer></script>
-    <script src='dist/bundle.js' defer></script>
-
+  <script src='assets/js/tippy.min.js' defer></script>
+  <script src='dist/vendor.bundle.js' defer></script>
+  <script src='dist/bundle.js' defer></script>
 </body>
-
 </html>

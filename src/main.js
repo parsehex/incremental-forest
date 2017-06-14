@@ -18,7 +18,7 @@ class Game extends Phaser.Game {
       width,
       height,
       renderer: Phaser.CANVAS,
-      parent: 'content',
+      parent: 'game-target',
       state: null,
       antialias: false,
       enableDebug: false,

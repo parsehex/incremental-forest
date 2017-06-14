@@ -7,10 +7,15 @@ div#hint {
   padding: 0.2em;
   padding-bottom: 0;
 
-  visibility: hidden;
-}
-div#hint span#object-name {
-  float: left;
+  // visibility: hidden;
+  display: initial !important;
+
+  span#object-name {
+    float: left;
+  }
+  span#object-hint {
+    // float: right;
+  }
 }
 div#hint #key, div#hint #action {
   color: white;
