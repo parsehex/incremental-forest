@@ -39,7 +39,7 @@ export default class Cursor {
 
       if (hints.hasOwnProperty(type)) {
         let hint = hints[type];
-        showHint(hint.name, hint.key, hint.action);
+        showHint(hint.key, hint.action);
         break;
       }
     }
