@@ -30,7 +30,7 @@ export default class extends CommonCharacter {
 
     this.update = update.bind(this);
 
-    this.pathFindWorker = new Worker('../web-worker/path-find.js');
+    this.pathFindWorker = new Worker('web-worker/path-find.js');
 
     this.getPaid();
   }
