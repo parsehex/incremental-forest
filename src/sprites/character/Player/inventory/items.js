@@ -3,6 +3,8 @@ import { REALLY_BIG_NUMBER } from '../../../../utils';
 
 import PineCone from '../../../object/PineCone';
 
+const itemMax = 50;
+
 export default {
   'wood-axe': {
     value: true,
@@ -14,17 +16,17 @@ export default {
   },
   water: {
     value: 0,
-    max: 50,
+    max: itemMax,
     sellable: false,
   },
   log: {
     value: 0,
-    max: 50,
+    max: itemMax,
     sellable: true,
   },
   'pine-cone': {
     value: config.test ? 100 : 0,
-    max: 50,
+    max: itemMax,
     sellable: true,
     place: PineCone,
   },
