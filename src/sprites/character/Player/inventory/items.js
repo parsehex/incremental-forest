@@ -14,17 +14,17 @@ export default {
   },
   water: {
     value: 0,
-    max: 15,
+    max: 50,
     sellable: false,
   },
   log: {
     value: 0,
-    max: config.test ? 1000 : 10,
+    max: 50,
     sellable: true,
   },
   'pine-cone': {
     value: config.test ? 100 : 0,
-    max: 100,
+    max: 50,
     sellable: true,
     place: PineCone,
   },
