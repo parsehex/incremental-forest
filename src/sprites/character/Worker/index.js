@@ -2,6 +2,7 @@ import CommonCharacter from '../Common';
 import frames from '../../../sprite-frames';
 import config from '../../../config';
 import salaries from '../../../worker-salaries';
+import inform from '../../../ui/inform';
 
 import update from './update';
 
@@ -21,7 +22,7 @@ export default class extends CommonCharacter {
     this.working = false;
     this.path = [];
     this.noPath = false;
-    this.speed = config.test ? 0.4 : 1.5;
+    this.speed = config.test ? 0.4 : 1;
 
     this.salary = salaries.worker;
     this.payTime = 180; // seconds
@@ -33,6 +34,8 @@ export default class extends CommonCharacter {
     this.pathFindWorker = new Worker('web-worker/path-find.js');
 
     this.getPaid();
+
+    inform.worker.count(1);
   }
 
   get waiting() {
@@ -75,5 +78,7 @@ export default class extends CommonCharacter {
     this.pathFindWorker.terminate();
 
     super.destroy();
+
+    inform.worker.count(-1);
   }
 }
