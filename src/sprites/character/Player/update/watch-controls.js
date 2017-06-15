@@ -37,9 +37,7 @@ function checkMoveKeys(callback, key) {
   const keys = this.game.state.states.Game.keys;
   const directionKey = directionToWASD(key);
 
-  const adjKey = directionKey || key;
-
-  if (keys[adjKey].isDown) {
+  if (keys[key].isDown || keys[directionKey].isDown) {
     callback(key);
   }
 }
