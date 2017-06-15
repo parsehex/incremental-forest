@@ -3,7 +3,7 @@ import move from './move';
 
 import { objectsAtTile, onChange } from '../../../../world';
 import { tile } from '../../../../tiles';
-import hints from '../../../../hints';
+import hints from '../../../../game-data/hints';
 import { showHint, hideHint } from '../../../../ui';
 
 export default class Cursor {

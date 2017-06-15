@@ -1,11 +1,11 @@
 import Worker from '../Worker';
-import salaries from '../../../worker-salaries';
+import { worker } from '../../../game-data/worker-config';
 
 import { availableTileNear } from '../../../world';
 import { tileToPixel } from '../../../tiles';
 
 export default function hireWorker() {
-  if (this.inventory.money.value < salaries.worker) return;
+  if (this.inventory.money.value < worker.salary) return;
 
   // will default to this.tile if no other available tiles
   const workerTileCoord = availableTileNear(this.tile, true);

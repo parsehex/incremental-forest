@@ -1,7 +1,6 @@
 import CommonCharacter from '../Common';
 import frames from '../../../sprite-frames';
-import config from '../../../config';
-import salaries from '../../../worker-salaries';
+import { worker } from '../../../game-data/worker-config';
 import inform from '../../../ui/inform';
 
 import update from './update';
@@ -22,10 +21,10 @@ export default class extends CommonCharacter {
     this.working = false;
     this.path = [];
     this.noPath = false;
-    this.speed = config.test ? 0.4 : 1;
+    this.speed = worker.speed;
 
-    this.salary = salaries.worker;
-    this.payTime = 180; // seconds
+    this.salary = worker.salary;
+    this.payTime = worker.payTime; // seconds
 
     this.sendToBack();
 

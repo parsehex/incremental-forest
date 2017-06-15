@@ -1,8 +1,8 @@
 import { clamp, wrap } from '../../../../utils';
 import inform from '../../../../ui/inform';
-import itemPrices from '../../../../item-prices';
+import itemPrices from '../../../../game-data/item-prices';
+import { items, money } from '../../../../game-data/player-items';
 
-import items, { money } from './items';
 import setup from './setup';
 
 export default class Inventory {

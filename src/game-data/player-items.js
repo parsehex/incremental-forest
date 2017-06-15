@@ -1,11 +1,13 @@
-import config from '../../../../config';
-import { REALLY_BIG_NUMBER } from '../../../../utils';
+import config from '../config';
+import { REALLY_BIG_NUMBER } from '../utils';
 
-import PineCone from '../../../object/PineCone';
+const testing = config.test;
+
+import PineCone from '../sprites/object/PineCone';
 
 const itemMax = 50;
 
-export default {
+export const items = {
   'wood-axe': {
     value: true,
     sellable: false,
@@ -25,7 +27,7 @@ export default {
     sellable: true,
   },
   'pine-cone': {
-    value: config.test ? itemMax : 0,
+    value: testing ? itemMax : 0,
     max: itemMax,
     sellable: true,
     place: PineCone,
@@ -33,6 +35,6 @@ export default {
 };
 
 export const money = {
-  value: config.test ? 10000 : 0,
+  value: testing ? 10000 : 0,
   max: REALLY_BIG_NUMBER,
 };

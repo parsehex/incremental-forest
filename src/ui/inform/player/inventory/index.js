@@ -1,5 +1,5 @@
 import { notify } from '../../../notifications';
-import salaries from '../../../../worker-salaries';
+import { worker } from '../../../../game-data/worker-config';
 
 import slots from './slots';
 
@@ -33,7 +33,7 @@ function money(newCount) {
   }
 
   const hireWorkerButton = document.getElementById('hire-worker');
-  if (newCount >= salaries.worker) {
+  if (newCount >= worker.salary) {
     hireWorkerButton.classList.remove('disabled');
   } else {
     hireWorkerButton.classList.add('disabled');

@@ -1,10 +1,8 @@
-import config from '../../../config';
+import { treeGrow as growChance } from '../../../game-data/chances';
 import { tryChance } from '../../../utils';
 
 import Phaser from 'phaser';
 import Tree from '../Tree';
-
-const growChance = config.test ? 60 : 10;
 
 export default function place() {
   this.placed = true;
