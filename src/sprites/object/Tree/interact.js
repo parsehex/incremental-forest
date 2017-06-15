@@ -4,7 +4,7 @@ import { tryChance } from '../../../utils';
 import Log from '../Log';
 import PineCone from '../PineCone';
 
-const seedDropChance = config.test ? 50 : 25;
+const seedDropChance = config.test ? 75 : 50;
 
 export default function interact(character) {
   if (character.inventory.selected !== 'wood-axe') return;
