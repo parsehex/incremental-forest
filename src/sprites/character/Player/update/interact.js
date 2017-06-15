@@ -1,4 +1,5 @@
 import interfaceWithObjects from '../../Common/interface-objects';
+import { pixelToTile } from '../../../../tiles';
 import { tileOutOfBounds } from '../../../../utils';
 
 export default function tryInteract() {
@@ -15,6 +16,9 @@ export default function tryInteract() {
     const selectedItem = inventory.items[inventory.selected];
 
     if (selectedItem && selectedItem.value > 0 && selectedItem.hasOwnProperty('place')) {
+
+      if (tileOutOfBounds(pixelToTile({ x: cursor.graphic.x, y: cursor.graphic.y }))) return; // TODO bandaid fix
+
       const Item = selectedItem.place;
       const placedItem = new Item({
         game: this.game,
