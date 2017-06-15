@@ -25,7 +25,7 @@ export default {
     sellable: true,
   },
   'pine-cone': {
-    value: config.test ? 100 : 0,
+    value: config.test ? itemMax : 0,
     max: itemMax,
     sellable: true,
     place: PineCone,
