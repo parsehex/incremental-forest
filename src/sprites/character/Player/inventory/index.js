@@ -53,7 +53,11 @@ export default class Inventory {
     const slot = this.slots[slotNum];
 
     const item = this.items[slot];
-    if (slot === null || !item || !item.sellable || item.value < amount) return;
+    if (slot === null || !item || !item.sellable) return;
+
+    if (item.value < amount) return;
+
+    amount = amount || item.value;
 
     item.value -= amount;
     this.money.value += itemPrices.sell[slot] * amount;

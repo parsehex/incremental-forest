@@ -26,8 +26,10 @@ export default function(moveCallback, interactCallback) {
 
   checkKey.call(this, this.hireWorker, 'H');
 
-  checkKey.call(this, () => {
-    this.inventory.sell(null, 1);
+  checkKey.call(this, (arg, key) => {
+    const amount = key.shiftKey ? null : 1;
+
+    this.inventory.sell(null, amount);
   }, 'L');
 }
 
@@ -46,6 +48,6 @@ function checkKey(callback, key, arg) {
   const keys = this.game.state.states.Game.keys;
 
   if (keys[key].justPressed()) {
-    callback(arg);
+    callback(arg, keys[key]);
   }
 }
