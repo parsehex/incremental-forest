@@ -1,5 +1,5 @@
 import { clamp, wrap } from '../../../../utils';
-import { addInventoryItem, selectSlot } from '../../../../ui';
+import inform from '../../../../ui/inform';
 import itemPrices from '../../../../item-prices';
 
 import items, { money } from './items';
@@ -21,6 +21,8 @@ export default class Inventory {
   }
 
   addToSlots(itemName) {
+    if (this.slots.includes(itemName)) return;
+
     const freeSlotNum = this.slots.indexOf(null);
 
     if (freeSlotNum < 0) return; // FIXME before adding more than 2 more items to game
@@ -29,7 +31,17 @@ export default class Inventory {
 
     this.slots[freeSlotNum] = itemName;
 
-    addInventoryItem(freeSlotNum, itemName, value);
+    inform.player.inventory.slots.add(freeSlotNum, itemName, value);
+  }
+
+  removeFromSlots(itemName) {
+    if (!this.slots.includes(itemName)) return;
+
+    const itemSlotNum = this.slots.indexOf(itemName);
+
+    this.slots[itemSlotNum] = null;
+
+    inform.player.inventory.slots.remove(itemSlotNum, itemName);
   }
 
   get selected() {
@@ -39,7 +51,7 @@ export default class Inventory {
   select(slotNum) {
     this.selectedSlot = clamp(slotNum, 0, this.slots.length - 1);
 
-    selectSlot(slotNum);
+    inform.player.inventory.slots.select(slotNum);
   }
 
   seek(direction) {
