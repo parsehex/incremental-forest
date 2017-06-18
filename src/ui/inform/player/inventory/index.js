@@ -26,6 +26,9 @@ function money(newCount) {
 
   const oldCount = +moneyEl.textContent;
 
+  // if newCount is a decimal, trim it to 2 demial places
+  if (Math.round(newCount) !== newCount) newCount = newCount.toFixed(2);
+
   moneyEl.textContent = newCount;
 
   if (newCount === 0 && oldCount > 0) {

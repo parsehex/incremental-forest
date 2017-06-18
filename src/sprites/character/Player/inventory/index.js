@@ -16,6 +16,8 @@ export default class Inventory {
     this.selectedSlot = null;
 
     setup.call(this);
+    // init money counter
+    inform.player.inventory.itemValue('money', this.money.value);
 
     this.seek = this.seek.bind(this);
   }
