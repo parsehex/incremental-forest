@@ -28,4 +28,6 @@ div#top ul li {
 div#top #money {
   color: #4CAF50;
   margin: 0 0.5em;
+
+  @include text-stroke(black);
 }

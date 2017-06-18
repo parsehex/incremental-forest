@@ -7,8 +7,7 @@ div#hint {
   padding: 0.2em;
   padding-bottom: 0;
 
-  // visibility: hidden;
-  display: initial !important;
+  visibility: hidden;
 
   span#object-name {
     float: left;
@@ -21,4 +20,6 @@ div#hint #key, div#hint #action {
   color: white;
 
   text-transform: uppercase;
+
+  @include text-stroke(black);
 }
