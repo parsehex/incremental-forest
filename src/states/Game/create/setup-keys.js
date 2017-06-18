@@ -23,6 +23,4 @@ export default function setupKeys() {
 
     keyboard.addKeyCapture(key);
   }
-
-  // console.log(this.keys);
 }
