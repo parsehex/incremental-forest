@@ -28,6 +28,9 @@ export default function tryInteract() {
 
     if (!selectedItem || !selectedItem.hasOwnProperty('place')) return;
 
+    // ensure that there are no objects under cursor before placing
+    if (cursorObjects.length > 0) return;
+
     if (selectedItem.value > 0) {
       if (tileOutOfBounds(pixelToTile({ x: cursor.graphic.x, y: cursor.graphic.y }))) return; // TODO bandaid fix
 
