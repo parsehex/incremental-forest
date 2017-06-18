@@ -5,18 +5,30 @@ import { tileOutOfBounds } from '../../../../utils';
 export default function tryInteract() {
   const { cursor, inventory } = this;
 
-  if (tileOutOfBounds(cursor.tile)) return;
+  if (!this.interacting || tileOutOfBounds(cursor.tile)) return;
 
   const cursorObjects = cursor.objects;
 
-  if (cursorObjects.length > 0) {
+  if (this.interactAction === null) {
+    if (cursorObjects.length > 0) {
+      this.interactAction = 'interacting';
+    } else if (inventory.selected !== null) {
+      this.interactAction = 'using item';
+    } else {
+      // player is picking up items
+      this.interactAction = 'interacting';
+    }
+  }
+
+  if (this.interactAction === 'interacting') {
     interfaceWithObjects(cursorObjects, 'interact', this);
-  } else {
+  } else if (this.interactAction === 'using item') {
     // no objects under cursor; if selected item is placeable, place it
     const selectedItem = inventory.items[inventory.selected];
 
-    if (selectedItem && selectedItem.value > 0 && selectedItem.hasOwnProperty('place')) {
+    if (!selectedItem || !selectedItem.hasOwnProperty('place')) return;
 
+    if (selectedItem.value > 0) {
       if (tileOutOfBounds(pixelToTile({ x: cursor.graphic.x, y: cursor.graphic.y }))) return; // TODO bandaid fix
 
       const Item = selectedItem.place;

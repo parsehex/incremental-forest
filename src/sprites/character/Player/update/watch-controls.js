@@ -54,6 +54,8 @@ function checkKeyRecurring(callback, key, arg, time) {
   const keys = this.game.state.states.Game.keys;
 
   if (keys[key].justPressed()) {
+    this.interacting = true;
+
     callback(arg, keys[key]);
 
     this.lastTileInteract = { x: this.cursor.tile.x, y: this.cursor.tile.y };
@@ -63,13 +65,17 @@ function checkKeyRecurring(callback, key, arg, time) {
 }
 function loop(keys, key, callback, arg) {
   const cursor = this.cursor;
-  this.game.time.events.add(25, function() {
-    if (!keys[key].isDown) {
+  this.timer = this.game.time.events.add(25, function() {
+    if (!keys[key].isDown || this.interactAction === 'cancel') {
       // stop the loop if key is no longer down
+      this.interacting = false;
+      this.interactAction = null;
       this.lastTileInteract = null;
 
       return;
     }
+
+    this.interacting = true;
 
     // callback only if cursor is not on same tile
     if (
