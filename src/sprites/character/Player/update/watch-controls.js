@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 
-import { directionToWASD } from '../../../../utils';
+import { num, directionToWASD } from '../../../../utils';
 
 export default function(moveCallback, interactCallback) {
   const checkMove = checkMoveKeys.bind(this, moveCallback);
@@ -19,12 +19,19 @@ export default function(moveCallback, interactCallback) {
     return;
   }
 
-  checkKeyRecurring.call(this, interactCallback, 'SPACE');
+  checkKeyRecurring.call(this, interactCallback, 'SPACEBAR');
 
   checkKey.call(this, this.inventory.seek, 'Q', 'previous');
   checkKey.call(this, this.inventory.seek, 'E', 'next');
 
+  for (let i = 0; i < 8; i++) {
+    checkKey.call(this, function(slotNum) {
+      this.inventory.select(slotNum);
+    }.bind(this, i), num(i + 1));
+  }
+
   checkKey.call(this, this.hireWorker, 'H');
+  checkKey.call(this, this.fireWorker, 'F');
 
   checkKey.call(this, (arg, key) => {
     const amount = key.shiftKey ? null : 1;
