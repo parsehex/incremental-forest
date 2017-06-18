@@ -67,12 +67,15 @@ function checkKeyRecurring(callback, key, arg, time) {
 
     this.lastTileInteract = { x: this.cursor.tile.x, y: this.cursor.tile.y };
 
-    loop.call(this, keys, key, callback, arg);
+    // add a short delay before loop starts
+    this.game.time.events.add(250, function() {
+      loop.call(this, keys, key, callback, arg);
+    }, this);
   }
 }
 function loop(keys, key, callback, arg) {
   const cursor = this.cursor;
-  this.timer = this.game.time.events.add(25, function() {
+  this.game.time.events.add(25, function() {
     if (!keys[key].isDown || this.interactAction === 'cancel') {
       // stop the loop if key is no longer down
       this.interacting = false;
