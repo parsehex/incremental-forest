@@ -43,8 +43,11 @@ div#inventory ul li.item-slot {
     position: absolute;
     right: 3px;
     top: 3px;
+    z-index: 5;
 
     color: #9E9E9E;
+
+    @include text-stroke(white);
   }
 }
 div#inventory li.item-slot div.icon {
