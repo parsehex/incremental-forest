@@ -27,7 +27,7 @@ export const items = {
     sellable: true,
   },
   'pine-cone': {
-    value: testing ? itemMax : 0,
+    value: testing ? 1 : 0,
     max: itemMax,
     sellable: true,
     place: PineCone,
