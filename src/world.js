@@ -25,6 +25,16 @@ export function getMap() {
   }
 })();
 
+export function count(type) {
+  let typeCount = 0;
+
+  for (let i = 0; i < fastObjects.length; i++) {
+    if (fastObjects[i] === type) typeCount++;
+  }
+
+  return typeCount;
+}
+
 const subscribers = [];
 
 function change(tileCoord) {
