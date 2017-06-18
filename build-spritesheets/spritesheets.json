@@ -42,12 +42,5 @@
       "sprites/guy-green/stand-left.png",
       "sprites/guy-green/stand-right.png"
     ]
-  },
-  {
-    "name": "buildings-2x2",
-    "size": 64,
-    "sprites": [
-      "sprites/building.png"
-    ]
   }
 ]
