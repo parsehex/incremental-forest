@@ -23,5 +23,7 @@ export default class extends CommonCharacter {
 
     this.hireWorker = hireWorker.bind(this);
     this.fireWorker = fireWorker.bind(this);
+
+    this.lastTileInteract = null;
   }
 }

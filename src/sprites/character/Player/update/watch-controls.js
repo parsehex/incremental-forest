@@ -19,7 +19,7 @@ export default function(moveCallback, interactCallback) {
     return;
   }
 
-  checkKey.call(this, interactCallback, 'SPACE');
+  checkKeyRecurring.call(this, interactCallback, 'SPACE');
 
   checkKey.call(this, this.inventory.seek, 'Q', 'previous');
   checkKey.call(this, this.inventory.seek, 'E', 'next');
@@ -48,4 +48,39 @@ function checkKey(callback, key, arg) {
   if (keys[key].justPressed()) {
     callback(arg, keys[key]);
   }
+}
+
+function checkKeyRecurring(callback, key, arg, time) {
+  const keys = this.game.state.states.Game.keys;
+
+  if (keys[key].justPressed()) {
+    callback(arg, keys[key]);
+
+    this.lastTileInteract = { x: this.cursor.tile.x, y: this.cursor.tile.y };
+
+    loop.call(this, keys, key, callback, arg);
+  }
+}
+function loop(keys, key, callback, arg) {
+  const cursor = this.cursor;
+  this.game.time.events.add(25, function() {
+    if (!keys[key].isDown) {
+      // stop the loop if key is no longer down
+      this.lastTileInteract = null;
+
+      return;
+    }
+
+    // callback only if cursor is not on same tile
+    if (
+      this.cursor.tile.x !== this.lastTileInteract.x ||
+      this.cursor.tile.y !== this.lastTileInteract.y
+    ) {
+      callback(arg);
+
+      this.lastTileInteract = { x: cursor.tile.x, y: cursor.tile.y };
+    }
+
+    loop.call(this, keys, key, callback, arg);
+  }, this);
 }
