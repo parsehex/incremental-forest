@@ -1,10 +1,13 @@
 import Chopper from '../Chopper';
 import Collector from '../Collector';
+import Planter from '../Planter';
+
 import { worker } from '../../../game-data/worker-config';
 
 const workerTypes = {
   chopper: Chopper,
   collector: Collector,
+  planter: Planter,
 };
 
 import { availableTileNear } from '../../../world';
