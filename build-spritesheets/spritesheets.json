@@ -19,28 +19,48 @@
     "sprites": [
       "sprites/guy/stand-down.png",
       "sprites/guy/stand-up.png",
-      "sprites/worker/stand-left.png",
-      "sprites/worker/stand-right.png"
+      "sprites/guy/stand-left.png",
+      "sprites/guy/stand-right.png"
     ]
   },
   {
-    "name": "worker",
+    "name": "guy-old",
     "size": 32,
     "sprites": [
-      "sprites/worker/stand-down.png",
-      "sprites/worker/stand-up.png",
-      "sprites/worker/stand-left.png",
-      "sprites/worker/stand-right.png"
+      "sprites/guy/stand-down.png",
+      "sprites/guy/stand-up.png",
+      "sprites/worker-collector/stand-left.png",
+      "sprites/worker-collector/stand-right.png"
     ]
   },
   {
-    "name": "guy-green",
+    "name": "worker-chopper",
     "size": 32,
     "sprites": [
-      "sprites/guy-green/stand-down.png",
-      "sprites/guy-green/stand-up.png",
-      "sprites/guy-green/stand-left.png",
-      "sprites/guy-green/stand-right.png"
+      "sprites/worker-chopper/stand-down.png",
+      "sprites/worker-chopper/stand-up.png",
+      "sprites/worker-chopper/stand-left.png",
+      "sprites/worker-chopper/stand-right.png"
+    ]
+  },
+  {
+    "name": "worker-collector",
+    "size": 32,
+    "sprites": [
+      "sprites/worker-collector/stand-down.png",
+      "sprites/worker-collector/stand-up.png",
+      "sprites/worker-collector/stand-left.png",
+      "sprites/worker-collector/stand-right.png"
+    ]
+  },
+  {
+    "name": "worker-planter",
+    "size": 32,
+    "sprites": [
+      "sprites/worker-planter/stand-down.png",
+      "sprites/worker-planter/stand-up.png",
+      "sprites/worker-planter/stand-left.png",
+      "sprites/worker-planter/stand-right.png"
     ]
   }
 ]
