@@ -3,6 +3,15 @@ import { clone, nextCoord } from '../../../utils';
 import { collidableObjects } from '../../../collisions';
 import config from '../../../config';
 
+const directions = [ 'UP', 'DOWN', 'LEFT', 'RIGHT'];
+
+function convertPath(path) {
+  for (let i = 0; i < path.length; i++) {
+    path[i] = directions[path[i]];
+  }
+  return path;
+}
+
 export default function findWork() {
   if (this.working || this.waitingOnPath) return;
 
@@ -21,7 +30,7 @@ export default function findWork() {
     const pathToTree = event.data;
 
     if (pathToTree) {
-      this.path = pathToTree;
+      this.path = convertPath(pathToTree);
 
       this.noPath = false;
       this.working = true;

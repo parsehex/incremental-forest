@@ -23,7 +23,9 @@ function findPath(data) {
     target = [target];
   }
 
-  if (Array.isArray(target)) {
+  const targetIsArray = Array.isArray(target);
+
+  if (targetIsArray) {
     let includes = false;
     for (let i = 0; i < target.length; i++) {
       if (fastObjects.includes(target[i])) {
@@ -46,20 +48,22 @@ function findPath(data) {
 
   checkedTiles.push(startLocation.x + ',' + startLocation.y);
 
+  let checking = 'start';
+
   let debug = 0;
   while (queue.length && debug <= 1000) { // infinite loop protection
     let item = queue[0];
 
-    const up = processDirection(item, 'UP');
+    const up = processDirection(item, 0);
     if (up) return up;
 
-    const left = processDirection(item, 'LEFT');
-    if (left) return left;
-
-    const down = processDirection(item, 'DOWN');
+    const down = processDirection(item, 1);
     if (down) return down;
 
-    const right = processDirection(item, 'RIGHT');
+    const left = processDirection(item, 2);
+    if (left) return left;
+
+    const right = processDirection(item, 3);
     if (right) return right;
 
     // remove first item in queue
@@ -85,7 +89,7 @@ function findPath(data) {
     if (result.outOfBounds) return;
 
     let isTarget = false;
-    if (Array.isArray(target)) {
+    if (targetIsArray) {
       isTarget = checkTargetType(coordName, target);
     } else {
       isTarget = checkTargetLocation(result);
@@ -121,7 +125,7 @@ function findPath(data) {
     location = {
       x: location.x,
       y: location.y,
-      path: JSON.parse(JSON.stringify(location.path)),
+      path: location.path.slice(), // clones location.path (quicker than JSON.parse+stringify)
       walkable: location.walkable,
     };
 
@@ -151,26 +155,16 @@ function findPath(data) {
 }
 
 // utility function dependencies
-const clone = (obj) => JSON.parse(JSON.stringify(obj));
 function nextCoord(coord, direction, size) {
   const { x, y } = coord;
 
-  switch (direction) {
-    case 'UP': {
-      coord.y = y - size;
-      break;
-    }
-    case 'LEFT': {
-      coord.x = x - size;
-      break;
-    }
-    case 'DOWN': {
-      coord.y = y + size;
-      break;
-    }
-    case 'RIGHT': {
-      coord.x = x + size;
-      break;
-    }
+  if (direction === 0) {
+    coord.y = y - size;
+  } else if (direction === 1) {
+    coord.y = y + size;
+  } else if (direction === 2) {
+    coord.x = x - size;
+  } else if (direction === 3) {
+    coord.x = x + size;
   }
 }
