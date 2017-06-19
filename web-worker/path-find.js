@@ -88,6 +88,8 @@ function findPath(data) {
     let isTarget = false;
     if (targetIsArray) {
       isTarget = checkTargetType(coordName, target);
+    } else if (target === null) {
+      isTarget = checkTargetEmpty(coordName);
     } else {
       isTarget = checkTargetLocation(result);
     }
@@ -110,6 +112,10 @@ function findPath(data) {
         return true;
       }
     }
+  }
+
+  function checkTargetEmpty(coordName) {
+    return fastMap[coordName].length === 0;
   }
 
   function checkTargetLocation(location) {
