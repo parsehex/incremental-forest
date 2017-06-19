@@ -79,6 +79,13 @@ export function remove() {
 
   change(this.tile);
 }
+export function changeType(newType) {
+  const fastMapTile = fastMap[this.tile.x + ',' + this.tile.y];
+
+  fastMapTile[fastMapTile.indexOf(this.objectType)] = newType;
+
+  fastObjects[fastObjects.indexOf(this.objectType)] = newType;
+}
 
 export function addCharacter(tileCoord, type) {
   fastMap[tileCoord.x + ',' + tileCoord.y].push(type);

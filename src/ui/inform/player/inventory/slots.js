@@ -8,7 +8,7 @@ function add(slotNum, itemName, itemValue) {
   itemEl.id = 'item-' + itemName;
 
   const iconDiv = document.createElement('div');
-  iconDiv.className = 'icon';
+  iconDiv.className = 'item-icon';
   itemEl.appendChild(iconDiv);
 
   const itemImg = document.createElement('img');

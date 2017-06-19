@@ -29,7 +29,7 @@ div#inventory ul li.item-slot {
   border: 1px outset lightgray;
   border-radius: 3px;
 
-  float: left;
+  // float: left;
 
   background-color: #ECEFF1;
 
@@ -50,7 +50,7 @@ div#inventory ul li.item-slot {
     @include text-stroke(white);
   }
 }
-div#inventory li.item-slot div.icon {
+div#inventory li.item-slot div.item-icon {
   position: relative;
 
   img {

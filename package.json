@@ -11,7 +11,8 @@
     "server": "ws -p 8080 -c -n",
     "sprites": "node build-spritesheets",
     "sass-build": "node-sass --output-style=compressed scss/index.scss css/style.css",
-    "sass": "yarn sass-build && node-sass -w scss/index.scss css/style.css"
+    "sass": "yarn sass-build && node-sass -w scss/index.scss css/style.css",
+    "pug": "pug -w pug/index.pug -o ./"
   },
   "license": "MIT",
   "devDependencies": {
@@ -31,6 +32,7 @@
     "jimp": "^0.2.28",
     "local-web-server": "^1.2.8",
     "node-sass": "^4.5.3",
+    "pug-cli": "^1.0.0-alpha6",
     "webpack": "^2.5.1"
   },
   "dependencies": {

@@ -34,17 +34,17 @@ export default function create() {
 
   setupHUD.call(this);
 
-  if (config.test) {
-    const workerStartObj = findObjByKey(this.map.objects.objects, 'name', 'workerStart');
-
-    const workerStart = centerOfObject(workerStartObj, this.map);
-
-    this.worker = new Worker({
-      game: this.game,
-      x: workerStart.x,
-      y: workerStart.y,
-    });
-  }
+  // if (config.test) {
+  //   const workerStartObj = findObjByKey(this.map.objects.objects, 'name', 'workerStart');
+  //
+  //   const workerStart = centerOfObject(workerStartObj, this.map);
+  //
+  //   this.worker = new Worker({
+  //     game: this.game,
+  //     x: workerStart.x,
+  //     y: workerStart.y,
+  //   });
+  // }
 
   this.game.gameTime = 0;
   this.game.stage.disableVisibilityChange = true;

@@ -4,16 +4,14 @@
 div#hint {
   cursor: default;
   user-select: none;
-  text-align: right;
+  text-align: center;
   min-height: 20px;
   padding: 0.2em;
-  padding-bottom: 0;
-  visibility: hidden; }
-  div#hint span#object-name {
-    float: left; }
+  padding-bottom: 0; }
 
 div#hint #key, div#hint #action {
   color: white;
+  margin: 0 0.5em;
   text-transform: uppercase;
   text-shadow: 1px 1px 0 black, -1px 1px 0 black, 1px -1px 0 black, -1px -1px 0 black, 0px 1px 0 black, 0px -1px 0 black, -1px 0px 0 black, 1px 0px 0 black, 2px 2px 0 black, -2px 2px 0 black, 2px -2px 0 black, -2px -2px 0 black, 0px 2px 0 black, 0px -2px 0 black, -2px 0px 0 black, 2px 0px 0 black, 1px 2px 0 black, -1px 2px 0 black, 1px -2px 0 black, -1px -2px 0 black, 2px 1px 0 black, -2px 1px 0 black, 2px -1px 0 black, -2px -1px 0 black; }
 
@@ -39,7 +37,6 @@ div#inventory ul li.item-slot {
   font-size: 0.90em;
   border: 1px outset lightgray;
   border-radius: 3px;
-  float: left;
   background-color: #ECEFF1;
   padding: 0.3rem 0.15rem; }
   div#inventory ul li.item-slot.selected {
@@ -52,9 +49,9 @@ div#inventory ul li.item-slot {
     color: #9E9E9E;
     text-shadow: 1px 1px 0 white, -1px 1px 0 white, 1px -1px 0 white, -1px -1px 0 white, 0px 1px 0 white, 0px -1px 0 white, -1px 0px 0 white, 1px 0px 0 white, 2px 2px 0 white, -2px 2px 0 white, 2px -2px 0 white, -2px -2px 0 white, 0px 2px 0 white, 0px -2px 0 white, -2px 0px 0 white, 2px 0px 0 white, 1px 2px 0 white, -1px 2px 0 white, 1px -2px 0 white, -1px -2px 0 white, 2px 1px 0 white, -2px 1px 0 white, 2px -1px 0 white, -2px -1px 0 white; }
 
-div#inventory li.item-slot div.icon {
+div#inventory li.item-slot div.item-icon {
   position: relative; }
-  div#inventory li.item-slot div.icon img {
+  div#inventory li.item-slot div.item-icon img {
     width: 100%;
     margin: auto; }
 
@@ -78,7 +75,8 @@ div.tabs {
 
 button.tab {
   cursor: pointer;
-  border: 0; }
+  border: 0;
+  margin: 0.1em; }
 
 div.menu {
   padding: 0.7em 0.2em; }
@@ -149,17 +147,14 @@ div#notifications ul li {
     position: relative;
     top: -5px; }
 
-.panel {
-  display: inline-block;
-  float: left;
+div#game, div#menu {
   padding: 0.5em;
+  min-height: 100%;
   border: 3px inset #BDBDBD;
   background-color: #E0E0E0; }
 
-div#right-wrapper {
-  background-color: initial;
-  border: initial;
-  padding: 0; }
+div#menu {
+  border-left: 0; }
 
 * {
   box-sizing: border-box; }
@@ -177,12 +172,7 @@ div#container {
   width: 100%;
   height: 100%; }
 
-div#game {
-  text-align: center;
-  width: 600px;
-  min-height: 100%; }
-
-div#game canvas {
+div#game canvas, div#game img {
   margin: auto; }
 
 /* hud panels should be hidden until game is ready (game will unhide when it's ready) */
@@ -204,7 +194,7 @@ button {
   button:focus {
     outline: 0; }
 
-div#top {
+div#top-menu {
   cursor: default;
   user-select: none;
   border-bottom: 0;
@@ -214,17 +204,17 @@ div#top {
   float: none;
   min-height: 8%; }
 
-div#top ul {
+div#top-menu ul {
   list-style-type: none;
   padding-left: 0;
   margin: 0;
   display: inline-block; }
 
-div#top ul li {
+div#top-menu ul li {
   display: inline-block;
   margin: 0 0.2em; }
 
-div#top #money {
+#money {
   color: #4CAF50;
   margin: 0 0.5em;
   text-shadow: 1px 1px 0 black, -1px 1px 0 black, 1px -1px 0 black, -1px -1px 0 black, 0px 1px 0 black, 0px -1px 0 black, -1px 0px 0 black, 1px 0px 0 black, 2px 2px 0 black, -2px 2px 0 black, 2px -2px 0 black, -2px -2px 0 black, 0px 2px 0 black, 0px -2px 0 black, -2px 0px 0 black, 2px 0px 0 black, 1px 2px 0 black, -1px 2px 0 black, 1px -2px 0 black, -1px -2px 0 black, 2px 1px 0 black, -2px 1px 0 black, 2px -1px 0 black, -2px -1px 0 black; }

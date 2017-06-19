@@ -19,7 +19,21 @@ function findPath(data) {
       start =             data[5],
       target =            data[6];
 
-  if (typeof target === 'string' && !fastObjects.includes(target)) return;
+  if (typeof target === 'string') {
+    target = [target];
+  }
+
+  if (Array.isArray(target)) {
+    let includes = false;
+    for (let i = 0; i < target.length; i++) {
+      if (fastObjects.includes(target[i])) {
+        includes = true;
+        break;
+      }
+    }
+
+    if (!includes) return;
+  }
 
   const startLocation = {
     x: start.x,
@@ -71,7 +85,7 @@ function findPath(data) {
     if (result.outOfBounds) return;
 
     let isTarget = false;
-    if (typeof target === 'string') {
+    if (Array.isArray(target)) {
       isTarget = checkTargetType(coordName, target);
     } else {
       isTarget = checkTargetLocation(result);
@@ -86,10 +100,15 @@ function findPath(data) {
     }
   }
 
-  function checkTargetType(coordName, targetType) {
+  function checkTargetType(coordName, targetTypes) {
     // TODO prefer (but not require) tiles with no objects at all on them
 
-    return fastMap[coordName].includes(targetType);
+    const mapTile = fastMap[coordName];
+    for (let i = 0; i < targetTypes.length; i++) {
+      if (mapTile.includes(targetTypes[i])) {
+        return true;
+      }
+    }
   }
 
   function checkTargetLocation(location) {

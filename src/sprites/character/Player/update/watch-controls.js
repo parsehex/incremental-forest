@@ -30,8 +30,8 @@ export default function(moveCallback, interactCallback) {
     }.bind(this, i), num(i + 1));
   }
 
-  checkKey.call(this, this.hireWorker, 'H');
-  checkKey.call(this, this.fireWorker, 'F');
+  // checkKey.call(this, this.hireWorker, 'H');
+  // checkKey.call(this, this.fireWorker, 'F');
 
   checkKey.call(this, (arg, key) => {
     const amount = key.shiftKey ? null : 1;

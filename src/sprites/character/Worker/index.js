@@ -6,14 +6,18 @@ import inform from '../../../ui/inform';
 import update from './update';
 
 export default class extends CommonCharacter {
-  constructor({ game, x, y }) {
-    super(game, x, y, 'worker', frames.CHARACTER.STAND_DOWN, null, 'worker');
+  constructor(game, x, y, sprite, id, objectType, props) {
+    super(game, x, y, sprite, frames.CHARACTER.STAND_DOWN, id, objectType);
+
+    this.salary = worker[objectType].salary;
+    this.payTime = worker[objectType].payTime;
+    this.speed = worker[objectType].speed;
 
     this.faceDirection = 'DOWN';
 
     // make a static inventory
     this.inventory = {
-      selected: 'wood-axe',
+      selected: null,
     };
 
     this.waitLastTime = this.game.gameTime;
@@ -21,10 +25,6 @@ export default class extends CommonCharacter {
     this.working = false;
     this.path = [];
     this.noPath = false;
-    this.speed = worker.speed;
-
-    this.salary = worker.salary;
-    this.payTime = worker.payTime; // seconds
 
     this.sendToBack();
 
@@ -34,7 +34,7 @@ export default class extends CommonCharacter {
 
     this.getPaid();
 
-    inform.worker.count(1);
+    inform.worker.count(objectType, 1);
   }
 
   get waiting() {
@@ -52,7 +52,7 @@ export default class extends CommonCharacter {
 
     this.timeSincePaid += this.waitLastTime - oldTime;
 
-    if (this.timeSincePaid >= this.payTime) this.getPaid(); // pay every 3 minutes
+    if (this.timeSincePaid >= this.payTime) this.getPaid();
   }
 
   getPaid() {
@@ -63,6 +63,7 @@ export default class extends CommonCharacter {
 
       this.timeSincePaid = 0;
     } else {
+      console.log('no pay');
       this.destroy();
     }
   }
@@ -78,6 +79,6 @@ export default class extends CommonCharacter {
 
     super.destroy();
 
-    inform.worker.count(-1);
+    inform.worker.count(this.objectType, -1);
   }
 }

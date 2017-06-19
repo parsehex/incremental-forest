@@ -6,7 +6,7 @@ import config from '../../../config';
 export default function findWork() {
   if (this.working || this.waitingOnPath) return;
 
-  const collidables = collidableObjects.concat(['worker']);
+  const collidables = collidableObjects.concat(['chopper', 'collector', 'planter']);
 
   const worker = this.pathFindWorker;
   const workerArgs = [

@@ -7,6 +7,8 @@ import Tree from '../Tree';
 export default function place() {
   this.placed = true;
 
+  this.changeType('planted-pine-cone');
+
   this.game.time.events.add(Phaser.Timer.SECOND * 5, function() {
     if (this.destroyed) return;
 

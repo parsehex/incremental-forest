@@ -1,15 +1,11 @@
-.panel {
-  display: inline-block;
-  float: left;
-
+div#game, div#menu {
   padding: 0.5em;
+
+  min-height: 100%;
 
   border: 3px inset #BDBDBD;
   background-color: #E0E0E0;
 }
-
-div#right-wrapper {
-  background-color: initial;
-  border: initial;
-  padding: 0;
+div#menu {
+  border-left: 0;
 }

@@ -1,4 +1,4 @@
-import { notify } from '../../../notifications';
+// import { notify } from '../../../notifications';
 import { worker } from '../../../../game-data/worker-config';
 
 import slots from './slots';
@@ -31,15 +31,17 @@ function money(newCount) {
 
   moneyEl.textContent = newCount;
 
-  if (newCount === 0 && oldCount > 0) {
-    notify('danger', 'You have on money!');
-  }
+  // if (newCount === 0 && oldCount > 0) {
+  //   notify('danger', 'You have on money!');
+  // }
 
-  const hireWorkerButton = document.getElementById('hire-worker');
-  if (newCount >= worker.salary) {
-    hireWorkerButton.classList.remove('disabled');
-  } else {
-    hireWorkerButton.classList.add('disabled');
+  const hireWorkerButtons = document.querySelectorAll('.hire-worker');
+  for (let i = 0; i < hireWorkerButtons.length; i++) {
+    if (newCount >= worker[hireWorkerButtons[i].id.substr(5)].salary) {
+      hireWorkerButtons[i].classList.remove('disabled');
+    } else {
+      hireWorkerButtons[i].classList.add('disabled');
+    }
   }
 }
 
