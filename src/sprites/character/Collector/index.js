@@ -6,7 +6,7 @@ import doWork from './do-work';
 
 export default class extends Worker {
   constructor({ game, x, y }) {
-    super(game, x, y, 'worker-collector', null, 'chopper');
+    super(game, x, y, 'worker-collector', null, 'collector');
 
     this.inventory.selected = 'wood-axe';
 
