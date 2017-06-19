@@ -15,7 +15,7 @@ export default function followPath() {
     return;
   }
 
-  const collision = quickCheckCollide(nextCoord(this.tile, this.path[0], 1), ['worker']);
+  const collision = quickCheckCollide(nextCoord(this.tile, this.path[0], 1), ['chopper', 'collector', 'planter']);
 
   if (!collision) {
     move.call(this, this.path[0]); // move according to next path direction
