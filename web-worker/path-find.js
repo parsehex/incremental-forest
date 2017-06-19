@@ -6,13 +6,12 @@ onmessage = function(event) {
 }
 
 function findPath(data) {
-  // fastMap, fastObjects expected
-  let fastMap =           data[0],
-      fastObjects =       data[1],
-      collidableObjects = data[2];
+  const fastMap =           data[0],
+        fastObjects =       data[1],
+        collidableObjects = data[2];
 
-  let mapWidth =          data[3],
-      mapHeight =         data[4];
+  const mapWidth =          data[3],
+        mapHeight =         data[4];
 
   let queue =             [],
       checkedTiles =      [],
@@ -47,8 +46,6 @@ function findPath(data) {
   queue.push(startLocation);
 
   checkedTiles.push(startLocation.x + ',' + startLocation.y);
-
-  let checking = 'start';
 
   let debug = 0;
   while (queue.length && debug <= 1000) { // infinite loop protection
@@ -122,6 +119,7 @@ function findPath(data) {
   }
 
   function checkDirection(location, direction) {
+    // manually clone location object
     location = {
       x: location.x,
       y: location.y,
@@ -134,14 +132,15 @@ function findPath(data) {
     location.walkable = true;
 
     // update location coords based on direction
-    nextCoord(location, direction, 1);
+    nextCoord(location, direction);
+    const { x, y } = location;
 
-    if (location.x < 0 || location.x >= mapWidth || location.y < 0 || location.y >= mapHeight) {
+    if (x < 0 || x >= mapWidth || y < 0 || y >= mapHeight) {
       location.outOfBounds = true;
       return location;
     }
 
-    const mapTile = fastMap[location.x + ',' + location.y];
+    const mapTile = fastMap[x + ',' + y];
 
     for (let i = 0; i < collidableObjects.length; i++) {
       if (mapTile.includes(collidableObjects[i])) {
@@ -155,16 +154,14 @@ function findPath(data) {
 }
 
 // utility function dependencies
-function nextCoord(coord, direction, size) {
-  const { x, y } = coord;
-
+function nextCoord(coord, direction) {
   if (direction === 0) {
-    coord.y = y - size;
+    coord.y = coord.y - 1;
   } else if (direction === 1) {
-    coord.y = y + size;
+    coord.y = coord.y + 1;
   } else if (direction === 2) {
-    coord.x = x - size;
+    coord.x = coord.x - 1;
   } else if (direction === 3) {
-    coord.x = x + size;
+    coord.x = coord.x + 1;
   }
 }
