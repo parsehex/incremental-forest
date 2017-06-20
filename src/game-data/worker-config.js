@@ -1,5 +1,7 @@
 import devtools from '../devtools';
 
+import merge from 'deepmerge';
+
 let worker = {
   chopper: {
     speed: 1,
@@ -18,6 +20,6 @@ let worker = {
   },
 };
 
-worker = Object.assign(worker, devtools.enabled ? devtools.workers : {});
+worker = merge(worker, devtools.enabled ? devtools.workers : {});
 
 export { worker };

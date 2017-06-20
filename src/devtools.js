@@ -9,6 +9,19 @@ export default {
   workers: {
     chopper: {
       speed: 0.2,
+      salary: 0,
+      payTime: Infinity,
+    },
+    collector: {
+      speed: 0.2,
+      salary: 0,
+      payTime: Infinity,
+      payTime: Infinity,
+    },
+    planter: {
+      speed: 0.2,
+      salary: 0,
+      payTime: Infinity,
     },
   },
   items: {

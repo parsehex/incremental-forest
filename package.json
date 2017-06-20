@@ -36,6 +36,7 @@
     "webpack": "^2.5.1"
   },
   "dependencies": {
+    "deepmerge": "^1.4.4",
     "phaser-ce": "^2.7.9"
   }
 }

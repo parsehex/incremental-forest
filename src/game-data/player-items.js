@@ -1,6 +1,8 @@
 import devtools from '../devtools';
 import { REALLY_BIG_NUMBER } from '../utils';
 
+import merge from 'deepmerge';
+
 import PineCone from '../sprites/object/PineCone';
 
 const itemMax = 50;
@@ -37,7 +39,8 @@ let money = {
   max: REALLY_BIG_NUMBER,
 };
 
-items = Object.assign(items, devtools.enabled ? devtools.items : {});
-money = Object.assign(money, devtools.enabled ? devtools.money : {});
+items = merge(items, devtools.enabled ? devtools.items : {});
+money = merge(money, devtools.enabled ? devtools.money : {});
+console.log(items, money);
 
 export { items, money };
