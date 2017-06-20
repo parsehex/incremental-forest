@@ -1,6 +1,6 @@
-import config from '../config';
+import devtools from '../devtools';
 
-const testing = config.test;
+const testing = devtools.betterChances;
 
-export const seedDrop = testing ? 75 : 50;
+export const seedDrop = testing ? 75 : 80;
 export const treeGrow = testing ? 25 : 10;

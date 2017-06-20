@@ -3,7 +3,7 @@ import addMap from './add-map';
 import addPlayer from './add-player';
 import addObjects from './add-objects';
 import setupHUD from '../../../ui/setup';
-import config from '../../../config';
+import devtools from '../../../devtools';
 
 // below imports are for testing
 import Worker from '../../../sprites/character/Worker';
@@ -34,17 +34,17 @@ export default function create() {
 
   setupHUD.call(this);
 
-  // if (config.test) {
-  //   const workerStartObj = findObjByKey(this.map.objects.objects, 'name', 'workerStart');
-  //
-  //   const workerStart = centerOfObject(workerStartObj, this.map);
-  //
-  //   this.worker = new Worker({
-  //     game: this.game,
-  //     x: workerStart.x,
-  //     y: workerStart.y,
-  //   });
-  // }
+  if (devtools.enabled && devtools.testMapWorker) {
+    const workerStartObj = findObjByKey(this.map.objects.objects, 'name', 'workerStart');
+
+    const workerStart = centerOfObject(workerStartObj, this.map);
+
+    this.worker = new Worker({
+      game: this.game,
+      x: workerStart.x,
+      y: workerStart.y,
+    });
+  }
 
   this.game.gameTime = 0;
   this.game.stage.disableVisibilityChange = true;

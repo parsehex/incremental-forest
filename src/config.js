@@ -5,5 +5,4 @@ export default {
   mapHeight: 25,
   tileWidth: 32,
   tileHeight: 32,
-  test: true,
 };

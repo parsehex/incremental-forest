@@ -1,13 +1,11 @@
-import config from '../config';
+import devtools from '../devtools';
 import { REALLY_BIG_NUMBER } from '../utils';
-
-const testing = config.test;
 
 import PineCone from '../sprites/object/PineCone';
 
 const itemMax = 50;
 
-export const items = {
+let items = {
   'wood-axe': {
     value: true,
     sellable: false,
@@ -27,14 +25,19 @@ export const items = {
     sellable: true,
   },
   'pine-cone': {
-    value: testing ? 1 : 0,
+    value: 0,
     max: itemMax,
     sellable: true,
     place: PineCone,
   },
 };
 
-export const money = {
-  value: testing ? 10000 : 0,
+let money = {
+  value: 10000,
   max: REALLY_BIG_NUMBER,
 };
+
+items = Object.assign(items, devtools.enabled ? devtools.items : {});
+money = Object.assign(money, devtools.enabled ? devtools.money : {});
+
+export { items, money };

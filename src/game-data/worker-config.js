@@ -1,21 +1,23 @@
-import config from '../config';
+import devtools from '../devtools';
 
-const testing = config.test;
-
-export const worker = {
+let worker = {
   chopper: {
-    speed: testing ? 0.4 : 1,
+    speed: 1,
     salary: 1.5,
     payTime: 1,
   },
   collector: {
-    speed: testing ? 0.4 : 0.5,
+    speed: 0.5,
     salary: 1.5,
     payTime: 1,
   },
   planter: {
-    speed: testing ? 0.4 : 1,
+    speed: 0.75,
     salary: 1.5,
     payTime: 1,
   },
 };
+
+worker = Object.assign(worker, devtools.enabled ? devtools.workers : {});
+
+export { worker };
