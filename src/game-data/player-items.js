@@ -41,6 +41,5 @@ let money = {
 
 items = merge(items, devtools.enabled ? devtools.items : {});
 money = merge(money, devtools.enabled ? devtools.money : {});
-console.log(items, money);
 
 export { items, money };
