@@ -8,9 +8,3 @@ export function getDirectionFromFrame(frame) {
     if (playerFrames[name] === frame) return name.replace('STAND_', '');
   }
 }
-
-export function getDirectionFromCoord(coord) {
-  const frame = coord;
-
-  // do coordinate maths
-}
