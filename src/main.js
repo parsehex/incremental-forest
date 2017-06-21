@@ -17,7 +17,7 @@ class Game extends Phaser.Game {
     const gameConfig = {
       width,
       height,
-      renderer: Phaser.CANVAS,
+      renderer: Phaser.AUTO,
       parent: 'game-target',
       state: null,
       antialias: false,
