@@ -1,8 +1,42 @@
+const directions = ['UP', 'DOWN', 'LEFT', 'RIGHT'];
+function convertPath(path) {
+  for (let i = 0; i < path.length; i++) {
+    path[i] = directions[path[i]];
+  }
+  return path;
+}
+
+let firstRun = true;
 onmessage = function(event) {
   // expect posted message data to be in a certain format
   if (!Array.isArray(event.data)) throw new Error('pass an array to worker');
+  let testing = false && firstRun && event.data[5].x === 10 && event.data[5].y === 0;
 
-  postMessage(findPath(event.data));
+  let now = performance.now();
+
+  let path = findPath(event.data);
+  if (path) path = convertPath(path);
+
+  if (testing) {
+    verifyPath(path);
+    firstRun = false;
+  }
+
+  postMessage(path);
+  if (testing) console.log(performance.now() - now);
+}
+
+function verifyPath(path) {
+  const correctPath = '["DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","LEFT","DOWN","DOWN","RIGHT"]';
+  if (JSON.stringify(path) !== correctPath) {
+    console.error('path fails test');
+    console.groupCollapsed('paths');
+    console.log('expected:', correctPath);
+    console.log('actual:', path);
+    console.groupEnd();
+  } else {
+    console.info('path passes test');
+  }
 }
 
 function findPath(data) {
