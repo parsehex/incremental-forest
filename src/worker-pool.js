@@ -38,7 +38,6 @@ class WorkerPool {
     return this.createWorker();
   }
   createWorker() {
-    console.clear();
     const newWorker = {
       worker: new Worker(this.path),
       busy: false,
@@ -63,7 +62,7 @@ class WorkerPool {
         this.removeWorker(i);
       }
     }
-    console.log('currently have', this.pool.length, 'workers');
+    // console.log('currently have', this.pool.length, 'workers');
   }
 }
 
