@@ -1,7 +1,7 @@
 export default {
   enabled: true,
-  testMap: false,
-  testMapWorker: false,
+  testMap: true,
+  testMapWorker: true,
   betterChances: true,
   money: {
     value: 10000

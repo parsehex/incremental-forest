@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 
 import { centerGameObjects } from '../../utils';
-import config from '../../config';
+import devtools from '../../devtools';
 
 export default function preload() {
   this.loaderBg = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'loaderBg');
@@ -12,7 +12,7 @@ export default function preload() {
 
   // load assets
   this.game.load.tilemap('forest', 'assets/tilemaps/forest.json', null, Phaser.Tilemap.TILED_JSON);
-  if (config.test) {
+  if (devtools.testMap) {
     this.game.load.tilemap('test', 'assets/tilemaps/test.json', null, Phaser.Tilemap.TILED_JSON);
   }
 
