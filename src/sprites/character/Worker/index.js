@@ -3,7 +3,10 @@ import frames from '../../../sprite-frames';
 import { worker } from '../../../game-data/worker-config';
 import inform from '../../../ui/inform';
 
+import workerPool from '../../../worker-pool';
+
 import update from './update';
+import findWork from './find-work';
 
 export default class extends CommonCharacter {
   constructor(game, x, y, sprite, id, objectType, props) {
@@ -29,6 +32,7 @@ export default class extends CommonCharacter {
     this.sendToBack();
 
     this.update = update.bind(this);
+    this.findWork = findWork.bind(this);
 
     this.pathFindWorker = new Worker('web-worker/path-find.js');
 

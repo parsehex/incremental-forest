@@ -3,8 +3,8 @@ import followPath from './follow-path';
 export default function update() {
   if (this.waiting) return; // we're waiting before we perform another action
 
-  if (!this.working && this.hasOwnProperty('findWork')) {
-    this.findWork.call(this);
+  if (!this.working) {
+    this.findWork();
     return this.wait();
   }
 
