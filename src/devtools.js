@@ -3,6 +3,8 @@ export default {
   testMap: true,
   testMapWorker: true,
   betterChances: true,
+  noclip: false,
+  playerSpeed: 15,
   money: {
     value: 10000
   },
