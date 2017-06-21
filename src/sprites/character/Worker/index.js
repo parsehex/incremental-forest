@@ -33,7 +33,7 @@ export default class extends CommonCharacter {
 
     this.findWork = findWork.bind(this);
 
-    this.pathFindWorker = new Worker('web-worker/path-find.js');
+    workerPool.register();
 
     this.getPaid();
     this.game.time.events.loop(this.speed * 1000, () => {
@@ -83,10 +83,10 @@ export default class extends CommonCharacter {
   }
 
   destroy() {
-    this.pathFindWorker.terminate();
-
     super.destroy();
 
     inform.worker.count(this.objectType, -1);
+
+    workerPool.unregister();
   }
 }
