@@ -31,12 +31,16 @@ export default class extends CommonCharacter {
 
     this.sendToBack();
 
-    this.update = update.bind(this);
     this.findWork = findWork.bind(this);
 
     this.pathFindWorker = new Worker('web-worker/path-find.js');
 
     this.getPaid();
+    this.game.time.events.loop(this.speed * 1000, () => {
+      if (this.destroyed) return;
+
+      update.call(this);
+    }, this);
 
     inform.worker.count(objectType, 1);
   }
