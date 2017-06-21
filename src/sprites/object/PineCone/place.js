@@ -1,5 +1,6 @@
 import { treeGrow as growChance } from '../../../game-data/chances';
 import { tryChance } from '../../../utils';
+import { fastMap } from '../../../world';
 
 import Phaser from 'phaser';
 import Tree from '../Tree';
@@ -17,6 +18,7 @@ export default function place() {
 
     if (
       (playerTile.x !== thisTile.x || playerTile.y !== thisTile.y) &&
+      fastMap[thisTile.x + ',' + thisTile.y].length === 1 && // this pine cone should be only thing on tile
       tryChance(growChance)
     ) {
       new Tree({
