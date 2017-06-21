@@ -1,27 +1,27 @@
 export default {
   enabled: true,
   testMap: true,
-  testMapWorker: true,
+  testMapWorker: false,
   betterChances: true,
   noclip: false,
-  playerSpeed: 15,
+  playerSpeed: 10,
   money: {
     value: 10000
   },
   workers: {
     chopper: {
-      speed: 0.2,
+      speed: 0.5,
       salary: 0,
       payTime: Infinity,
     },
     collector: {
-      speed: 0.2,
+      speed: 0.5,
       salary: 0,
       payTime: Infinity,
       payTime: Infinity,
     },
     planter: {
-      speed: 0.2,
+      speed: 0.5,
       salary: 0,
       payTime: Infinity,
     },
