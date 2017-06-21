@@ -5,7 +5,7 @@ import { clone } from '../../utils';
 
 import tween from './tween';
 
-export default class extends Phaser.Sprite {
+export default class extends Phaser.Image {
   constructor(game, x, y, sprite, frame, id, objectType) {
     const alignedCoords = alignToGrid({ x, y });
 
