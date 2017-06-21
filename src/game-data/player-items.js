@@ -5,7 +5,7 @@ import merge from 'deepmerge';
 
 import PineCone from '../sprites/object/PineCone';
 
-const itemMax = 50;
+const itemMax = 500;
 
 let items = {
   'wood-axe': {
