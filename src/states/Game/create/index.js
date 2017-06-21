@@ -6,7 +6,7 @@ import setupHUD from '../../../ui/setup';
 import devtools from '../../../devtools';
 
 // below imports are for testing
-import Worker from '../../../sprites/character/Worker';
+import Worker from '../../../sprites/character/Chopper';
 import {
   findObjByKey,
   centerOfObject,
