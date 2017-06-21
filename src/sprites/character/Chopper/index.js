@@ -13,4 +13,10 @@ export default class extends Worker {
 
     this.doWork = doWork.bind(this);
   }
+
+  resetObject() {
+    super.resetObject();
+
+    this.inventory.selected = 'wood-axe';
+  }
 }

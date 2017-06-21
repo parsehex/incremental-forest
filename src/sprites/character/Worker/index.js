@@ -18,7 +18,6 @@ export default class extends CommonCharacter {
 
     this.faceDirection = 'DOWN';
 
-    // make a static inventory
     this.inventory = {
       selected: null,
     };
@@ -36,20 +35,20 @@ export default class extends CommonCharacter {
     workerPool.register();
 
     this.getPaid();
-    this.game.time.events.loop(this.speed * 1000, () => {
+
+    this.timer = this.game.time.create(false);
+    this.timer.loop(this.speed * 1000, () => {
       if (this.destroyed) return;
 
       update.call(this);
     }, this);
+    this.timer.start();
 
     inform.worker.count(objectType, 1);
   }
 
   get waiting() {
     if (this.moving) return true;
-
-    let diff = this.game.gameTime - this.waitLastTime;
-    if (diff < this.speed) return true;
 
     return false;
   }
@@ -82,7 +81,36 @@ export default class extends CommonCharacter {
     this.noPath = !!noPath;
   }
 
+  resetObject() {
+    super.resetObject();
+
+    this.salary = worker[this.objectType].salary;
+    this.payTime = worker[this.objectType].payTime;
+    this.speed = worker[this.objectType].speed;
+
+    this.faceDirection = 'DOWN';
+
+    // make a static inventory
+    this.inventory = {
+      selected: null,
+    };
+
+    this.waitLastTime = this.game.gameTime;
+
+    this.working = false;
+    this.path = [];
+    this.noPath = false;
+
+    this.timer.resume();
+
+    workerPool.register();
+
+    inform.worker.count(this.objectType, 1);
+  }
+
   destroy() {
+    this.timer.pause();
+
     super.destroy();
 
     inform.worker.count(this.objectType, -1);

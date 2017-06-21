@@ -24,6 +24,12 @@ export default class CommonObject extends Common {
     this.objectType = newType;
   }
 
+  resetObject() {
+    super.resetObject();
+    
+    add.call(this, null);
+  }
+
   destroy() {
     remove.call(this);
 

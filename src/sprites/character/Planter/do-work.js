@@ -1,6 +1,7 @@
 import { nextCoord, findObjByKey } from '../../../utils';
 import { objectsAtTile } from '../../../world';
 import { tileToPixel } from '../../../tiles';
+import objectPool from '../../../object-pool';
 
 import PineCone from '../../object/PineCone';
 
@@ -13,7 +14,7 @@ export default function doWork() {
 
   if (objects.length === 0 && player.inventory.items['pine-cone'].value > 0) {
     const pixelCoord = tileToPixel(nextTile);
-    const pineCone = new PineCone({
+    const pineCone = objectPool.new('pine-cone', PineCone, {
       game: this.game,
       x: pixelCoord.x,
       y: pixelCoord.y,

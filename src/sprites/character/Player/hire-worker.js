@@ -3,6 +3,7 @@ import Collector from '../Collector';
 import Planter from '../Planter';
 
 import { worker } from '../../../game-data/worker-config';
+import objectPool from '../../../object-pool';
 
 const workerTypes = {
   chopper: Chopper,
@@ -22,7 +23,7 @@ export default function hireWorker(workerType) {
 
   const Worker = workerTypes[workerType];
 
-  new Worker({
+  objectPool.new(workerType, Worker, {
     game: this.game,
     x: workerPixelCoord.x,
     y: workerPixelCoord.y,

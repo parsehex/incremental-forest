@@ -1,5 +1,6 @@
 import { seedDrop as seedDropChance } from '../../../game-data/chances';
 import { tryChance } from '../../../utils';
+import objectPool from '../../../object-pool';
 
 import Log from '../Log';
 import PineCone from '../PineCone';
@@ -7,19 +8,21 @@ import PineCone from '../PineCone';
 export default function interact(character) {
   if (character.inventory.selected !== 'wood-axe') return;
 
-  new Log({
-    game: this.game,
-    x: this.x,
-    y: this.y,
+  const { game, x, y } = this;
+
+  this.destroy();
+
+  objectPool.new('log', Log, {
+    game,
+    x,
+    y,
   });
 
   if (tryChance(seedDropChance)) {
-    new PineCone({
-      game: this.game,
-      x: this.x,
-      y: this.y,
+    objectPool.new('pine-cone', PineCone, {
+      game,
+      x,
+      y,
     });
   }
-
-  this.destroy();
 }

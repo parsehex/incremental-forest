@@ -1,6 +1,7 @@
 import interfaceWithObjects from '../../Common/interface-objects';
 import { pixelToTile } from '../../../../tiles';
 import { tileOutOfBounds } from '../../../../utils';
+import objectPool from '../../../../object-pool';
 
 export default function tryInteract() {
   const { cursor, inventory } = this;
@@ -35,7 +36,7 @@ export default function tryInteract() {
       if (tileOutOfBounds(pixelToTile({ x: cursor.graphic.x, y: cursor.graphic.y }))) return; // TODO bandaid fix
 
       const Item = selectedItem.place;
-      const placedItem = new Item({
+      const placedItem = objectPool.new(inventory.selected, Item, {
         game: this.game,
         x: cursor.graphic.x + 16,
         y: cursor.graphic.y + 16,

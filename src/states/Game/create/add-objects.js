@@ -1,5 +1,6 @@
 import frames from '../../../sprite-frames';
 import { centerOfObject } from '../../../utils';
+import objectPool from '../../../object-pool';
 
 import Tree from '../../../sprites/object/Tree';
 import Water from '../../../sprites/object/Water';
@@ -13,16 +14,16 @@ export default function addObjects() {
 
   objects = objects.bind(this);
 
-  objects('trees', Tree);
-  objects('water', Water);
+  objects('trees', 'tree', Tree);
+  objects('water', 'water', Water);
 }
 
-function objects(name, objectClass) {
+function objects(name, objectType, objectClass) {
   const arr = this.map.objects[name];
   for (let i = 0, len = arr.length; i < len; i++) {
     const start = centerOfObject(arr[i], this.map);
 
-    const object = new objectClass({
+    const object = objectPool.new(objectType, objectClass, {
       game: this.game,
       x: start.x,
       y: start.y,

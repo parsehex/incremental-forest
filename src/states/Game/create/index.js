@@ -4,9 +4,10 @@ import addPlayer from './add-player';
 import addObjects from './add-objects';
 import setupHUD from '../../../ui/setup';
 import devtools from '../../../devtools';
+import objectPool from '../../../object-pool';
 
 // below imports are for testing
-import Worker from '../../../sprites/character/Chopper';
+import Chopper from '../../../sprites/character/Chopper';
 import {
   findObjByKey,
   centerOfObject,
@@ -39,7 +40,7 @@ export default function create() {
 
     const workerStart = centerOfObject(workerStartObj, this.map);
 
-    this.worker = new Worker({
+    objectPool.new('chopper', Chopper, {
       game: this.game,
       x: workerStart.x,
       y: workerStart.y,

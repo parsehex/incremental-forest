@@ -22,4 +22,12 @@ export default class extends CommonObject {
 
     this.update = update.bind(this);
   }
+
+  resetObject() {
+    super.resetObject();
+    
+    tihs.inventory = new Inventory(this.game);
+    this.timer = null;
+    this.power = false;
+  }
 }

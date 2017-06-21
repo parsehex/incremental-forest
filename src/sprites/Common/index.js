@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 
 import { tile, nextTile, alignToGrid, pixelToTile } from '../../tiles';
 import { clone } from '../../utils';
+import objectPool from '../../object-pool';
 
 import tween from './tween';
 
@@ -44,9 +45,16 @@ export default class extends Phaser.Image {
     this.tile = tile.call(this);
   }
 
+  resetObject() {
+    this.setTile();
+    this.timers = [];
+  }
+
   destroy() {
-    super.destroy();
+    this.kill();
 
     this.destroyed = true;
+
+    objectPool.remove(this);
   }
 }

@@ -31,6 +31,12 @@ export default class CommonCharacter extends Common {
     this.faceDirection = direction;
   }
 
+  resetObject() {
+    super.resetObject();
+    
+    addCharacter(this.tile, this.objectType);
+  }
+
   destroy() {
     removeCharacter(this.tile, this.objectType);
 

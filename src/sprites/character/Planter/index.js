@@ -7,8 +7,6 @@ export default class extends Worker {
   constructor({ game, x, y }) {
     super(game, x, y, 'worker-planter', null, 'planter');
 
-    this.inventory.selected = 'wood-axe';
-
     this.targetObjects = null;
 
     this.doWork = doWork.bind(this);
