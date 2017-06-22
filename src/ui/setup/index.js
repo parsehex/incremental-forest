@@ -14,7 +14,7 @@ export default function() {
   setupMenus.call(this);
 
   // setup tippy on top-menu
-  Tippy('#top-menu #money, #top-menu #debt');
+  Tippy('#top-menu #money, #top-menu #debt-amt');
 
   // carryingEl.style.display = 'block';
   // hintEl.style.display = 'block';
