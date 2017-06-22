@@ -4,6 +4,13 @@ import Planter from '../Planter';
 
 import { worker } from '../../../game-data/worker-config';
 import objectPool from '../../../object-pool';
+import workerPool from '../../../worker-pool';
+
+import { fastMap, fastObjects } from '../../../world';
+import { clone, nextCoord } from '../../../utils';
+import { collidableObjects } from '../../../collisions';
+import { tileToPixel } from '../../../tiles';
+import config from '../../../config';
 
 const workerTypes = {
   chopper: Chopper,
@@ -11,24 +18,33 @@ const workerTypes = {
   planter: Planter,
 };
 
-import { availableTileNear } from '../../../world';
-import { tileToPixel } from '../../../tiles';
-
 export default function hireWorker(workerType) {
   if (this.inventory.money.value < worker[workerType].deposit) return;
 
   // pay worker's upfront deposit
   this.inventory.money.value -= worker[workerType].deposit;
 
-  // will default to this.tile if no other available tiles
-  const workerTileCoord = availableTileNear(this.tile, true);
-  const workerPixelCoord = tileToPixel(workerTileCoord);
+  const workerArgs = [
+    fastMap, fastObjects, collidableObjects,
+    config.mapWidth, config.mapHeight,
+    this.tile, null, // use this.targetObjects
+  ];
+  workerPool.addTask(workerArgs, (path) => {
+    if (!path) {
+      path = {
+        x: this.x,
+        y: this.y,
+      };
+    }
+    // will default to this.tile if no other available tiles
+    const workerPixelCoord = tileToPixel(path);
 
-  const Worker = workerTypes[workerType];
+    const Worker = workerTypes[workerType];
 
-  objectPool.new(workerType, Worker, {
-    game: this.game,
-    x: workerPixelCoord.x,
-    y: workerPixelCoord.y,
+    objectPool.new(workerType, Worker, {
+      game: this.game,
+      x: workerPixelCoord.x,
+      y: workerPixelCoord.y,
+    });
   });
 }

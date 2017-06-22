@@ -15,10 +15,11 @@ onmessage = function(event) {
   let now = performance.now();
 
   let path = findPath(event.data);
-  if (path) path = convertPath(path);
+
+  if (path) path.path = convertPath(path.path);
 
   if (testing) {
-    verifyPath(path);
+    verifyPath(path.path);
     firstRun = false;
   }
 
@@ -82,7 +83,7 @@ function findPath(data) {
   checkedTiles.push(startLocation.x + ',' + startLocation.y);
 
   let debug = 0;
-  while (queue.length && debug <= 1000) { // infinite loop protection
+  while (queue.length && debug <= 3000) { // infinite loop protection
     let item = queue[0];
 
     const up = processDirection(item, 0);
@@ -103,8 +104,6 @@ function findPath(data) {
     debug++;
   }
 
-  return [];
-
   function processDirection(location, direction) {
     const result = checkDirection(location, direction);
 
@@ -121,26 +120,29 @@ function findPath(data) {
 
     let isTarget = false;
     if (targetIsArray) {
-      isTarget = checkTargetType(coordName, target);
+      isTarget = checkTargetType(result, target);
     } else if (target === null) {
-      isTarget = checkTargetEmpty(coordName);
+      isTarget = checkTargetEmpty(result);
     } else {
       isTarget = checkTargetLocation(result);
     }
 
     if (isTarget) {
       // result is the target
-      return result.path;
+      return result;
     } else if (result.walkable) {
       // result isn't target but is still walkable; add to queue to check
       queue.push(result);
     }
   }
 
-  function checkTargetType(coordName, targetTypes) {
-    // TODO prefer (but not require) tiles with no objects at all on them
+  function checkTargetType(location, targetTypes) {
+    const mapTile = fastMap[location.y][location.x];
 
-    const mapTile = fastMap[coordName];
+    if (mapTile.length === 0) return false;
+
+    console.log(mapTile);
+
     for (let i = 0; i < targetTypes.length; i++) {
       if (mapTile.includes(targetTypes[i])) {
         return true;
@@ -148,8 +150,8 @@ function findPath(data) {
     }
   }
 
-  function checkTargetEmpty(coordName) {
-    return fastMap[coordName].length === 0;
+  function checkTargetEmpty(location) {
+    return fastMap[location.y][location.x].length === 0;
   }
 
   function checkTargetLocation(location) {
@@ -180,7 +182,7 @@ function findPath(data) {
       return location;
     }
 
-    const mapTile = fastMap[x + ',' + y];
+    const mapTile = fastMap[y][x];
 
     for (let i = 0; i < collidableObjects.length; i++) {
       if (mapTile.includes(collidableObjects[i])) {

@@ -45,7 +45,7 @@ export function quickCheckCollide(tileCoord, addedCollidables) {
   // check if next coord is out of bounds
   if (x < 0 || x >= mapWidth || y < 0 || y >= mapHeight) return true;
 
-  const mapTile = fastMap[x + ',' + y];
+  const mapTile = fastMap[y][x];
 
   for (let i = 0; i < mapTile.length; i++) {
     if (collidables.includes(mapTile[i])) return true;

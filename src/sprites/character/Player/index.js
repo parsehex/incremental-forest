@@ -1,6 +1,9 @@
+import Phaser from 'phaser';
+
 import CommonCharacter from '../Common';
 
 import frames from '../../../sprite-frames';
+import workerPool from '../../../worker-pool';
 
 import update from './update';
 import Inventory from './inventory';
@@ -27,5 +30,44 @@ export default class extends CommonCharacter {
     this.interacting = false;
     this.interactAction = null;
     this.lastTileInteract = null;
+
+    workerPool.register();
+
+    // i'll leave this here to be remembered for later
+    // this.axe = new Phaser.Image(
+    //   this.game,
+    //   15,
+    //   -15,
+    //   'axe'
+    // );
+    // this.addChild(this.axe);
+    // this.axe.scale.x = 0.3;
+    // this.axe.scale.y = 0.3;
+  }
+
+  save() {
+    // serialize and return any data that should be persited between sessions
+
+    const saveState = {
+      x: this.x,
+      y: this.y,
+      frame: this.frame,
+      faceDirection: this.faceDirection,
+      inventory: {
+        money: {
+          value: this.inventory.money.value,
+        },
+        items: {},
+      },
+    };
+
+    const items = this.inventory.items;
+    for (let itemName in items) {
+      saveState.inventory.items[itemName] = {
+        value: items[itemName].value,
+      };
+    }
+
+    return saveState;
   }
 }

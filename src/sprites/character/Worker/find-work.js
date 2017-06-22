@@ -19,7 +19,7 @@ export default function findWork() {
   this.waitingOnPath = true;
   workerPool.addTask(workerArgs, (pathToTree) => {
     if (pathToTree) {
-      this.path = pathToTree;
+      this.path = pathToTree.path;
 
       this.noPath = false;
       this.working = true;
@@ -28,7 +28,7 @@ export default function findWork() {
       this.cancelWork(true);
     }
     this.waitingOnPath = false;
-  })
+  });
 
   // if a path to a tree can't be found, worker will try again next time update calls it
 }
