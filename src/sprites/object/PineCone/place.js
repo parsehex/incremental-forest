@@ -19,7 +19,7 @@ export default function place() {
 
     if (
       (playerTile.x !== thisTile.x || playerTile.y !== thisTile.y) &&
-      fastMap[thisTile.x + ',' + thisTile.y].length === 1 && // this pine cone should be only thing on tile
+      fastMap[thisTile.y][thisTile.x].length === 1 && // this pine cone should be only thing on tile
       tryChance(growChance)
     ) {
       objectPool.new('tree', Tree, {
