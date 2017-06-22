@@ -21,6 +21,17 @@ function itemValue(itemName, newValue) {
   // don't add to slots; inventory will call inform.player.inventory.slots['add' || 'remove']
 }
 
+function debt(newCount) {
+  const debtEl = document.querySelector('#debt .item-count');
+
+  const oldCount = +debtEl.textContent;
+
+  // if newCount is a decimal, trim it to 2 demial places
+  if (Math.round(newCount) !== newCount) newCount = newCount.toFixed(2);
+
+  debtEl.textContent = newCount;
+}
+
 function money(newCount) {
   const moneyEl = document.querySelector('#money .item-count');
 
@@ -47,5 +58,6 @@ function money(newCount) {
 
 export default {
   itemValue,
+  debt,
   slots,
 };

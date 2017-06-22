@@ -13,7 +13,8 @@ export default function() {
 
   setupWorkers.call(this);
 
-  // TODO setup shortcuts (that are related to DOM, like pause)
+  // setup tippy on top-menu
+  Tippy('#top-menu #money, #top-menu #debt');
 
   // carryingEl.style.display = 'block';
   // hintEl.style.display = 'block';

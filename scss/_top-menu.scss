@@ -31,3 +31,9 @@ div#top-menu ul li {
 
   @include text-stroke(black);
 }
+#debt {
+  color: #F44336;
+  margin: 0 0.5em;
+
+  @include text-stroke(black);
+}
