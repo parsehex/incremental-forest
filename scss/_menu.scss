@@ -15,6 +15,13 @@ button.tab {
   border: 0;
 
   margin: 0.1em;
+  background-color: white;
+  color: $buttonBGColor;
+
+  &.selected {
+    background-color: $buttonBGColor;
+    color: white;
+  }
 }
 
 div.menu {
