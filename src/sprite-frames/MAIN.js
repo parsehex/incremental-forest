@@ -7,4 +7,5 @@ export default {
   GENERATOR_ON:  5,
   TREE:          6,
   WATER:         7,
+  DIRT:          8,
 };
