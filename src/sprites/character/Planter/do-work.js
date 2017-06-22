@@ -10,9 +10,7 @@ export default function doWork() {
   const nextTile = nextCoord(this.tile, this.faceDirection, 1);
   const objects = objectsAtTile(nextTile);
 
-  const player = this.game.state.states.Game.player;
-
-  if (objects.length === 0 && player.inventory.items['pine-cone'].value > 0) {
+  if (objects.length === 0 && this.player.inventory.items['pine-cone'].value > 0) {
     const pixelCoord = tileToPixel(nextTile);
     const pineCone = objectPool.new('pine-cone', PineCone, {
       game: this.game,
@@ -21,9 +19,11 @@ export default function doWork() {
       placed: true,
     });
 
-    player.inventory.items['pine-cone'].value--;
+    this.player.inventory.items['pine-cone'].value--;
 
     pineCone.place(this);
+
+    this.player.inventory.addDebt(this.salary);
   }
 
   this.cancelWork();

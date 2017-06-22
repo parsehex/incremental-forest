@@ -9,6 +9,8 @@ export default function doWork() {
 
   if (facingTree !== false) {
     facingTree.interact(this);
+
+    this.player.inventory.addDebt(this.salary);
   }
 
   this.cancelWork();

@@ -48,7 +48,7 @@ function money(newCount) {
 
   const hireWorkerButtons = document.querySelectorAll('.hire-worker');
   for (let i = 0; i < hireWorkerButtons.length; i++) {
-    if (newCount >= worker[hireWorkerButtons[i].id.substr(5)].salary) {
+    if (newCount >= worker[hireWorkerButtons[i].id.substr(5)].deposit) {
       hireWorkerButtons[i].classList.remove('disabled');
     } else {
       hireWorkerButtons[i].classList.add('disabled');

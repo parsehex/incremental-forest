@@ -15,7 +15,10 @@ import { availableTileNear } from '../../../world';
 import { tileToPixel } from '../../../tiles';
 
 export default function hireWorker(workerType) {
-  if (this.inventory.money.value < worker[workerType].salary) return;
+  if (this.inventory.money.value < worker[workerType].deposit) return;
+
+  // pay worker's upfront deposit
+  this.inventory.money.value -= worker[workerType].deposit;
 
   // will default to this.tile if no other available tiles
   const workerTileCoord = availableTileNear(this.tile, true);

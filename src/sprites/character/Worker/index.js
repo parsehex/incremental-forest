@@ -34,7 +34,7 @@ export default class extends CommonCharacter {
 
     workerPool.register();
 
-    this.getPaid();
+    this.player = this.game.state.states.Game.player;
 
     this.timer = this.game.time.create(false);
     this.timer.loop(this.speed * 1000, () => {
@@ -56,23 +56,6 @@ export default class extends CommonCharacter {
   wait() {
     const oldTime = this.waitLastTime;
     this.waitLastTime = this.game.gameTime;
-
-    this.timeSincePaid += this.waitLastTime - oldTime;
-
-    if (this.timeSincePaid >= this.payTime) this.getPaid();
-  }
-
-  getPaid() {
-    const player = this.game.state.states.Game.player;
-
-    if (player.inventory.money.value >= this.salary) {
-      player.inventory.money.value -= this.salary;
-
-      this.timeSincePaid = 0;
-    } else {
-      console.log('no pay');
-      this.destroy();
-    }
   }
 
   cancelWork(noPath) {

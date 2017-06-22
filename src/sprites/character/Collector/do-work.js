@@ -8,7 +8,9 @@ export default function doWork() {
 
   for (let i = 0; i < objects.length; i++) {
     if (objects[i].hasOwnProperty('collide')) {
-      objects[i].collide(this.game.state.states.Game.player);
+      objects[i].collide(this.player);
+
+      this.player.inventory.addDebt(this.salary);
     }
   }
 
