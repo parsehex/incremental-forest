@@ -25,7 +25,7 @@ export default {
   },
   items: {
     'pine-cone': {
-      value: 50,
+      value: 0,
     },
     log: {
       value: 0,

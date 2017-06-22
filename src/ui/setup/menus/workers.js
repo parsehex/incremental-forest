@@ -1,8 +1,7 @@
-import bindMenu from './bind-menu';
+import bindMenu from '../bind-menu';
 
-export default function setupButtons() {
+export default function setup() {
   bindMenu('workers');
-  bindMenu('debt');
 
   // worker types
   workerType.call(this, 'chopper');

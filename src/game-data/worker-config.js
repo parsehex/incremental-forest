@@ -5,8 +5,8 @@ import merge from 'deepmerge';
 let worker = {
   chopper: {
     speed: 1,
-    salary: 7,
-    deposit: 35, // salary * 5
+    salary: 5,
+    deposit: 25, // salary * 5
   },
   collector: {
     speed: 0.5,
@@ -15,8 +15,8 @@ let worker = {
   },
   planter: {
     speed: 0.75,
-    salary: 7,
-    deposit: 35,
+    salary: 5,
+    deposit: 25,
   },
 };
 

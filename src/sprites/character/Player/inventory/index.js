@@ -14,6 +14,7 @@ export default class Inventory {
 
     // running total of debt
     this.debt = 0;
+    this.debtCut = 0.1;
 
     this.slots = [ null, null, null, null, null, null, null, null ];
     this.selectedSlot = null;
@@ -31,7 +32,17 @@ export default class Inventory {
     inform.player.inventory.debt(this.debt);
   }
   payDebt(amount) {
+    if (amount > this.debt) {
+      amount = this.debt;
+    }
+    if (amount > this.money.value) {
+      amount = this.money.value;
+    }
+
+    if (amount === 0) return;
+
     this.debt -= amount;
+    this.money.value -= amount;
 
     inform.player.inventory.debt(this.debt);
   }
@@ -86,16 +97,11 @@ export default class Inventory {
     if (item.value < amount) return;
 
     amount = amount || item.value;
-    let moneyAmount = itemPrices.sell[slot] * amount;
-    if (this.debt > 0) {
-      // the cut should be up to 10% of sale but no more than total debt
-      const cut = clamp(moneyAmount * 0.1, 0, this.debt);
-
-      moneyAmount -= cut;
-      this.payDebt(cut);
-    }
+    const moneyAmount = itemPrices.sell[slot] * amount;
 
     item.value -= amount;
     this.money.value += moneyAmount;
+
+    if (this.debt > 0) this.payDebt(moneyAmount * this.debtCut);
   }
 }

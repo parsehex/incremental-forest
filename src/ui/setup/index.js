@@ -1,5 +1,5 @@
 import { bindItemSlot } from '../bind-item';
-import setupWorkers from './worker-menu';
+import setupMenus from './menus';
 import setupKeys from './keys';
 
 export default function() {
@@ -11,7 +11,7 @@ export default function() {
 
   setupKeys.call(this);
 
-  setupWorkers.call(this);
+  setupMenus.call(this);
 
   // setup tippy on top-menu
   Tippy('#top-menu #money, #top-menu #debt');

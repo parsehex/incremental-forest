@@ -1,0 +1,20 @@
+div.row#workers-menu.menu
+  each worker in ['chopper', 'collector', 'planter']
+    div.col-xs-8(id=worker + '-menu', class=worker !== 'chopper' ? 'hidden' : '')
+      .line
+        span
+          | You have 
+          span(id=worker + '-count') 0
+          |  #{worker} workers
+      .line
+        button(id='hire-' + worker, type='button').hire-worker.disabled Hire a #{worker}
+        span #{' | '}
+        button(id='fire-' + worker, type='button').fire-worker.disabled Fire a #{worker}
+  div.col-xs-4
+    ul.list-unstyled.text-right
+      li
+        button#chopper.tab.worker-type.selected(type='button') Chopper
+      li
+        button#collector.tab.worker-type(type='button') Collector
+      li
+        button#planter.tab.worker-type(type='button') Planter

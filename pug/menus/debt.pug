@@ -1,0 +1,12 @@
+div.row#debt-menu.menu.hidden
+  div.col-xs-12
+    .line
+      button#debt-pay-50.disabled(type='button') Pay $50
+      button#debt-pay-100.disabled(type='button') Pay $100
+      button#debt-pay-500.disabled(type='button') Pay $500
+      button#debt-pay-1000.disabled(type='button') Pay $1000
+    .line
+      label
+        | Pay 
+        input#debt-cut(type='number' value='10' min='5' max='100' width='25')
+        | % of all items sales toward debt
