@@ -29,8 +29,6 @@ div#inventory ul li.item-slot {
   border: 1px outset lightgray;
   border-radius: 3px;
 
-  // float: left;
-
   background-color: #ECEFF1;
 
   padding: 0.3rem 0.15rem;
@@ -45,7 +43,7 @@ div#inventory ul li.item-slot {
     top: 3px;
     z-index: 5;
 
-    color: #9E9E9E;
+    color: #757575;
 
     @include text-stroke(white);
   }
