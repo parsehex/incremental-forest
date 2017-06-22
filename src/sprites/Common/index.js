@@ -48,6 +48,7 @@ export default class extends Phaser.Image {
   resetObject() {
     this.setTile();
     this.timers = [];
+    this.destroyed = false;
   }
 
   destroy() {
