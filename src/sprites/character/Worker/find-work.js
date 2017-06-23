@@ -14,7 +14,7 @@ export default function findWork() {
     fastMap, fastObjects, collidables,
     config.mapWidth, config.mapHeight,
     this.tile, this.targetObjects, // use this.targetObjects
-    false,
+    true,
   ];
 
   this.waitingOnPath = true;
