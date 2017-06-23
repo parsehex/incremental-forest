@@ -1,6 +1,7 @@
 import { seedDrop as seedDropChance } from '../../../game-data/chances';
 import { tryChance } from '../../../utils';
 import objectPool from '../../../object-pool';
+import devtools from '../../../devtools';
 
 import Log from '../Log';
 import PineCone from '../PineCone';
@@ -8,10 +9,12 @@ import PineCone from '../PineCone';
 export default function interact(character) {
   if (character.inventory.selected !== 'wood-axe') return;
 
-  this.progress += 2;
-  if (this.bar) this.bar.update();
+  if (devtools.enabled && !devtools.instaChop) {
+    this.progress += 2;
+    if (this.bar) this.bar.update();
 
-  if (this.progress < this.progressMax) return;
+    if (this.progress < this.progressMax) return;
+  }
 
   const { game, x, y } = this;
 
@@ -30,4 +33,6 @@ export default function interact(character) {
       y,
     });
   }
+
+  return true;
 }

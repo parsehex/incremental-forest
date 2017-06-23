@@ -6,6 +6,7 @@ export default {
   betterChances: true,
   noclip: false,
   playerSpeed: 10,
+  instaChop: false,
   money: {
     value: 0,
   },
