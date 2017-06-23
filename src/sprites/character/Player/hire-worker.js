@@ -27,7 +27,7 @@ export default function hireWorker(workerType) {
   const workerArgs = [
     fastMap, fastObjects, collidableObjects,
     config.mapWidth, config.mapHeight,
-    this.tile, null, // use this.targetObjects
+    this.tile, null,
   ];
   workerPool.addTask(workerArgs, (path) => {
     if (!path) {
