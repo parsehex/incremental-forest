@@ -141,8 +141,6 @@ function findPath(data) {
 
     if (mapTile.length === 0) return false;
 
-    console.log(mapTile);
-
     for (let i = 0; i < targetTypes.length; i++) {
       if (mapTile.includes(targetTypes[i])) {
         return true;
