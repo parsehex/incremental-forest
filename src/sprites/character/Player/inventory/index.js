@@ -13,8 +13,8 @@ export default class Inventory {
     this.items = items;
 
     // running total of debt
-    this.debt = 0;
-    this.debtCut = 0.1;
+    // this.debt = 0;
+    // this.debtCut = 0.1;
 
     this.slots = [ null, null, null, null, null, null, null, null ];
     this.selectedSlot = null;
@@ -26,26 +26,26 @@ export default class Inventory {
     this.seek = this.seek.bind(this);
   }
 
-  addDebt(amount) {
-    this.debt += amount;
-
-    inform.player.inventory.debt(this.debt);
-  }
-  payDebt(amount) {
-    if (amount > this.debt) {
-      amount = this.debt;
-    }
-    if (amount > this.money.value) {
-      amount = this.money.value;
-    }
-
-    if (amount === 0) return;
-
-    this.debt -= amount;
-    this.money.value -= amount;
-
-    inform.player.inventory.debt(this.debt);
-  }
+  // addDebt(amount) {
+  //   this.debt += amount;
+  //
+  //   inform.player.inventory.debt(this.debt);
+  // }
+  // payDebt(amount) {
+  //   if (amount > this.debt) {
+  //     amount = this.debt;
+  //   }
+  //   if (amount > this.money.value) {
+  //     amount = this.money.value;
+  //   }
+  //
+  //   if (amount === 0) return;
+  //
+  //   this.debt -= amount;
+  //   this.money.value -= amount;
+  //
+  //   inform.player.inventory.debt(this.debt);
+  // }
 
   addToSlots(itemName) {
     if (this.slots.includes(itemName)) return;
@@ -102,6 +102,6 @@ export default class Inventory {
     item.value -= amount;
     this.money.value += moneyAmount;
 
-    if (this.debt > 0) this.payDebt(moneyAmount * this.debtCut);
+    // if (this.debt > 0) this.payDebt(moneyAmount * this.debtCut);
   }
 }

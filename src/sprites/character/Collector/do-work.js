@@ -2,7 +2,8 @@ import { nextCoord, findObjByKey } from '../../../utils';
 import { objectsAtTile } from '../../../world';
 
 export default function doWork() {
-  // ensure that we're facing a tree
+  if (this.player.inventory.money.value < this.salary) return this.destroy();
+
   const nextTile = nextCoord(this.tile, this.faceDirection, 1);
   const objects = objectsAtTile(nextTile);
 
@@ -10,7 +11,8 @@ export default function doWork() {
     if (objects[i].hasOwnProperty('collide')) {
       objects[i].collide(this.player);
 
-      this.player.inventory.addDebt(this.salary);
+      // this.player.inventory.addDebt(this.salary);
+      this.player.inventory.money.value -= this.salary;
     }
   }
 
