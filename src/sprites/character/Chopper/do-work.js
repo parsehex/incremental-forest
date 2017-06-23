@@ -10,10 +10,12 @@ export default function doWork() {
   const facingTree = findObjByKey(objects, 'objectType', 'tree');
 
   if (facingTree !== false) {
-    facingTree.interact(this);
+    const treeFell = facingTree.interact(this);
 
-    // this.player.inventory.addDebt(this.salary);
-    this.player.inventory.money.value -= this.salary;
+    if (treeFell) {
+      // this.player.inventory.addDebt(this.salary);
+      this.player.inventory.money.value -= this.salary;
+    }
   }
 
   this.cancelWork();

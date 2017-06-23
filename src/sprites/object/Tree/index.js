@@ -14,5 +14,10 @@ export default class extends CommonObject {
     this.notFacing = notFacing.bind(this);
 
     this.interact = interact.bind(this);
+
+    this.progress = 0;
+    this.progressMax = 28;
+
+    this.bar = null;
   }
 }

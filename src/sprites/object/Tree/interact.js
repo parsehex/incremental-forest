@@ -8,6 +8,11 @@ import PineCone from '../PineCone';
 export default function interact(character) {
   if (character.inventory.selected !== 'wood-axe') return;
 
+  this.progress += 2;
+  if (this.bar) this.bar.update(this.progress / this.progressMax);
+
+  if (this.progress < this.progressMax) return;
+
   const { game, x, y } = this;
 
   this.destroy();
