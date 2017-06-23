@@ -7,9 +7,11 @@ export function bindItemSlot(slotNum, inventory) {
   });
 
   // bind to right click
-  slotEl.addEventListener('contextmenu', function() {
+  slotEl.addEventListener('contextmenu', function(event) {
     event.preventDefault();
 
-    inventory.sell(slotNum, 1);
+    const sellAmount = event.shiftKey ? null : 1;
+
+    inventory.sell(slotNum, sellAmount);
   });
 }
