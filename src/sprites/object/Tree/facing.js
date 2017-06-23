@@ -7,7 +7,7 @@ export function facing() {
     this.bar.show();
   } else {
     this.bar = new ProgressBar(this);
-    this.bar.update(0.1);
+    this.bar.update();
   }
 }
 

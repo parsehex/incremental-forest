@@ -16,7 +16,7 @@ export default class ProgressBar {
   hide() {
     this.graphic.visible = false;
   }
-  update(percent) {
-    this.graphic.width = 28 * percent;
+  update() {
+    this.graphic.width = 28 * (this.tree.progress / this.tree.progressMax);
   }
 }

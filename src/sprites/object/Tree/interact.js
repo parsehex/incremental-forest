@@ -9,7 +9,7 @@ export default function interact(character) {
   if (character.inventory.selected !== 'wood-axe') return;
 
   this.progress += 2;
-  if (this.bar) this.bar.update(this.progress / this.progressMax);
+  if (this.bar) this.bar.update();
 
   if (this.progress < this.progressMax) return;
 

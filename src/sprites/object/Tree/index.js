@@ -20,4 +20,10 @@ export default class extends CommonObject {
 
     this.bar = null;
   }
+
+  resetObject() {
+    this.progress = 0;
+
+    if (this.bar) this.bar.update();
+  }
 }
