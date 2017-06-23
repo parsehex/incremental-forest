@@ -11,7 +11,7 @@ onmessage = function(event) {
   // expect posted message data to be in a certain format
   if (!Array.isArray(event.data)) throw new Error('pass an array to worker');
 
-  let timing = true;
+  let timing = false;
 
   let now;
   if (timing) now = performance.now();
