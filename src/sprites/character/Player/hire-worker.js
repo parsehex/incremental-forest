@@ -28,6 +28,7 @@ export default function hireWorker(workerType) {
     fastMap, fastObjects, collidableObjects,
     config.mapWidth, config.mapHeight,
     this.tile, null,
+    true, // random direction order
   ];
   workerPool.addTask(workerArgs, (path) => {
     if (!path) {

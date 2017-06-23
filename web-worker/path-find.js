@@ -10,34 +10,38 @@ let firstRun = true;
 onmessage = function(event) {
   // expect posted message data to be in a certain format
   if (!Array.isArray(event.data)) throw new Error('pass an array to worker');
-  let testing = false && firstRun && event.data[5].x === 10 && event.data[5].y === 0;
 
-  let now = performance.now();
+  let timing = true;
+
+  let now;
+  if (timing) now = performance.now();
 
   let path = findPath(event.data);
-
   if (path) path.path = convertPath(path.path);
 
-  if (testing) {
-    verifyPath(path.path);
-    firstRun = false;
-  }
-
   postMessage(path);
-  if (testing) console.log(performance.now() - now);
+
+  if (timing) console.log(performance.now() - now);
 }
 
-function verifyPath(path) {
-  const correctPath = '["DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","DOWN","LEFT","DOWN","DOWN","RIGHT"]';
-  if (JSON.stringify(path) !== correctPath) {
-    console.error('path fails test');
-    console.groupCollapsed('paths');
-    console.log('expected:', correctPath);
-    console.log('actual:', path);
-    console.groupEnd();
-  } else {
-    console.info('path passes test');
+function shuffle(array) {
+  // https://stackoverflow.com/a/2450976
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
   }
+
+  return array;
 }
 
 function findPath(data) {
@@ -51,7 +55,8 @@ function findPath(data) {
   let queue =             [],
       checkedTiles =      [],
       start =             data[5],
-      target =            data[6];
+      target =            data[6],
+      random =            data[7];
 
   if (typeof target === 'string') {
     target = [target];
@@ -82,26 +87,18 @@ function findPath(data) {
 
   checkedTiles.push(startLocation.x + ',' + startLocation.y);
 
-  let debug = 0;
-  while (queue.length && debug <= 3000) { // infinite loop protection
+  while (queue.length) {
     let item = queue[0];
 
-    const up = processDirection(item, 0);
-    if (up) return up;
+    const directions = random ? shuffle([0, 2, 1, 3]) : [0, 1, 2, 3];
 
-    const down = processDirection(item, 1);
-    if (down) return down;
-
-    const left = processDirection(item, 2);
-    if (left) return left;
-
-    const right = processDirection(item, 3);
-    if (right) return right;
+    for (let i = 0; i < directions.length; i++) {
+      const direction = processDirection(item, directions[i]);
+      if (direction) return direction;
+    }
 
     // remove first item in queue
     queue.shift();
-
-    debug++;
   }
 
   function processDirection(location, direction) {
