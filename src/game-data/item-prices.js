@@ -1,6 +1,6 @@
 export default {
   sell: {
-    log: 50,
-    'pine-cone': 5,
+    log: 12,
+    'pine-cone': 1.5,
   },
 };
