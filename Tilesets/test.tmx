@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" nextobjectid="4806">
- <tileset firstgid="1" name="sprites" tilewidth="32" tileheight="32" tilecount="9" columns="9">
-  <image source="../assets/spritesheets/tiles.png" width="288" height="32"/>
+<map version="1.0" tiledversion="1.0.1" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" nextobjectid="4810">
+ <tileset firstgid="1" name="sprites" tilewidth="32" tileheight="32" tilecount="10" columns="10">
+  <image source="../assets/spritesheets/tiles.png" width="320" height="32"/>
  </tileset>
- <tileset firstgid="10" source="sprites.tsx"/>
+ <tileset firstgid="11" source="sprites.tsx"/>
  <layer name="background" width="50" height="50">
   <data encoding="csv">
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,

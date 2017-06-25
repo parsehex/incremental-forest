@@ -22,6 +22,8 @@ export default class extends CommonObject {
   }
 
   resetObject() {
+    super.resetObject();
+    
     this.progress = 0;
 
     if (this.bar) this.bar.update();
