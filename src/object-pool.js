@@ -17,7 +17,7 @@ class ObjectPool {
       // if (object.objectType === 'pine-cone') console.log(object.placed);
 
       object.reset(arg.x, arg.y);
-      
+
       // call object's reset method if it has one
       if (object.resetObject) object.resetObject();
 

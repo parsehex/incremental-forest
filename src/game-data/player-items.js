@@ -35,7 +35,7 @@ let items = {
 };
 
 let money = {
-  value: 10000,
+  value: 0,
   max: REALLY_BIG_NUMBER,
 };
 
