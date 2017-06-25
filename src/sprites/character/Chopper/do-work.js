@@ -15,8 +15,10 @@ export default function doWork() {
     if (treeFell) {
       // this.player.inventory.addDebt(this.salary);
       this.player.inventory.money.value -= this.salary;
-      
+
       this.cancelWork();
     }
+  } else {
+    this.cancelWork();
   }
 }
