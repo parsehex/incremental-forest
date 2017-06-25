@@ -2,7 +2,7 @@ export default {
   enabled: true,
   testMap: true,
   testMapWorker: false,
-  testMapSize: [50, 50],
+  testMapSize: [30, 30],
   betterChances: true,
   noclip: false,
   playerSpeed: 10,
