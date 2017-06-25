@@ -6,10 +6,12 @@ import devtools from '../../../devtools';
 import Log from '../Log';
 import PineCone from '../PineCone';
 
+const instaChop = devtools.enabled && devtools.instaChop;
+
 export default function interact(character) {
   if (character.inventory.selected !== 'wood-axe') return;
 
-  if (devtools.enabled && !devtools.instaChop) {
+  if (!instaChop) {
     this.progress += 2;
     if (this.bar) this.bar.update();
 
