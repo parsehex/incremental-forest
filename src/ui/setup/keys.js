@@ -4,8 +4,12 @@ export default function setupKeys() {
   watchKeys.call(this);
 }
 
+let holdingKey = false;
 function watchKeys() {
   document.body.addEventListener('keydown', (event) => {
+    if (holdingKey) return;
+    holdingKey = true;
+
     if (event.which === 80) { // P
       pause.call(this, 'toggle', true);
     } else if (event.which === 72) { // H
@@ -17,6 +21,9 @@ function watchKeys() {
 
       this.game.state.states.Game.player.fireWorker(workerType);
     }
+  });
+  document.body.addEventListener('keyup', () => {
+    holdingKey = false;
   });
 }
 
