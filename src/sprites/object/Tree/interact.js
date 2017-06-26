@@ -1,7 +1,8 @@
-import { seedDrop as seedDropChance } from '../../../game-data/chances';
+import getChance from '../../../game-data/chances';
 import { tryChance } from '../../../utils';
 import objectPool from '../../../object-pool';
 import devtools from '../../../devtools';
+import ProgressBar from './ProgressBar';
 
 import Log from '../Log';
 import PineCone from '../PineCone';
@@ -13,6 +14,8 @@ export default function interact(character) {
 
   if (!instaChop) {
     this.progress += 2;
+    if (!this.bar) this.bar = new ProgressBar(this);
+
     if (this.bar) this.bar.update();
 
     if (this.progress < this.progressMax) return;
