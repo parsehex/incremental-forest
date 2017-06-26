@@ -26,7 +26,7 @@ export default class extends CommonCharacter {
     this.waitLastTime = this.game.gameTime;
 
     this.working = false;
-    this.path = [];
+    this.path = {};
 
     this.sendToBack();
 
@@ -104,7 +104,7 @@ export default class extends CommonCharacter {
     this.waitLastTime = this.game.gameTime;
 
     this.working = false;
-    this.path = [];
+    this.path = {};
 
     this.timer.resume();
 

@@ -20,7 +20,7 @@ export default function findWork() {
   this.waitingOnPath = true;
   workerPool.addTask(workerArgs, (pathToTree) => {
     if (pathToTree) {
-      this.path = pathToTree.path;
+      this.path = pathToTree;
 
       this.working = true;
     } else {
