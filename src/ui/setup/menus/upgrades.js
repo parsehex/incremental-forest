@@ -25,7 +25,7 @@ export default function setup() {
     if (player.inventory.money.value < price || chopperWoodAxeRank >= 24) return;
 
     updatePrice('chopper-wood-axe', 5 * Math.pow(3.5, chopperWoodAxeRank + 1));
-console.log(chopperWoodAxeRank);
+
     player.inventory.money.value -= price;
 
     // update existing choppers' wood axes
