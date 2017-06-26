@@ -13,7 +13,7 @@ export default function findWork() {
   const workerArgs = [
     fastMap, fastObjects, collidables,
     config.mapWidth, config.mapHeight,
-    this.tile, this.targetObjects, // use this.targetObjects
+    this.tile, this.targetObjects,
     true,
   ];
 
@@ -22,11 +22,12 @@ export default function findWork() {
     if (pathToTree) {
       this.path = pathToTree.path;
 
-      this.noPath = false;
       this.working = true;
     } else {
       // no available path to any trees
-      this.cancelWork(true);
+      this.cancelWork();
+
+      this.idle();
     }
     this.waitingOnPath = false;
   });

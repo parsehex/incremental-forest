@@ -12,6 +12,9 @@ export default class Inventory {
     this.money = money;
     this.items = items;
 
+    // debugging
+    window.money = this.money;
+
     // running total of debt
     // this.debt = 0;
     // this.debtCut = 0.1;

@@ -16,7 +16,7 @@ export default class Cursor {
 
     this.draw();
 
-    onChange((tileCoord, objects) => {
+    onChange('player-cursor', (tileCoord, objects) => {
       // we don't care about tiles the cursor isn't on
       if (tileCoord.x !== this.tile.x || tileCoord.y !== this.tile.y) return;
 

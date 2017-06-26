@@ -64,18 +64,6 @@ function findPath(data) {
 
   const targetIsArray = Array.isArray(target);
 
-  if (targetIsArray) {
-    let includes = false;
-    for (let i = 0; i < target.length; i++) {
-      if (fastObjects.includes(target[i])) {
-        includes = true;
-        break;
-      }
-    }
-
-    if (!includes) return;
-  }
-
   const startLocation = {
     x: start.x,
     y: start.y,

@@ -45,12 +45,19 @@ const subscribers = [];
 
 function change(tileCoord) {
   for (let i = 0; i < subscribers.length; i++) {
-    subscribers[i](tileCoord, objectsAtTile(tileCoord));
+    subscribers[i][1](tileCoord, objectsAtTile(tileCoord));
   }
 }
-// NOTE can't unsubscribe; might be an issue later
-export function onChange(callback) {
-  subscribers.push(callback);
+export function removeListener(id) {
+  for (let i = 0; i < subscribers.length; i++) {
+    if (subscribers[i][0] !== id) continue;
+
+    subscribers.splice(i, 1);
+    return;
+  }
+}
+export function onChange(id, callback) {
+  subscribers.push([ id, callback ]);
 }
 
 export function add() {
