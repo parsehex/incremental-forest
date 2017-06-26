@@ -2,7 +2,7 @@ import { nextCoord, findObjByKey } from '../../../utils';
 import { objectsAtTile } from '../../../world';
 
 export default function doWork() {
-  if (this.player.inventory.money.value < this.salary) return this.destroy();
+  // if (this.player.inventory.money.value < this.salary) return this.destroy();
 
   // ensure that we're facing a tree
   const nextTile = nextCoord(this.tile, this.faceDirection, 1);
