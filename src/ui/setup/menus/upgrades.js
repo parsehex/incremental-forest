@@ -17,10 +17,21 @@ export default function setup() {
 
     if (player.inventory.money.value < price || player.inventory.items['wood-axe'].rank >= 24) return;
 
-    updatePrice('wood-axe', 5 * Math.pow(3.5, player.inventory.items['wood-axe'].rank + 1));
+    updatePrice('wood-axe', 14 * Math.pow(2, player.inventory.items['wood-axe'].rank + 1));
 
     player.inventory.money.value -= price;
     player.inventory.items['wood-axe'].rank++;
+  });
+  upgrade('sell-price', (event) => {
+    const price = +event.target.dataset.price;
+    const player = this.game.state.states.Game.player;
+
+    if (player.inventory.money.value < price) return;
+
+    updatePrice('sell-price', 12 * Math.pow(5.5, player.inventory.sellMultiplier));
+
+    player.inventory.money.value -= price;
+    player.inventory.sellMultiplier += 0.1;
   });
   upgrade('chopper-wood-axe', (event) => {
     const price = +event.target.dataset.price;
@@ -30,7 +41,7 @@ export default function setup() {
 
     if (player.inventory.money.value < price || chopperWoodAxeRank >= 24) return;
 
-    updatePrice('chopper-wood-axe', 5 * Math.pow(3.5, chopperWoodAxeRank + 1));
+    updatePrice('chopper-wood-axe', 14 * Math.pow(2, chopperWoodAxeRank + 1));
 
     player.inventory.money.value -= price;
 
@@ -49,7 +60,7 @@ export default function setup() {
 
     if (player.inventory.money.value < price || chopperSpeed <= 0.5) return;
 
-    updatePrice('chopper-speed', Math.pow(3.1, (1.5 - (chopperSpeed - 0.1)) * 10));
+    updatePrice('chopper-speed', 5 * Math.pow(3.1, (1.5 - (chopperSpeed - 0.1)) * 10));
 
     player.inventory.money.value -= price;
 
@@ -69,7 +80,7 @@ export default function setup() {
 
     if (player.inventory.money.value < price || collectorSpeed <= 0.5) return;
 
-    updatePrice('collector-speed', Math.pow(3.1, (1.5 - (collectorSpeed - 0.1)) * 10));
+    updatePrice('collector-speed', 5 * Math.pow(3.1, (1.5 - (collectorSpeed - 0.1)) * 10));
 
     player.inventory.money.value -= price;
 

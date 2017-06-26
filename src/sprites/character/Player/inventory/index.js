@@ -27,6 +27,8 @@ export default class Inventory {
     inform.player.inventory.itemValue('money', this.money.value);
 
     this.seek = this.seek.bind(this);
+
+    this.sellMultiplier = 1;
   }
 
   // addDebt(amount) {
@@ -103,7 +105,7 @@ export default class Inventory {
     const moneyAmount = itemPrices.sell[slot] * amount;
 
     item.value -= amount;
-    this.money.value += moneyAmount;
+    this.money.value += (moneyAmount * this.sellMultiplier);
 
     // if (this.debt > 0) this.payDebt(moneyAmount * this.debtCut);
   }
