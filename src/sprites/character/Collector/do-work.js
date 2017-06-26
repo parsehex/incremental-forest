@@ -12,7 +12,7 @@ export default function doWork() {
       objects[i].collide(this.player);
 
       // this.player.inventory.addDebt(this.salary);
-      this.player.inventory.money.value -= this.salary;
+      // this.player.inventory.money.value -= this.salary;
     }
   }
 

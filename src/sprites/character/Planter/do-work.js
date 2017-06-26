@@ -26,7 +26,7 @@ export default function doWork() {
     pineCone.place(this);
 
     // this.player.inventory.addDebt(this.salary);
-    this.player.inventory.money.value -= this.salary;
+    // this.player.inventory.money.value -= this.salary;
   }
 
   this.cancelWork();
