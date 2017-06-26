@@ -6,7 +6,7 @@ mixin count(type)
       |  #{type.substr(0, 1).toUpperCase() + type.substr(1)}s
 mixin hireFire(type)
   .line
-    button(id='hire-' + type, type='button').hire-worker.disabled Hire a #{type.substr(0, 1).toUpperCase() + type.substr(1)}
+    button(id='hire-' + type, type='button').hire-worker.disabled Hire a #{type.substr(0, 1).toUpperCase() + type.substr(1)} ($150)
     span #{' | '}
     button(id='fire-' + type, type='button').fire-worker.disabled Fire a #{type.substr(0, 1).toUpperCase() + type.substr(1)}
 mixin upgrade(id, price, title, label)
