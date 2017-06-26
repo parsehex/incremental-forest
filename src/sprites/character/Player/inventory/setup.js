@@ -31,11 +31,7 @@ function setupObj(obj, objName) {
 
   function processObject(item, itemName) {
     for (let keyName in item) {
-      if (keyName === 'value') {
-        readWrite.call(this, item, itemName, keyName);
-      } else {
-        readOnly(item, keyName);
-      }
+      readWrite.call(this, item, itemName, keyName);
     }
 
     Object.defineProperty(item, 'isMax', { get: isMax.bind(item) });

@@ -1,4 +1,4 @@
-import { treeGrow as growChance } from '../../../game-data/chances';
+import getChance from '../../../game-data/chances';
 import { tryChance } from '../../../utils';
 import { fastMap } from '../../../world';
 import objectPool from '../../../object-pool';
@@ -20,7 +20,7 @@ export default function place() {
     if (
       (playerTile.x !== thisTile.x || playerTile.y !== thisTile.y) &&
       fastMap[thisTile.y][thisTile.x].length === 1 && // this pine cone should be only thing on tile
-      tryChance(growChance)
+      tryChance(getChance('treeGrow'))
     ) {
       objectPool.new('tree', Tree, {
         game: this.game,

@@ -1,6 +1,5 @@
 import Chopper from '../Chopper';
 import Collector from '../Collector';
-import Planter from '../Planter';
 
 import { worker } from '../../../game-data/worker-config';
 import objectPool from '../../../object-pool';
@@ -15,7 +14,6 @@ import config from '../../../config';
 const workerTypes = {
   chopper: Chopper,
   collector: Collector,
-  planter: Planter,
 };
 
 export default function hireWorker(workerType) {

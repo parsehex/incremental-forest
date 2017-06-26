@@ -5,7 +5,10 @@ export default function setValue(itemName, thisInventory, keyName, privName, val
   if (typeof this[privName] !== 'number') {
     this[privName] = value;
   } else {
-    this[privName] = clamp(value, 0, this.max || REALLY_BIG_NUMBER);
+    // keyName will be either 'value' or 'rank'
+    let max = keyName === 'value' ? this.max : 24;
+
+    this[privName] = clamp(value, 0, max);
   }
 
   switch (keyName) {

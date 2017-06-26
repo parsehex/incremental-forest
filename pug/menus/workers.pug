@@ -1,20 +1,35 @@
+mixin count(type)
+  .line
+    span
+      | You have 
+      span(id=type + '-count') 0
+      |  #{type.substr(0, 1).toUpperCase() + type.substr(1)}s
+mixin hireFire(type)
+  .line
+    button(id='hire-' + type, type='button').hire-worker.disabled Hire a #{type.substr(0, 1).toUpperCase() + type.substr(1)}
+    span #{' | '}
+    button(id='fire-' + type, type='button').fire-worker.disabled Fire a #{type.substr(0, 1).toUpperCase() + type.substr(1)}
+mixin upgrade(id, price, title, label)
+  button.upgrade.disabled(type='button' id=id data-price=price title=title)=label
+
 div.row#workers-menu.menu
-  each worker in ['chopper', 'collector', 'planter']
-    div.col-xs-8(id=worker + '-menu', class=worker !== 'chopper' ? 'hidden' : '')
-      .line
-        span
-          | You have 
-          span(id=worker + '-count') 0
-          |  #{worker} workers
-      .line
-        button(id='hire-' + worker, type='button').hire-worker.disabled Hire a #{worker}
-        span #{' | '}
-        button(id='fire-' + worker, type='button').fire-worker.disabled Fire a #{worker}
+  div#chopper-menu.col-xs-8
+    +count('chopper')
+    +hireFire('chopper')
+    .line
+      +upgrade('chopper-speed', '75', 'Chopper will work faster', 'Upgrade Speed ($75)')
+      br
+      +upgrade('chopper-wood-axe', '75', 'Chopper will chop trees down faster', 'Upgrade Wood Axe ($75)')
+  div#collector-menu.col-xs-8.hidden
+    +count('collector')
+    +hireFire('collector')
+    .line
+      +upgrade('collector-speed', '75', 'Collector will work faster', 'Upgrade Speed ($75)')
   div.col-xs-4
     ul.list-unstyled.text-right
       li
         button#chopper.tab.worker-type.selected(type='button') Chopper
       li
         button#collector.tab.worker-type(type='button') Collector
-      li
-        button#planter.tab.worker-type(type='button') Planter
+      //- li
+      //-   button#planter.tab.worker-type(type='button') Planter

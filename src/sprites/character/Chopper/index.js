@@ -7,7 +7,14 @@ export default class extends Worker {
   constructor({ game, x, y }) {
     super(game, x, y, 'worker-chopper', null, 'chopper');
 
-    this.inventory.selected = 'wood-axe';
+    this.inventory = {
+      selected: 'wood-axe',
+      items: {
+        'wood-axe': {
+          rank: 0,
+        },
+      },
+    };
 
     this.targetObjects = ['tree'];
 

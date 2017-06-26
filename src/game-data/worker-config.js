@@ -9,7 +9,7 @@ let worker = {
     deposit: 150,
   },
   collector: {
-    speed: 0.5,
+    speed: 1.25,
     salary: 1,
     deposit: 50,
   },

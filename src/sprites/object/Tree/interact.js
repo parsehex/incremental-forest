@@ -13,14 +13,16 @@ export default function interact(character) {
   if (character.inventory.selected !== 'wood-axe') return;
 
   if (!instaChop) {
-    this.progress += 2;
-    if (!this.bar) this.bar = new ProgressBar(this);
+    const chopAmount = 2 + (character.inventory.items['wood-axe'].rank * 0.5);
+    this.progress += chopAmount;
 
-    if (this.bar) this.bar.update();
+    if (!this.bar) this.bar = new ProgressBar(this);
+    this.bar.update();
 
     if (this.progress < this.progressMax) return;
   }
 
+  // tree is at max progress (i.e. chopped down)
   const { game, x, y } = this;
 
   this.destroy();
@@ -31,7 +33,7 @@ export default function interact(character) {
     y,
   });
 
-  if (tryChance(seedDropChance)) {
+  if (tryChance(getChance('seedDrop'))) {
     objectPool.new('pine-cone', PineCone, {
       game,
       x,

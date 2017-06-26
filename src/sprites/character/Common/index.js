@@ -2,7 +2,7 @@ import Common from '../../Common';
 import frames from '../../../sprite-frames';
 import config from '../../../config';
 import { addCharacter, moveCharacter, removeCharacter } from '../../../world';
-import { clone } from '../../../utils';
+import { clone, tileOutOfBounds } from '../../../utils';
 import { pixelToTile } from '../../../tiles';
 
 export default class CommonCharacter extends Common {
@@ -15,8 +15,8 @@ export default class CommonCharacter extends Common {
   }
 
   move(nextPixelCoord) {
-    const tileCoord = pixelToTile(nextPixelCoord);
-    if (tileCoord.x < 0 || tileCoord.x >= config.mapWidth || tileCoord.y < 0 || tileCoord.y >= config.mapHeight) return;
+    const nextTileCoord = pixelToTile(nextPixelCoord);
+    if (tileOutOfBounds(nextTileCoord)) return;
 
     if (this.cursor) {
       this.cursor.move();

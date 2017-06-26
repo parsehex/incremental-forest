@@ -6,7 +6,7 @@ export default function setup() {
   // worker types
   workerType.call(this, 'chopper');
   workerType.call(this, 'collector');
-  workerType.call(this, 'planter');
+  // workerType.call(this, 'planter');
 }
 
 function workerType(name) {

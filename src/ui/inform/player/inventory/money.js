@@ -1,4 +1,3 @@
-// import { notify } from '../../../notifications';
 import { worker } from '../../../../game-data/worker-config';
 
 export default function money(newCount) {
@@ -6,14 +5,10 @@ export default function money(newCount) {
 
   const oldCount = +moneyEl.textContent;
 
-  // if newCount is a decimal, trim it to 2 demial places
-  if (Math.round(newCount) !== newCount) newCount = newCount.toFixed(2);
+  // if newCount is a decimal, trim it to 2 decimal places
+  if (Math.round(newCount) !== newCount) newCount = +newCount.toFixed(2);
 
   moneyEl.textContent = newCount;
-
-  // if (newCount === 0 && oldCount > 0) {
-  //   notify('danger', 'You have on money!');
-  // }
 
   const hireWorkerButtons = document.querySelectorAll('.hire-worker');
   for (let i = 0; i < hireWorkerButtons.length; i++) {
@@ -21,6 +16,15 @@ export default function money(newCount) {
       hireWorkerButtons[i].classList.remove('disabled');
     } else {
       hireWorkerButtons[i].classList.add('disabled');
+    }
+  }
+
+  const upgradeButtons = document.querySelectorAll('.upgrade');
+  for (let i = 0; i < upgradeButtons.length; i++) {
+    if (newCount >= upgradeButtons[i].dataset.price) {
+      upgradeButtons[i].classList.remove('disabled');
+    } else {
+      upgradeButtons[i].classList.add('disabled');
     }
   }
 }
