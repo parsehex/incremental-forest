@@ -1,4 +1,5 @@
 import draw from './draw';
+import { clamp } from '../../../../utils';
 
 export default class ProgressBar {
   constructor(tree) {
@@ -17,6 +18,6 @@ export default class ProgressBar {
     this.graphic.visible = false;
   }
   update() {
-    this.graphic.width = 28 * (this.tree.progress / this.tree.progressMax);
+    this.graphic.width = clamp(28 * (this.tree.progress / this.tree.progressMax), 0, 100);
   }
 }
