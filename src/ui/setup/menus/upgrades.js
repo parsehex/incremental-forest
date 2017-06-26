@@ -98,9 +98,9 @@ export default function setup() {
     const upgradeNumber = +event.target.dataset.upgradeNumber || 0;
     const player = this.game.state.states.Game.player;
 
-    if (player.inventory.money.value < price || upgradeNumber >= 23) return;
+    if (player.inventory.money.value < price || upgradeNumber >= 18) return;
 
-    updatePrice('pine-cone', 5 * Math.pow(2, upgradeNumber + 1));
+    updatePrice('pine-cone', 5 * Math.pow(1.35, upgradeNumber + 1));
 
     player.inventory.money.value -= price;
     increaseChance('seedDrop');
