@@ -1,6 +1,6 @@
 import CommonCharacter from '../Common';
 import frames from '../../../sprite-frames';
-import { worker } from '../../../game-data/worker-config';
+import * as workers from '../../../game-data/worker-config';
 import inform from '../../../ui/inform';
 
 import workerPool from '../../../worker-pool';
@@ -12,9 +12,9 @@ export default class extends CommonCharacter {
   constructor(game, x, y, sprite, id, objectType, props) {
     super(game, x, y, sprite, frames.CHARACTER.STAND_DOWN, id, objectType);
 
-    this.salary = worker[objectType].salary;
-    this.payTime = worker[objectType].payTime;
-    this.speed = worker[objectType].speed;
+    this.salary = workers[objectType].salary;
+    this.payTime = workers[objectType].payTime;
+    this.speed = workers[objectType].speed;
 
     this.faceDirection = 'DOWN';
 
@@ -43,6 +43,7 @@ export default class extends CommonCharacter {
       update.call(this);
     }, this);
     this.timer.start();
+    window.times = this.timer;
 
     inform.worker.count(objectType, 1);
   }

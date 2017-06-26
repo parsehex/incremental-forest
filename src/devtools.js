@@ -1,14 +1,14 @@
 export default {
   enabled: false,
-  testMap: true,
+  testMap: false,
   testMapWorker: false,
   testMapSize: [30, 30],
-  betterChances: true,
+  betterChances: false,
   noclip: false,
   playerSpeed: 10,
-  instaChop: true,
+  instaChop: false,
   money: {
-    value: 10000000,
+    value: 250,
   },
   workers: {
     chopper: {

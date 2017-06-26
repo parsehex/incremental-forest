@@ -1,4 +1,4 @@
-import { worker } from '../../../../game-data/worker-config';
+import * as worker from '../../../../game-data/worker-config';
 
 export default function money(newCount) {
   const moneyEl = document.querySelector('#money .item-count');

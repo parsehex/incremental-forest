@@ -1,5 +1,4 @@
 import Worker from '../Worker';
-import { worker } from '../../../game-data/worker-config';
 
 import doWork from './do-work';
 

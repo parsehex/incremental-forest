@@ -1,6 +1,12 @@
 import bindMenu from '../bind-menu';
 import { increaseChance } from '../../../game-data/chances';
-import { getWoodAxeRank, increaseWoodAxeRank } from '../../../game-data/worker-config';
+import {
+  chopper,
+  collector,
+  getWoodAxeRank,
+  increaseWoodAxeRank,
+  increaseSpeed,
+} from '../../../game-data/worker-config';
 
 export default function setup() {
   bindMenu('upgrades');
@@ -34,6 +40,46 @@ export default function setup() {
     }
     // update global chopper wood axe rank
     increaseWoodAxeRank();
+  });
+  upgrade('chopper-speed', (event) => {
+    const price = +event.target.dataset.price;
+    const player = this.game.state.states.Game.player;
+    const choppers = this.game.state.states.Game.groups.character.children.filter((o) => o.objectType === 'chopper');
+    const chopperSpeed = chopper.speed;
+
+    if (player.inventory.money.value < price || chopperSpeed <= 0.5) return;
+
+    updatePrice('chopper-speed', Math.pow(3.1, (1.5 - (chopperSpeed - 0.1)) * 10));
+
+    player.inventory.money.value -= price;
+
+    // update existing choppers' wood axes
+    for (let i = 0; i < choppers.length; i++) {
+      choppers[i].speed -= 0.1;
+      choppers[i].timer.events[0].delay -= 100;
+    }
+    // update global chopper wood axe rank
+    increaseSpeed('chopper');
+  });
+  upgrade('collector-speed', (event) => {
+    const price = +event.target.dataset.price;
+    const player = this.game.state.states.Game.player;
+    const collectors = this.game.state.states.Game.groups.character.children.filter((o) => o.objectType === 'collector');
+    const collectorSpeed = collector.speed;
+
+    if (player.inventory.money.value < price || collectorSpeed <= 0.5) return;
+
+    updatePrice('collector-speed', Math.pow(3.1, (1.5 - (collectorSpeed - 0.1)) * 10));
+
+    player.inventory.money.value -= price;
+
+    // update existing collectors' wood axes
+    for (let i = 0; i < collectors.length; i++) {
+      collectors[i].speed -= 0.1;
+      collectors[i].timer.events[0].delay -= 100;
+    }
+    // update global collector wood axe rank
+    increaseSpeed('collector');
   });
 
   upgrade('pine-cone', (event) => {

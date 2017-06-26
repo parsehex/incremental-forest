@@ -1,5 +1,5 @@
 import Worker from '../Worker';
-import { worker, getWoodAxeRank } from '../../../game-data/worker-config';
+import { getWoodAxeRank } from '../../../game-data/worker-config';
 
 import doWork from './do-work';
 

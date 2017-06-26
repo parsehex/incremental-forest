@@ -3,30 +3,30 @@ import { clamp } from '../utils';
 
 import merge from 'deepmerge';
 
-let worker = {
-  chopper: {
-    speed: 1,
-    salary: 3,
-    deposit: 150,
-  },
-  collector: {
-    speed: 1.25,
-    salary: 1,
-    deposit: 50,
-  },
-  planter: {
-    speed: 1.5,
-    salary: 2,
-    deposit: 75,
-  },
+const chopper = {
+  speed: 1.5,
+  salary: 3,
+  deposit: 150,
 };
+const collector = {
+  speed: 1.5,
+  salary: 1,
+  deposit: 150,
+};
+const planter = {
+  speed: 1.5,
+  salary: 2,
+  deposit: 75,
+};
+const workers = { chopper, collector, planter };
 
-worker = merge(worker, devtools.enabled ? devtools.workers : {});
+export { chopper, collector, planter };
 
-export { worker };
+export function increaseSpeed(workerType) {
+  workers[workerType].speed = clamp(workers[workerType].speed - 0.1, 0.5, 2);
+}
 
 let chopperWoodAxeRank = 0;
-
 export function getWoodAxeRank() {
   return chopperWoodAxeRank;
 }
