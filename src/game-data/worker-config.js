@@ -1,4 +1,5 @@
 import devtools from '../devtools';
+import { clamp } from '../utils';
 
 import merge from 'deepmerge';
 
@@ -23,3 +24,12 @@ let worker = {
 worker = merge(worker, devtools.enabled ? devtools.workers : {});
 
 export { worker };
+
+let chopperWoodAxeRank = 0;
+
+export function getWoodAxeRank() {
+  return chopperWoodAxeRank;
+}
+export function increaseWoodAxeRank() {
+  chopperWoodAxeRank = clamp(chopperWoodAxeRank + 1, 0, 24);
+}

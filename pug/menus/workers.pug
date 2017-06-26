@@ -10,7 +10,7 @@ mixin hireFire(type)
     span #{' | '}
     button(id='fire-' + type, type='button').fire-worker.disabled Fire a #{type.substr(0, 1).toUpperCase() + type.substr(1)}
 mixin upgrade(id, price, title, label)
-  button.upgrade.disabled(type='button' id=id data-price=price title=title)=label
+  button.upgrade.disabled(type='button' id='upgrade-' + id data-price=price title=title)=label
 
 div.row#workers-menu.menu
   div#chopper-menu.col-xs-8
@@ -19,7 +19,7 @@ div.row#workers-menu.menu
     .line
       +upgrade('chopper-speed', '75', 'Chopper will work faster', 'Upgrade Speed ($75)')
       br
-      +upgrade('chopper-wood-axe', '75', 'Chopper will chop trees down faster', 'Upgrade Wood Axe ($75)')
+      +upgrade('chopper-wood-axe', '5', 'Chopper will chop trees down faster', 'Upgrade Wood Axe ($5)')
   div#collector-menu.col-xs-8.hidden
     +count('collector')
     +hireFire('collector')
