@@ -8,7 +8,7 @@ export default {
   playerSpeed: 10,
   instaChop: false,
   money: {
-    value: 250,
+    value: 0,
   },
   workers: {
     chopper: {
