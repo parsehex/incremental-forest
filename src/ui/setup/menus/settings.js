@@ -5,13 +5,15 @@ import keyMap from '../../../key-map';
 export default function setup() {
   bindMenu('settings');
 
+  tab.call(this, 'game-settings');
+
   tab.call(this, 'controls');
   controls();
 }
 
 function tab(name) {
   document.getElementById(name).addEventListener('click', () => {
-    const lastSelected = document.querySelector('.worker-type.selected');
+    const lastSelected = document.querySelector('#settings-menu button.selected');
     lastSelected.classList.remove('selected');
     document.getElementById(lastSelected.id + '-menu').classList.add('hidden');
 

@@ -38,9 +38,11 @@ div#inventory ul li.item-slot {
   border: 1px outset lightgray;
   border-radius: 3px;
   background-color: #ECEFF1;
-  padding: 0.3rem 0.15rem; }
+  padding: 0.3rem 0.15rem;
+  margin: 0 0.02em; }
   div#inventory ul li.item-slot.selected {
-    background-color: #B0BEC5; }
+    background-color: #B0BEC5;
+    border: 1px solid #80DEEA; }
   div#inventory ul li.item-slot .item-slot-number {
     position: absolute;
     right: 3px;
@@ -79,15 +81,20 @@ button.tab {
   margin: 0.1em;
   background-color: white;
   color: #616161; }
-  button.tab.selected {
+  button.tab.selected:not(.side-tab) {
     background-color: #616161;
-    color: white; }
+    color: white;
+    border-bottom: 3px solid #80DEEA; }
+  button.tab.side-tab.selected {
+    background-color: #616161;
+    color: white;
+    border-left: 3px solid #80DEEA; }
 
 div.menu {
   padding: 0.7em 0.2em; }
 
-div.menu div.line {
-  margin-bottom: 0.5em; }
+div.menu :not(#controls-menu) div.line {
+  margin-bottom: 1em; }
 
 div#menu-holder {
   width: 350px;
@@ -97,63 +104,6 @@ div#menu-holder {
 
 input#debt-cut {
   width: 50px; }
-
-div#notifications {
-  width: 300px;
-  height: 92%;
-  border-left: 0;
-  display: block;
-  float: none;
-  cursor: default;
-  overflow-y: auto; }
-  div#notifications h1 {
-    font-size: 1.2em; }
-
-div#notifications ul {
-  list-style-type: none;
-  padding-left: 0; }
-
-div#notifications ul li {
-  border: 1px solid lightgray;
-  color: white;
-  font-size: 0.9em;
-  background-color: black;
-  padding: 0.5em;
-  margin: 0.25em 0;
-  transition: all 0.2s; }
-  div#notifications ul li:first-of-type {
-    margin-bottom: 0.75em; }
-  div#notifications ul li.info {
-    background-color: #E3F2FD;
-    border-color: #2196F3;
-    color: #0D47A1; }
-    div#notifications ul li.info .dismiss:hover {
-      background-color: #b2dbfb; }
-  div#notifications ul li.tip {
-    background-color: #FFFDE7;
-    border-color: #FF6F00;
-    color: #F57F17; }
-    div#notifications ul li.tip .dismiss:hover {
-      background-color: #ffc599; }
-  div#notifications ul li.warning {
-    background-color: #FFF3E0;
-    border-color: #FF9800;
-    color: #E65100; }
-    div#notifications ul li.warning .dismiss:hover {
-      background-color: #ffd699; }
-  div#notifications ul li.danger {
-    background-color: #FFEBEE;
-    border-color: #F44336;
-    color: #B71C1C; }
-    div#notifications ul li.danger .dismiss:hover {
-      background-color: #fccbc7; }
-  div#notifications ul li .dismiss {
-    cursor: pointer;
-    float: right;
-    padding: 0.2em;
-    margin-left: 0.25em;
-    position: relative;
-    top: -5px; }
 
 div#game, div#menu {
   padding: 0.5em;
@@ -176,17 +126,9 @@ html, body {
   font-size: 17px;
   font-family: 'Inconsolata', monospace; }
 
-div#container {
-  width: 100%;
-  height: 100%; }
-
 div#game canvas, div#game img {
   margin: auto;
   padding: 0.3em 0; }
-
-/* hud panels should be hidden until game is ready (game will unhide when it's ready) */
-div#right-wrapper, div#menu-holder {
-  height: 100%; }
 
 button {
   background-color: #616161;
@@ -228,10 +170,5 @@ div#top-menu ul li {
 
 #money {
   color: #4CAF50;
-  margin: 0 0.5em;
-  text-shadow: 1px 1px 0 black, -1px 1px 0 black, 1px -1px 0 black, -1px -1px 0 black, 0px 1px 0 black, 0px -1px 0 black, -1px 0px 0 black, 1px 0px 0 black, 2px 2px 0 black, -2px 2px 0 black, 2px -2px 0 black, -2px -2px 0 black, 0px 2px 0 black, 0px -2px 0 black, -2px 0px 0 black, 2px 0px 0 black, 1px 2px 0 black, -1px 2px 0 black, 1px -2px 0 black, -1px -2px 0 black, 2px 1px 0 black, -2px 1px 0 black, 2px -1px 0 black, -2px -1px 0 black; }
-
-#debt-amt {
-  color: #F44336;
   margin: 0 0.5em;
   text-shadow: 1px 1px 0 black, -1px 1px 0 black, 1px -1px 0 black, -1px -1px 0 black, 0px 1px 0 black, 0px -1px 0 black, -1px 0px 0 black, 1px 0px 0 black, 2px 2px 0 black, -2px 2px 0 black, 2px -2px 0 black, -2px -2px 0 black, 0px 2px 0 black, 0px -2px 0 black, -2px 0px 0 black, 2px 0px 0 black, 1px 2px 0 black, -1px 2px 0 black, 1px -2px 0 black, -1px -2px 0 black, 2px 1px 0 black, -2px 1px 0 black, 2px -1px 0 black, -2px -1px 0 black; }

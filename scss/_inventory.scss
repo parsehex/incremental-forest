@@ -32,9 +32,11 @@ div#inventory ul li.item-slot {
   background-color: #ECEFF1;
 
   padding: 0.3rem 0.15rem;
+  margin: 0 0.02em;
 
   &.selected {
     background-color: #B0BEC5;
+    border: 1px solid #80DEEA;
   }
 
   .item-slot-number {

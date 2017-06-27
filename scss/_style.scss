@@ -11,23 +11,10 @@ html, body {
   font-size: 17px;
   font-family: 'Inconsolata', monospace;
 }
-div#container {
-  width: 100%;
-  height: 100%;
-}
 
 div#game canvas, div#game img {
   margin: auto;
   padding: 0.3em 0;
-}
-
-/* hud panels should be hidden until game is ready (game will unhide when it's ready) */
-div#carrying, div#hint, div#inventory {
-//  display: none;
-}
-
-div#right-wrapper, div#menu-holder {
-  height: 100%;
 }
 
 button {

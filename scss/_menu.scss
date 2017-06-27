@@ -18,9 +18,15 @@ button.tab {
   background-color: white;
   color: $buttonBGColor;
 
-  &.selected {
+  &.selected:not(.side-tab) {
     background-color: $buttonBGColor;
     color: white;
+    border-bottom: 3px solid #80DEEA;
+  }
+  &.side-tab.selected {
+    background-color: $buttonBGColor;
+    color: white;
+    border-left: 3px solid #80DEEA;
   }
 }
 
@@ -28,8 +34,8 @@ div.menu {
   padding: 0.7em 0.2em;
 }
 
-div.menu div.line {
-  margin-bottom: 0.5em;
+div.menu :not(#controls-menu) div.line {
+  margin-bottom: 1em;
 }
 
 div#menu-holder {
