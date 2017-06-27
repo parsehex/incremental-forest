@@ -1,5 +1,6 @@
 import { clamp, REALLY_BIG_NUMBER } from '../../../../utils';
 import inform from '../../../../ui/inform';
+import { save } from '../../../../save';
 
 export default function setValue(itemName, thisInventory, keyName, privName, value) {
   if (typeof this[privName] !== 'number') {
@@ -15,7 +16,10 @@ export default function setValue(itemName, thisInventory, keyName, privName, val
     case 'value': {
       inform.player.inventory.itemValue(itemName, value);
 
-      if (itemName === 'money') return;
+      if (itemName === 'money') {
+        save('money', value);
+        return;
+      }
 
       if (this[privName]) {
         // item value is truthy (i.e. >0 || true); add it to item slots

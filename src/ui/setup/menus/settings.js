@@ -1,11 +1,13 @@
 import bindMenu from '../bind-menu';
 import { buttons, keys, saveButtons } from '../controls';
 import keyMap from '../../../key-map';
+import { clear } from '../../../save';
 
 export default function setup() {
   bindMenu('settings');
 
   tab.call(this, 'game-settings');
+  gameSettings();
 
   tab.call(this, 'controls');
   controls();
@@ -19,6 +21,13 @@ function tab(name) {
 
     document.getElementById(name + '-menu').classList.remove('hidden');
     document.getElementById(name).classList.add('selected');
+  });
+}
+
+function gameSettings() {
+  document.getElementById('reset').addEventListener('click', function() {
+    // only clears game data; controls are stored separately
+    clear();
   });
 }
 

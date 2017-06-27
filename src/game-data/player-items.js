@@ -1,5 +1,6 @@
 import devtools from '../devtools';
 import { REALLY_BIG_NUMBER } from '../utils';
+import { load } from '../save';
 
 import merge from 'deepmerge';
 
@@ -36,7 +37,7 @@ let items = {
 };
 
 let money = {
-  value: 0,
+  value: load('money') || 0,
   max: REALLY_BIG_NUMBER,
 };
 
