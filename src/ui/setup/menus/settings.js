@@ -1,5 +1,6 @@
 import bindMenu from '../bind-menu';
-import { buttons, keys } from '../controls';
+import { buttons, keys, saveButtons } from '../controls';
+import keyMap from '../../../key-map';
 
 export default function setup() {
   bindMenu('settings');
@@ -21,7 +22,9 @@ function tab(name) {
 
 function controls() {
   for (let button in buttons) {
-    document.getElementById('controls-' + button).addEventListener('keydown', assign);
+    const input = document.getElementById('controls-' + button);
+    input.value = keyMap[buttons[button]];
+    input.addEventListener('keydown', assign);
   }
 }
 
@@ -34,16 +37,7 @@ function assign(event) {
   // don't allow setting the same key for more than one control
   if (Object.keys(keys).includes(event.which + '')) return;
 
-  let keyName = event.key.toUpperCase();
-  if (keyName === 'ARROWUP') {
-    keyName = '↑';
-  } else if (keyName === 'ARROWLEFT') {
-    keyName = '←';
-  } else if (keyName === 'ARROWDOWN') {
-    keyName = '↓';
-  } else if (keyName === 'ARROWRIGHT') {
-    keyName = '→';
-  }
+  let keyName = event.key.toUpperCase().replace('ARROW', '');
 
   event.target.value = keyName;
 
@@ -55,4 +49,6 @@ function assign(event) {
   keys[event.which] = key;
 
   buttons[button] = event.which;
+
+  saveButtons();
 }
