@@ -3,30 +3,30 @@ import move from './move';
 import interact from './interact';
 import { hireWorker, fireWorker } from './worker';
 
-export default function handleKeyChange(keysList, changedKey) {
+export default function handleKeyChange(buttons, keysList, changedKey) {
   const player = this.game.state.states.Game.player;
   const key = keysList[changedKey];
 
   switch (changedKey) {
-    case 87: {
+    case buttons.up: {
       if (!key.down) break;
 
       move.call(player, key, 'UP');
       break;
     }
-    case 65: {
+    case buttons.left: {
       if (!key.down) break;
 
       move.call(player, key, 'LEFT');
       break;
     }
-    case 83: {
+    case buttons.down: {
       if (!key.down) break;
 
       move.call(player, key, 'DOWN');
       break;
     }
-    case 68: {
+    case buttons.right: {
       if (!key.down) break;
 
       move.call(player, key, 'RIGHT');
@@ -34,49 +34,49 @@ export default function handleKeyChange(keysList, changedKey) {
     }
 
     // SPACE: interact
-    case 32: {
+    case buttons.interact: {
       if (!key.justDown) return;
 
       interact.call(player, key);
       break;
     }
     // L: sell
-    case 76: {
+    case buttons.sell: {
       if (!key.justDown) return;
 
       player.inventory.sell(null, key.shift ? null : 1);
       break;
     }
     // P: pause
-    case 80: {
+    case buttons.pause: {
       if (!key.justDown) break;
 
       pause.call(this, 'toggle', true);
       break;
     }
     // H: hire
-    case 72: {
+    case buttons.hire: {
       if (!key.justDown) break;
 
       hireWorker.call(this, event);
       break;
     }
     // F: fire
-    case 70: {
+    case buttons.fire: {
       if (!key.justDown) break;
 
       fireWorker.call(this, event);
       break;
     }
     // Q: prev item
-    case 81: {
+    case buttons.prev: {
       if (!key.justDown) break;
 
       player.inventory.seek(-1);
       break;
     }
     // E: next item
-    case 69: {
+    case buttons.next: {
       if (!key.justDown) break;
 
       player.inventory.seek(1);

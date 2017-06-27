@@ -33,7 +33,7 @@ div#right-wrapper, div#menu-holder {
 button {
   background-color: $buttonBGColor;
   color: white;
-  font-size: 1rem;
+  font-size: 0.95rem;
   border-radius: 2px;
 
   &.selected {
@@ -50,4 +50,7 @@ button {
   &:focus {
     outline: 0;
   }
+}
+input {
+  margin: 0.1em;
 }

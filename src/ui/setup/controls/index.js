@@ -3,8 +3,14 @@ import { setupPause } from './pause';
 import watchKeys from './keys';
 import watchControls from './controls';
 
+export const buttons = {
+  up: 87, left: 65, down: 83, right: 68,
+  interact: 32, sell: 76, pause: 80,
+  hire: 72, fire: 70, prev: 81, next: 69,
+};
+
 // list all keys and their states
-const keys = {
+export const keys = {
   87: false, // W
   65: false, // A
   83: false, // S
@@ -46,6 +52,6 @@ export default function setupKeys() {
   // TODO check for touch controls; watch them if so
   // feed watchKeys a change callback
   watchKeys(keys, (changedKey) => {
-    watchControls.call(this, keys, changedKey);
+    watchControls.call(this, buttons, keys, changedKey);
   });
 }
