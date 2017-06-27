@@ -1,5 +1,5 @@
 import getChance from '../../../game-data/chances';
-import { tryChance } from '../../../utils';
+import { clamp, tryChance } from '../../../utils';
 import objectPool from '../../../object-pool';
 import devtools from '../../../devtools';
 import ProgressBar from './ProgressBar';
@@ -13,7 +13,7 @@ export default function interact(character) {
   if (character.inventory.selected !== 'wood-axe') return;
 
   if (!instaChop) {
-    const chopAmount = character.inventory.items['wood-axe'].rank;
+    const chopAmount = clamp(character.inventory.items['wood-axe'].rank * 0.5, 1, 28);
     this.progress += chopAmount;
 
     if (!this.bar) this.bar = new ProgressBar(this);
