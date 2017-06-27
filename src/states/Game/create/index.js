@@ -1,4 +1,3 @@
-import setupKeys from './setup-keys';
 import addMap from './add-map';
 import addPlayer from './add-player';
 import addObjects from './add-objects';
@@ -25,8 +24,6 @@ export default function create() {
     player: this.game.add.group(),
     character: this.game.add.group(),
   };
-
-  setupKeys.call(this);
 
   addMap.call(this);
 

@@ -5,7 +5,8 @@ import CommonCharacter from '../Common';
 import frames from '../../../sprite-frames';
 import workerPool from '../../../worker-pool';
 
-import update from './update';
+import tryMove from './move';
+import interact from './interact';
 import Inventory from './inventory';
 import Cursor from './Cursor';
 import hireWorker from './hire-worker';
@@ -20,8 +21,6 @@ export default class extends CommonCharacter {
 
     this.inventory = new Inventory(this.game);
 
-    this.update = update.bind(this);
-
     this.cursor = new Cursor(this);
 
     this.hireWorker = hireWorker.bind(this);
@@ -29,9 +28,14 @@ export default class extends CommonCharacter {
 
     this.interacting = false;
     this.interactAction = null;
-    this.lastTileInteract = null;
+    this.lastInteractedTile = null;
 
     workerPool.register();
+
+    this.controls = {
+      move: tryMove.bind(this),
+      interact: interact.bind(this),
+    };
 
     // i'll leave this here to be remembered for later
     // this.axe = new Phaser.Image(

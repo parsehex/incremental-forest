@@ -1,6 +1,7 @@
 import { bindItemSlot } from '../bind-item';
+import bindMenu from './bind-menu';
 import setupMenus from './menus';
-import setupKeys from './keys';
+import setupControls from './controls';
 
 export default function() {
   // const carryingEl = document.getElementById('carrying');
@@ -9,7 +10,7 @@ export default function() {
 
   setupItems.call(this);
 
-  setupKeys.call(this);
+  setupControls.call(this);
 
   setupMenus.call(this);
 

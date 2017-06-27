@@ -1,33 +1,4 @@
-export default function setupKeys() {
-  setupPause.call(this);
-
-  watchKeys.call(this);
-}
-
-let holdingKey = false;
-function watchKeys() {
-  document.body.addEventListener('keydown', (event) => {
-    if (holdingKey) return;
-    holdingKey = true;
-
-    if (event.which === 80) { // P
-      pause.call(this, 'toggle', true);
-    } else if (event.which === 72) { // H
-      const workerType = document.querySelector('.worker-type.selected').id;
-
-      this.game.state.states.Game.player.hireWorker(workerType);
-    } else if (event.which === 70) { // F
-      const workerType = document.querySelector('.worker-type.selected').id;
-
-      this.game.state.states.Game.player.fireWorker(workerType);
-    }
-  });
-  document.body.addEventListener('keyup', () => {
-    holdingKey = false;
-  });
-}
-
-function setupPause() {
+export function setupPause() {
   // button and onUnfocus
   const pauseButton = document.getElementById('pause-button');
 
@@ -55,7 +26,7 @@ function setupPause() {
     }
   }, false);
 }
-function pause(state, manual) {
+export function pause(state, manual) {
   if (state === 'toggle') {
     this.game.paused = !this.game.paused;
   } else if (typeof state === 'boolean') {

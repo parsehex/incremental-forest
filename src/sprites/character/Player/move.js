@@ -1,10 +1,10 @@
-import { nextCoord } from '../../../../utils';
-import checkCollide from '../../../../collisions';
-import { pixelToTile } from '../../../../tiles';
+import { nextCoord } from '../../../utils';
+import checkCollide from '../../../collisions';
+import { pixelToTile } from '../../../tiles';
 
-import devtools from '../../../../devtools';
+import devtools from '../../../devtools';
 
-import interfaceWithObjects from '../../Common/interface-objects';
+import interfaceWithObjects from '../Common/interface-objects';
 
 export default function tryMove(direction) {
   if (this.moving) return;

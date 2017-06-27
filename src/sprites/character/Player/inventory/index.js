@@ -87,7 +87,7 @@ export default class Inventory {
   }
 
   seek(direction) {
-    const nextSlot = this.selectedSlot + (direction === 'next' ? 1 : -1);
+    const nextSlot = this.selectedSlot + direction;
     this.select(wrap(nextSlot, this.slots.length));
   }
 
