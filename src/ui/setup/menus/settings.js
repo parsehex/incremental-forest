@@ -31,6 +31,9 @@ function assign(event) {
   event.stopPropagation();
   event.preventDefault();
 
+  // don't allow setting the same key for more than one control
+  if (Object.keys(keys).includes(event.which + '')) return;
+
   let keyName = event.key.toUpperCase();
   if (keyName === 'ARROWUP') {
     keyName = '↑';
