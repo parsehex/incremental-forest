@@ -60,7 +60,7 @@ export default function setup() {
 
     if (player.inventory.money.value < price || chopperSpeed <= 0.5) return;
 
-    updatePrice('chopper-speed', 5 * Math.pow(3.1, (1.5 - (chopperSpeed - 0.1)) * 10));
+    updatePrice('chopper-speed', 5 * Math.pow(2.9, (1.5 - (chopperSpeed - 0.1)) * 10));
 
     player.inventory.money.value -= price;
 
@@ -80,7 +80,7 @@ export default function setup() {
 
     if (player.inventory.money.value < price || collectorSpeed <= 0.5) return;
 
-    updatePrice('collector-speed', 5 * Math.pow(3.1, (1.5 - (collectorSpeed - 0.1)) * 10));
+    updatePrice('collector-speed', 5 * Math.pow(2.9, (1.5 - (collectorSpeed - 0.1)) * 10));
 
     player.inventory.money.value -= price;
 
