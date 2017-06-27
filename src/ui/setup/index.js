@@ -4,10 +4,6 @@ import setupMenus from './menus';
 import setupControls from './controls';
 
 export default function() {
-  // const carryingEl = document.getElementById('carrying');
-  // const hintEl = document.getElementById('hint');
-  // const inventoryEl = document.getElementById('inventory');
-
   setupItems.call(this);
 
   setupControls.call(this);
@@ -15,11 +11,7 @@ export default function() {
   setupMenus.call(this);
 
   // setup tippy on top-menu
-  Tippy('#top-menu #money, #top-menu #debt-amt');
-
-  // carryingEl.style.display = 'block';
-  // hintEl.style.display = 'block';
-  // inventoryEl.style.display = 'block';
+  Tippy('#top-menu #money');
 }
 
 function setupItems() {

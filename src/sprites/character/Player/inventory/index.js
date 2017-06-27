@@ -15,10 +15,6 @@ export default class Inventory {
     // debugging
     window.money = this.money;
 
-    // running total of debt
-    // this.debt = 0;
-    // this.debtCut = 0.1;
-
     this.slots = [ null, null, null, null, null, null, null, null ];
     this.selectedSlot = null;
 
@@ -30,27 +26,6 @@ export default class Inventory {
 
     this.sellMultiplier = 1;
   }
-
-  // addDebt(amount) {
-  //   this.debt += amount;
-  //
-  //   inform.player.inventory.debt(this.debt);
-  // }
-  // payDebt(amount) {
-  //   if (amount > this.debt) {
-  //     amount = this.debt;
-  //   }
-  //   if (amount > this.money.value) {
-  //     amount = this.money.value;
-  //   }
-  //
-  //   if (amount === 0) return;
-  //
-  //   this.debt -= amount;
-  //   this.money.value -= amount;
-  //
-  //   inform.player.inventory.debt(this.debt);
-  // }
 
   addToSlots(itemName) {
     if (this.slots.includes(itemName)) return;
@@ -106,7 +81,5 @@ export default class Inventory {
 
     item.value -= amount;
     this.money.value += (moneyAmount * this.sellMultiplier);
-
-    // if (this.debt > 0) this.payDebt(moneyAmount * this.debtCut);
   }
 }
