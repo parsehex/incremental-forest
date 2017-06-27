@@ -30,6 +30,8 @@ export default function create() {
   addObjects.call(this);
   addPlayer.call(this);
 
+  this.input.destroy();
+
   setupHUD.call(this);
 
   if (devtools.enabled && devtools.testMapWorker) {
