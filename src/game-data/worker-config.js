@@ -26,7 +26,7 @@ export function increaseSpeed(workerType) {
   workers[workerType].speed = clamp(workers[workerType].speed - 0.1, 0.5, 2);
 }
 
-let chopperWoodAxeRank = 0;
+let chopperWoodAxeRank = 1;
 export function getWoodAxeRank() {
   return chopperWoodAxeRank;
 }

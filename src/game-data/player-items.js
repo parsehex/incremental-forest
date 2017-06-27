@@ -10,7 +10,7 @@ const itemMax = 500;
 let items = {
   'wood-axe': {
     value: true,
-    rank: 0,
+    rank: 1,
     sellable: false,
   },
   bucket: {
