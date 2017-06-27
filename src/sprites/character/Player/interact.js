@@ -1,5 +1,5 @@
 import interfaceWithObjects from '../Common/interface-objects';
-import { pixelToTile } from '../../../tiles';
+import { pixelToTile, tileToPixel } from '../../../tiles';
 import { fastMap } from '../../../world';
 import { tileOutOfBounds } from '../../../utils';
 import objectPool from '../../../object-pool';
@@ -39,13 +39,15 @@ function placeItem() {
   if (!selectedItem || !selectedItem.hasOwnProperty('place')) return;
 
   if (selectedItem.value > 0) {
-    if (tileOutOfBounds(pixelToTile({ x: cursor.graphic.x, y: cursor.graphic.y }))) return; // TODO bandaid fix
+    const pixelCoord = tileToPixel(cursor.tile);
+
+    if (tileOutOfBounds(pixelToTile(pixelCoord))) return;
 
     const Item = selectedItem.place;
     const placedItem = objectPool.new(inventory.selected, Item, {
       game: this.game,
-      x: cursor.graphic.x + 16,
-      y: cursor.graphic.y + 16,
+      x: pixelCoord.x,
+      y: pixelCoord.y,
       placed: true,
     });
 
