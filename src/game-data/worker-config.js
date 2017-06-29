@@ -1,29 +1,43 @@
 import devtools from '../devtools';
 import { clamp } from '../utils';
+import { save, load } from '../save';
 
 import merge from 'deepmerge';
 
-const chopper = {
-  speed: 1.5,
-  salary: 3,
-  deposit: 150,
+const config = {
+  chopper: {
+    base: 150,
+    multiplier: 1.1,
+  },
+  collector: {
+    base: 150,
+    multiplier: 1.15,
+  },
 };
-const collector = {
-  speed: 1.5,
-  salary: 1,
-  deposit: 150,
-};
-const planter = {
-  speed: 1.5,
-  salary: 2,
-  deposit: 75,
-};
-const workers = { chopper, collector, planter };
 
-export { chopper, collector, planter };
+const counts = {
+  chopper: 0,
+  collector: 0,
+};
+
+const chopper = load('chopper-config') || {
+  speed: 1.5,
+};
+chopper.deposit = price('chopper')
+
+const collector = load('collector-config') || {
+  speed: 1.5,
+};
+collector.deposit = price('collector');
+
+const workers = { chopper, collector };
+
+export { chopper, collector };
 
 export function increaseSpeed(workerType) {
   workers[workerType].speed = clamp(workers[workerType].speed - 0.1, 0.5, 2);
+
+  save(workerType + '-config', workers[workerType]);
 }
 
 let chopperWoodAxeRank = 1;
@@ -32,4 +46,28 @@ export function getWoodAxeRank() {
 }
 export function increaseWoodAxeRank() {
   chopperWoodAxeRank = clamp(chopperWoodAxeRank + 1, 0, 24);
+
+  save('chopper-config', chopper);
+}
+
+export function increment(itemName) {
+  counts[itemName]++;
+  workers[itemName].deposit = price(itemName);
+
+  return workers[itemName].deposit;
+}
+export function decrement(itemName) {
+  counts[itemName] = clamp(counts[itemName] - 1, 0, 999999);
+  workers[itemName].deposit = price(itemName);
+
+  return workers[itemName].deposit;
+}
+export function count(itemName) {
+  return counts[itemName];
+}
+
+function price(itemName) {
+  const item = config[itemName];
+
+  return item.base * Math.pow(item.multiplier, counts[itemName]);
 }

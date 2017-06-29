@@ -8,7 +8,7 @@ import PineCone from '../sprites/object/PineCone';
 
 const itemMax = 500;
 
-let items = {
+let items = load('items') || {
   'wood-axe': {
     value: true,
     rank: 1,
@@ -32,16 +32,10 @@ let items = {
     value: 0,
     max: itemMax,
     sellable: true,
-    place: PineCone,
   },
 };
+items['pine-cone'].place = PineCone;
 
-let money = {
-  value: load('money') || 0,
-  max: REALLY_BIG_NUMBER,
-};
-
-items = merge(items, devtools.enabled ? devtools.items : {});
-money = merge(money, devtools.enabled ? devtools.money : {});
+let money = load('money') || 0;
 
 export { items, money };

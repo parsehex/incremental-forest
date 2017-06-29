@@ -1,15 +1,24 @@
 import bindMenu from '../bind-menu';
+import {
+  chopper,
+  collector,
+  increment,
+  decrement,
+  count,
+} from '../../../game-data/worker-config';
+
+const workers = { chopper, collector };
 
 export default function setup() {
   bindMenu('workers');
 
-  // worker types
   workerType.call(this, 'chopper');
   workerType.call(this, 'collector');
-  // workerType.call(this, 'planter');
 }
 
 function workerType(name) {
+  const player = this.game.state.states.Game.player;
+
   document.getElementById(name).addEventListener('click', () => {
     const lastSelected = document.querySelector('.worker-type.selected');
     lastSelected.classList.remove('selected');
@@ -19,10 +28,35 @@ function workerType(name) {
     document.getElementById(name).classList.add('selected');
   });
 
+  updatePrice(name, workers[name].deposit);
+
   document.getElementById('hire-' + name).addEventListener('click', () => {
-    this.game.state.states.Game.player.hireWorker(name);
+    if (!buy.call(player.inventory, name)) return;
+
+    player.hireWorker(name);
   });
   document.getElementById('fire-' + name).addEventListener('click', () => {
-    this.game.state.states.Game.player.fireWorker(name);
+    player.fireWorker(name);
+
+    decrement(name);
   });
+}
+
+function buy(name) {
+  if (this.money < workers[name].deposit) return false;
+
+  this.money -= workers[name].deposit;
+  updatePrice(name, increment(name));
+
+  return true;
+}
+
+function updatePrice(name, newPrice) {
+  if (Math.round(newPrice) !== newPrice) newPrice = newPrice.toFixed(2);
+
+  const button = document.getElementById('hire-' + name);
+
+  button.dataset.price = newPrice;
+
+  button.textContent = button.textContent.replace(/\(\$.+\)/, '($' + newPrice + ')');
 }

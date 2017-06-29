@@ -13,8 +13,6 @@ export default class extends CommonCharacter {
   constructor(game, x, y, sprite, id, objectType, props) {
     super(game, x, y, sprite, frames.CHARACTER.STAND_DOWN, id, objectType);
 
-    this.salary = workers[objectType].salary;
-    this.payTime = workers[objectType].payTime;
     this.speed = workers[objectType].speed;
 
     this.faceDirection = 'DOWN';

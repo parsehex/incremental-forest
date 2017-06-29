@@ -8,42 +8,42 @@ import {
   increaseSpeed,
 } from '../../../game-data/worker-config';
 
+import prices, { increment, count } from '../../../game-data/upgrade-prices';
+
 export default function setup() {
+  const inventory = this.game.state.states.Game.player.inventory;
+
   bindMenu('upgrades');
 
-  upgrade('wood-axe', (event) => {
-    const price = +event.target.dataset.price;
-    const player = this.game.state.states.Game.player;
+  const upgradeButtons = document.querySelectorAll('.upgrade');
+  for (let i = 0; i < upgradeButtons.length; i++) {
+    const itemName = upgradeButtons[i].id.replace('upgrade-', '');
 
-    if (player.inventory.money.value < price || player.inventory.items['wood-axe'].rank >= 24) return;
+    updatePrice(itemName, prices[itemName]);
 
-    updatePrice('wood-axe', 14 * Math.pow(2, player.inventory.items['wood-axe'].rank + 1));
+    if (inventory.money >= upgradeButtons[i].dataset.price) {
+      upgradeButtons[i].classList.remove('disabled');
+    } else {
+      upgradeButtons[i].classList.add('disabled');
+    }
+  }
 
-    player.inventory.money.value -= price;
-    player.inventory.items['wood-axe'].rank++;
+  buy = buy.bind(inventory);
+
+  upgrade('wood-axe', () => {
+    if (!buy('wood-axe')) return;
+
+    inventory.increment('wood-axe', 'rank');
   });
-  upgrade('sell-price', (event) => {
-    const price = +event.target.dataset.price;
-    const player = this.game.state.states.Game.player;
+  upgrade('sell-price', () => {
+    if (!buy('sell-price')) return;
 
-    if (player.inventory.money.value < price) return;
-
-    updatePrice('sell-price', 12 * Math.pow(5.5, player.inventory.sellMultiplier));
-
-    player.inventory.money.value -= price;
-    player.inventory.sellMultiplier += 0.1;
+    inventory.sellMultiplier += 0.1;
   });
-  upgrade('chopper-wood-axe', (event) => {
-    const price = +event.target.dataset.price;
-    const player = this.game.state.states.Game.player;
+  upgrade('chopper-wood-axe', () => {
+    if (!buy('chopper-wood-axe')) return;
+
     const choppers = this.game.state.states.Game.groups.character.children.filter((o) => o.objectType === 'chopper');
-    const chopperWoodAxeRank = getWoodAxeRank();
-
-    if (player.inventory.money.value < price || chopperWoodAxeRank >= 24) return;
-
-    updatePrice('chopper-wood-axe', 14 * Math.pow(2, chopperWoodAxeRank + 1));
-
-    player.inventory.money.value -= price;
 
     // update existing choppers' wood axes
     for (let i = 0; i < choppers.length; i++) {
@@ -52,74 +52,49 @@ export default function setup() {
     // update global chopper wood axe rank
     increaseWoodAxeRank();
   });
-  upgrade('chopper-speed', (event) => {
-    const price = +event.target.dataset.price;
-    const player = this.game.state.states.Game.player;
+  upgrade('chopper-speed', () => {
+    if (!buy('chopper-speed')) return;
+
     const choppers = this.game.state.states.Game.groups.character.children.filter((o) => o.objectType === 'chopper');
-    const chopperSpeed = chopper.speed;
 
-    if (player.inventory.money.value < price || chopperSpeed <= 0.5) return;
-
-    updatePrice('chopper-speed', 5 * Math.pow(2.9, (1.5 - (chopperSpeed - 0.1)) * 10));
-
-    player.inventory.money.value -= price;
-
-    // update existing choppers' wood axes
     for (let i = 0; i < choppers.length; i++) {
       choppers[i].speed -= 0.1;
       choppers[i].timer.events[0].delay -= 100;
     }
-    // update global chopper wood axe rank
     increaseSpeed('chopper');
   });
-  upgrade('collector-speed', (event) => {
-    const price = +event.target.dataset.price;
-    const player = this.game.state.states.Game.player;
+  upgrade('collector-speed', () => {
+    if (!buy('collector-speed')) return;
+
     const collectors = this.game.state.states.Game.groups.character.children.filter((o) => o.objectType === 'collector');
-    const collectorSpeed = collector.speed;
 
-    if (player.inventory.money.value < price || collectorSpeed <= 0.5) return;
-
-    updatePrice('collector-speed', 5 * Math.pow(2.9, (1.5 - (collectorSpeed - 0.1)) * 10));
-
-    player.inventory.money.value -= price;
-
-    // update existing collectors' wood axes
     for (let i = 0; i < collectors.length; i++) {
       collectors[i].speed -= 0.1;
       collectors[i].timer.events[0].delay -= 100;
     }
-    // update global collector wood axe rank
     increaseSpeed('collector');
   });
 
-  upgrade('pine-cone', (event) => {
-    const price = +event.target.dataset.price;
-    const upgradeNumber = +event.target.dataset.upgradeNumber || 0;
-    const player = this.game.state.states.Game.player;
+  upgrade('pine-cone', () => {
+    if (!buy('pine-cone')) return;
 
-    if (player.inventory.money.value < price || upgradeNumber >= 18) return;
-
-    updatePrice('pine-cone', 5 * Math.pow(1.35, upgradeNumber + 1));
-
-    player.inventory.money.value -= price;
     increaseChance('seedDrop');
-    event.target.dataset.upgradeNumber = upgradeNumber + 1;
   });
 
   upgrade('tree-grow', (event) => {
-    const price = +event.target.dataset.price;
-    const upgradeNumber = +event.target.dataset.upgradeNumber || 0;
-    const player = this.game.state.states.Game.player;
+    if (!buy('tree-grow')) return;
 
-    if (player.inventory.money.value < price || upgradeNumber >= 23) return;
-
-    updatePrice('tree-grow', 15 * Math.pow(2.1, upgradeNumber + 1));
-
-    player.inventory.money.value -= price;
     increaseChance('treeGrow');
-    event.target.dataset.upgradeNumber = upgradeNumber + 1;
   });
+}
+
+function buy(name) {
+  if (this.money < prices[name] || count(name) >= prices[name].max) return false;
+
+  this.money -= prices[name];
+  updatePrice(name, increment(name));
+
+  return true;
 }
 
 function upgrade(name, handler) {

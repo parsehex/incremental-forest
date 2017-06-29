@@ -34,16 +34,16 @@ export default function tryInteract() {
 function placeItem() {
   const { cursor, inventory } = this;
 
-  const selectedItem = inventory.items[inventory.selected];
+  const item = inventory.get.bind(inventory, inventory.selected);
 
-  if (!selectedItem || !selectedItem.hasOwnProperty('place')) return;
+  if (!inventory.selected || !item('place')) return;
 
-  if (selectedItem.value > 0) {
+  if (item() > 0) {
     const pixelCoord = tileToPixel(cursor.tile);
 
     if (tileOutOfBounds(pixelToTile(pixelCoord))) return;
 
-    const Item = selectedItem.place;
+    const Item = item('place');
     const placedItem = objectPool.new(inventory.selected, Item, {
       game: this.game,
       x: pixelCoord.x,
@@ -51,7 +51,7 @@ function placeItem() {
       placed: true,
     });
 
-    selectedItem.value--;
+    inventory.set(inventory.selected, 'value', item() - 1);
 
     if (placedItem.hasOwnProperty('place')) placedItem.place(this);
   }

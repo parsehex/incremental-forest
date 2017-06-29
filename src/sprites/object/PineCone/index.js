@@ -30,16 +30,16 @@ export default class extends CommonObject {
 
   resetObject() {
     super.resetObject();
-    
+
     this.placed = false;
   }
 
   pickUp(character) {
-    if (character.inventory.items['pine-cone'].isMax) return;
+    if (!character.inventory.isMax('pine-cone')) {
+      character.inventory.increment('pine-cone');
 
-    character.inventory.items['pine-cone'].value++;
-
-    this.destroy();
+      this.destroy();
+    }
   }
 
   destroy() {

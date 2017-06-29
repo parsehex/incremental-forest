@@ -1,30 +1,91 @@
-import { clamp, wrap } from '../../../../utils';
+import { clamp, wrap, REALLY_BIG_NUMBER } from '../../../../utils';
+import { save, load } from '../../../../save';
 import inform from '../../../../ui/inform';
 import itemPrices from '../../../../game-data/item-prices';
 import { items, money } from '../../../../game-data/player-items';
-
-import setup from './setup';
 
 export default class Inventory {
   constructor(game) {
     this.game = game;
 
-    this.money = money;
-    this.items = items;
+    this._money = money;
+    this._items = items;
 
     // debugging
-    window.money = this.money;
+    window.money = (val) => {this.money = val};
 
     this.slots = [ null, null, null, null, null, null, null, null ];
-    this.selectedSlot = null;
+    this.selectedSlot = 0;
 
-    setup.call(this);
     // init money counter
-    inform.player.inventory.itemValue('money', this.money.value);
+    inform.player.inventory.itemValue('money', this.money);
 
     this.seek = this.seek.bind(this);
 
-    this.sellMultiplier = 1;
+    this._sellMultiplier = load('sell-multiplier') || 1;
+
+    for (let item in this._items) {
+      if (this.get(item)) {
+        this.addToSlots(item);
+
+        inform.player.inventory.itemValue(item, this.get(item));
+      }
+    }
+  }
+
+  get sellMultiplier() {
+    return this._sellMultiplier;
+  }
+  set sellMultiplier(value) {
+    this._sellMultiplier = value;
+    save('sell-multiplier', this._sellMultiplier);
+  }
+
+  get money() {
+    return this._money;
+  }
+  set money(value) {
+    this._money = clamp(value, 0, REALLY_BIG_NUMBER);
+    inform.player.inventory.itemValue('money', this._money);
+
+    save('money', this._money);
+  }
+
+  isMax(item) {
+    return this._items[item].value >= this._items[item].max;
+  }
+  increment(item, prop) {
+    prop = prop || 'value';
+
+    this.set(item, prop, clamp(this.get(item, prop) + 1, 0, this.get(item, 'max') || REALLY_BIG_NUMBER));
+  }
+  get(item, prop) {
+    prop = prop || 'value';
+    return this._items[item][prop];
+  }
+  set(item, prop, value) {
+    if (typeof value !== 'number') {
+      this._items[item][prop] = value;
+
+      save('items', this._items);
+      return;
+    }
+
+    const newValue = clamp(value, 0, this._items[item].max || REALLY_BIG_NUMBER);
+
+    this._items[item][prop] = newValue;
+
+    if (prop === 'value') inform.player.inventory.itemValue(item, newValue);
+
+    if (prop === 'value') {
+      if (newValue) {
+        this.addToSlots(item);
+      } else {
+        this.removeFromSlots(item);
+      }
+    }
+
+    save('items', this._items);
   }
 
   addToSlots(itemName) {
@@ -32,9 +93,9 @@ export default class Inventory {
 
     const freeSlotNum = this.slots.indexOf(null);
 
-    if (freeSlotNum < 0) return; // FIXME before adding more than 2 more items to game
+    if (freeSlotNum < 0) return;
 
-    const value = this.items[itemName].value;
+    const value = this.get(itemName);
 
     this.slots[freeSlotNum] = itemName;
 
@@ -69,17 +130,16 @@ export default class Inventory {
   sell(slotNum, amount) {
     if (typeof slotNum !== 'number') slotNum = this.selectedSlot;
 
-    const slot = this.slots[slotNum];
+    const itemName = this.slots[slotNum];
 
-    const item = this.items[slot];
-    if (slot === null || !item || !item.sellable) return;
+    if (itemName === null || !this.get(itemName, 'sellable')) return;
 
-    if (item.value < amount) return;
+    if (this.get(itemName) < amount) return;
 
-    amount = amount || item.value;
-    const moneyAmount = itemPrices.sell[slot] * amount;
+    amount = amount || this.get(itemName);
+    const moneyAmount = itemPrices.sell[itemName] * amount;
 
-    item.value -= amount;
-    this.money.value += (moneyAmount * this.sellMultiplier);
+    this.set(itemName, 'value', this.get(itemName) - amount);
+    this.money += (moneyAmount * this.sellMultiplier);
   }
 }

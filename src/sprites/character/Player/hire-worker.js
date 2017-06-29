@@ -17,11 +17,6 @@ const workerTypes = {
 };
 
 export default function hireWorker(workerType) {
-  if (this.inventory.money.value < worker[workerType].deposit) return;
-
-  // pay worker's upfront deposit
-  this.inventory.money.value -= worker[workerType].deposit;
-
   const workerArgs = [
     fastMap, fastObjects, collidableObjects,
     config.mapWidth, config.mapHeight,

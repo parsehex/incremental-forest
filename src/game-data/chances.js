@@ -14,8 +14,8 @@ export default function getChance(name) {
 
 export function increaseChance(name) {
   if (name === 'seedDrop') {
-    chances.seedDrop = clamp(chances.seedDrop + 3, 0, 95);
+    chances.seedDrop = clamp(chances.seedDrop + 1, 0, 95);
   } else if (name === 'treeGrow') {
-    chances.treeGrow = clamp(chances.treeGrow + 2, 0, 90);
+    chances.treeGrow = clamp(chances.treeGrow + 1, 0, 90);
   }
 }

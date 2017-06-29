@@ -31,6 +31,8 @@ export function clear() {
 }
 
 window.addEventListener('beforeunload', function() {
+  if (changes === 0) return;
+  
   localStorage.setItem('game', JSON.stringify(data));
 
   console.log('game saved');
