@@ -39,7 +39,7 @@ export default function interact(character) {
       game,
       x,
       y,
-    });
+    }).bringToTop();
   }
 
   return true;
