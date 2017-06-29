@@ -23,17 +23,17 @@ export const config = {
   },
   'chopper-wood-axe': {
     base: 14,
-    multiplier: 2,
+    multiplier: 2.93,
     max: 24,
   },
   'chopper-speed': {
-    base: 5,
+    base: 25,
     multiplier: 2.9,
     max: 10,
   },
   'collector-speed': {
-    base: 5,
-    multiplier: 2.9,
+    base: 50,
+    multiplier: 1.73,
     max: 10,
   },
 };

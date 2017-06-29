@@ -38,7 +38,7 @@ export default function setup() {
   upgrade('sell-price', () => {
     if (!buy('sell-price')) return;
 
-    inventory.sellMultiplier += 0.1;
+    inventory.sellMultiplier += 0.5;
   });
   upgrade('chopper-wood-axe', () => {
     if (!buy('chopper-wood-axe')) return;
