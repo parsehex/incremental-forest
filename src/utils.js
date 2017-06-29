@@ -101,3 +101,9 @@ export function wrap(value, length) {
   if (value >= length) return 0;
   return value;
 }
+
+export function isTouchDevice() {
+ return (('ontouchstart' in window)
+      || (navigator.MaxTouchPoints > 0)
+      || (navigator.msMaxTouchPoints > 0));
+}

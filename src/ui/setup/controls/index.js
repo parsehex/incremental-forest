@@ -1,5 +1,7 @@
-import { setupPause } from './pause';
+import { isTouchDevice } from '../../../utils';
 
+import { setupPause } from './pause';
+import setupTouch from './touch';
 import watchKeys from './keys';
 import watchControls from './controls';
 
@@ -41,11 +43,13 @@ export function resetKey(key) {
 export default function setupKeys() {
   setupPause.call(this);
 
-  // TODO check for touch controls; watch them if so
-  // feed watchKeys a change callback
-  watchKeys(keys, (changedKey) => {
-    watchControls.call(this, buttons, keys, changedKey);
-  });
+  if (!isTouchDevice()) {
+    watchKeys(keys, (changedKey) => {
+      watchControls.call(this, buttons, keys, changedKey);
+    });
+  } else {
+    setupTouch.call(this.game.state.states.Game.player);
+  }
 }
 
 export function saveButtons() {

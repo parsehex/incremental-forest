@@ -2,6 +2,7 @@ import { bindItemSlot } from '../bind-item';
 import bindMenu from './bind-menu';
 import setupMenus from './menus';
 import setupControls from './controls';
+import { isTouchDevice } from '../../utils';
 
 export default function() {
   setupItems.call(this);
@@ -10,11 +11,13 @@ export default function() {
 
   setupMenus.call(this);
 
-  // setup tippy on top-menu
-  Tippy('#top-menu #money, button[title]', {
-    size: 'small',
-    duration: 0,
-  });
+  if (!isTouchDevice()) {
+    // setup tippy on top-menu
+    Tippy('#top-menu #money, button[title]', {
+      size: 'small',
+      duration: 0,
+    });
+  }
 }
 
 function setupItems() {
