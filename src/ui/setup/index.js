@@ -11,7 +11,10 @@ export default function() {
   setupMenus.call(this);
 
   // setup tippy on top-menu
-  Tippy('#top-menu #money');
+  Tippy('#top-menu #money, button[title]', {
+    size: 'small',
+    duration: 0,
+  });
 }
 
 function setupItems() {

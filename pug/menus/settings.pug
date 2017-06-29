@@ -5,9 +5,9 @@ mixin control(label, id, defaultValue)
       input(type='text' id='controls-' + id value=defaultValue)
 
 div.row#settings-menu.menu.hidden
-  div#game-settings-menu.col-xs-8
+  div#game-settings-menu.col-xs-9
     button#reset(type='button') Reset Save
-  div#controls-menu.col-xs-8.hidden
+  div#controls-menu.col-xs-9.hidden
     +control('Move Up', 'up', 'W')
     +control('Move Left', 'left', 'A')
     +control('Move Down', 'down', 'S')
@@ -20,7 +20,7 @@ div.row#settings-menu.menu.hidden
     +control('Select next item', 'next', 'E')
     +control('Pause Game', 'pause', 'P')
     
-  div.col-xs-4
+  div.col-xs-3
     ul.list-unstyled.text-right
       li
         button#game-settings.tab.side-tab.selected(type='button') Game
