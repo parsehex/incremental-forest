@@ -21,17 +21,14 @@ export const keys = {
   50: false, // 2
   51: false, // 3
   52: false, // 4
-  53: false, // 5
-  54: false, // 6
-  55: false, // 7
-  56: false, // 8
 };
-for (let button in buttons) {
-  resetKey(buttons[button]);
+const keysList = Object.keys(keys).concat(Object.keys(buttons).map((k) => buttons[k]));
+for (let i = 0; i < keysList.length; i++) {
+  resetKey(keysList[i]);
 }
 
 export function resetKey(key) {
-  if (!keys.hasOwnProperty(key)) keys[key] = {};
+  if (!keys.hasOwnProperty(key) || typeof keys[key] === 'boolean') keys[key] = {};
 
   keys[key].down = false; // is true as long as key is down
   keys[key].justDown = false; // is true for first keydown event; is reset once keyup is fired (like phaser's justPressed())
