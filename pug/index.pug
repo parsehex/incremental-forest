@@ -14,16 +14,10 @@ html(lang='en')
         div#top-menu.row
           include ./top-menu.pug
         div#game-target.row
-        div#hint.row
-          span#object-hint
-            span press
-            span#key space
-            span to
-            span#action chop down
         div#inventory.row
           include ./inventory.pug
       div#menu.col-xs-12.col-md-6
         include ./menu.pug
-    script(src='assets/js/tippy.min.js' defer='')
+    script(src='assets/js/tippy.min.js' defer)
     script(src='dist/vendor.bundle.js' defer)
     script(src='dist/bundle.js' defer)
