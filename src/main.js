@@ -10,9 +10,19 @@ import config from './config';
 
 class Game extends Phaser.Game {
   constructor () {
-    const docElement = document.documentElement;
-    const width = docElement.clientWidth > config.gameWidth ? config.gameWidth : docElement.clientWidth;
-    const height = docElement.clientHeight > config.gameHeight ? config.gameHeight : docElement.clientHeight;
+    const parentEl = document.getElementById('game-target');
+    let width, height;
+    if (parentEl.clientWidth > config.gameWidth) {
+      // parent element has plenty of room for game
+      width = config.gameWidth;
+      height = config.gameHeight;
+    } else {
+      // can't fit game into parent element
+      width = parentEl.clientWidth - 25;
+
+      // make height half screen size to make room for other ui
+      height = window.innerHeight / 2;
+    }
 
     const gameConfig = {
       width,
