@@ -9,7 +9,7 @@ var pixi = path.join(phaserModule, 'build/custom/pixi.js');
 var p2 = path.join(phaserModule, 'build/custom/p2.js');
 
 // var tilemapWalker = path.join(__dirname, '/plugins/TilemapWalker');
-var phasetips = path.join(__dirname, '/plugins/Phasetips');
+// var phasetips = path.join(__dirname, '/plugins/Phasetips');
 
 var definePlugin = new webpack.DefinePlugin({
   __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV || 'true'))
@@ -26,7 +26,7 @@ module.exports = {
       'p2',
       'phaser',
       // 'tilemap-walker',
-      'phasetips',
+      // 'phasetips',
     ],
   },
   devtool: 'cheap-source-map',
@@ -67,7 +67,7 @@ module.exports = {
       'pixi': pixi,
       'p2': p2,
       // 'tilemap-walker': tilemapWalker,
-      'phasetips': phasetips,
+      // 'phasetips': phasetips,
     }
   }
 };
