@@ -21,7 +21,7 @@ export default function setup() {
 
     updatePrice(itemName, prices[itemName]);
 
-    if (inventory.money >= upgradeButtons[i].dataset.price) {
+    if (inventory.money >= upgradeButtons[i].dataset.price || count(itemName) >= config[itemName]) {
       upgradeButtons[i].classList.remove('disabled');
     } else {
       upgradeButtons[i].classList.add('disabled');
@@ -106,9 +106,14 @@ function upgrade(name, handler) {
 }
 
 function updatePrice(name, newPrice) {
-  if (Math.round(newPrice) !== newPrice) newPrice = newPrice.toFixed(2);
-
   const button = document.getElementById('upgrade-' + name);
+
+  if (count(name) >= config[name]) {
+    // item is maxed out; disable button
+    button.classList.add('disabled');
+  }
+
+  if (Math.round(newPrice) !== newPrice) newPrice = newPrice.toFixed(2);
 
   button.dataset.price = newPrice;
 
