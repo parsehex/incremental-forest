@@ -38,13 +38,13 @@ function workerType(name) {
   document.getElementById('fire-' + name).addEventListener('click', () => {
     player.fireWorker(name);
 
-    decrement(name);
+    updatePrice(name, decrement(name));
   });
 }
 
 function buy(name) {
   const price = workers[name].deposit;
-  
+
   if (this.money < price) return false;
 
   updatePrice(name, increment(name));
