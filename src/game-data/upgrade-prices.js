@@ -1,6 +1,6 @@
 import { save, load } from '../save';
 
-const config = {
+export const config = {
   'wood-axe': {
     base: 14,
     multiplier: 2.93,

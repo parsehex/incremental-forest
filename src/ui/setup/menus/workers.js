@@ -43,10 +43,12 @@ function workerType(name) {
 }
 
 function buy(name) {
-  if (this.money < workers[name].deposit) return false;
+  const price = workers[name].deposit;
+  
+  if (this.money < price) return false;
 
-  this.money -= workers[name].deposit;
   updatePrice(name, increment(name));
+  this.money -= price;
 
   return true;
 }

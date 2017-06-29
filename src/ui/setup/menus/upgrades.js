@@ -8,7 +8,7 @@ import {
   increaseSpeed,
 } from '../../../game-data/worker-config';
 
-import prices, { increment, count } from '../../../game-data/upgrade-prices';
+import prices, { increment, count, config } from '../../../game-data/upgrade-prices';
 
 export default function setup() {
   const inventory = this.game.state.states.Game.player.inventory;
@@ -89,10 +89,14 @@ export default function setup() {
 }
 
 function buy(name) {
-  if (this.money < prices[name] || count(name) >= prices[name].max) return false;
+  const price = prices[name];
 
-  this.money -= prices[name];
+  if (this.money < price || count(name) >= config[name].max) return false;
+
+  // NOTE update price before taking money so that the button will be properly
+    // disabled if the player has no money for next price
   updatePrice(name, increment(name));
+  this.money -= price;
 
   return true;
 }
