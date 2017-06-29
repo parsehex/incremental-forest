@@ -13,7 +13,7 @@ export const config = {
   },
   'sell-price': {
     base: 12,
-    multiplier: 5.51,
+    multiplier: 3.417,
     max: 999,
   },
   'tree-grow': {

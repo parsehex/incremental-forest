@@ -14,7 +14,7 @@ export default function interact(character) {
 
   if (!instaChop) {
     const rank = character.id === 'player' ? character.inventory.get('wood-axe', 'rank') : character.inventory.items['wood-axe'].rank;
-    const chopAmount = clamp(rank * 0.5, 1, 28);
+    const chopAmount = clamp(rank * 0.35, 1, 28);
     this.progress += chopAmount;
 
     if (!this.bar) this.bar = new ProgressBar(this);

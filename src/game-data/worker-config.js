@@ -10,7 +10,7 @@ const config = {
     multiplier: 1.74,
   },
   collector: {
-    base: 50,
+    base: 100,
     multiplier: 2.33,
   },
 };
