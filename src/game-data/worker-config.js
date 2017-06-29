@@ -7,11 +7,11 @@ import merge from 'deepmerge';
 const config = {
   chopper: {
     base: 150,
-    multiplier: 1.1,
+    multiplier: 1.74,
   },
   collector: {
-    base: 150,
-    multiplier: 1.15,
+    base: 50,
+    multiplier: 2.33,
   },
 };
 

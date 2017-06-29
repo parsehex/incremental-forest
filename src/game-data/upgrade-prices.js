@@ -3,22 +3,22 @@ import { save, load } from '../save';
 const config = {
   'wood-axe': {
     base: 14,
-    multiplier: 2,
+    multiplier: 2.93,
     max: 24,
   },
   'pine-cone': {
     base: 2.5,
-    multiplier: 1.15,
+    multiplier: 1.153,
     max: 75,
   },
   'sell-price': {
     base: 12,
-    multiplier: 5.5,
+    multiplier: 5.51,
     max: 999,
   },
   'tree-grow': {
     base: 13,
-    multiplier: 1.4,
+    multiplier: 1.39,
     max: 80,
   },
   'chopper-wood-axe': {
