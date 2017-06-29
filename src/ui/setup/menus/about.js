@@ -6,6 +6,7 @@ export default function setup() {
   tab.call(this, 'summary');
   tab.call(this, 'how-to-play');
   tab.call(this, 'bugs');
+  tab.call(this, 'credits');
 }
 
 function tab(name) {
