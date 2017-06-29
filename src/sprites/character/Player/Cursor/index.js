@@ -3,7 +3,7 @@ import move from './move';
 
 import { objectsAtTile, onChange } from '../../../../world';
 import { tile } from '../../../../tiles';
-import hints from '../../../../hints';
+import hints from '../../../../game-data/hints';
 import { showHint, hideHint } from '../../../../ui';
 
 export default class Cursor {
@@ -16,7 +16,7 @@ export default class Cursor {
 
     this.draw();
 
-    onChange((tileCoord, objects) => {
+    onChange('player-cursor', (tileCoord, objects) => {
       // we don't care about tiles the cursor isn't on
       if (tileCoord.x !== this.tile.x || tileCoord.y !== this.tile.y) return;
 
@@ -39,7 +39,7 @@ export default class Cursor {
 
       if (hints.hasOwnProperty(type)) {
         let hint = hints[type];
-        showHint(hint.name, hint.key, hint.action);
+        showHint(hint.key, hint.action);
         break;
       }
     }

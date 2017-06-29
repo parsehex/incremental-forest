@@ -1,13 +1,15 @@
-import config from '../../../config';
+import getChance from '../../../game-data/chances';
 import { tryChance } from '../../../utils';
+import { fastMap } from '../../../world';
+import objectPool from '../../../object-pool';
 
 import Phaser from 'phaser';
 import Tree from '../Tree';
 
-const growChance = config.test ? 60 : 10;
-
 export default function place() {
   this.placed = true;
+
+  this.changeType('planted-pine-cone');
 
   this.game.time.events.add(Phaser.Timer.SECOND * 5, function() {
     if (this.destroyed) return;
@@ -17,9 +19,10 @@ export default function place() {
 
     if (
       (playerTile.x !== thisTile.x || playerTile.y !== thisTile.y) &&
-      tryChance(growChance)
+      fastMap[thisTile.y][thisTile.x].length === 1 && // this pine cone should be only thing on tile
+      tryChance(getChance('treeGrow'))
     ) {
-      new Tree({
+      objectPool.new('tree', Tree, {
         game: this.game,
         x: this.x,
         y: this.y,

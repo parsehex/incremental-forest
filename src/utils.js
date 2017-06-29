@@ -2,6 +2,11 @@ import config from './config';
 
 export const REALLY_BIG_NUMBER = 999999999999999;
 
+const numbers = ['ZERO', 'ONE', 'TWO', 'THREE', 'FOUR', 'FIVE', 'SIX', 'SEVEN', 'EIGHT', 'NINE'];
+export function num(number) {
+  return numbers[number];
+}
+
 export function centerGameObjects(objects) {
   objects.forEach(function (object) {
     object.anchor.setTo(0.5);
@@ -89,4 +94,10 @@ export function tryChance(chance) {
   const randomNumber = Math.floor(Math.random() * 100) + 1;
 
   return randomNumber <= chance;
+}
+
+export function wrap(value, length) {
+  if (value < 0) return length - 1;
+  if (value >= length) return 0;
+  return value;
 }

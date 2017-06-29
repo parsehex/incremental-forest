@@ -1,0 +1,29 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1, user-scalable=no')
+    title Incremental Forest
+    link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' integrity='sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u' crossorigin='anonymous')
+    link(href='https://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet')
+    link(rel='stylesheet' href='assets/css/tippy.min.css')
+    link(rel='stylesheet' href='css/style.css')
+  body
+    div.container-fluid
+      div#game.col-xs-12.col-md-6.text-center
+        div#top-menu.row
+          include ./top-menu.pug
+        div#game-target.row
+        div#hint.row
+          span#object-hint
+            span press
+            span#key space
+            span to
+            span#action chop down
+        div#inventory.row
+          include ./inventory.pug
+      div#menu.col-xs-12.col-md-6
+        include ./menu.pug
+    script(src='assets/js/tippy.min.js' defer='')
+    script(src='dist/vendor.bundle.js' defer)
+    script(src='dist/bundle.js' defer)

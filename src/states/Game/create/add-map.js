@@ -2,9 +2,10 @@ import Phaser from 'phaser';
 
 import frames from '../../../sprite-frames';
 import config from '../../../config';
+import devtools from '../../../devtools';
 
 export default function addMap() {
-  let mapName = config.test ? 'test' : 'forest';
+  let mapName = devtools.enabled && devtools.testMap ? 'test' : 'forest';
 
   this.map = new Phaser.Tilemap(
     this.game,

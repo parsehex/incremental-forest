@@ -1,0 +1,28 @@
+mixin control(label, id, defaultValue)
+  .line
+    label
+      | #{label}
+      input(type='text' id='controls-' + id value=defaultValue)
+
+div.row#settings-menu.menu.hidden
+  div#game-settings-menu.col-xs-9
+    button#reset(type='button') Reset Save
+  div#controls-menu.col-xs-9.hidden
+    +control('Move Up', 'up', 'W')
+    +control('Move Left', 'left', 'A')
+    +control('Move Down', 'down', 'S')
+    +control('Move Right', 'right', 'D')
+    +control('Use Item', 'interact', 'SPACE')
+    +control('Sell Item', 'sell', 'L')
+    +control('Hire selected Worker', 'hire', 'H')
+    +control('Fire selected Worker', 'fire', 'F')
+    +control('Select previous item', 'prev', 'Q')
+    +control('Select next item', 'next', 'E')
+    +control('Pause Game', 'pause', 'P')
+    
+  div.col-xs-3
+    ul.list-unstyled.text-right
+      li
+        button#game-settings.tab.side-tab.selected(type='button') Game
+      li
+        button#controls.tab.side-tab(type='button') Controls

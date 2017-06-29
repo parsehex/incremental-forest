@@ -1,45 +1,53 @@
 import CommonCharacter from '../Common';
 import frames from '../../../sprite-frames';
-import config from '../../../config';
-import salaries from '../../../worker-salaries';
+import * as workers from '../../../game-data/worker-config';
+import inform from '../../../ui/inform';
+import { onChange, removeListener } from '../../../world';
+
+import workerPool from '../../../worker-pool';
 
 import update from './update';
+import findWork from './find-work';
 
 export default class extends CommonCharacter {
-  constructor({ game, x, y }) {
-    super(game, x, y, 'worker', frames.CHARACTER.STAND_DOWN, null, 'worker');
+  constructor(game, x, y, sprite, id, objectType, props) {
+    super(game, x, y, sprite, frames.CHARACTER.STAND_DOWN, id, objectType);
+
+    this.speed = workers[objectType].speed;
 
     this.faceDirection = 'DOWN';
 
-    // make a static inventory
     this.inventory = {
-      selected: 'wood-axe',
+      selected: null,
     };
 
     this.waitLastTime = this.game.gameTime;
 
     this.working = false;
-    this.path = [];
-    this.noPath = false;
-    this.speed = config.test ? 0.4 : 1.5;
-
-    this.salary = salaries.worker;
-    this.payTime = 180; // seconds
+    this.path = {};
 
     this.sendToBack();
 
-    this.update = update.bind(this);
+    this.findWork = findWork.bind(this);
 
-    this.pathFindWorker = new Worker('../web-worker/path-find.js');
+    workerPool.register();
 
-    this.getPaid();
+    this.player = this.game.state.states.Game.player;
+
+    this.timer = this.game.time.create(false);
+    this.timer.loop(this.speed * 1000, () => {
+      if (this.destroyed) return;
+
+      update.call(this);
+    }, this);
+    this.timer.start();
+    window.times = this.timer;
+
+    inform.worker.count(objectType, 1);
   }
 
   get waiting() {
     if (this.moving) return true;
-
-    let diff = this.game.gameTime - this.waitLastTime;
-    if (diff < this.speed) return true;
 
     return false;
   }
@@ -47,33 +55,69 @@ export default class extends CommonCharacter {
   wait() {
     const oldTime = this.waitLastTime;
     this.waitLastTime = this.game.gameTime;
-
-    this.timeSincePaid += this.waitLastTime - oldTime;
-
-    if (this.timeSincePaid >= this.payTime) this.getPaid(); // pay every 3 minutes
   }
 
-  getPaid() {
-    const player = this.game.state.states.Game.player;
+  idle() {
+    // called when a worker has no available path; waits on the world to change
+    this.timer.pause();
 
-    if (player.inventory.money.value >= this.salary) {
-      player.inventory.money.value -= this.salary;
+    onChange(this.id, (tileCoord, objects) => {
+      if (objects.length === 0) {
+        // worker might have been stuck; try to pathfind again
+        removeListener(this.id);
+        this.timer.resume();
+        return;
+      }
 
-      this.timeSincePaid = 0;
-    } else {
-      this.destroy();
-    }
+      // check if any objects at this tile are one of this worker's targetObjects
+      for (let i = 0; i < objects.length; i++) {
+        if (!this.targetObjects.includes(objects[i].objectType)) continue;
+
+        removeListener(this.id);
+        this.timer.resume();
+        return;
+      }
+    });
   }
 
-  cancelWork(noPath) {
+  cancelWork() {
     this.working = false;
     this.path = [];
-    this.noPath = !!noPath;
+  }
+
+  resetObject() {
+    super.resetObject();
+
+    this.salary = worker[this.objectType].salary;
+    this.payTime = worker[this.objectType].payTime;
+    this.speed = worker[this.objectType].speed;
+
+    this.faceDirection = 'DOWN';
+
+    // make a static inventory
+    this.inventory = {
+      selected: null,
+    };
+
+    this.waitLastTime = this.game.gameTime;
+
+    this.working = false;
+    this.path = {};
+
+    this.timer.resume();
+
+    workerPool.register();
+
+    inform.worker.count(this.objectType, 1);
   }
 
   destroy() {
-    this.pathFindWorker.terminate();
+    this.timer.pause();
 
     super.destroy();
+
+    inform.worker.count(this.objectType, -1);
+
+    workerPool.unregister();
   }
 }

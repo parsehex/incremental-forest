@@ -1,7 +1,9 @@
 import Common from '../../Common';
 import frames from '../../../sprite-frames';
+import config from '../../../config';
 import { addCharacter, moveCharacter, removeCharacter } from '../../../world';
-import { clone } from '../../../utils';
+import { clone, tileOutOfBounds } from '../../../utils';
+import { pixelToTile } from '../../../tiles';
 
 export default class CommonCharacter extends Common {
   constructor(game, x, y, sprite, frame, id, objectType) {
@@ -13,6 +15,9 @@ export default class CommonCharacter extends Common {
   }
 
   move(nextPixelCoord) {
+    const nextTileCoord = pixelToTile(nextPixelCoord);
+    if (tileOutOfBounds(nextTileCoord)) return;
+
     if (this.cursor) {
       this.cursor.move();
     }
@@ -29,6 +34,12 @@ export default class CommonCharacter extends Common {
     this.frame = frameName;
 
     this.faceDirection = direction;
+  }
+
+  resetObject() {
+    super.resetObject();
+
+    addCharacter(this.tile, this.objectType);
   }
 
   destroy() {

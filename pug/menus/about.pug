@@ -1,0 +1,71 @@
+div.row#about-menu.menu.hidden
+  div#summary-menu.col-xs-9
+    p
+      | A small experimental game attempting to bring typical 
+      a(href='https://en.wikipedia.org/wiki/Incremental_game' target='_blank') incremental game
+      |  mechanics to a game where you control the character instead of solely clicking buttons.
+    p
+      | Chop down trees, sell logs, chop down more trees, upgrade your axe and stuff, chop down more trees, sell more logs, hire workers to help out. 
+      | Basically the same things you would do in any incremental game like 
+      a(href='http://dhmstark.co.uk/games/civclicker/' target='_blank') CivClicker
+      | .
+    p
+      | I think the game is fun and I had fun making it, but I won't be doing anymore significant work on this game. 
+      | I certainly have plans to explore this idea more, but I'd rather start fresh and design a new game based on what I learned here.
+    
+    p You can view and change controls in the Settings -> Controls menu.
+  div#how-to-play-menu.col-xs-9.hidden
+    ul
+      li Walk up to a tree and hold SPACE with your axe selected to start chopping it down.
+      li Pick up what the tree drops.
+        ul
+          li Sell the log.
+          li If it drops a pine cone, you can plant it by pressing SPACE on some grass (with the pine cone selected). It'll grow into a tree after a while.
+            ul
+              li If you really want some more cash, you can sell pine cones too (they don't sell for much though).
+      li Buy some upgrades in the Upgrades tab.
+      li Once you have enough money, you can hire workers (in the Workers tab).
+        ul
+          li Choppers will chop down any trees they can find.
+          li Collectors will pick up items and put them in your inventory. (You still need to sell the logs and plant the pine cones though).
+          li You can upgrade workers in their respective menus.
+  div#bugs-menu.col-xs-9.hidden
+    p I'm aware of a number of issues in the game. If enough people like the game I'll polish things up.
+    ul
+      li There are no mobile controls.
+      li Performance could be better.
+      li Upgrades could use some more tweaking I think.
+      li There's (possibly still) a bug that causes workers to just stop moving and stand still. Refreshing the page will fix it (but will reset the world and workers).
+      li The world and your workers aren't saved. I figured this was a way to get around the fact that there's a finite supply of trees and keep the game playable without fully resetting.
+      li There are 8 inventory slots and only 3 items you can get. (I had slightly bigger plans for this game at one point and didn't remove the extra slots)
+      li Controls are bit screwy at times.
+      li The UI could be better.
+  div#credits-menu.col-xs-9.hidden
+    ul
+      li
+        a(href='http://courperationx.deviantart.com/' target='_blank') courperationX
+        |  created the Grass, (modified) Trees, Pine Cones, Logs, Dirt (unused), Water (unused), and Mud (unused).
+      li
+        a(href='http://pousse.rapiere.free.fr/tome/' target='_blank') David E. Gervais
+        |  created the (original) Character and (original) Tree sprites.
+      li
+        a(href='https://github.com/ThomasMays' target='_blank') I
+        |  masterfully modified the Character sprite into 3 different sprites and developed the game.
+      li
+        a(href='https://phaser.io/' target='_blank') Phaser
+        |  game framework powers the game
+      li
+        a(href='http://getbootstrap.com/' target='_blank') Bootstrap
+        |  was used to make the UI
+        
+    
+  div.col-xs-3
+    ul.list-unstyled.text-right
+      li
+        button#summary.tab.side-tab.selected(type='button') Summary
+      li
+        button#how-to-play.tab.side-tab(type='button') How To Play
+      li
+        button#bugs.tab.side-tab(type='button') Bugs/Issues
+      li
+        button#credits.tab.side-tab(type='button') Credits

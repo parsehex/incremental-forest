@@ -28,11 +28,24 @@ export default class extends CommonObject {
     this.notFacing = notFacing.bind(this);
   }
 
+  resetObject() {
+    super.resetObject();
+
+    this.placed = false;
+  }
+
   pickUp(character) {
-    if (character.inventory.items['pine-cone'].isMax) return;
+    if (!character.inventory.isMax('pine-cone')) {
+      character.inventory.increment('pine-cone');
 
-    character.inventory.items['pine-cone'].value++;
+      this.destroy();
+    }
+  }
 
-    this.destroy();
+  destroy() {
+    // reset objectType so that this gets put in the pine-cone pool and not the planted-pine-cone pool
+    this.objectType = 'pine-cone';
+
+    super.destroy();
   }
 }

@@ -1,6 +1,6 @@
 export default function collide(character) {
-  if (!character.inventory.items.log.isMax) {
-    character.inventory.items.log.value++;
+  if (!character.inventory.isMax('log')) {
+    character.inventory.increment('log');
 
     this.destroy();
   }

@@ -1,8 +1,7 @@
 import Phaser from 'phaser';
 
 import interfaceWithObjects from '../../Common/interface-objects';
-import { objectsAtTile } from '../../../../world';
-import { nextTile, tileToPixel } from '../../../../tiles';
+import { tileToPixel } from '../../../../tiles';
 import { nextCoord } from '../../../../utils';
 
 export default function move() {

@@ -4,12 +4,15 @@ import { tileToPixel } from './tiles';
 
 // fastMap just keeps object types in each tile
 // the order of items in tiles means nothing
-export const fastMap = {};
+export const fastMap = [];
 // fastObjects keeps a list of object types in the map
 // the order of items means nothing, will get shuffled around over time
 export const fastObjects = [];
 
-const map = {};
+
+// TODO change map to 2d array (map[y][x] instead of map[x + ',' + y])
+const map = [];
+
 const objects = {};
 
 export function getMap() {
@@ -17,33 +20,51 @@ export function getMap() {
 }
 
 (function generateMap() {
-  for (let i = 0; i < config.mapHeight; i++) {
-    for (let k = 0; k < config.mapWidth; k++) {
-      map[k + ',' + i] = [];
-      fastMap[k + ',' + i] = [];
+  for (let y = 0; y < config.mapHeight; y++) {
+    map[y] = [];
+    fastMap[y] = [];
+
+    for (let x = 0; x < config.mapWidth; x++) {
+      map[y][x] = [];
+      fastMap[y][x] = [];
     }
   }
 })();
+
+export function count(type) {
+  let typeCount = 0;
+
+  for (let i = 0; i < fastObjects.length; i++) {
+    if (fastObjects[i] === type) typeCount++;
+  }
+
+  return typeCount;
+}
 
 const subscribers = [];
 
 function change(tileCoord) {
   for (let i = 0; i < subscribers.length; i++) {
-    subscribers[i](tileCoord, objectsAtTile(tileCoord));
+    subscribers[i][1](tileCoord, objectsAtTile(tileCoord));
   }
 }
-// NOTE can't unsubscribe; might be an issue later
-export function onChange(callback) {
-  subscribers.push(callback);
+export function removeListener(id) {
+  for (let i = 0; i < subscribers.length; i++) {
+    if (subscribers[i][0] !== id) continue;
+
+    subscribers.splice(i, 1);
+    return;
+  }
+}
+export function onChange(id, callback) {
+  subscribers.push([ id, callback ]);
 }
 
 export function add() {
   objects[this.id] = this;
 
-  const coordName = this.tile.x + ',' + this.tile.y;
-
-  map[coordName].push(this.id);
-  fastMap[coordName].push(this.objectType);
+  map[this.tile.y][this.tile.x].push(this.id);
+  fastMap[this.tile.y][this.tile.x].push(this.objectType);
 
   // add objectType to a list of objects on map
   fastObjects.push(this.objectType);
@@ -52,10 +73,8 @@ export function add() {
 }
 
 export function remove() {
-  const coordName = this.tile.x + ',' + this.tile.y;
-
-  const mapTile = map[coordName];
-  const fastMapTile = fastMap[coordName];
+  const mapTile = map[this.tile.y][this.tile.x];
+  const fastMapTile = fastMap[this.tile.y][this.tile.x];
 
   const index = mapTile.indexOf(this.id);
 
@@ -69,20 +88,27 @@ export function remove() {
 
   change(this.tile);
 }
+export function changeType(newType) {
+  const fastMapTile = fastMap[this.tile.y][this.tile.x];
+
+  fastMapTile[fastMapTile.indexOf(this.objectType)] = newType;
+
+  fastObjects[fastObjects.indexOf(this.objectType)] = newType;
+}
 
 export function addCharacter(tileCoord, type) {
-  fastMap[tileCoord.x + ',' + tileCoord.y].push(type);
+  fastMap[tileCoord.y][tileCoord.x].push(type);
 }
 export function moveCharacter(oldTileCoord, newTileCoord, type) {
-  const oldMapTile = fastMap[oldTileCoord.x + ',' + oldTileCoord.y];
+  const oldMapTile = fastMap[oldTileCoord.y][oldTileCoord.x];
   const oldIndex = oldMapTile.indexOf(type);
 
   if (oldIndex >= 0) oldMapTile.splice(oldIndex, 1);
 
-  fastMap[newTileCoord.x + ',' + newTileCoord.y].push(type);
+  fastMap[newTileCoord.y][newTileCoord.x].push(type);
 }
 export function removeCharacter(tileCoord, type) {
-  const mapTile = fastMap[tileCoord.x + ',' + tileCoord.y];
+  const mapTile = fastMap[tileCoord.y][tileCoord.x];
   const index = mapTile.indexOf(type);
 
   if (index < 0) return;
@@ -103,7 +129,7 @@ export function objectsAtTile(tileCoord) {
     return [];
   }
 
-  const mapTile = map[tileCoord.x + ',' + tileCoord.y];
+  const mapTile = map[tileCoord.y][tileCoord.x];
   const tileObjects = [];
 
   for (let i = 0, len = mapTile.length; i < len; i++) {
@@ -111,37 +137,4 @@ export function objectsAtTile(tileCoord) {
   }
 
   return tileObjects;
-}
-
-// returns a tile with no objects near `tileCoord`
-// if fallback is true and there are no tiles available, `tileCoord` is returned
-// returned tile is not guaranteed to be the one nearest `tileCoord`
-export function availableTileNear(tileCoord, fallback) {
-  const mapTiles = Object.keys(fastMap);
-  const i = mapTiles.indexOf(tileCoord.x + ',' + tileCoord.y);
-
-  // check all tiles after tileCoord for an empty tile
-  for (let k = i + 1; k < mapTiles.length; k++) {
-    if (fastMap[mapTiles[k]].length === 0) {
-      return {
-        x: +mapTiles[k].split(',')[0],
-        y: +mapTiles[k].split(',')[1],
-      };
-    }
-  }
-
-  // check all tiles before tileCoord for an empty tile
-  for (let k = i - 1; k >= 0; k--) {
-    if (fastMap[mapTiles[k]].length === 0) {
-      return {
-        x: +mapTiles[k].split(',')[0],
-        y: +mapTiles[k].split(',')[1],
-      };
-    }
-  }
-
-  // no empty tiles
-
-  // return fallback if set
-  if (fallback) return tileCoord;
 }

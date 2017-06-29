@@ -2,10 +2,11 @@ import Phaser from 'phaser';
 
 import { tile, nextTile, alignToGrid, pixelToTile } from '../../tiles';
 import { clone } from '../../utils';
+import objectPool from '../../object-pool';
 
 import tween from './tween';
 
-export default class extends Phaser.Sprite {
+export default class extends Phaser.Image {
   constructor(game, x, y, sprite, frame, id, objectType) {
     const alignedCoords = alignToGrid({ x, y });
 
@@ -44,9 +45,17 @@ export default class extends Phaser.Sprite {
     this.tile = tile.call(this);
   }
 
+  resetObject() {
+    this.setTile();
+    this.timers = [];
+    this.destroyed = false;
+  }
+
   destroy() {
-    super.destroy();
+    this.kill();
 
     this.destroyed = true;
+
+    objectPool.remove(this);
   }
 }

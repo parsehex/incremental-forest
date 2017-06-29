@@ -1,0 +1,20 @@
+div#hint {
+  cursor: default;
+  user-select: none;
+
+  text-align: center;
+  min-height: 20px;
+  padding: 0.2em;
+  padding-bottom: 0;
+
+  // visibility: hidden;
+}
+div#hint #key, div#hint #action {
+  color: white;
+
+  margin: 0 0.5em;
+
+  text-transform: uppercase;
+
+  @include text-stroke(black);
+}

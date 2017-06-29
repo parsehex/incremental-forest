@@ -1,0 +1,73 @@
+div#inventory {
+  cursor: default;
+  user-select: none;
+
+  padding-top: 0.2em;
+
+  h4 {
+    margin: 1em 0;
+  }
+}
+div#inventory ul {
+  list-style-type: none;
+
+  padding-left: 0;
+  margin: auto;
+
+  position: relative;
+}
+div#inventory ul li.item-slot {
+  display: inline-block;
+  position: relative;
+
+  vertical-align: top;
+
+  width: 68px;
+  height: 75px;
+  font-size: 0.90em;
+
+  border: 1px outset lightgray;
+  border-radius: 3px;
+
+  background-color: #ECEFF1;
+
+  padding: 0.3rem 0.15rem;
+  margin: 0 0.02em;
+
+  &.selected {
+    background-color: #B0BEC5;
+    border: 1px solid #80DEEA;
+  }
+
+  .item-slot-number {
+    position: absolute;
+    right: 3px;
+    top: 3px;
+    z-index: 5;
+
+    color: #757575;
+
+    @include text-stroke(white);
+  }
+}
+div#inventory li.item-slot div.item-icon {
+  position: relative;
+
+  img {
+    width: 100%;
+
+    margin: auto;
+  }
+}
+
+.item-slot .item div.item-count {
+  position: absolute;
+  bottom: 0;
+  right: 2px;
+
+  background-color: #E0F7FA;
+  font-size: 0.8em;
+  padding: 0.15em;
+  border: 1px solid #006064;
+  border-radius: 3px;
+}

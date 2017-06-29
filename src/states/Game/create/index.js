@@ -1,12 +1,12 @@
-import setupKeys from './setup-keys';
 import addMap from './add-map';
 import addPlayer from './add-player';
 import addObjects from './add-objects';
 import setupHUD from '../../../ui/setup';
-import config from '../../../config';
+import devtools from '../../../devtools';
+import objectPool from '../../../object-pool';
 
 // below imports are for testing
-import Worker from '../../../sprites/character/Worker';
+import Chopper from '../../../sprites/character/Chopper';
 import {
   findObjByKey,
   centerOfObject,
@@ -25,21 +25,21 @@ export default function create() {
     character: this.game.add.group(),
   };
 
-  setupKeys.call(this);
-
   addMap.call(this);
 
   addObjects.call(this);
   addPlayer.call(this);
 
+  this.input.destroy();
+
   setupHUD.call(this);
 
-  if (config.test) {
+  if (devtools.enabled && devtools.testMapWorker) {
     const workerStartObj = findObjByKey(this.map.objects.objects, 'name', 'workerStart');
 
     const workerStart = centerOfObject(workerStartObj, this.map);
 
-    this.worker = new Worker({
+    objectPool.new('chopper', Chopper, {
       game: this.game,
       x: workerStart.x,
       y: workerStart.y,
