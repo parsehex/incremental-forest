@@ -4,6 +4,8 @@ import interact from './interact';
 import { hireWorker, fireWorker } from './worker';
 
 export default function handleKeyChange(buttons, keysList, changedKey) {
+  if (this.game.paused && changedKey !== buttons.pause) return;
+
   const player = this.game.state.states.Game.player;
   const key = keysList[changedKey];
 
