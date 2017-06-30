@@ -24,8 +24,6 @@ export default function move() {
     if (objectsAtCurrentCursor.length > 0) {
       interfaceWithObjects(objectsAtCurrentCursor, 'facing', this.player);
     }
-
-    this.showHints();
   }, this);
 
   if (objectsAtOldCursor.length > 0) {

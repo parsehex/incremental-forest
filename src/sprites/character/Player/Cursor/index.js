@@ -21,28 +21,7 @@ export default class Cursor {
       if (tileCoord.x !== this.tile.x || tileCoord.y !== this.tile.y) return;
 
       this.objects = objects;
-
-      this.showHints();
     });
-  }
-
-  showHints() {
-    // TODO need early return if hint is same as last one
-    const objects = this.objects;
-
-    if (objects.length === 0) return hideHint();
-
-    for (let i = 0; i < objects.length; i++) {
-      let type = objects[i].objectType;
-
-      if (type === 'pine-cone' && !objects[i].placed) continue;
-
-      if (hints.hasOwnProperty(type)) {
-        let hint = hints[type];
-        showHint(hint.key, hint.action);
-        break;
-      }
-    }
   }
 
   setTile() {

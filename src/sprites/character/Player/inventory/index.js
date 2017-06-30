@@ -14,7 +14,7 @@ export default class Inventory {
     // debugging
     window.money = (val) => {this.money = val};
 
-    this.slots = [ null, null, null, null, null, null, null, null ];
+    this.slots = [ null, null, null, null ];
     this.selectedSlot = 0;
 
     // init money counter

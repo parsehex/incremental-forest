@@ -30,6 +30,4 @@ export default function draw() {
   if (objectsAtCursor.length > 0) {
     interfaceWithObjects(objectsAtCursor, 'facing', this.player);
   }
-
-  this.showHints();
 }

@@ -6,11 +6,7 @@ import { fastMap } from '../../../../world';
 import move from './move';
 
 export default function followPath() {
-  if (this.path.path.length === 0) {
-    // there's no path to follow
-    // TODO could this ever happen? is this check necessary?
-    return;
-  } else if (this.path.path.length === 1) {
+  if (this.path.path.length === 1) {
     // we're at end of path; face the next direction 9instead of moving to it)
     this.face(this.path.path[0]);
     this.path = [];

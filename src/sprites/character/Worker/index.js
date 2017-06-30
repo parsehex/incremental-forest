@@ -88,13 +88,10 @@ export default class extends CommonCharacter {
   resetObject() {
     super.resetObject();
 
-    this.salary = worker[this.objectType].salary;
-    this.payTime = worker[this.objectType].payTime;
     this.speed = worker[this.objectType].speed;
 
     this.faceDirection = 'DOWN';
 
-    // make a static inventory
     this.inventory = {
       selected: null,
     };
