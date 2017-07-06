@@ -4,6 +4,7 @@ import CommonCharacter from '../Common';
 
 import frames from '../../../sprite-frames';
 import workerPool from '../../../worker-pool';
+import devtools from '../../../devtools';
 
 import tryMove from './move';
 import interact from './interact';
@@ -18,6 +19,8 @@ export default class extends CommonCharacter {
 
     this.faceDirection = 'DOWN';
     this.faceObjects = [];
+
+		this.speed = devtools.enabled ? devtools.playerSpeed : 10;
 
     this.inventory = new Inventory(this.game);
 
