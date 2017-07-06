@@ -1,4 +1,4 @@
-import bindMenu from '../bind-menu';
+import setupMenu from '../../menu';
 import {
   chopper,
   collector,
@@ -10,7 +10,7 @@ import {
 const workers = { chopper, collector };
 
 export default function setup() {
-  bindMenu('workers');
+  setupMenu('workers');
 
   workerType.call(this, 'chopper');
   workerType.call(this, 'collector');
@@ -18,16 +18,7 @@ export default function setup() {
 
 function workerType(name) {
   const player = this.game.state.states.Game.player;
-
-  document.getElementById(name).addEventListener('click', () => {
-    const lastSelected = document.querySelector('.worker-type.selected');
-    lastSelected.classList.remove('selected');
-    document.getElementById(lastSelected.id + '-menu').classList.add('hidden');
-
-    document.getElementById(name + '-menu').classList.remove('hidden');
-    document.getElementById(name).classList.add('selected');
-  });
-
+  
   updatePrice(name, workers[name].deposit);
 
   document.getElementById('hire-' + name).addEventListener('click', () => {

@@ -1,27 +1,13 @@
-import bindMenu from '../bind-menu';
+import setupMenu from '../../menu';
 import { buttons, keys, saveButtons } from '../controls';
 import keyMap from '../../../key-map';
 import { clear } from '../../../save';
 
 export default function setup() {
-  bindMenu('settings');
+  setupMenu('settings');
 
-  tab.call(this, 'game-settings');
   gameSettings();
-
-  tab.call(this, 'controls');
   controls();
-}
-
-function tab(name) {
-  document.getElementById(name).addEventListener('click', () => {
-    const lastSelected = document.querySelector('#settings-menu button.selected');
-    lastSelected.classList.remove('selected');
-    document.getElementById(lastSelected.id + '-menu').classList.add('hidden');
-
-    document.getElementById(name + '-menu').classList.remove('hidden');
-    document.getElementById(name).classList.add('selected');
-  });
 }
 
 function gameSettings() {
