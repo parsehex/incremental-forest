@@ -6,12 +6,12 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack",
-    "deploy": "webpack --config webpack.production.config.js && yarn sass-build",
+    "deploy": "webpack --config webpack.production.config.js && npm run sass-build",
     "test": "eslint ./src/**/*.js --fix",
     "server": "ws -p 8080 -c -n",
     "sprites": "node build-spritesheets",
     "sass-build": "node-sass --output-style=compressed scss/index.scss css/style.css",
-    "sass": "yarn sass-build && node-sass -w scss/index.scss css/style.css",
+    "sass": "npm run sass-build && node-sass -w scss/index.scss css/style.css",
     "pug-build": "pug pug/index.pug -o ./",
     "pug": "pug -w pug/index.pug -o ./"
   },
