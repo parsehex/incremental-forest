@@ -48,19 +48,7 @@
         {
          "draworder":"topdown",
          "name":"trees",
-         "objects":[
-                {
-                 "gid":7,
-                 "height":32,
-                 "id":5100,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":32,
-                 "x":384,
-                 "y":352
-                }],
+         "objects":[],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -80,7 +68,7 @@
  "nextobjectid":5104,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.0.1",
+ "tiledversion":"1.0.2",
  "tileheight":32,
  "tilesets":[
         {
