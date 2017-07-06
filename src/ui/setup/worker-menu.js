@@ -2,12 +2,10 @@ import bindMenu from './bind-menu';
 
 export default function setupButtons() {
   bindMenu('workers');
-  bindMenu('debt');
 
   // worker types
   workerType.call(this, 'chopper');
   workerType.call(this, 'collector');
-  workerType.call(this, 'planter');
 }
 
 function workerType(name) {
