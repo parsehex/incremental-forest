@@ -13,7 +13,7 @@ import prices, { increment, count, config } from '../../../game-data/upgrade-pri
 export default function setup() {
   const inventory = this.game.state.states.Game.player.inventory;
 
-  bindMenu('upgrades');
+  bindMenu('store');
 
   const upgradeButtons = document.querySelectorAll('.upgrade');
   for (let i = 0; i < upgradeButtons.length; i++) {

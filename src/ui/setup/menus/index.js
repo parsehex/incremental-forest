@@ -1,11 +1,11 @@
 import setupWorkers from './workers';
-import setupUpgrades from './upgrades';
+import setupStore from './store';
 import setupSettings from './settings';
 import setupAbout from './about';
 
 export default function setup() {
   setupWorkers.call(this);
-  setupUpgrades.call(this);
+  setupStore.call(this);
   setupSettings.call(this);
   setupAbout.call(this);
 }

@@ -1,7 +1,7 @@
 mixin upgrade(id, price, title, label)
   button.upgrade.disabled(type='button' id='upgrade-' + id data-price=price title=title)=label
 
-div.row#upgrades-menu.menu
+div.row#store-menu.menu
   div.col-xs-12
     .line
       +upgrade('wood-axe', '14', 'Chop trees faster', 'Upgrade Wood Axe ($14)')
