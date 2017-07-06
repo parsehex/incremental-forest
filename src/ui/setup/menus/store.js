@@ -15,16 +15,16 @@ export default function setup() {
 
   setupMenu('store');
 
-  const upgradeButtons = document.querySelectorAll('.upgrade');
+  const upgradeButtons = document.querySelectorAll('.upgrade span');
   for (let i = 0; i < upgradeButtons.length; i++) {
-    const itemName = upgradeButtons[i].id.replace('upgrade-', '');
+    const itemName = upgradeButtons[i].parentNode.id.replace('upgrade-', '');
 
     updatePrice(itemName, prices[itemName]);
 
     if (inventory.money >= upgradeButtons[i].dataset.price || count(itemName) >= config[itemName]) {
-      upgradeButtons[i].classList.remove('disabled');
+      upgradeButtons[i].parentNode.classList.remove('disabled');
     } else {
-      upgradeButtons[i].classList.add('disabled');
+      upgradeButtons[i].parentNode.classList.add('disabled');
     }
   }
 
@@ -106,11 +106,11 @@ function upgrade(name, handler) {
 }
 
 function updatePrice(name, newPrice) {
-  const button = document.getElementById('upgrade-' + name);
+  const button = document.querySelector('#upgrade-' + name + ' span');
 
   if (count(name) >= config[name]) {
     // item is maxed out; disable button
-    button.classList.add('disabled');
+    button.parentNode.classList.add('disabled');
   }
 
   if (Math.round(newPrice) !== newPrice) newPrice = newPrice.toFixed(2);

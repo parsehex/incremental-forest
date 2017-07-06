@@ -1,0 +1,16 @@
+.store-item {
+  display: inline-block;
+  width: 115px;
+  vertical-align: top;
+  margin: 0.5em;
+
+  text-align: center;
+  cursor: pointer;
+
+  img {
+    width: 72px;
+    height: 72px;
+    display: block;
+    margin: auto;
+  }
+}

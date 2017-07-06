@@ -1,13 +1,15 @@
-mixin upgrade(id, price, title, label)
-  button.upgrade.disabled(type='button' id='upgrade-' + id data-price=price title=title)=label
+mixin upgrade(id, img, price, title, label)
+  div.upgrade.disabled.store-item(id='upgrade-' + id, title=title)
+    img(src='assets/sprites/' + img, alt=label)
+    span(data-price=price) #{label}
 
 div.row#store-menu.menu
-  div.col-xs-12
-    .line
-      +upgrade('wood-axe', '14', 'Chop trees faster', 'Upgrade Wood Axe ($14)')
-      br
-      +upgrade('pine-cone', '2.50', 'Trees drop pine cones more often', 'Upgrade Pine Cone Drop Chance ($2.50)')
-      br
-      +upgrade('sell-price', '12', 'Items sell for higher', 'Upgrade Sell Prices ($12)')
-      br
-      +upgrade('tree-grow', '13', 'Trees grow faster', 'Upgrade Tree Grow Time ($13)')
+  div#upgrades-menu.col-xs-9
+    +upgrade('wood-axe', 'wood-axe.png', '14', 'Chop trees faster', 'Upgrade Wood Axe ($14)')
+    +upgrade('pine-cone', 'pine-cone.png', '2.50', 'Trees drop pine cones more often', 'Upgrade Pine Cone Drop Chance ($2.50)')
+    +upgrade('sell-price', 'money.png', '12', 'Items sell for higher', 'Upgrade Sell Prices ($12)')
+    +upgrade('tree-grow', 'tree.png', '13', 'Trees grow faster', 'Upgrade Tree Grow Time ($13)')
+  div.col-xs-3
+    ul.list-unstyled.text-right
+      li
+        button#upgrades.tab.side-tab.selected(type='button') Upgrades

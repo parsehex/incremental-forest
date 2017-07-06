@@ -12,7 +12,7 @@ export default function() {
 
   if (!isTouchDevice()) {
     // setup tippy on top-menu
-    Tippy('#top-menu #money, button[title]', {
+    Tippy('#top-menu #money, [title]', {
       size: 'small',
       duration: 0,
     });

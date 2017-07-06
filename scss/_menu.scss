@@ -19,12 +19,12 @@ button.tab {
   color: $buttonBGColor;
 
   &.selected:not(.side-tab) {
-    background-color: $buttonBGColor;
+    background-color: $darkButtonBGColor;
     color: white;
     border-bottom: 3px solid #80DEEA;
   }
   &.side-tab.selected {
-    background-color: $buttonBGColor;
+    background-color: $darkButtonBGColor;
     color: white;
     border-left: 3px solid #80DEEA;
   }
