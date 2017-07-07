@@ -1,7 +1,7 @@
 import setupMenu from '../../menu';
 import { buttons, keys, saveButtons } from '../controls';
 import keyMap from '../../../key-map';
-import { clear } from '../../../save';
+import { clear, forceSave, autoSave, autoSaveToggle } from '../../../save';
 
 export default function setup() {
   setupMenu('settings');
@@ -14,6 +14,15 @@ function gameSettings() {
   document.getElementById('reset').addEventListener('click', function() {
     // only clears game data; controls are stored separately
     clear();
+  });
+  
+  document.getElementById('save').addEventListener('click', function() {
+    forceSave();
+  });
+  const autosaveEl = document.getElementById('autosave');
+  autosaveEl.checked = autoSave;
+  autosaveEl.addEventListener('change', function(event) {
+    autoSaveToggle();
   });
 }
 
