@@ -29,5 +29,7 @@ export default function watchKeys(keysList, changeCallback) {
     resetKey(event.which);
 
     changeCallback(event.which);
+
+    event.preventDefault();
   });
 }
