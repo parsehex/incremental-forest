@@ -1,7 +1,5 @@
 import getGame from '../../game';
 
-import { increaseChance } from '../chances';
-
 export default {
   'wood-axe': {
     count: 0,
@@ -17,9 +15,7 @@ export default {
     basePrice: 2.50,
     multiplier: 1.153,
     max: 75,
-    buyCallback: function() {
-      increaseChance('seedDrop');
-    },
+    buyCallback: function() {},
   },
   'sell-price': {
     count: 0,
@@ -35,8 +31,6 @@ export default {
     basePrice: 13,
     multiplier: 1.39,
     max: 80,
-    buyCallback: function() {
-      increaseChance('treeGrow');
-    },
+    buyCallback: function() {},
   },
 };

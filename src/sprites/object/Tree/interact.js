@@ -34,7 +34,7 @@ export default function interact(character) {
     y,
   });
 
-  if (tryChance(getChance('seedDrop'))) {
+  if (tryChance(getChance('pine-cone'))) {
     objectPool.new('pine-cone', PineCone, {
       game,
       x,
