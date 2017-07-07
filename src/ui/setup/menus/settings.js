@@ -4,8 +4,6 @@ import keyMap from '../../../key-map';
 import { clear, forceSave, autoSave, autoSaveToggle } from '../../../save';
 
 export default function setup() {
-  setupMenu('settings');
-
   gameSettings();
   controls();
 }

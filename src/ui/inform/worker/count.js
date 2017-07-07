@@ -1,7 +1,5 @@
-/**
- * updates UI count of workers
- * @param  {number} countChange the amount that the workers count changed (-1 or 1); is added to previous count
- */
+import { updatePrice } from '../../setup/menus/store';
+
 export default function count(type, countChange) {
   const countEl = document.getElementById(type + '-count');
 
@@ -9,7 +7,9 @@ export default function count(type, countChange) {
 
   countEl.textContent = newCount;
 
-  const fireWorkerButton = document.getElementById('fire-' + type);
+  updatePrice('hire-' + type);
+
+  const fireWorkerButton = document.getElementById('buy-fire-' + type);
   if (newCount > 0) {
     fireWorkerButton.classList.remove('disabled');
   } else {

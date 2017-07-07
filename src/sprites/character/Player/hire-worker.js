@@ -1,7 +1,6 @@
 import Chopper from '../Chopper';
 import Collector from '../Collector';
 
-import * as worker from '../../../game-data/worker-config';
 import objectPool from '../../../object-pool';
 import workerPool from '../../../worker-pool';
 

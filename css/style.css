@@ -85,6 +85,9 @@ div.menu :not(#controls-menu) div.line {
 div#about-menu {
   font-size: 0.95rem; }
 
+div#menu {
+  visibility: hidden; }
+
 div#game, div#menu {
   padding: 0.5em;
   min-height: 100%;
@@ -128,18 +131,23 @@ button, .upgrade {
     outline: 0; }
 
 input {
-  margin: 0.1em; }
+  margin: 0.2em !important; }
+
+hr {
+  border-color: #546E7A; }
+
+label {
+  margin: 0.2em; }
 
 .store-item {
   display: inline-block;
-  width: 115px;
+  width: 29%;
   vertical-align: top;
   margin: 0.5em;
   text-align: center;
   cursor: pointer; }
   .store-item img {
-    width: 72px;
-    height: 72px;
+    width: 64px;
     display: block;
     margin: auto; }
 

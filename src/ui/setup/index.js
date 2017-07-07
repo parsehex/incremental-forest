@@ -17,6 +17,8 @@ export default function() {
       duration: 0,
     });
   }
+
+  document.getElementById('menu').style.visibility = 'visible';
 }
 
 function setupItems() {

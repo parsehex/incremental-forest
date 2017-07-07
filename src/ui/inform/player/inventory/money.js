@@ -1,4 +1,4 @@
-import * as worker from '../../../../game-data/worker-config';
+import store from '../../../../game-data/store';
 
 export default function money(newCount) {
   const moneyEl = document.querySelector('#money .item-count');
@@ -10,21 +10,16 @@ export default function money(newCount) {
 
   moneyEl.textContent = newCount;
 
-  const hireWorkerButtons = document.querySelectorAll('.hire-worker');
-  for (let i = 0; i < hireWorkerButtons.length; i++) {
-    if (+newCount >= worker[hireWorkerButtons[i].id.substr(5)].deposit) {
-      hireWorkerButtons[i].classList.remove('disabled');
-    } else {
-      hireWorkerButtons[i].classList.add('disabled');
-    }
-  }
+  const buyButtons = document.querySelectorAll('.upgrade');
+  for (let i = 0; i < buyButtons.length; i++) {
+    const item = store[buyButtons[i].id.substr(4)];
 
-  const upgradeButtons = document.querySelectorAll('.upgrade');
-  for (let i = 0; i < upgradeButtons.length; i++) {
-    if (+newCount >= upgradeButtons[i].dataset.price) {
-      upgradeButtons[i].classList.remove('disabled');
+    if (item.max === 0) continue;
+
+    if (+newCount >= item.price && item.count < item.max) {
+      buyButtons[i].classList.remove('disabled');
     } else {
-      upgradeButtons[i].classList.add('disabled');
+      buyButtons[i].classList.add('disabled');
     }
   }
 }

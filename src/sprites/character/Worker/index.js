@@ -1,6 +1,6 @@
 import CommonCharacter from '../Common';
 import frames from '../../../sprite-frames';
-import * as workers from '../../../game-data/worker-config';
+import store from '../../../game-data/store';
 import inform from '../../../ui/inform';
 import { onChange, removeListener } from '../../../world';
 
@@ -13,7 +13,7 @@ export default class extends CommonCharacter {
   constructor(game, x, y, sprite, id, objectType, props) {
     super(game, x, y, sprite, frames.CHARACTER.STAND_DOWN, id, objectType);
 
-    this.speed = workers[objectType].speed;
+    this.speed = 1.5 - (store[objectType + '-speed'].count * 0.1);
 
     this.faceDirection = 'DOWN';
 
@@ -88,7 +88,7 @@ export default class extends CommonCharacter {
   resetObject() {
     super.resetObject();
 
-    this.speed = worker[this.objectType].speed;
+    this.speed = 1.5 - (store[this.objectType + '-speed'].count * 0.1);
 
     this.faceDirection = 'DOWN';
 

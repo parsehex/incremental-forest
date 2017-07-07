@@ -1,121 +1,61 @@
 import setupMenu from '../../menu';
-import { increaseChance } from '../../../game-data/chances';
-import {
-  chopper,
-  collector,
-  getWoodAxeRank,
-  increaseWoodAxeRank,
-  increaseSpeed,
-} from '../../../game-data/worker-config';
-
-import prices, { increment, count, config } from '../../../game-data/upgrade-prices';
+import getGame from '../../../game';
+import store, { buy } from '../../../game-data/store';
 
 export default function setup() {
-  const inventory = this.game.state.states.Game.player.inventory;
+  const inventory = getGame().player.inventory;
 
-  setupMenu('store');
+  for (let itemName in store) {
+    const item = store[itemName];
+    const buttonEl = document.getElementById('buy-' + itemName);
 
-  const upgradeButtons = document.querySelectorAll('.upgrade span');
-  for (let i = 0; i < upgradeButtons.length; i++) {
-    const itemName = upgradeButtons[i].parentNode.id.replace('upgrade-', '');
+    updatePrice(itemName, item);
 
-    updatePrice(itemName, prices[itemName]);
-
-    if (inventory.money >= upgradeButtons[i].dataset.price || count(itemName) >= config[itemName]) {
-      upgradeButtons[i].parentNode.classList.remove('disabled');
+    // if player can't afford this or is maxed, disable button
+    // NOTE if item.max is 0 then another part of code handles disabling the button
+    if (item.max === 0) {
+    } else if (inventory.money >= item.price && item.count < item.max) {
+      buttonEl.classList.remove('disabled');
     } else {
-      upgradeButtons[i].parentNode.classList.add('disabled');
+      buttonEl.classList.add('disabled');
     }
+
+    upgrade(itemName, function(event) {
+      // don't do anything if button is disabled
+      if (event.target.classList.contains('disabled')) return;
+
+      if (!buy(itemName)) return;
+
+      // purchase successful; update item's price
+      updatePrice(itemName, item); // TODO item.price updates on its own, right?
+    });
   }
-
-  buy = buy.bind(inventory);
-
-  upgrade('wood-axe', () => {
-    if (!buy('wood-axe')) return;
-
-    inventory.increment('wood-axe', 'rank');
-  });
-  upgrade('sell-price', () => {
-    if (!buy('sell-price')) return;
-
-    inventory.sellMultiplier += 0.5;
-  });
-  upgrade('chopper-wood-axe', () => {
-    if (!buy('chopper-wood-axe')) return;
-
-    const choppers = this.game.state.states.Game.groups.character.children.filter((o) => o.objectType === 'chopper');
-
-    // update existing choppers' wood axes
-    for (let i = 0; i < choppers.length; i++) {
-      choppers[i].inventory.items['wood-axe'].rank++;
-    }
-    // update global chopper wood axe rank
-    increaseWoodAxeRank();
-  });
-  upgrade('chopper-speed', () => {
-    if (!buy('chopper-speed')) return;
-
-    const choppers = this.game.state.states.Game.groups.character.children.filter((o) => o.objectType === 'chopper');
-
-    for (let i = 0; i < choppers.length; i++) {
-      choppers[i].speed -= 0.1;
-      choppers[i].timer.events[0].delay -= 100;
-    }
-    increaseSpeed('chopper');
-  });
-  upgrade('collector-speed', () => {
-    if (!buy('collector-speed')) return;
-
-    const collectors = this.game.state.states.Game.groups.character.children.filter((o) => o.objectType === 'collector');
-
-    for (let i = 0; i < collectors.length; i++) {
-      collectors[i].speed -= 0.1;
-      collectors[i].timer.events[0].delay -= 100;
-    }
-    increaseSpeed('collector');
-  });
-
-  upgrade('pine-cone', () => {
-    if (!buy('pine-cone')) return;
-
-    increaseChance('seedDrop');
-  });
-
-  upgrade('tree-grow', (event) => {
-    if (!buy('tree-grow')) return;
-
-    increaseChance('treeGrow');
-  });
-}
-
-function buy(name) {
-  const price = prices[name];
-
-  if (this.money < price || count(name) >= config[name].max) return false;
-
-  // NOTE update price before taking money so that the button will be properly
-    // disabled if the player has no money for next price
-  updatePrice(name, increment(name));
-  this.money -= price;
-
-  return true;
 }
 
 function upgrade(name, handler) {
-  document.getElementById('upgrade-' + name).addEventListener('click', handler);
+  document.getElementById('buy-' + name).addEventListener('click', handler);
 }
 
-function updatePrice(name, newPrice) {
-  const button = document.querySelector('#upgrade-' + name + ' span');
+export function updatePrice(itemName, item) {
+  item = item || store[itemName];
 
-  if (count(name) >= config[name]) {
+  if (item.basePrice === 0) return; // item has no price
+
+  const priceSpan = document.querySelector('#buy-' + itemName + ' span.price');
+
+  if (item.count >= item.max) {
     // item is maxed out; disable button
-    button.parentNode.classList.add('disabled');
+    priceSpan.parentNode.classList.add('disabled');
+  }
+
+  let newPrice = item.price;
+
+  if (newPrice === 0) {
+    priceSpan.textContent = 'FREE';
+    return;
   }
 
   if (Math.round(newPrice) !== newPrice) newPrice = newPrice.toFixed(2);
 
-  button.dataset.price = newPrice;
-
-  button.textContent = button.textContent.replace(/\(\$.+\)/, '($' + newPrice + ')');
+  priceSpan.textContent = '$' + newPrice;
 }

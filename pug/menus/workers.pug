@@ -4,27 +4,28 @@ mixin count(type)
       | You have 
       span(id=type + '-count') 0
       |  #{type.substr(0, 1).toUpperCase() + type.substr(1)}s
-mixin hireFire(type)
-  .line
-    button(id='hire-' + type, type='button').hire-worker.disabled Hire a #{type.substr(0, 1).toUpperCase() + type.substr(1)} ($150)
-    span #{' | '}
-    button(id='fire-' + type, type='button').fire-worker.disabled Fire a #{type.substr(0, 1).toUpperCase() + type.substr(1)}
-mixin upgrade(id, price, title, label)
-  div.upgrade.disabled.store-item(id='upgrade-' + id, title=title)
-    span(data-price=price) #{label}
 
 div.row#workers-menu.menu.hidden
   div#chopper-menu.col-xs-9
     +count('chopper')
-    +hireFire('chopper')
-    .line
-      +upgrade('chopper-wood-axe', '14', 'Chopper will chop trees down faster', 'Upgrade Wood Axe ($14)')
-      +upgrade('chopper-speed', '25', 'Chopper will work faster', 'Upgrade Speed ($25)')
+    
+    +storeButton('hire-chopper', null, 150, null, 'Hire a Chopper')
+    +storeButton('fire-chopper', null, 0, null, 'Fire a Chopper')
+    
+    hr
+      
+    +storeButton('chopper-wood-axe', null, '14', 'Chopper will chop trees down faster', 'Upgrade Wood Axe')
+    +storeButton('chopper-speed', null, '25', 'Chopper will work faster', 'Upgrade Speed')
+  
   div#collector-menu.col-xs-9.hidden
     +count('collector')
-    +hireFire('collector')
-    .line
-      +upgrade('collector-speed', '50', 'Collector will work faster', 'Upgrade Speed ($50)')
+    
+    +storeButton('hire-collector', null, 100, null, 'Hire a Collector')
+    +storeButton('fire-collector', null, 100, null, 'Fire a Collector')
+    
+    hr
+    
+    +storeButton('collector-speed', null, '50', 'Collector will work faster', 'Upgrade Speed')
   div.col-xs-3
     ul.list-unstyled.text-right
       li
