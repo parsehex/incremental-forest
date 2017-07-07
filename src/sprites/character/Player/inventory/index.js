@@ -1,7 +1,7 @@
 import { clamp, wrap, REALLY_BIG_NUMBER, clone } from '../../../../utils';
 import { save, load } from '../../../../save';
 import inform from '../../../../ui/inform';
-import itemPrices from '../../../../game-data/item-prices';
+import sellPrices from '../../../../game-data/sell-prices';
 import { items, money } from '../../../../game-data/player-items';
 
 export default class Inventory {
@@ -153,7 +153,7 @@ export default class Inventory {
     if (this.get(itemName) < amount) return;
 
     amount = amount || this.get(itemName);
-    const moneyAmount = itemPrices.sell[itemName] * amount;
+    const moneyAmount = sellPrices.sell[itemName] * amount;
 
     this.set(itemName, 'value', this.get(itemName) - amount);
     this.money += (moneyAmount * this.sellMultiplier);
