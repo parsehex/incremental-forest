@@ -1,3 +1,11 @@
+// version is only bumped when an error is encountered due to an old version; not necessarily on every format change
+const version = 2;
+const loadedVersion = localStorage.getItem('save-version') || 1;
+if (version != loadedVersion) {
+  localStorage.clear();
+  localStorage.setItem('save-version', version);
+}
+
 let data = localStorage.getItem('game');
 if (data) {
   data = JSON.parse(data);
