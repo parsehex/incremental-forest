@@ -6,7 +6,10 @@ export default function setup(menuName) {
   document.getElementById(menuName).addEventListener('click', function() {
     openTab(menuName);
 
+    const sideTab = document.querySelector('#' + menuName + '-menu .side-tab.selected');
+
     save('ui.tab', menuName);
+    save('ui.side-tab', sideTab.id);
   });
 
   const sideTabs = document.querySelectorAll('#' + menuName + '-menu .side-tab');
@@ -19,6 +22,7 @@ function sideTab(menuName, sideTabName) {
   document.getElementById(sideTabName).addEventListener('click', () => {
     openSideTab(menuName, sideTabName);
 
+    save('ui.tab', menuName);
     save('ui.side-tab', sideTabName);
   });
 }
