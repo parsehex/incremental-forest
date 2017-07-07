@@ -11,7 +11,7 @@ if (savedControls) savedControls = JSON.parse(savedControls);
 export const buttons = savedControls || {
   up: 87, left: 65, down: 83, right: 68,
   interact: 32, sell: 76, pause: 80,
-  hire: 72, fire: 70, prev: 81, next: 69,
+  prev: 81, next: 69,
 };
 
 // list all keys and their states
