@@ -17,21 +17,22 @@ div#game canvas {
   padding: 0.3em 0;
 }
 
-button {
+button, .upgrade {
   background-color: $buttonBGColor;
-  color: white;
-  font-size: 0.95rem;
+  color: #F5F5F5;
+  font-size: 0.9rem;
   border-radius: 2px;
+  border-style: outset;
 
   &.selected {
-    background-color: white;
+    background-color: #F5F5F5;
     color: $buttonBGColor;
   }
   &.disabled {
     background-color: #E0E0E0;
     color: #616161;
     border-style: solid;
-    // border-width: 1px;
+    border-color: #c0c0c0;
   }
 
   &:focus {
@@ -39,5 +40,11 @@ button {
   }
 }
 input {
-  margin: 0.1em;
+  margin: 0.2em !important;
+}
+hr {
+  border-color: #546E7A;
+}
+label {
+  margin: 0.2em;
 }

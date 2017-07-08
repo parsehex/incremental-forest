@@ -11,7 +11,7 @@ const itemMax = 500;
 let items = load('items') || {
   'wood-axe': {
     value: true,
-    rank: 1,
+    rank: 0,
     sellable: false,
   },
   bucket: {

@@ -4,7 +4,7 @@ let game;
 
 export default function() {
   if (!game) {
-    game = Phaser.GAMES[0];
+    game = Phaser.GAMES[0].state.states.Game;
   }
 
   return game;

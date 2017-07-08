@@ -19,12 +19,12 @@ button.tab {
   color: $buttonBGColor;
 
   &.selected:not(.side-tab) {
-    background-color: $buttonBGColor;
+    background-color: $darkButtonBGColor;
     color: white;
     border-bottom: 3px solid #80DEEA;
   }
   &.side-tab.selected {
-    background-color: $buttonBGColor;
+    background-color: $darkButtonBGColor;
     color: white;
     border-left: 3px solid #80DEEA;
   }
@@ -40,4 +40,7 @@ div.menu :not(#controls-menu) div.line {
 
 div#about-menu {
   font-size: 0.95rem;
+}
+div#menu {
+  visibility: hidden;
 }

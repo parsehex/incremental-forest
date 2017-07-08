@@ -1,5 +1,4 @@
 import { bindItemSlot } from '../bind-item';
-import bindMenu from './bind-menu';
 import setupMenus from './menus';
 import setupControls from './controls';
 import { isTouchDevice } from '../../utils';
@@ -13,11 +12,13 @@ export default function() {
 
   if (!isTouchDevice()) {
     // setup tippy on top-menu
-    Tippy('#top-menu #money, button[title]', {
+    Tippy('#top-menu #money, [title]', {
       size: 'small',
       duration: 0,
     });
   }
+
+  document.getElementById('menu').style.visibility = 'visible';
 }
 
 function setupItems() {

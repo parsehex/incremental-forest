@@ -7,6 +7,13 @@ mixin control(label, id, defaultValue)
 div.row#settings-menu.menu.hidden
   div#game-settings-menu.col-xs-9
     button#reset(type='button') Reset Save
+    
+    hr
+    
+    label
+      | Auto Save
+      input#autosave(type='checkbox' checked)
+    button#save(type='button') Save Game
   div#controls-menu.col-xs-9.hidden
     +control('Move Up', 'up', 'W')
     +control('Move Left', 'left', 'A')
@@ -14,8 +21,6 @@ div.row#settings-menu.menu.hidden
     +control('Move Right', 'right', 'D')
     +control('Use Item', 'interact', 'SPACE')
     +control('Sell Item', 'sell', 'L')
-    +control('Hire selected Worker', 'hire', 'H')
-    +control('Fire selected Worker', 'fire', 'F')
     +control('Select previous item', 'prev', 'Q')
     +control('Select next item', 'next', 'E')
     +control('Pause Game', 'pause', 'P')

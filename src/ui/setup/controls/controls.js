@@ -1,7 +1,6 @@
 import { pause } from './pause';
 import move from './move';
 import interact from './interact';
-import { hireWorker, fireWorker } from './worker';
 
 export default function handleKeyChange(buttons, keysList, changedKey) {
   if (this.game.paused && changedKey !== buttons.pause) return;
@@ -54,20 +53,6 @@ export default function handleKeyChange(buttons, keysList, changedKey) {
       if (!key.justDown) break;
 
       pause.call(this, 'toggle', true);
-      break;
-    }
-    // H: hire
-    case buttons.hire: {
-      if (!key.justDown) break;
-
-      hireWorker.call(this, event);
-      break;
-    }
-    // F: fire
-    case buttons.fire: {
-      if (!key.justDown) break;
-
-      fireWorker.call(this, event);
       break;
     }
     // Q: prev item

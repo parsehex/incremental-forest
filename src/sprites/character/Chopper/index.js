@@ -1,5 +1,5 @@
 import Worker from '../Worker';
-import { getWoodAxeRank } from '../../../game-data/worker-config';
+import store from '../../../game-data/store';
 
 import doWork from './do-work';
 
@@ -11,7 +11,7 @@ export default class extends Worker {
       selected: 'wood-axe',
       items: {
         'wood-axe': {
-          rank: getWoodAxeRank(),
+          rank: store['chopper-wood-axe'].count,
         },
       },
     };
@@ -19,5 +19,18 @@ export default class extends Worker {
     this.targetObjects = ['tree'];
 
     this.doWork = doWork.bind(this);
+  }
+
+  resetObject() {
+    super.resetObject();
+
+    this.inventory = {
+      selected: 'wood-axe',
+      items: {
+        'wood-axe': {
+          rank: store['chopper-wood-axe'].count,
+        },
+      },
+    };
   }
 }

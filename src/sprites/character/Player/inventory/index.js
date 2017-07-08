@@ -1,7 +1,7 @@
-import { clamp, wrap, REALLY_BIG_NUMBER } from '../../../../utils';
+import { clamp, wrap, REALLY_BIG_NUMBER, clone } from '../../../../utils';
 import { save, load } from '../../../../save';
 import inform from '../../../../ui/inform';
-import itemPrices from '../../../../game-data/item-prices';
+import sellPrices from '../../../../game-data/sell-prices';
 import { items, money } from '../../../../game-data/player-items';
 
 export default class Inventory {
@@ -15,6 +15,11 @@ export default class Inventory {
     window.money = (val) => {this.money = val};
 
     this.slots = [ null, null, null, null ];
+    let loadedSlots = false;
+    if (load('item-slots')) {
+      this.slots = load('item-slots');
+      loadedSlots = true;
+    }
     this.selectedSlot = 0;
 
     // init money counter
@@ -24,11 +29,18 @@ export default class Inventory {
 
     this._sellMultiplier = load('sell-multiplier') || 1;
 
-    for (let item in this._items) {
-      if (this.get(item)) {
-        this.addToSlots(item);
+    for (let itemName in this._items) {
+      const itemValue = this.get(itemName);
 
-        inform.player.inventory.itemValue(item, this.get(item));
+      if (itemValue) {
+        if (loadedSlots) {
+          // don't need to actually add item to slots, just update ui
+          inform.player.inventory.slots.add(this.slots.indexOf(itemName), itemName, itemValue);
+        } else {
+          this.addToSlots(itemName, true);
+        }
+
+        inform.player.inventory.itemValue(itemName, itemValue);
       }
     }
   }
@@ -88,7 +100,7 @@ export default class Inventory {
     save('items', this._items);
   }
 
-  addToSlots(itemName) {
+  addToSlots(itemName, noSave) {
     if (this.slots.includes(itemName)) return;
 
     const freeSlotNum = this.slots.indexOf(null);
@@ -100,6 +112,8 @@ export default class Inventory {
     this.slots[freeSlotNum] = itemName;
 
     inform.player.inventory.slots.add(freeSlotNum, itemName, value);
+
+    if (!noSave) save('item-slots', this.slots);
   }
 
   removeFromSlots(itemName) {
@@ -110,6 +124,8 @@ export default class Inventory {
     this.slots[itemSlotNum] = null;
 
     inform.player.inventory.slots.remove(itemSlotNum, itemName);
+
+    save('item-slots', this.slots);
   }
 
   get selected() {
@@ -137,7 +153,7 @@ export default class Inventory {
     if (this.get(itemName) < amount) return;
 
     amount = amount || this.get(itemName);
-    const moneyAmount = itemPrices.sell[itemName] * amount;
+    const moneyAmount = sellPrices.sell[itemName] * amount;
 
     this.set(itemName, 'value', this.get(itemName) - amount);
     this.money += (moneyAmount * this.sellMultiplier);

@@ -1,0 +1,10 @@
+div.row#store-menu.menu
+  div#upgrades-menu.col-xs-9
+    +storeButton('wood-axe', 'wood-axe.png', '14', 'Chop trees faster', 'Upgrade Wood Axe')
+    +storeButton('pine-cone', 'pine-cone.png', '2.50', 'Trees drop pine cones more often', 'Upgrade Pine Cone Drop Chance')
+    +storeButton('sell-price', 'money.png', '12', 'Items sell for higher', 'Upgrade Sell Prices')
+    +storeButton('tree-grow', 'tree.png', '13', 'Trees grow faster', 'Upgrade Tree Grow Time')
+  div.col-xs-3
+    ul.list-unstyled.text-right
+      li
+        button#upgrades.tab.side-tab.selected(type='button') Upgrades
