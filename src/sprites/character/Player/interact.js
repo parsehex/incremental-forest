@@ -48,7 +48,7 @@ function getMode() {
   const selectedItemName = inventory.selected;
 
   const noItemSelected = selectedItemName === null;
-  const holdingPlaceableItem = inventory.get(selectedItemName, 'place');
+  const holdingPlaceableItem = !noItemSelected && inventory.get(selectedItemName, 'place');
   const facingPickableObject = cursor.objects.length && cursor.objects[0].hasOwnProperty('place');
 
   if (noItemSelected || facingPickableObject) {
