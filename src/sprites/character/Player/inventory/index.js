@@ -136,6 +136,9 @@ export default class Inventory {
     this.selectedSlot = clamp(slotNum, 0, this.slots.length - 1);
 
     inform.player.inventory.slots.select(slotNum);
+
+    // interrupt interacting
+    if (this.interactMode !== null) this.stopInteract = true;
   }
 
   seek(direction) {

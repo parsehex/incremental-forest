@@ -4,6 +4,8 @@ import { fastMap } from '../../../world';
 import { tileOutOfBounds } from '../../../utils';
 import objectPool from '../../../object-pool';
 
+const modes = { INTERACT: 0, PICK: 1, PLACE: 2 };
+
 export default function tryInteract() {
   const { cursor, inventory } = this;
 
@@ -13,22 +15,54 @@ export default function tryInteract() {
   const cursorObjectTypes = fastMap[cursor.tile.y][cursor.tile.x];
   const selectedItem = inventory.selected;
 
-  if (selectedItem === 'wood-axe' && cursorObjectTypes.includes('tree')) {
+  const mode = getMode.call(this);
+
+  if (mode === modes.INTERACT && selectedItem === 'wood-axe' && cursorObjectTypes.includes('tree')) {
     interfaceWithObjects(cursorObjects, 'interact', this);
-  } else {
-    const lastTile = this.lastInteractedTile;
-    if (lastTile !== null && lastTile.x === cursor.tile.x && lastTile.y === cursor.tile.y) return;
-
-    if (cursorObjects.length > 0) {
-      interfaceWithObjects(cursorObjects, 'interact', this);
-
-      this.lastInteractedTile = Object.assign({}, cursor.tile);
-    } else {
-      placeItem.call(this);
-
-      this.lastInteractedTile = Object.assign({}, cursor.tile);
-    }
+    return;
   }
+
+  // don't interact on same tile we just interacted with
+  const lastTile = this.lastInteractedTile;
+  if (lastTile !== null && lastTile.x === cursor.tile.x && lastTile.y === cursor.tile.y) return;
+
+  if (mode === modes.PICK && cursorObjects.length > 0) {
+    interfaceWithObjects(cursorObjects, 'interact', this);
+
+    this.lastInteractedTile = Object.assign({}, cursor.tile);
+    return;
+  }
+  if (mode === modes.PLACE && cursorObjects.length === 0) {
+    placeItem.call(this);
+
+    this.lastInteractedTile = Object.assign({}, cursor.tile);
+    return;
+  }
+}
+
+function getMode() {
+  const { cursor, inventory } = this;
+  // mode is already set, return that
+  if (this.interactMode) return this.interactMode;
+
+  const selectedItemName = inventory.selected;
+
+  const noItemSelected = selectedItemName === null;
+  const holdingPlaceableItem = inventory.get(selectedItemName, 'place');
+  const facingPickableObject = cursor.objects.length && cursor.objects[0].hasOwnProperty('place');
+
+  if (noItemSelected || facingPickableObject) {
+    this.interactMode = modes.PICK;
+    return modes.PICK;
+  }
+  if (holdingPlaceableItem) {
+    // placeable itme is selected
+    this.interactMode = modes.PLACE;
+    return modes.PLACE;
+  }
+
+  this.interactMode = modes.INTERACT;
+  return modes.INTERACT;
 }
 
 function placeItem() {
