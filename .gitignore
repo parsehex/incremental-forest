@@ -10,3 +10,10 @@ src/
 plugins/
 build-spritesheets
 Tilesets/
+scss
+pug
+webpack*.js
+package*.json
+yarn.lock
+.babelrc
+.eslint.json
