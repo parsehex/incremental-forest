@@ -22,13 +22,14 @@ const items = merge(Object.assign({}, worker, upgrades), load('upgrades') || {})
 // calculate item prices
 for (let itemName in items) {
   const item = items[itemName];
-  if (itemName.includes('hire') && item.count > 0) {
-    // player had workers last time they played
-    // offer a 100% discount on those workers
+  if (itemName.includes('hire') && load('world.fastObjects')) {
+    // make sure to increase count to however many workers were reloaded
+    const workerType = itemName.replace('hire-', '');
+    const workers = load('world.fastObjects').filter((type) => type === workerType);
 
-    item.freeCount = item.count;
-    item.count = 0;
+    item.count = workers.length;
   }
+
   item.price = price(item);
 }
 
