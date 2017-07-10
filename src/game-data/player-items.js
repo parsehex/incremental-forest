@@ -36,7 +36,7 @@ const defaultItems = {
   },
 };
 
-let items = Object.assign(defaultItems, loadedItems);
+let items = merge(defaultItems, loadedItems);
 items['pine-cone'].place = PineCone;
 
 let money = load('money') || 0;
