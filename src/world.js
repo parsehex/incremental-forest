@@ -1,6 +1,7 @@
 import config from './config';
 import { indexOfObject, clone } from './utils';
 import { tileToPixel } from './tiles';
+import { save, saveMe } from './save';
 
 // fastMap just keeps object types in each tile
 // the order of items in tiles means nothing
@@ -9,8 +10,6 @@ export const fastMap = [];
 // the order of items means nothing, will get shuffled around over time
 export const fastObjects = [];
 
-
-// TODO change map to 2d array (map[y][x] instead of map[x + ',' + y])
 const map = [];
 
 const objects = {};
@@ -30,6 +29,12 @@ export function getMap() {
     }
   }
 })();
+
+saveMe(function() {
+  // should be able to reload all objects and workers from fastMap
+  save('world.fastMap', fastMap);
+  save('world.fastObjects', fastObjects);
+});
 
 export function count(type) {
   let typeCount = 0;
@@ -98,6 +103,7 @@ export function changeType(newType) {
 
 export function addCharacter(tileCoord, type) {
   fastMap[tileCoord.y][tileCoord.x].push(type);
+  fastObjects.push(type);
 }
 export function moveCharacter(oldTileCoord, newTileCoord, type) {
   const oldMapTile = fastMap[oldTileCoord.y][oldTileCoord.x];
@@ -114,6 +120,7 @@ export function removeCharacter(tileCoord, type) {
   if (index < 0) return;
 
   mapTile.splice(index, 1);
+  fastObjects.splice(fastObjects.indexOf(type), 1);
 }
 
 // TODO objectTypesAtTile?

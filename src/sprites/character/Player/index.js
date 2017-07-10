@@ -5,6 +5,7 @@ import CommonCharacter from '../Common';
 import frames from '../../../sprite-frames';
 import workerPool from '../../../worker-pool';
 import devtools from '../../../devtools';
+import { save, load, saveMe } from '../../../save';
 
 import tryMove from './move';
 import interact from './interact';
@@ -15,9 +16,15 @@ import fireWorker from './fire-worker';
 
 export default class extends CommonCharacter {
   constructor({ game, x, y }) {
-    super(game, x, y, 'guy', frames.GUY.STAND_DOWN, 'player', 'player');
+    if (load('player.location')) {
+      x = load('player.location').x;
+      y = load('player.location').y;
+    }
+    const faceDirection = load('player.face-direction') || 'DOWN';
 
-    this.faceDirection = 'DOWN';
+    super(game, x, y, 'guy', frames.GUY['STAND_' + faceDirection], 'player', 'player');
+
+    this.faceDirection = faceDirection;
     this.faceObjects = [];
 
 		this.speed = devtools.enabled ? devtools.playerSpeed : 10;
@@ -40,41 +47,11 @@ export default class extends CommonCharacter {
       interact: interact.bind(this),
     };
 
-    // i'll leave this here to be remembered for later
-    // this.axe = new Phaser.Image(
-    //   this.game,
-    //   15,
-    //   -15,
-    //   'axe'
-    // );
-    // this.addChild(this.axe);
-    // this.axe.scale.x = 0.3;
-    // this.axe.scale.y = 0.3;
+    saveMe(this.saveState.bind(this));
   }
 
-  save() {
-    // serialize and return any data that should be persited between sessions
-
-    const saveState = {
-      x: this.x,
-      y: this.y,
-      frame: this.frame,
-      faceDirection: this.faceDirection,
-      inventory: {
-        money: {
-          value: this.inventory.money.value,
-        },
-        items: {},
-      },
-    };
-
-    const items = this.inventory.items;
-    for (let itemName in items) {
-      saveState.inventory.items[itemName] = {
-        value: items[itemName].value,
-      };
-    }
-
-    return saveState;
+  saveState() {
+    save('player.location', { x: this.x, y: this.y });
+    save('player.face-direction', this.faceDirection);
   }
 }

@@ -13,30 +13,36 @@ import merge from 'deepmerge';
 
 import getGame from '../../game';
 import { load, save } from '../../save';
+import { clone } from '../../utils';
 
 import worker from './worker';
 import upgrades from './upgrades';
+import items from './items';
 
-const items = merge(Object.assign({}, worker, upgrades), load('upgrades') || {});
+const noSaveItems = Object.keys(items);
+const saveProps = ['count', 'freeCount'];
+
+const storeItems = merge(Object.assign({}, worker, upgrades, items), load('upgrades') || {});
 
 // calculate item prices
-for (let itemName in items) {
-  const item = items[itemName];
-  if (itemName.includes('hire') && item.count > 0) {
-    // player had workers last time they played
-    // offer a 100% discount on those workers
+for (let itemName in storeItems) {
+  const item = storeItems[itemName];
+  if (itemName.includes('hire') && load('world.fastObjects')) {
+    // make sure to increase count to however many workers were reloaded
+    const workerType = itemName.replace('hire-', '');
+    const workers = load('world.fastObjects').filter((type) => type === workerType);
 
-    item.freeCount = item.count;
-    item.count = 0;
+    item.count = workers.length;
   }
+
   item.price = price(item);
 }
 
-export default items;
+export default storeItems;
 
 export function buy(itemName) {
   const inventory = getGame().player.inventory;
-  const item = items[itemName];
+  const item = storeItems[itemName];
   const itemPrice = item.price;
 
   if (inventory.money < itemPrice || (item.max > 0 && item.count >= item.max)) return false;
@@ -48,7 +54,7 @@ export function buy(itemName) {
 
     item.buyCallback();
 
-    save('upgrades', items);
+    saveStore();
   });
 
   // we don't need to increment items that aren't actually buyable (basePrice === 0)
@@ -56,7 +62,7 @@ export function buy(itemName) {
     increment(item);
   } else {
     // decrement the item specified under item.decrement
-    decrement(items[item.decrement]);
+    decrement(storeItems[item.decrement]);
   }
 
   return true;
@@ -76,4 +82,25 @@ function price(item) {
   if (item.freeCount > 0) return 0;
 
   return item.basePrice * Math.pow(item.multiplier, item.count);
+}
+
+function saveStore() {
+  const itemsToSave = clone(storeItems);
+
+  // remove items that don't need to be saved
+  for (let i = 0; i < noSaveItems.length; i++) {
+    delete itemsToSave[noSaveItems[i]];
+  }
+
+  // go through remaining items, remve props that don't need to be saved
+  for (let itemName in itemsToSave) {
+    for (let propName in itemsToSave[itemName]) {
+      // only 'count' and 'freeCount' props should be saved; delete all others
+      if (propName === 'count' || propName === 'freeCount') continue;
+
+      delete itemsToSave[itemName][propName];
+    }
+  }
+
+  save('upgrades', itemsToSave);
 }
