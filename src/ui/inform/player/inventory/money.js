@@ -16,7 +16,7 @@ export default function money(newCount) {
 
     if (item.max === 0) continue;
 
-    if (+newCount >= item.price && item.count < item.max) {
+    if (+newCount >= item.price && (item.count < item.max || item.max === null)) {
       buyButtons[i].classList.remove('disabled');
     } else {
       buyButtons[i].classList.add('disabled');

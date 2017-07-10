@@ -10,5 +10,5 @@ const chances = {
 };
 
 export default function getChance(name) {
-  return chances[name] + store[name].count;
+  return chances[name] + (store[name].count * 1.5);
 }

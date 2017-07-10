@@ -41,7 +41,7 @@ export default {
   'chopper-wood-axe': {
     count: 0,
     basePrice: 14,
-    multiplier: 2.93,
+    multiplier: 1.85,
     max: 24,
     buyCallback: function() {
       const choppers = getGame().groups.character.children.filter((o) => o.objectType === 'chopper');

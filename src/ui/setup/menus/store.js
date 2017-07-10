@@ -14,7 +14,7 @@ export default function setup() {
     // if player can't afford this or is maxed, disable button
     // NOTE if item.max is 0 then another part of code handles disabling the button
     if (item.max === 0) {
-    } else if (inventory.money >= item.price && item.count < item.max) {
+    } else if (inventory.money >= item.price && (item.count < item.max || item.max === null)) {
       buttonEl.classList.remove('disabled');
     } else {
       buttonEl.classList.add('disabled');
@@ -43,7 +43,7 @@ export function updatePrice(itemName, item) {
 
   const priceSpan = document.querySelector('#buy-' + itemName + ' span.price');
 
-  if (item.count >= item.max) {
+  if (item.count >= item.max && item.max !== null) {
     // item is maxed out; disable button
     priceSpan.parentNode.classList.add('disabled');
   }

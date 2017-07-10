@@ -79,7 +79,7 @@ export default class Inventory {
     if (typeof value !== 'number') {
       this._items[item][prop] = value;
 
-      save('items', this._items);
+      saveItems.call(this);
       return;
     }
 
@@ -97,7 +97,7 @@ export default class Inventory {
       }
     }
 
-    save('items', this._items);
+    saveItems.call(this);
   }
 
   addToSlots(itemName, noSave) {
@@ -161,4 +161,16 @@ export default class Inventory {
     this.set(itemName, 'value', this.get(itemName) - amount);
     this.money += (moneyAmount * this.sellMultiplier);
   }
+}
+
+function saveItems() {
+  const items = clone(this._items);
+  for (let itemName in items) {
+    for (let prop in items[itemName]) {
+      if (prop === 'value') continue;
+
+      delete items[itemName][prop];
+    }
+  }
+  save('items', items);
 }

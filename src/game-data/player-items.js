@@ -8,7 +8,8 @@ import PineCone from '../sprites/object/PineCone';
 
 const itemMax = 500;
 
-let items = load('items') || {
+const loadedItems = load('items') || {};
+const defaultItems = {
   'wood-axe': {
     value: true,
     rank: 0,
@@ -31,9 +32,11 @@ let items = load('items') || {
   'pine-cone': {
     value: 0,
     max: itemMax,
-    sellable: true,
+    sellable: false,
   },
 };
+
+let items = Object.assign(defaultItems, loadedItems);
 items['pine-cone'].place = PineCone;
 
 let money = load('money') || 0;

@@ -4,7 +4,7 @@ export default {
   'wood-axe': {
     count: 0,
     basePrice: 14,
-    multiplier: 2.93,
+    multiplier: 1.85,
     max: 24,
     buyCallback: function() {
       getGame().player.inventory.increment('wood-axe', 'rank');
@@ -14,7 +14,7 @@ export default {
     count: 0,
     basePrice: 2.50,
     multiplier: 1.153,
-    max: 75,
+    max: 43,
     buyCallback: function() {},
   },
   'sell-price': {
@@ -30,7 +30,7 @@ export default {
     count: 0,
     basePrice: 13,
     multiplier: 1.39,
-    max: 80,
+    max: 35,
     buyCallback: function() {},
   },
 };
