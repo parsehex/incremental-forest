@@ -167,7 +167,7 @@ function saveItems() {
   const items = clone(this._items);
   for (let itemName in items) {
     for (let prop in items[itemName]) {
-      if (prop === 'value') continue;
+      if (prop === 'value' || prop === 'rank') continue;
 
       delete items[itemName][prop];
     }
