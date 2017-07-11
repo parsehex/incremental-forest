@@ -1,6 +1,6 @@
 export function findObjByKey(array, key, value) {
-  for(let i = 0, len = array.length; i < len; i++) {
-    let object = array[i];
+  for (let i = 0, len = array.length; i < len; i++) {
+    const object = array[i];
     if (typeof object === 'object' && object.hasOwnProperty(key) && object[key] === value) {
       return object;
     }

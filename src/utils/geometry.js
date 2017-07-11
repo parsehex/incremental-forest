@@ -12,16 +12,19 @@ export function nextCoord(coord, direction, size) {
 
   switch (direction) {
     case 'UP': {
-      return { x: x, y: y - size };
+      return { x, y: y - size };
     }
     case 'LEFT': {
-      return { x: x - size, y: y };
+      return { x: x - size, y };
     }
     case 'DOWN': {
-      return { x: x, y: y + size };
+      return { x, y: y + size };
     }
     case 'RIGHT': {
-      return { x: x + size, y: y };
+      return { x: x + size, y };
+    }
+    default: {
+      return { x, y };
     }
   }
 }
