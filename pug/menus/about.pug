@@ -1,9 +1,9 @@
-div.row#about-menu.menu.hidden
-  div#summary-menu.col-xs-9
++menu('about', 'hidden')
+  +submenu('summary')
     p
       a(href='https://github.com/ThomasMays/incremental-forest' target='_blank') Source Code on GitHub
     p
-      | A small experimental game attempting to bring typical 
+      | An experimental game attempting to bring typical 
       a(href='https://en.wikipedia.org/wiki/Incremental_game' target='_blank') incremental game
       |  mechanics to a game where you control the character instead of solely clicking buttons.
     p
@@ -11,12 +11,9 @@ div.row#about-menu.menu.hidden
       | Basically the same things you would do in any incremental game like 
       a(href='http://dhmstark.co.uk/games/civclicker/' target='_blank') CivClicker
       | .
-    p
-      | I think the game is fun and I had fun making it, but I won't be doing anymore significant work on this game. 
-      | I certainly have plans to explore this idea more, but I'd rather start fresh and design a new game based on what I learned here.
     
     p You can view and change controls in the Settings -> Controls menu.
-  div#how-to-play-menu.col-xs-9.hidden
+  +submenu('how-to-play', 'hidden')
     ul
       li Walk up to a tree and hold SPACE with your axe selected to start chopping it down.
       li Pick up what the tree drops.
@@ -31,18 +28,12 @@ div.row#about-menu.menu.hidden
           li Choppers will chop down any trees they can find.
           li Collectors will pick up items and put them in your inventory. (You still need to sell the logs and plant the pine cones though).
           li You can upgrade workers in their respective menus.
-  div#bugs-menu.col-xs-9.hidden
-    p I'm aware of a number of issues in the game. If enough people like the game I'll polish things up.
-    ul
-      li There are no mobile controls.
-      li Performance could be better.
-      li Upgrades could use some more tweaking I think.
-      li There's (possibly still) a bug that causes workers to just stop moving and stand still. Refreshing the page will fix it (but will reset the world and workers).
-      li The world and your workers aren't saved. I figured this was a way to get around the fact that there's a finite supply of trees and keep the game playable without fully resetting.
-      li There are 8 inventory slots and only 3 items you can get. (I had slightly bigger plans for this game at one point and didn't remove the extra slots)
-      li Controls are bit screwy at times.
-      li The UI could be better.
-  div#credits-menu.col-xs-9.hidden
+  +submenu('bugs', 'hidden')
+    p
+      | If you run across a bug, or there's a gameplay issue or enhancement you want to request, you can open an 
+      a(href='https://github.com/ThomasMays/incremental-forest/issues' target='_blank') issue on GitHub
+      |  and I'll get to it as soon as I can.
+  +submenu('credits', 'hidden')
     ul
       li
         a(href='http://courperationx.deviantart.com/' target='_blank') courperationX
@@ -63,11 +54,7 @@ div.row#about-menu.menu.hidden
     
   div.col-xs-3
     ul.list-unstyled.text-right
-      li
-        button#summary.tab.side-tab.selected(type='button') Summary
-      li
-        button#how-to-play.tab.side-tab(type='button') How To Play
-      li
-        button#bugs.tab.side-tab(type='button') Bugs/Issues
-      li
-        button#credits.tab.side-tab(type='button') Credits
+      +sideTab('summary', 'Summary', 'selected')
+      +sideTab('how-to-play', 'How To Play')
+      +sideTab('bugs', 'Bugs/Issues')
+      +sideTab('credits', 'Credits')

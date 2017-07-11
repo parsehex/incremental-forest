@@ -1,0 +1,25 @@
+mixin storeButton(id, img, price, title, label)
+  button.upgrade.disabled.store-item(id='buy-' + id, title=title)
+    if img
+      img(src='assets/sprites/' + img, alt=label)
+    span
+      | #{label}
+      if price > 0
+        |  (
+        span.price #{price}
+        | )
+
+mixin menu(id, hidden)
+  div(id=id + '-menu', class='row menu' + (hidden ? ' hidden' : ''))
+    block
+
+mixin submenu(id, hidden)
+  div(id=id + '-menu', class='col-xs-9' + (hidden ? ' hidden' : ''))
+    block
+
+mixin tab(id, label, selected)
+  button(type='button', id=id, class='tab' + (selected ? ' selected' : ''))=label
+
+mixin sideTab(id, label, selected)
+  li
+    button(type='button', id=id, class='tab side-tab' + (selected ? ' selected' : ''))=label

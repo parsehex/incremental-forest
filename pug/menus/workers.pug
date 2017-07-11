@@ -5,30 +5,24 @@ mixin count(type)
       span(id=type + '-count') 0
       |  #{type.substr(0, 1).toUpperCase() + type.substr(1)}s
 
-div.row#workers-menu.menu.hidden
-  div#chopper-menu.col-xs-9
++menu('workers', 'hidden')
+  +submenu('chopper')
     +count('chopper')
     
     +storeButton('hire-chopper', null, 150, null, 'Hire a Chopper')
     +storeButton('fire-chopper', null, 0, null, 'Fire a Chopper')
-    
     hr
-      
     +storeButton('chopper-wood-axe', null, '14', 'Chopper will chop trees down faster', 'Upgrade Wood Axe')
     +storeButton('chopper-speed', null, '25', 'Chopper will work faster', 'Upgrade Speed')
   
-  div#collector-menu.col-xs-9.hidden
+  +submenu('collector', 'hidden')
     +count('collector')
     
     +storeButton('hire-collector', null, 100, null, 'Hire a Collector')
     +storeButton('fire-collector', null, 0, null, 'Fire a Collector')
-    
     hr
-    
     +storeButton('collector-speed', null, '50', 'Collector will work faster', 'Upgrade Speed')
   div.col-xs-3
     ul.list-unstyled.text-right
-      li
-        button#chopper.tab.side-tab.worker-type.selected(type='button') Chopper
-      li
-        button#collector.tab.side-tab.worker-type(type='button') Collector
+      +sideTab('chopper', 'Chopper', 'selected')
+      +sideTab('collector', 'Collector')
