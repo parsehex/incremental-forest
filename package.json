@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "webpack",
     "deploy": "webpack --config webpack.production.config.js && npm run sass-build",
-    "test": "eslint ./src/**/*.js --fix",
+    "lint": "eslint ./src/**/*.js",
     "server": "ws -p 8080 -c -n",
     "sprites": "node build-spritesheets",
     "sass-build": "node-sass --output-style=compressed scss/index.scss css/style.css",
