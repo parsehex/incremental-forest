@@ -15,6 +15,7 @@ export default function() {
     Tippy('#top-menu #money, [title]', {
       size: 'small',
       duration: 0,
+      trigger: 'mouseenter',
     });
   }
 
