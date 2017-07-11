@@ -12,6 +12,12 @@ mixin control(label, id, defaultValue)
       | Auto Save
       input#autosave(type='checkbox' checked)
     button#save(type='button') Save Game
+    hr
+    input#save-data(type='text')
+    button#restore(type='button') Restore
+    br
+    button#backup(type='button') Backup Save
+    
     
   +submenu('controls', 'hidden')
     +control('Move Up', 'up', 'W')

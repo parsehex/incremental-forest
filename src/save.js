@@ -13,6 +13,18 @@ if (data) {
   data = {};
 }
 
+export function backup() {
+  return JSON.stringify(data);
+}
+export function restore(restoreData) {
+  data = JSON.parse(restoreData);
+  forceSave();
+
+  // there's no way load data mid-game, so reload the page
+  autoSave = false;
+  window.location.reload();
+}
+
 // debugging
 window.saveData = data;
 
