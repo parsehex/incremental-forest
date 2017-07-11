@@ -1,3 +1,5 @@
+/* eslint-disable key-spacing */
+
 export default {
   GRASS:         0,
   MUD:           1,
