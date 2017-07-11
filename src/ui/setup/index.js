@@ -1,4 +1,4 @@
-import { bindItemSlot } from '../bind-item';
+import bindItemSlot from '../bind-item';
 import setupMenus from './menus';
 import setupControls from './controls';
 import { isTouchDevice } from '../../utils';
