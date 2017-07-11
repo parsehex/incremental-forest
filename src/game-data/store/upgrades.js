@@ -14,7 +14,7 @@ export default {
     count: 0,
     basePrice: 2.50,
     multiplier: 1.153,
-    max: 43,
+    max: 40,
     buyCallback: function() {},
   },
   'sell-price': {
