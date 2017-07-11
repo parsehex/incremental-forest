@@ -1,4 +1,5 @@
 import config from './config';
+import getGame from './game';
 
 export const REALLY_BIG_NUMBER = 999999999999999;
 
@@ -91,7 +92,7 @@ export function tileOutOfBounds(tileCoord) {
 }
 
 export function tryChance(chance) {
-  const randomNumber = Math.floor(Math.random() * 100) + 1;
+  const randomNumber = getGame().rnd.integerInRange(0, 100);
 
   return randomNumber <= chance;
 }
