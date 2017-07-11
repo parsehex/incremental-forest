@@ -1,5 +1,4 @@
 import devtools from '../devtools';
-import { clamp } from '../utils';
 import store from './store';
 
 const testing = devtools.enabled && devtools.betterChances;

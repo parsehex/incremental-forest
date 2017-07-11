@@ -1,9 +1,6 @@
-import devtools from '../devtools';
-import { REALLY_BIG_NUMBER } from '../utils';
-import { load } from '../save';
-
 import merge from 'deepmerge';
 
+import { load } from '../save';
 import PineCone from '../sprites/object/PineCone';
 
 const itemMax = 500;
@@ -36,9 +33,9 @@ const defaultItems = {
   },
 };
 
-let items = merge(defaultItems, loadedItems);
+const items = merge(defaultItems, loadedItems);
 items['pine-cone'].place = PineCone;
 
-let money = load('money') || 0;
+const money = load('money') || 0;
 
 export { items, money };
