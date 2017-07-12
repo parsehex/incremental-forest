@@ -14,7 +14,6 @@ class ObjectPool {
       return new objectClass(arg);
     } else {
       const object = pool.pop();
-      // if (object.objectType === 'pine-cone') console.log(object.placed);
 
       object.reset(arg.x, arg.y);
 
