@@ -6,9 +6,18 @@ if (version != loadedVersion) {
   localStorage.setItem('save-version', version);
 }
 
+import LZString from 'lz-string';
+
 let data = localStorage.getItem('game');
 if (data) {
-  data = JSON.parse(data);
+  const decompressedData = LZString.decompress(data);
+
+  if (decompressedData) {
+    data = JSON.parse(decompressedData);
+  } else {
+    // data was probably not compressed
+    data = JSON.parse(data);
+  }
 } else {
   data = {};
 }
@@ -60,7 +69,7 @@ function callSaves() {
 }
 
 export function forceSave() {
-  localStorage.setItem('game', JSON.stringify(data));
+  localStorage.setItem('game', LZString.compress(JSON.stringify(data)));
 
   console.log('game saved');
 }

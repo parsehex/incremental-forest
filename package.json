@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "deepmerge": "^1.4.4",
+    "lz-string": "^1.4.4",
     "phaser-ce": "^2.7.9"
   }
 }
