@@ -1,3 +1,8 @@
+const options = {
+  watch: true,
+  quick: false,
+};
+
 var path = require('path');
 var webpack = require('webpack');
 // var BrowserSyncPlugin = require('browser-sync-webpack-plugin');
@@ -13,12 +18,11 @@ var p2 = path.join(phaserModule, 'build/custom/p2.js');
 
 var definePlugin = new webpack.DefinePlugin({
   __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV || 'true'))
-})
+});
 
-module.exports = {
+const config = {
   entry: {
     app: [
-      'babel-polyfill',
       path.resolve(__dirname, 'src/main.js')
     ],
     vendor: [
@@ -36,10 +40,10 @@ module.exports = {
     publicPath: './dist/',
     filename: 'bundle.js',
   },
-  watch: true,
+  watch: options.watch,
   plugins: [
     definePlugin,
-    new webpack.optimize.CommonsChunkPlugin({ name: 'vendor'/* chunkName= */, filename: 'vendor.bundle.js'/* filename= */}),
+    new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'vendor.bundle.js'}),
     // new BrowserSyncPlugin({
     //   host: process.env.IP || 'localhost',
     //   port: process.env.PORT || 3000,
@@ -50,7 +54,6 @@ module.exports = {
   ],
   module: {
     rules: [
-      { test: /\.js$/, use: ['babel-loader'], include: path.join(__dirname, 'src') },
       { test: /pixi\.js/, use: ['expose-loader?PIXI'] },
       { test: /phaser-split\.js$/, use: ['expose-loader?Phaser'] },
       { test: /p2\.js/, use: ['expose-loader?p2'] },
@@ -71,3 +74,16 @@ module.exports = {
     }
   }
 };
+
+if (options.quick) {
+  delete config.devtool;
+} else {
+  config.entry.app.push(
+    'babel-polyfill'
+  );
+  config.module.rules.push(
+    { test: /\.js$/, use: ['babel-loader'], include: path.join(__dirname, 'src') }
+  );
+}
+
+module.exports = config;
