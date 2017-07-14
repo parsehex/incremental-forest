@@ -1,5 +1,5 @@
 import config from './config';
-import { indexOfObject, clone } from './utils';
+import { clone } from './utils';
 import { tileToPixel } from './tiles';
 import { save, saveMe } from './save';
 
@@ -12,7 +12,7 @@ export const fastObjects = [];
 
 const map = [];
 
-const objects = {};
+const objects = new Map();
 
 export function getMap() {
   return clone(map);
@@ -48,9 +48,9 @@ export function count(type) {
 
 const subscribers = [];
 
-function change(tileCoord) {
+function change(tileX, tileY) {
   for (let i = 0; i < subscribers.length; i++) {
-    subscribers[i][1](tileCoord, objectsAtTile(tileCoord));
+    subscribers[i][1](tileX, tileY, objectsAtTile(tileX, tileY));
   }
 }
 export function removeListener(id) {
@@ -65,56 +65,56 @@ export function onChange(id, callback) {
   subscribers.push([ id, callback ]);
 }
 
-export function add() {
-  objects[this.id] = this;
+export function add(tileX, tileY, id, type, object) {
+  objects.set(id, object);
 
-  map[this.tile.y][this.tile.x].push(this.id);
-  fastMap[this.tile.y][this.tile.x].push(this.objectType);
+  map[tileY][tileX].push(id);
+  fastMap[tileY][tileX].push(type);
 
   // add objectType to a list of objects on map
-  fastObjects.push(this.objectType);
+  fastObjects.push(type);
 
-  change(this.tile);
+  change(tileX, tileY);
 }
 
-export function remove() {
-  const mapTile = map[this.tile.y][this.tile.x];
-  const fastMapTile = fastMap[this.tile.y][this.tile.x];
+export function remove(tileX, tileY, id, type) {
+  const mapTile = map[tileY][tileX];
+  const fastMapTile = fastMap[tileY][tileX];
 
-  const index = mapTile.indexOf(this.id);
+  const index = mapTile.indexOf(id);
 
   mapTile.splice(index, 1);
   fastMapTile.splice(index, 1);
 
-  delete objects[this.id];
+  objects.delete(id);
 
   // remove first instance of objectType (not necessarily the instance that this object added)
-  fastObjects.splice(fastObjects.indexOf(this.objectType), 1);
+  fastObjects.splice(fastObjects.indexOf(type), 1);
 
-  change(this.tile);
+  change(tileX, tileY);
 }
-export function changeType(newType) {
-  const fastMapTile = fastMap[this.tile.y][this.tile.x];
+export function changeType(tileX, tileY, oldType, newType) {
+  const fastMapTile = fastMap[tileY][tileX];
 
-  fastMapTile[fastMapTile.indexOf(this.objectType)] = newType;
+  fastMapTile[fastMapTile.indexOf(oldType)] = newType;
 
-  fastObjects[fastObjects.indexOf(this.objectType)] = newType;
+  fastObjects[fastObjects.indexOf(oldType)] = newType;
 }
 
-export function addCharacter(tileCoord, type) {
-  fastMap[tileCoord.y][tileCoord.x].push(type);
+export function addCharacter(tileX, tileY, type) {
+  fastMap[tileY][tileX].push(type);
   fastObjects.push(type);
 }
-export function moveCharacter(oldTileCoord, newTileCoord, type) {
-  const oldMapTile = fastMap[oldTileCoord.y][oldTileCoord.x];
+export function moveCharacter(oldTileX, oldTileY, newTileX, newTileY, type) {
+  const oldMapTile = fastMap[oldTileY][oldTileX];
   const oldIndex = oldMapTile.indexOf(type);
 
   if (oldIndex >= 0) oldMapTile.splice(oldIndex, 1);
 
-  fastMap[newTileCoord.y][newTileCoord.x].push(type);
+  fastMap[newTileY][newTileX].push(type);
 }
-export function removeCharacter(tileCoord, type) {
-  const mapTile = fastMap[tileCoord.y][tileCoord.x];
+export function removeCharacter(tileX, tileY, type) {
+  const mapTile = fastMap[tileY][tileX];
   const index = mapTile.indexOf(type);
 
   if (index < 0) return;
@@ -123,11 +123,10 @@ export function removeCharacter(tileCoord, type) {
   fastObjects.splice(fastObjects.indexOf(type), 1);
 }
 
-// TODO objectTypesAtTile?
-export function objectsAtTile(tileCoord) {
-  const pixelCoord = tileToPixel(tileCoord);
-  const boundsWidth = config.mapWidth * config.tileWidth;
-  const boundsHeight = config.mapHeight * config.tileHeight;
+const boundsWidth = config.mapWidth * config.tileWidth;
+const boundsHeight = config.mapHeight * config.tileHeight;
+export function objectsAtTile(tileX, tileY) {
+  const pixelCoord = tileToPixel(tileX, tileY);
 
   if (
     pixelCoord.x < 0 || pixelCoord.x > boundsWidth ||
@@ -136,11 +135,11 @@ export function objectsAtTile(tileCoord) {
     return [];
   }
 
-  const mapTile = map[tileCoord.y][tileCoord.x];
+  const mapTile = map[tileY][tileX];
   const tileObjects = [];
 
   for (let i = 0, len = mapTile.length; i < len; i++) {
-    tileObjects.push(objects[mapTile[i]]);
+    tileObjects.push(objects.get(mapTile[i]));
   }
 
   return tileObjects;

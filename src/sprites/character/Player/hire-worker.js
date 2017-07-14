@@ -5,7 +5,6 @@ import objectPool from '../../../object-pool';
 import workerPool from '../../../worker-pool';
 
 import { fastMap, fastObjects } from '../../../world';
-import { clone, nextCoord } from '../../../utils';
 import { collidableObjects } from '../../../collisions';
 import { tileToPixel } from '../../../tiles';
 import config from '../../../config';
@@ -30,7 +29,7 @@ export default function hireWorker(workerType) {
       };
     }
     // will default to this.tile if no other available tiles
-    const workerPixelCoord = tileToPixel(path);
+    const workerPixelCoord = tileToPixel(path.x, path.y);
 
     const Worker = workerTypes[workerType];
 

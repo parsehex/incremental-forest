@@ -24,22 +24,22 @@ const objectTypes = {
 
 export default function loadFromSave() {
   const fastMap = load('world.fastMap');
-  
-  for (let y = 0; y < config.mapHeight; y++) {
-    for (let x = 0; x < config.mapWidth; x++) {
-      if (fastMap[y][x].length === 0) continue;
 
-      for (let i = 0; i < fastMap[y][x].length; i++) {
-        spawnObject.call(this, fastMap[y][x][i], { x, y });
+  for (let tileY = 0; tileY < config.mapHeight; tileY++) {
+    for (let tileX = 0; tileX < config.mapWidth; tileX++) {
+      if (fastMap[tileY][tileX].length === 0) continue;
+
+      for (let i = 0; i < fastMap[tileY][tileX].length; i++) {
+        spawnObject.call(this, fastMap[tileY][tileX][i], tileX, tileY);
       }
     }
   }
 }
 
-function spawnObject(objectType, tileCoord) {
+function spawnObject(objectType, tileX, tileY) {
   if (objectType === 'player') return;
 
-  const start = tileToPixel(tileCoord);
+  const start = tileToPixel(tileX, tileY);
 
   const props = {
     game: this.game,

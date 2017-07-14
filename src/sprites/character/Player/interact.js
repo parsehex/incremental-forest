@@ -9,7 +9,7 @@ const modes = { INTERACT: 0, PICK: 1, PLACE: 2 };
 export default function tryInteract() {
   const { cursor, inventory } = this;
 
-  if (tileOutOfBounds(cursor.tile)) return;
+  if (tileOutOfBounds(cursor.tile.x, cursor.tile.y)) return;
 
   const cursorObjects = cursor.objects;
   const cursorObjectTypes = fastMap[cursor.tile.y][cursor.tile.x];
@@ -73,9 +73,10 @@ function placeItem() {
   if (!inventory.selected || !item('place')) return;
 
   if (item() > 0) {
-    const pixelCoord = tileToPixel(cursor.tile);
+    const pixelCoord = tileToPixel(cursor.tile.x, cursor.tile.y);
+    const tileCoord = pixelToTile(pixelCoord.x, pixelCoord.y);
 
-    if (tileOutOfBounds(pixelToTile(pixelCoord))) return;
+    if (tileOutOfBounds(tileCoord.x, tileCoord.y)) return;
 
     const Item = item('place');
     const placedItem = objectPool.new(inventory.selected, Item, {

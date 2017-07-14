@@ -1,18 +1,12 @@
 import Phaser from 'phaser';
 
-import { tile, nextTile, alignToGrid, pixelToTile } from '../../tiles';
-import { clone } from '../../utils';
+import { pixelToTile } from '../../tiles';
 import objectPool from '../../object-pool';
 
 import tween from './tween';
 
 export default class extends Phaser.Image {
   constructor(game, x, y, sprite, frame, id, objectType) {
-    const alignedCoords = alignToGrid({ x, y });
-
-    x = alignedCoords.x;
-    y = alignedCoords.y;
-
     super(game, x, y, sprite, frame);
 
     this.anchor.setTo(0.5, 0.5);
@@ -40,7 +34,7 @@ export default class extends Phaser.Image {
   }
 
   setTile() {
-    this.tile = tile.call(this);
+    this.tile = pixelToTile(this.x, this.y);
   }
 
   resetObject() {

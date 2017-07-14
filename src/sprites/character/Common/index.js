@@ -11,12 +11,12 @@ export default class CommonCharacter extends Common {
 
     this.game.state.states.Game.groups.character.add(this);
 
-    addCharacter(this.tile, this.objectType);
+    addCharacter(this.tile.x, this.tile.y, this.objectType);
   }
 
   move(nextPixelCoord) {
-    const nextTileCoord = pixelToTile(nextPixelCoord);
-    if (tileOutOfBounds(nextTileCoord)) return;
+    const nextTileCoord = pixelToTile(nextPixelCoord.x, nextPixelCoord.y);
+    if (tileOutOfBounds(nextTileCoord.x, nextTileCoord.y)) return;
 
     if (this.cursor) {
       this.cursor.move();
@@ -25,7 +25,7 @@ export default class CommonCharacter extends Common {
     const oldTileCoord = this.tile;
 
     super.move(nextPixelCoord, function() {
-      moveCharacter(oldTileCoord, this.tile, this.objectType);
+      moveCharacter(oldTileCoord.x, oldTileCoord.y, this.tile.x, this.tile.y, this.objectType);
     });
   }
 
@@ -39,11 +39,11 @@ export default class CommonCharacter extends Common {
   resetObject() {
     super.resetObject();
 
-    addCharacter(this.tile, this.objectType);
+    addCharacter(this.tile.x, this.tile.y, this.objectType);
   }
 
   destroy() {
-    removeCharacter(this.tile, this.objectType);
+    removeCharacter(this.tile.x, this.tile.y, this.objectType);
 
     super.destroy();
   }

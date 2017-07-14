@@ -7,9 +7,7 @@ export function centerOfObject(object, map) {
   };
 }
 
-export function nextCoord(coord, direction, size) {
-  const { x, y } = coord;
-
+export function nextCoord(x, y, direction, size) {
   switch (direction) {
     case 'UP': {
       return { x, y: y - size };
@@ -29,15 +27,15 @@ export function nextCoord(coord, direction, size) {
   }
 }
 
-export function pixelOutOfBounds(pixelCoord) {
+export function pixelOutOfBounds(pixX, pixY) {
   return (
-    pixelCoord.x < 0 || pixelCoord.x >= config.gameWidth ||
-    pixelCoord.y < 0 || pixelCoord.y >= config.gameHeight
+    pixelX < 0 || pixelX >= config.gameWidth ||
+    pixelY < 0 || pixelY >= config.gameHeight
   );
 }
-export function tileOutOfBounds(tileCoord) {
+export function tileOutOfBounds(tileX, tileY) {
   return (
-    tileCoord.x < 0 || tileCoord.x >= config.mapWidth ||
-    tileCoord.y < 0 || tileCoord.y >= config.mapHeight
+    tileX < 0 || tileX >= config.mapWidth ||
+    tileY < 0 || tileY >= config.mapHeight
   );
 }
