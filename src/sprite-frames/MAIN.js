@@ -8,5 +8,6 @@ export default {
   TREE:          4,
   WATER:         5,
   DIRT:          6,
-  HOUSE:         7,
+  ROCKS:         7,
+  HOUSE:         8,
 };
