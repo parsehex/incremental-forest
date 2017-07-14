@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" tiledversion="1.0.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="32" tileheight="32" nextobjectid="5100">
- <tileset firstgid="1" name="sprites" tilewidth="32" tileheight="32" tilecount="10" columns="10">
+ <tileset firstgid="1" name="sprites" tilewidth="32" tileheight="32" tilecount="9" columns="9">
   <image source="../assets/spritesheets/tiles.png" width="320" height="32"/>
  </tileset>
  <layer name="background" width="30" height="30">
