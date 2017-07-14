@@ -22,8 +22,6 @@ export default class extends Phaser.Image {
 
     this.objectType = objectType || 'generic';
 
-    this.timers = [];
-
     this.tile = {};
 
     this.setTile();
