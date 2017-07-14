@@ -1,6 +1,9 @@
 import objectPool from '../../../../object-pool';
 import { centerOfObject } from '../../../../utils';
 
+import Tree from '../../../../sprites/object/Tree';
+import Water from '../../../../sprites/object/Water';
+
 export default function loadFromMap() {
   objects.call(this, 'trees', 'tree', Tree);
   objects.call(this, 'water', 'water', Water);
