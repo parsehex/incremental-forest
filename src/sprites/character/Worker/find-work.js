@@ -1,5 +1,4 @@
 import { fastMap, fastObjects } from '../../../world';
-import { clone, nextCoord } from '../../../utils';
 import { collidableObjects } from '../../../collisions';
 import config from '../../../config';
 

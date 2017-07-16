@@ -3,16 +3,16 @@ import { save } from '../save';
 export default function setup(menuName) {
   // bind menu button + toggle other menus
   // check if menu has tabs, setup if so
-  document.getElementById(menuName).addEventListener('click', function() {
+  document.getElementById(menuName).addEventListener('click', () => {
     openTab(menuName);
 
-    const sideTab = document.querySelector('#' + menuName + '-menu .side-tab.selected');
+    const sideTabEl = document.querySelector(`#${menuName}-menu .side-tab.selected`);
 
     save('ui.tab', menuName);
-    save('ui.side-tab', sideTab.id);
+    save('ui.side-tab', sideTabEl.id);
   });
 
-  const sideTabs = document.querySelectorAll('#' + menuName + '-menu .side-tab');
+  const sideTabs = document.querySelectorAll(`#${menuName}-menu .side-tab`);
   for (let i = 0; i < sideTabs.length; i++) {
     sideTab(menuName, sideTabs[i].id);
   }
@@ -36,19 +36,19 @@ export function openTab(tabName) {
   lastMenu.classList.add('hidden');
 
   // open the clicked menu
-  document.getElementById(tabName + '-menu').classList.remove('hidden');
+  document.getElementById(`${tabName}-menu`).classList.remove('hidden');
   document.getElementById(tabName).classList.add('selected');
 }
 export function openSideTab(menuName, sideTabName) {
-  const lastButtonEl = document.querySelector('#' + menuName + '-menu button.selected');
+  const lastButtonEl = document.querySelector(`#${menuName}-menu button.selected`);
   lastButtonEl.classList.remove('selected');
 
-  const lastMenuEl = document.getElementById(lastButtonEl.id + '-menu');
+  const lastMenuEl = document.getElementById(`${lastButtonEl.id}-menu`);
   lastMenuEl.classList.add('hidden');
 
   const sideTabButtonEl = document.getElementById(sideTabName);
   sideTabButtonEl.classList.add('selected');
 
-  const sideTabMenuEl = document.getElementById(sideTabName + '-menu');
+  const sideTabMenuEl = document.getElementById(`${sideTabName}-menu`);
   sideTabMenuEl.classList.remove('hidden');
 }

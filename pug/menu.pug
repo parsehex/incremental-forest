@@ -1,9 +1,9 @@
 div.row
   div.col-xs-12
-    button#store.tab.selected(type='button') Store
-    button#workers.tab(type='button') Workers
-    button#settings.tab(type='button') Settings
-    button#about.tab(type='button') About
+    +tab('store', 'Store', 'selected')
+    +tab('workers', 'Workers')
+    +tab('settings', 'Settings')
+    +tab('about', 'About')
 include ./menus/store.pug
 include ./menus/workers.pug
 include ./menus/settings.pug

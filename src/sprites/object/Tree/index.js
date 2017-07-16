@@ -1,7 +1,6 @@
 import CommonObject from '../Common';
 
 import frames from '../../../sprite-frames';
-import { hideHint } from '../../../ui';
 
 import { facing, notFacing } from './facing';
 import interact from './interact';
@@ -23,7 +22,7 @@ export default class extends CommonObject {
 
   resetObject() {
     super.resetObject();
-    
+
     this.progress = 0;
 
     if (this.bar) this.bar.update();

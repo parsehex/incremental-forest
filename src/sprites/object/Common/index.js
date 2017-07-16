@@ -15,23 +15,37 @@ export default class CommonObject extends Common {
 
     this.game.state.states.Game.groups.objects.add(this);
 
-    add.call(this, null);
+    add(
+      this.tile.x, this.tile.y,
+      this.id, this.objectType,
+      this
+    );
   }
 
   changeType(newType) {
-    changeType.call(this, newType);
+    changeType(
+      this.tile.x, this.tile.y,
+      this.objectType, newType
+    );
 
     this.objectType = newType;
   }
 
   resetObject() {
     super.resetObject();
-    
-    add.call(this, null);
+
+    add(
+      this.tile.x, this.tile.y,
+      this.id, this.objectType,
+      this
+    );
   }
 
   destroy() {
-    remove.call(this);
+    remove(
+      this.tile.x, this.tile.y,
+      this.id, this.objectType,
+    );
 
     super.destroy();
   }

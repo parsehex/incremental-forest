@@ -25,7 +25,6 @@ export default class extends CommonCharacter {
     super(game, x, y, 'guy', frames.GUY['STAND_' + faceDirection], 'player', 'player');
 
     this.faceDirection = faceDirection;
-    this.faceObjects = [];
 
 		this.speed = devtools.enabled ? devtools.playerSpeed : 10;
 

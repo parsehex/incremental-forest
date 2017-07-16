@@ -1,4 +1,4 @@
-import { bindItemSlot } from '../bind-item';
+import bindItemSlot from '../bind-item';
 import setupMenus from './menus';
 import setupControls from './controls';
 import { isTouchDevice } from '../../utils';
@@ -15,6 +15,7 @@ export default function() {
     Tippy('#top-menu #money, [title]', {
       size: 'small',
       duration: 0,
+      trigger: 'mouseenter',
     });
   }
 

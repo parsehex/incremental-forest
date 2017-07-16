@@ -61,7 +61,7 @@ export default class extends CommonCharacter {
     // called when a worker has no available path; waits on the world to change
     this.timer.pause();
 
-    onChange(this.id, (tileCoord, objects) => {
+    onChange(this.id, (tileX, tileY, objects) => {
       if (objects.length === 0) {
         // worker might have been stuck; try to pathfind again
         removeListener(this.id);

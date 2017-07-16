@@ -29,8 +29,10 @@ export function setupPause() {
 export function pause(state, manual) {
   if (state === 'toggle') {
     this.game.paused = !this.game.paused;
+    this.game.lockRender = this.game.paused;
   } else if (typeof state === 'boolean') {
     this.game.paused = state;
+    this.game.lockRender = state;
   }
 
   this.game.manuallyPaused = manual && this.game.paused;

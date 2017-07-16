@@ -5,8 +5,8 @@ import { tileToPixel } from '../../../../tiles';
 import { nextCoord } from '../../../../utils';
 
 export default function draw() {
-  let cursorTileCoord = nextCoord(this.player.tile, this.player.faceDirection, 1);
-  let cursorPixelCoord = tileToPixel(cursorTileCoord);
+  let cursorTileCoord = nextCoord(this.player.tile.x, this.player.tile.y, this.player.faceDirection, 1);
+  let cursorPixelCoord = tileToPixel(cursorTileCoord.x, cursorTileCoord.y);
 
   cursorPixelCoord.x -= 16;
   cursorPixelCoord.y -= 16;
