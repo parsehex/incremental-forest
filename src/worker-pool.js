@@ -1,13 +1,13 @@
 class WorkerPool {
   constructor() {
-    this.path = 'web-worker/path-find.js';
-    this.pool = [];
-    this.potentialWorkers = 0;
+    this._path = 'web-worker/path-find.js';
+    this._pool = [];
+    this._potentialWorkers = 0;
 
-    this.logCount = 0;
+    this._logCount = 0;
   }
   addTask(args, callback) {
-    const thisWorker = this.getFreeWorker();
+    const thisWorker = this._getFreeWorker();
     thisWorker.busy = true;
 
     thisWorker.worker.onmessage = function(event) {
@@ -19,50 +19,49 @@ class WorkerPool {
 
     thisWorker.worker.postMessage(args);
 
-    this.logCount++;
-    if (this.logCount % 10 === 0) this.cleanUp();
+    this._logCount++;
+    if (this._logCount % 10 === 0) this._cleanUp();
   }
   register() {
-    this.potentialWorkers++;
+    this._potentialWorkers++;
   }
   unregister() {
-    this.potentialWorkers--;
+    this._potentialWorkers--;
   }
 
-  getFreeWorker() {
-    for (let i = 0; i < this.pool.length; i++) {
-      if (!this.pool[i].busy) return this.pool[i];
+  _getFreeWorker() {
+    for (let i = 0; i < this._pool.length; i++) {
+      if (!this._pool[i].busy) return this._pool[i];
     }
 
     // no free workers; return a new one
-    return this.createWorker();
+    return this._createWorker();
   }
-  createWorker() {
+  _createWorker() {
     const newWorker = {
-      worker: new Worker(this.path),
+      worker: new Worker(this._path),
       busy: false,
     };
-    this.pool.push(newWorker);
+    this._pool.push(newWorker);
 
     return newWorker;
   }
-  removeWorker(index) {
-    this.pool[index].worker.terminate();
-    this.pool.splice(index, 1);
+  _removeWorker(index) {
+    this._pool[index].worker.terminate();
+    this._pool.splice(index, 1);
   }
-  cleanUp() {
-    if (this.pool.length > this.potentialWorkers) {
+  _cleanUp() {
+    if (this._pool.length > this._potentialWorkers) {
       // there are more workers than there are objects that have registered as needing a worker
       // remove non-busy workers until these two numbers match up
       // if there aren't enough non-busy workers to remove, they'll probably be removed at next clean up
 
-      for (let i = this.pool.length - 1; i >= 0 && this.pool.length > this.potentialWorkers; i--) {
-        if (this.pool[i].busy) continue;
+      for (let i = this._pool.length - 1; i >= 0 && this._pool.length > this._potentialWorkers; i--) {
+        if (this._pool[i].busy) continue;
 
-        this.removeWorker(i);
+        this._removeWorker(i);
       }
     }
-    // console.log('currently have', this.pool.length, 'workers');
   }
 }
 
