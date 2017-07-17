@@ -10,9 +10,13 @@ export function findObjByKey(array, key, value) {
 
 export const clone = (obj) => JSON.parse(JSON.stringify(obj));
 
-export function indexOfObject(arr, name, value) {
-  for (let i = 0, len = arr.length; i < len; i++) {
-    if (arr[i][name] === value) return i;
+export function indexOfObject(array, propName, propValue) {
+  // search an array of objects, returning the index of the first object with specified prop value
+
+  const len = array.length;
+  for (let i = 0; i < len; i++) {
+    if (array[i][propName] === propValue) return i;
   }
+
   return -1;
 }
