@@ -29,11 +29,11 @@ export default function loadFromSave() {
   for (let i = 0; i < len; i++) {
     // loop through each tile
 
+    const y = Math.floor(i / config.mapHeight);
+    const x = i - (y * config.mapHeight);
+
     for (let k = 0; k < fastMap[i].length; k++) {
       // loop through and create each object at tile
-
-      const y = Math.floor(i / config.mapHeight);
-      const x = i - (y * config.mapHeight);
 
       spawnObject.call(this, fastMap[i][k], x, y);
     }

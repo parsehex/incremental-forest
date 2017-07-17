@@ -24,7 +24,7 @@ class World {
 
     saveMe(() => {
       // should be able to reload all objects and workers from fastMap
-      
+
       save('world.fastMap', this.fastMap);
     });
   }
@@ -100,7 +100,7 @@ class World {
 
     // NOTE to get index from 2D: x * width + y
       // from https://stackoverflow.com/a/1730975
-    return this.map[(x * config.mapWidth) + y];
+    return this.map[(y * config.mapHeight) + x];
   }
   fastTile(x, y) {
     // return an array of objectTypes at x/y

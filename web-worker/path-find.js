@@ -123,7 +123,7 @@ function findPath(data) {
   }
 
   function checkTargetType(location, targetTypes) {
-    const mapTile = fastMap[(location.x * mapWidth) + location.y];
+    const mapTile = fastMap[(location.y * mapHeight) + location.x];
 
     if (mapTile.length === 0) return false;
 
@@ -135,7 +135,7 @@ function findPath(data) {
   }
 
   function checkTargetEmpty(location) {
-    return fastMap[(location.x * mapWidth) + location.y].length === 0;
+    return fastMap[(location.y * mapHeight) + location.x].length === 0;
   }
 
   function checkTargetLocation(location) {
@@ -166,7 +166,7 @@ function findPath(data) {
       return location;
     }
 
-    const mapTile = fastMap[(x * mapWidth) + y];
+    const mapTile = fastMap[(y * mapHeight) + x];
 
     for (let i = 0; i < collidableObjects.length; i++) {
       if (mapTile.includes(collidableObjects[i])) {
