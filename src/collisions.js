@@ -1,4 +1,4 @@
-import { objectsAtTile, fastMap } from './world';
+import world from './world';
 import { pixelToTile } from './tiles';
 import config from './config';
 
@@ -6,7 +6,7 @@ const boundsWidth = config.mapWidth * config.tileWidth;
 const boundsHeight = config.mapHeight * config.tileHeight;
 const { mapWidth, mapHeight } = config;
 
-export default function checkCollide(pixX, pixY) {
+export default function checkCollide(pixX, pixY, id) {
   // check if next coord is out of bounds
   if (pixX < 0 || pixX > boundsWidth || pixY < 0 || pixY > boundsHeight) {
     return {
@@ -16,10 +16,10 @@ export default function checkCollide(pixX, pixY) {
   }
 
   const tileCoord = pixelToTile(pixX, pixY);
-  const objects = objectsAtTile(tileCoord.x, tileCoord.y);
+  const objects = world.tile(tileCoord.x, tileCoord.y);
 
   for (let i = 0, len = objects.length; i < len; i++) {
-    if (objects[i].collides !== false) {
+    if (objects[i].collides !== false && objects[i].id !== id) {
       return {
         collides: true,
         objects,
@@ -42,7 +42,7 @@ export function quickCheckCollide(tileX, tileY, addedCollidables) {
   // check if next coord is out of bounds
   if (tileX < 0 || tileX >= mapWidth || tileY < 0 || tileY >= mapHeight) return true;
 
-  const mapTile = fastMap[tileY][tileX];
+  const mapTile = world.fastTile(tileX, tileY);
 
   for (let i = 0; i < mapTile.length; i++) {
     if (collidables.includes(mapTile[i])) return true;

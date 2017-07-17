@@ -1,6 +1,6 @@
 import interfaceWithObjects from '../Common/interface-objects';
 import { pixelToTile, tileToPixel } from '../../../tiles';
-import { fastMap } from '../../../world';
+import world from '../../../world';
 import { tileOutOfBounds } from '../../../utils';
 import objectPool from '../../../object-pool';
 
@@ -12,7 +12,7 @@ export default function tryInteract() {
   if (tileOutOfBounds(cursor.tile.x, cursor.tile.y)) return;
 
   const cursorObjects = cursor.objects;
-  const cursorObjectTypes = fastMap[cursor.tile.y][cursor.tile.x];
+  const cursorObjectTypes = world.fastTile(cursor.tile.x, cursor.tile.y);
   const selectedItem = inventory.selected;
 
   const mode = getMode.call(this);

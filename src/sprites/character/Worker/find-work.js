@@ -1,4 +1,4 @@
-import { fastMap, fastObjects } from '../../../world';
+import world from '../../../world';
 import { collidableObjects } from '../../../collisions';
 import config from '../../../config';
 
@@ -10,7 +10,7 @@ export default function findWork() {
   const collidables = collidableObjects.concat(['chopper', 'collector', 'planter']);
 
   const workerArgs = [
-    fastMap, fastObjects, collidables,
+    world.fastMap, collidables,
     config.mapWidth, config.mapHeight,
     this.tile, this.targetObjects,
     true,

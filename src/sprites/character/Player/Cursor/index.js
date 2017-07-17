@@ -1,7 +1,7 @@
 import draw from './draw';
 import move from './move';
 
-import { objectsAtTile, onChange } from '../../../../world';
+import world from '../../../../world';
 import { pixelToTile } from '../../../../tiles';
 
 export default class Cursor {
@@ -14,7 +14,7 @@ export default class Cursor {
 
     this.draw();
 
-    onChange('player-cursor', (tileX, tileY, objects) => {
+    world.subscribe('player-cursor', (tileX, tileY, objects) => {
       // we don't care about tiles the cursor isn't on
       if (tileX !== this.tile.x || tileY !== this.tile.y) return;
 
@@ -25,6 +25,6 @@ export default class Cursor {
   setTile() {
     this.tile = pixelToTile(this.graphic.x, this.graphic.y);
 
-    this.objects = objectsAtTile(this.tile.x, this.tile.y);
+    this.objects = world.tile(this.tile.x, this.tile.y);
   }
 }

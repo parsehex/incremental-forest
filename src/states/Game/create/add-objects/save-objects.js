@@ -25,13 +25,17 @@ const objectTypes = {
 export default function loadFromSave() {
   const fastMap = load('world.fastMap');
 
-  for (let tileY = 0; tileY < config.mapHeight; tileY++) {
-    for (let tileX = 0; tileX < config.mapWidth; tileX++) {
-      if (fastMap[tileY][tileX].length === 0) continue;
+  const len = fastMap.length;
+  for (let i = 0; i < len; i++) {
+    // loop through each tile
 
-      for (let i = 0; i < fastMap[tileY][tileX].length; i++) {
-        spawnObject.call(this, fastMap[tileY][tileX][i], tileX, tileY);
-      }
+    for (let k = 0; k < fastMap[i].length; k++) {
+      // loop through and create each object at tile
+
+      const y = Math.floor(i / config.mapHeight);
+      const x = i - (y * config.mapHeight);
+
+      spawnObject.call(this, fastMap[i][k], x, y);
     }
   }
 }
