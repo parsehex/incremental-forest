@@ -22,8 +22,9 @@ class World {
 
     this._subscribers = [];
 
-    saveMe(function() {
+    saveMe(() => {
       // should be able to reload all objects and workers from fastMap
+      
       save('world.fastMap', this.fastMap);
     });
   }
