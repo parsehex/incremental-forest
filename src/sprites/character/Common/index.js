@@ -1,7 +1,7 @@
 import Common from '../../Common';
 import frames from '../../../sprite-frames';
 import config from '../../../config';
-import { addCharacter, moveCharacter, removeCharacter } from '../../../world';
+import world from '../../../world';
 import { clone, tileOutOfBounds } from '../../../utils';
 import { pixelToTile } from '../../../tiles';
 
@@ -11,7 +11,7 @@ export default class CommonCharacter extends Common {
 
     this.game.state.states.Game.groups.character.add(this);
 
-    addCharacter(this.tile.x, this.tile.y, this.objectType);
+    world.add(this.tile.x, this.tile.y, this);
   }
 
   move(nextPixelCoord) {
@@ -25,7 +25,7 @@ export default class CommonCharacter extends Common {
     const oldTileCoord = this.tile;
 
     super.move(nextPixelCoord, function() {
-      moveCharacter(oldTileCoord.x, oldTileCoord.y, this.tile.x, this.tile.y, this.objectType);
+      world.move(oldTileCoord.x, oldTileCoord.y, this.tile.x, this.tile.y, this);
     });
   }
 
@@ -39,11 +39,11 @@ export default class CommonCharacter extends Common {
   resetObject() {
     super.resetObject();
 
-    addCharacter(this.tile.x, this.tile.y, this.objectType);
+    world.add(this.tile.x, this.tile.y, this);
   }
 
   destroy() {
-    removeCharacter(this.tile.x, this.tile.y, this.objectType);
+    world.remove(this.tile.x, this.tile.y, this);
 
     super.destroy();
   }

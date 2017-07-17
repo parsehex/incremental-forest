@@ -4,7 +4,7 @@ import Collector from '../Collector';
 import objectPool from '../../../object-pool';
 import workerPool from '../../../worker-pool';
 
-import { fastMap, fastObjects } from '../../../world';
+import world from '../../../world';
 import { collidableObjects } from '../../../collisions';
 import { tileToPixel } from '../../../tiles';
 import config from '../../../config';
@@ -16,7 +16,7 @@ const workerTypes = {
 
 export default function hireWorker(workerType) {
   const workerArgs = [
-    fastMap, fastObjects, collidableObjects,
+    world.fastMap, collidableObjects,
     config.mapWidth, config.mapHeight,
     this.tile, null,
     true, // random direction order

@@ -46,17 +46,18 @@ function shuffle(array) {
 
 function findPath(data) {
   const fastMap =           data[0],
-        fastObjects =       data[1],
-        collidableObjects = data[2];
+        // fastObjects can be assembled by flattening fastMap:
+        fastObjects =       [].concat.apply([], data[0]),
+        collidableObjects = data[1];
 
-  const mapWidth =          data[3],
-        mapHeight =         data[4];
+  const mapWidth =          data[2],
+        mapHeight =         data[3];
 
   let queue =             [],
       checkedTiles =      [],
-      start =             data[5],
-      target =            data[6],
-      random =            data[7];
+      start =             data[4],
+      target =            data[5],
+      random =            data[6];
 
   if (typeof target === 'string') {
     target = [target];
@@ -122,7 +123,7 @@ function findPath(data) {
   }
 
   function checkTargetType(location, targetTypes) {
-    const mapTile = fastMap[location.y][location.x];
+    const mapTile = fastMap[(location.x * mapWidth) + location.y];
 
     if (mapTile.length === 0) return false;
 
@@ -134,7 +135,7 @@ function findPath(data) {
   }
 
   function checkTargetEmpty(location) {
-    return fastMap[location.y][location.x].length === 0;
+    return fastMap[(location.x * mapWidth) + location.y].length === 0;
   }
 
   function checkTargetLocation(location) {
@@ -165,7 +166,7 @@ function findPath(data) {
       return location;
     }
 
-    const mapTile = fastMap[y][x];
+    const mapTile = fastMap[(x * mapWidth) + y];
 
     for (let i = 0; i < collidableObjects.length; i++) {
       if (mapTile.includes(collidableObjects[i])) {

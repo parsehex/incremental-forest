@@ -12,7 +12,7 @@ export default function tryMove(direction) {
 
   const nextPixelCoord = nextCoord(this.x, this.y, direction, this.speed);
 
-  const collisions = checkCollide(nextPixelCoord.x, nextPixelCoord.y);
+  const collisions = checkCollide(nextPixelCoord.x, nextPixelCoord.y, this.id);
 
   if (collisions.collides === false || (devtools.enabled && devtools.noclip)) {
     interfaceWithObjects(collisions.objects, 'collide', this);

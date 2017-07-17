@@ -2,7 +2,7 @@ import CommonCharacter from '../Common';
 import frames from '../../../sprite-frames';
 import store from '../../../game-data/store';
 import inform from '../../../ui/inform';
-import { onChange, removeListener } from '../../../world';
+import world from '../../../world';
 
 import workerPool from '../../../worker-pool';
 
@@ -61,10 +61,10 @@ export default class extends CommonCharacter {
     // called when a worker has no available path; waits on the world to change
     this.timer.pause();
 
-    onChange(this.id, (tileX, tileY, objects) => {
+    world.subscribe(this.id, (tileX, tileY, objects) => {
       if (objects.length === 0) {
         // worker might have been stuck; try to pathfind again
-        removeListener(this.id);
+        world.unsubscribe(this.id);
         this.timer.resume();
         return;
       }
@@ -73,7 +73,7 @@ export default class extends CommonCharacter {
       for (let i = 0; i < objects.length; i++) {
         if (!this.targetObjects.includes(objects[i].objectType)) continue;
 
-        removeListener(this.id);
+        world.unsubscribe(this.id);
         this.timer.resume();
         return;
       }

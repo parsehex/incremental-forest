@@ -1,7 +1,7 @@
 import { tileToPixel } from '../../../../tiles';
 import { quickCheckCollide } from '../../../../collisions';
 import { nextCoord } from '../../../../utils';
-import { fastMap } from '../../../../world';
+import world from '../../../../world';
 
 import move from './move';
 
@@ -14,7 +14,7 @@ export default function followPath() {
   }
 
   // make sure there's still a target object where we're going
-  const objectsAtTarget = fastMap[this.path.y][this.path.x];
+  const objectsAtTarget = world.fastTile(this.path.x, this.path.y);
   let stillTarget = false;
   for (let i = 0; i < objectsAtTarget.length; i++) {
     if (this.targetObjects.includes(objectsAtTarget[i])) {

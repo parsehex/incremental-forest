@@ -1,6 +1,6 @@
 import Common from '../../Common';
 
-import { add, remove, changeType } from '../../../world';
+import world from '../../../world';
 
 export default class CommonObject extends Common {
   constructor(game, x, y, sprite, frame, id, objectType, props) {
@@ -15,37 +15,21 @@ export default class CommonObject extends Common {
 
     this.game.state.states.Game.groups.objects.add(this);
 
-    add(
-      this.tile.x, this.tile.y,
-      this.id, this.objectType,
-      this
-    );
+    world.add(this.tile.x, this.tile.y, this);
   }
 
   changeType(newType) {
-    changeType(
-      this.tile.x, this.tile.y,
-      this.objectType, newType
-    );
-
     this.objectType = newType;
   }
 
   resetObject() {
     super.resetObject();
 
-    add(
-      this.tile.x, this.tile.y,
-      this.id, this.objectType,
-      this
-    );
+    world.add(this.tile.x, this.tile.y, this);
   }
 
   destroy() {
-    remove(
-      this.tile.x, this.tile.y,
-      this.id, this.objectType,
-    );
+    world.remove(this.tile.x, this.tile.y, this);
 
     super.destroy();
   }
