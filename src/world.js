@@ -1,146 +1,130 @@
+/*
+  notes for World class:
+  - all x/y coordinates are implied tile coordinates; World doesn't deal with pixels at all
+  - where appropriate, methods accept an object which should
+      contain relevant props needed for the method (like obj.objectType)
+ */
+
 import config from './config';
-import { clone } from './utils';
-import { tileToPixel } from './tiles';
+import { indexOfObject } from './utils';
 import { save, saveMe } from './save';
 
-// fastMap just keeps object types in each tile
-// the order of items in tiles means nothing
-export const fastMap = [];
-// fastObjects keeps a list of object types in the map
-// the order of items means nothing, will get shuffled around over time
-export const fastObjects = [];
+class World {
+  constructor() {
+    // map is a 1D array of map tiles
+    // each tile is an array containing refs to objects on that tile
+    this.map = [];
 
-const map = [];
+    const len = config.mapHeight * config.mapWidth;
+    for (let i = 0; i < len; i++) {
+      this.map[i] = [];
+    }
 
-const objects = new Map();
+    this._subscribers = [];
 
-export function getMap() {
-  return clone(map);
-}
+    saveMe(function() {
+      // should be able to reload all objects and workers from fastMap
+      save('world.fastMap', this.fastMap);
+    });
+  }
 
-(function generateMap() {
-  for (let y = 0; y < config.mapHeight; y++) {
-    map[y] = [];
-    fastMap[y] = [];
+  add(x, y, object) {
+    // add an object to the map
 
-    for (let x = 0; x < config.mapWidth; x++) {
-      map[y][x] = [];
-      fastMap[y][x] = [];
+    this.tile(x, y).push(object);
+
+    this._notifySubscribers(x, y, 'add');
+  }
+  move(fromX, fromY, toX, toY, object) {
+    // move an object from one tile to a different tile
+
+    // remove the object from previous tile and inform subscribers
+    const fromTile = this.tile(fromX, fromY);
+    const fromIndex = indexOfObject(fromTile, 'id', object.id);
+    fromTile.splice(fromIndex, 1);
+
+    this._notifySubscribers(fromX, fromY, 'moveFrom');
+
+    // add object to new tile and inform subscribers
+    this.tile(toX, toY).push(object);
+
+    this._notifySubscribers(toX, toY, 'moveTo');
+  }
+  remove(x, y, object) {
+    // remove an object from the map
+
+    const tile = this.tile(x, y);
+    const tileIndex = indexOfObject(tile, 'id', object.id);
+    tile.splice(tileIndex, 1);
+
+    this._notifySubscribers(x, y, 'remove');
+  }
+
+  _notifySubscribers(x, y, eventType) {
+    // call all subscribers with event info
+
+    const len = this._subscribers.length;
+    for (let i = 0; i < len; i++) {
+      // inform the subscriber of: change coordinate, objects at tile, type of event
+      this._subscribers[i][1](x, y, this.tile(x, y), eventType);
     }
   }
-})();
+  subscribe(id, callback) {
+    // register a subscriber to world events
 
-saveMe(function() {
-  // should be able to reload all objects and workers from fastMap
-  save('world.fastMap', fastMap);
-  save('world.fastObjects', fastObjects);
-});
+    this._subscribers.push([ id, callback ]);
+  }
+  unsubscribe(id) {
+    // unregister a subscriber by id to world events
 
-export function count(type) {
-  let typeCount = 0;
+    for (let i = 0; i < this._subscribers.length; i++) {
+      // first index of subscriber is the sub's id
+      if (this._subscribers[i][0] !== id) continue;
 
-  for (let i = 0; i < fastObjects.length; i++) {
-    if (fastObjects[i] === type) typeCount++;
+      this._subscribers.splice(i, 1);
+      break;
+    }
   }
 
-  return typeCount;
-}
+  tile(x, y) {
+    // get the map tile at a x/y coordinate
 
-const subscribers = [];
+    // return an empty array if coordinates are out of bounds
+    if (
+      x < 0 || x > config.mapWidth ||
+      y < 0 || y > config.mapHeight
+    ) {
+      return [];
+    }
 
-function change(tileX, tileY) {
-  for (let i = 0; i < subscribers.length; i++) {
-    subscribers[i][1](tileX, tileY, objectsAtTile(tileX, tileY));
+    // NOTE to get index from 2D: x * width + y
+      // from https://stackoverflow.com/a/1730975
+    return this.map[(x * config.mapWidth) + y];
   }
-}
-export function removeListener(id) {
-  for (let i = 0; i < subscribers.length; i++) {
-    if (subscribers[i][0] !== id) continue;
+  fastTile(x, y) {
+    // return an array of objectTypes at x/y
 
-    subscribers.splice(i, 1);
-    return;
-  }
-}
-export function onChange(id, callback) {
-  subscribers.push([ id, callback ]);
-}
-
-export function add(tileX, tileY, id, type, object) {
-  objects.set(id, object);
-
-  map[tileY][tileX].push(id);
-  fastMap[tileY][tileX].push(type);
-
-  // add objectType to a list of objects on map
-  fastObjects.push(type);
-
-  change(tileX, tileY);
-}
-
-export function remove(tileX, tileY, id, type) {
-  const mapTile = map[tileY][tileX];
-  const fastMapTile = fastMap[tileY][tileX];
-
-  const index = mapTile.indexOf(id);
-
-  mapTile.splice(index, 1);
-  fastMapTile.splice(index, 1);
-
-  objects.delete(id);
-
-  // remove first instance of objectType (not necessarily the instance that this object added)
-  fastObjects.splice(fastObjects.indexOf(type), 1);
-
-  change(tileX, tileY);
-}
-export function changeType(tileX, tileY, oldType, newType) {
-  const fastMapTile = fastMap[tileY][tileX];
-
-  fastMapTile[fastMapTile.indexOf(oldType)] = newType;
-
-  fastObjects[fastObjects.indexOf(oldType)] = newType;
-}
-
-export function addCharacter(tileX, tileY, type) {
-  fastMap[tileY][tileX].push(type);
-  fastObjects.push(type);
-}
-export function moveCharacter(oldTileX, oldTileY, newTileX, newTileY, type) {
-  const oldMapTile = fastMap[oldTileY][oldTileX];
-  const oldIndex = oldMapTile.indexOf(type);
-
-  if (oldIndex >= 0) oldMapTile.splice(oldIndex, 1);
-
-  fastMap[newTileY][newTileX].push(type);
-}
-export function removeCharacter(tileX, tileY, type) {
-  const mapTile = fastMap[tileY][tileX];
-  const index = mapTile.indexOf(type);
-
-  if (index < 0) return;
-
-  mapTile.splice(index, 1);
-  fastObjects.splice(fastObjects.indexOf(type), 1);
-}
-
-const boundsWidth = config.mapWidth * config.tileWidth;
-const boundsHeight = config.mapHeight * config.tileHeight;
-export function objectsAtTile(tileX, tileY) {
-  const pixelCoord = tileToPixel(tileX, tileY);
-
-  if (
-    pixelCoord.x < 0 || pixelCoord.x > boundsWidth ||
-    pixelCoord.y < 0 || pixelCoord.y > boundsHeight
-  ) {
-    return [];
+    return this.tile(x, y).map((obj) => obj.objectType);
   }
 
-  const mapTile = map[tileY][tileX];
-  const tileObjects = [];
+  get fastMap() {
+    // return a simple copy of this.map populated with objectTypes instead of entire objects
 
-  for (let i = 0, len = mapTile.length; i < len; i++) {
-    tileObjects.push(objects.get(mapTile[i]));
+    const fastMap = [];
+
+    const ilen = this.map.length;
+    for (let i = 0; i < ilen; i++) {
+      fastMap[i] = [];
+
+      const klen = this.map[i].length;
+
+      for (let k = 0; k < klen; k++) {
+        fastMap[i].push(this.map[i][k].objectType);
+      }
+    }
+
+    return fastMap;
   }
-
-  return tileObjects;
 }
+
+export default new World();
