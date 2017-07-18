@@ -16,7 +16,7 @@ export default function checkCollide(pixX, pixY, id) {
   }
 
   const tileCoord = pixelToTile(pixX, pixY);
-  const objects = world.tile(tileCoord.x, tileCoord.y);
+  const objects = world.tile(tileCoord.x, tileCoord.y).slice(); // copy array
 
   for (let i = 0, len = objects.length; i < len; i++) {
     if (objects[i].collides !== false && objects[i].id !== id) {
