@@ -90,6 +90,12 @@ export function clear() {
   autoSave = false;
 }
 
+window.addEventListener('error', function() {
+  // try to catch errors and prevent saving (in case the error could cause a corrupt save)
+
+  autoSave = false;
+});
+
 window.addEventListener('beforeunload', function() {
   callSaves();
 
