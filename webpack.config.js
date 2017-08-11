@@ -3,20 +3,15 @@ const options = {
   quick: false,
 };
 
-var path = require('path');
-var webpack = require('webpack');
-// var BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+const path = require('path');
+const webpack = require('webpack');
 
-// Phaser webpack config
-var phaserModule = path.join(__dirname, '/node_modules/phaser-ce/');
-var phaser = path.join(phaserModule, 'build/custom/phaser-split.js');
-var pixi = path.join(phaserModule, 'build/custom/pixi.js');
-var p2 = path.join(phaserModule, 'build/custom/p2.js');
+const phaserModule = path.join(__dirname, '/node_modules/phaser-ce/');
+const phaser = path.join(phaserModule, 'build/custom/phaser-split.js');
+const pixi = path.join(phaserModule, 'build/custom/pixi.js');
+const p2 = path.join(phaserModule, 'build/custom/p2.js');
 
-// var tilemapWalker = path.join(__dirname, '/plugins/TilemapWalker');
-// var phasetips = path.join(__dirname, '/plugins/Phasetips');
-
-var definePlugin = new webpack.DefinePlugin({
+const definePlugin = new webpack.DefinePlugin({
   __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV || 'true'))
 });
 
@@ -29,8 +24,6 @@ const config = {
       'pixi',
       'p2',
       'phaser',
-      // 'tilemap-walker',
-      // 'phasetips',
     ],
   },
   devtool: 'cheap-source-map',
@@ -44,13 +37,6 @@ const config = {
   plugins: [
     definePlugin,
     new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'vendor.bundle.js'}),
-    // new BrowserSyncPlugin({
-    //   host: process.env.IP || 'localhost',
-    //   port: process.env.PORT || 3000,
-    //   server: {
-    //     baseDir: ['./', './build']
-    //   }
-    // }),
   ],
   module: {
     rules: [
@@ -69,8 +55,6 @@ const config = {
       'phaser': phaser,
       'pixi': pixi,
       'p2': p2,
-      // 'tilemap-walker': tilemapWalker,
-      // 'phasetips': phasetips,
     }
   }
 };
