@@ -1,5 +1,3 @@
-import Phaser from 'phaser';
-
 import { pixelToTile } from '../../tiles';
 import objectPool from '../../object-pool';
 

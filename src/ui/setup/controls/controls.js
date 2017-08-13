@@ -10,25 +10,25 @@ export default function handleKeyChange(buttons, keysList, changedKey) {
 
   switch (changedKey) {
     case buttons.up: {
-      if (!key.down) break;
+      if (!key.justDown) break;
 
       move.call(player, key, 'UP');
       break;
     }
     case buttons.left: {
-      if (!key.down) break;
+      if (!key.justDown) break;
 
       move.call(player, key, 'LEFT');
       break;
     }
     case buttons.down: {
-      if (!key.down) break;
+      if (!key.justDown) break;
 
       move.call(player, key, 'DOWN');
       break;
     }
     case buttons.right: {
-      if (!key.down) break;
+      if (!key.justDown) break;
 
       move.call(player, key, 'RIGHT');
       break;
