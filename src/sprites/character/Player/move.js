@@ -19,6 +19,6 @@ export default function tryMove(direction) {
 
     this.move(nextPixelCoord);
   } else {
-    this.cursor.move();
+    this.cursor.move(this);
   }
 }
