@@ -19,7 +19,7 @@ export default class CommonCharacter extends Common {
     if (tileOutOfBounds(nextTileCoord.x, nextTileCoord.y)) return;
 
     if (this.cursor) {
-      this.cursor.move();
+      this.cursor.move(nextPixelCoord);
     }
 
     const oldTileCoord = this.tile;

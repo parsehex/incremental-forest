@@ -4,9 +4,8 @@ import interfaceWithObjects from '../../Common/interface-objects';
 import { tileToPixel } from '../../../../tiles';
 import { nextCoord } from '../../../../utils';
 
-export default function move() {
-  let cursorTileCoord = nextCoord(this.player.tile.x, this.player.tile.y, this.player.faceDirection, 1);
-  let cursorPixelCoord = tileToPixel(cursorTileCoord.x, cursorTileCoord.y);
+export default function move(nextPixelCoord) {
+  const cursorPixelCoord = nextCoord(nextPixelCoord.x, nextPixelCoord.y, this.player.faceDirection, 32);
 
   cursorPixelCoord.x -= 16;
   cursorPixelCoord.y -= 16;
