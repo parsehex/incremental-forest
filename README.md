@@ -1,9 +1,8 @@
-# Phaser + ES6 + Webpack.
-#### A bootstrap project to create games with Phaser + ES6 + Webpack.
+# Incremental Forest
+#### An attempt to make a character-controlled incremental game.
 
-![Phaser+ES6+Webpack](https://raw.githubusercontent.com/lean/phaser-es6-webpack/master/assets/images/phaser-es6-webpack.jpg)
 
-[![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
+## The rest of this readme is from the forked repo https://github.com/lean/phaser-es6-webpack
 
 
 ## Features
