@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+var TerserPlugin = require('terser-webpack-plugin');
 
 // Phaser webpack config
 var phaserModule = path.join(__dirname, '/node_modules/phaser-ce/');
@@ -12,6 +13,7 @@ var definePlugin = new webpack.DefinePlugin({
 });
 
 module.exports = {
+  mode: 'production',
   entry: {
     app: [
       'babel-polyfill',
@@ -22,19 +24,23 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: './dist/',
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
+  },
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin()]
   },
   plugins: [
     definePlugin,
-    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-    new webpack.optimize.UglifyJsPlugin({
-      drop_console: true,
-      minimize: true,
-      output: {
-        comments: false,
-      },
-    }),
-    new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'vendor.bundle.js'}),
+    new webpack.IgnorePlugin({ resourceRegExp: /^\.\/locale$/, contextRegExp: /moment$/ }),
+    // new webpack.optimize.UglifyJsPlugin({
+    //   drop_console: true,
+    //   minimize: true,
+    //   output: {
+    //     comments: false,
+    //   },
+    // }),
+    // new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'vendor.bundle.js' }),
   ],
   module: {
     rules: [
@@ -44,16 +50,13 @@ module.exports = {
       { test: /p2\.js/, use: ['expose-loader?p2'] },
     ]
   },
-  node: {
-    fs: 'empty',
-    net: 'empty',
-    tls: 'empty',
-  },
+  node: false,
   resolve: {
     alias: {
       'phaser': phaser,
       'pixi': pixi,
       'p2': p2,
     },
+    preferRelative: true
   },
 };

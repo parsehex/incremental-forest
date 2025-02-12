@@ -10,6 +10,8 @@ html(lang='en')
     link(href='https://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet')
     link(rel='stylesheet' href='assets/css/tippy.min.css')
     link(rel='stylesheet' href='css/style.css')
+    script
+      | window.global = window;
   body
     div.container-fluid
       div#game.col-xs-12.col-md-6.text-center
@@ -22,4 +24,4 @@ html(lang='en')
         include ./menu.pug
     script(src='assets/js/tippy.min.js' defer)
     script(src='dist/vendor.bundle.js' defer)
-    script(src='dist/bundle.js' defer)
+    script(src='dist/app.bundle.js' defer)
