@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack",
-    "deploy": "webpack --config webpack.production.config.js && npm run sass-build",
+    "deploy": "webpack --config webpack.production.config.js && npm run sass-build && npm run pug-build",
     "lint": "eslint ./src/**/*.js",
     "server": "ws -p 8080 -c -n",
     "sprites": "node build-spritesheets",
