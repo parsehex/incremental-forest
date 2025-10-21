@@ -4,18 +4,24 @@ import { load } from '../../../../save';
 import { tileToPixel } from '../../../../tiles';
 
 import Tree from '../../../../sprites/object/Tree';
+import Boulder from '../../../../sprites/object/Boulder';
 import PineCone from '../../../../sprites/object/PineCone';
 import Log from '../../../../sprites/object/Log';
+import Rocks from '../../../../sprites/object/Rocks';
 import Water from '../../../../sprites/object/Water';
 import House from '../../../../sprites/object/House';
 
 import Chopper from '../../../../sprites/character/Chopper';
 import Collector from '../../../../sprites/character/Collector';
 
+// handle instantiating objects from the saved map from localstorage
+
 const objectTypes = {
   tree: Tree,
+  boulder: Boulder,
   'pine-cone': PineCone,
   log: Log,
+  rocks: Rocks,
   water: Water,
   house: House,
   chopper: Chopper,

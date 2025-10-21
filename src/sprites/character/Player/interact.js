@@ -17,7 +17,11 @@ export default function tryInteract() {
 
   const mode = getMode.call(this);
 
-  if (mode === modes.INTERACT && selectedItem === 'wood-axe' && cursorObjectTypes.includes('tree')) {
+  if (
+    mode === modes.INTERACT &&
+    (selectedItem === 'wood-axe' || selectedItem === 'pick-axe') &&
+    (cursorObjectTypes.includes('tree') || cursorObjectTypes.includes('boulder'))
+  ) {
     interfaceWithObjects(cursorObjects, 'interact', this);
     return;
   }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.1" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="32" tileheight="32" nextobjectid="5100">
- <tileset firstgid="1" name="sprites" tilewidth="32" tileheight="32" tilecount="9" columns="9">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="5108">
+ <tileset firstgid="1" name="sprites" tilewidth="32" tileheight="32" tilecount="10" columns="10">
   <image source="../assets/spritesheets/tiles.png" width="320" height="32"/>
  </tileset>
- <layer name="background" width="30" height="30">
+ <layer id="1" name="background" width="30" height="30">
   <data encoding="csv">
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
@@ -37,11 +37,11 @@
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
 </data>
  </layer>
- <objectgroup name="objects" visible="0">
+ <objectgroup id="2" name="objects" visible="0">
   <object id="1" name="playerStart" gid="1" x="480" y="416" width="32" height="32"/>
-  <object id="741" name="workerStart" gid="1" x="672" y="448" width="32" height="32"/>
+  <object id="741" name="workerStart" gid="1" x="608" y="384" width="32" height="32"/>
  </objectgroup>
- <objectgroup name="trees">
+ <objectgroup id="3" name="trees">
   <object id="2759" gid="5" x="672" y="32" width="32" height="32"/>
   <object id="2763" gid="5" x="448" y="64" width="32" height="32"/>
   <object id="2767" gid="5" x="608" y="32" width="32" height="32"/>
@@ -807,7 +807,7 @@
   <object id="5061" gid="5" x="672" y="416" width="32" height="32"/>
   <object id="5062" gid="5" x="640" y="416" width="32" height="32"/>
   <object id="5063" gid="5" x="640" y="448" width="32" height="32"/>
-  <object id="5064" gid="5" x="672" y="448" width="32" height="32"/>
+  <object id="5064" gid="5" x="640" y="384" width="32" height="32"/>
   <object id="5065" gid="5" x="256" y="576" width="32" height="32"/>
   <object id="5066" gid="5" x="288" y="576" width="32" height="32"/>
   <object id="5067" gid="5" x="320" y="576" width="32" height="32"/>
@@ -843,5 +843,11 @@
   <object id="5098" gid="5" x="320" y="352" width="32" height="32"/>
   <object id="5099" gid="5" x="320" y="416" width="32" height="32"/>
  </objectgroup>
- <objectgroup name="water"/>
+ <objectgroup id="4" name="water"/>
+ <objectgroup id="6" name="boulders">
+  <object id="5104" gid="10" x="576" y="448" width="32" height="32"/>
+  <object id="5105" gid="10" x="544" y="384" width="32" height="32"/>
+  <object id="5106" gid="10" x="544" y="416" width="32" height="32"/>
+  <object id="5107" gid="10" x="544" y="448" width="32" height="32"/>
+ </objectgroup>
 </map>

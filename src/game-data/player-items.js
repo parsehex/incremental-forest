@@ -13,6 +13,11 @@ const defaultItems = {
     rank: 0,
     sellable: false,
   },
+  'pick-axe': {
+    value: false,
+    rank: 0,
+    sellable: false,
+  },
   bucket: {
     value: false,
     sellable: false,
@@ -37,9 +42,16 @@ const defaultItems = {
     max: itemMax,
     sellable: false,
   },
+  rocks: {
+    value: 0,
+    max: itemMax,
+    sellable: true,
+  },
 };
 
 const items = merge(defaultItems, loadedItems);
+
+// re-hook up place-able items
 items['pine-cone'].place = PineCone;
 items.house.place = House;
 

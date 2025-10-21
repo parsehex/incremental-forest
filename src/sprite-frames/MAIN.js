@@ -10,4 +10,5 @@ export default {
   DIRT:          6,
   ROCKS:         7,
   HOUSE:         8,
+  BOULDER:       9,
 };

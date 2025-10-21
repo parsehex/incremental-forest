@@ -78,6 +78,14 @@ export default class Inventory {
   set(item, prop, value) {
     if (typeof value !== 'number') {
       this._items[item][prop] = value;
+      
+      if (prop === 'value') {
+        if (value) {
+          this.addToSlots(item);
+        } else {
+          this.removeFromSlots(item);
+        }
+      }
 
       saveItems.call(this);
       return;

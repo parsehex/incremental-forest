@@ -1,7 +1,12 @@
-const Jimp    = require("jimp");
-const fs      = require('fs');
-const path    = require('path');
-const spritesheets = require('./spritesheets.json');
+import { Jimp } from "jimp";
+import fs from 'fs';
+import { join } from 'path';
+import spritesheets from './spritesheets.json' with { type: "json" };
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const pathPrefix = '../assets';
 
@@ -32,22 +37,21 @@ for (let i = 0; i < spritesheets.length; i++) {
   const height = size;
 
   // create a new image for this spritesheet
-  new Jimp(width, height, function (err, spritesheet) {
-    const promises = [];
+  const spritesheet = new Jimp({width, height});
+  const promises = [];
 
-    // loop through sprites
-    for (let i = 0; i < sprites.length; i++) {
-      // read sprite at specified file, call concat once read to composite into spritesheet
-      let spritePath = path.join(__dirname, pathPrefix, sprites[i]);
-      promises.push(
-        Jimp.read(spritePath).then(concat.bind({ size }, i, spritesheet))
-      );
-    }
+  // loop through sprites
+  for (let i = 0; i < sprites.length; i++) {
+    // read sprite at specified file, call concat once read to composite into spritesheet
+    let spritePath = join(__dirname, pathPrefix, sprites[i]);
+    promises.push(
+      Jimp.read(spritePath).then(concat.bind({ size }, i, spritesheet))
+    );
+  }
 
-    // once all sprites are composited to the spritesheet, write the spritesheet image to disk
-    Promise.all(promises).then(function() {
-      spritesheet.write(path.join(__dirname, pathPrefix, '/spritesheets/', name + '.png'));
-    })
+  // once all sprites are composited to the spritesheet, write the spritesheet image to disk
+  Promise.all(promises).then(function() {
+    spritesheet.write(join(__dirname, pathPrefix, '/spritesheets/', name + '.png'));
   });
 }
 

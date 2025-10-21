@@ -2,8 +2,6 @@ class ObjectPool {
   constructor() {
     this.pools = {};
 
-    this.logCount = 0;
-
     window.Pool = this.pools;
   }
   new(objectType, objectClass, arg) {

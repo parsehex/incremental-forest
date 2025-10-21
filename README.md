@@ -9,3 +9,8 @@ This project was originally started from the [phaser-es6-webpack](https://github
 ## License
 
 This project is licensed under MIT.
+
+Some art has been used from the following places:
+
+- <https://craftpix.net/freebies/free-simple-summer-top-down-vector-tileset/?num=2&count=93&sq=simple&pos=10>
+- <https://www.svgrepo.com/svg/275512/pickaxe>

@@ -7,6 +7,10 @@ import interact from './interact';
 import place from './place';
 import { facing, notFacing } from './facing';
 
+// i think we're gonna reuse and repurpose this to be ObjectSeed
+// the object will work for growable objects
+// (Tree, Boulder)
+
 export default class extends CommonObject {
   constructor({ game, x, y, placed }) {
     const importantProps = {

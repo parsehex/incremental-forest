@@ -10,6 +10,15 @@ export default {
       getGame().player.inventory.increment('wood-axe', 'rank');
     },
   },
+  'pick-axe': {
+    count: 0,
+    basePrice: 14,
+    multiplier: 1.85,
+    max: 24,
+    buyCallback: function() {
+      getGame().player.inventory.increment('pick-axe', 'rank');
+    },
+  },
   'pine-cone': {
     count: 0,
     basePrice: 2.50,

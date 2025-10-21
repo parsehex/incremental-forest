@@ -21,6 +21,7 @@ var definePlugin = new webpack.DefinePlugin({
 });
 
 const config = {
+  mode: 'development',
   entry: {
     app: [
       path.resolve(__dirname, 'src/main.js')
@@ -38,12 +39,11 @@ const config = {
     pathinfo: true,
     path: path.resolve(__dirname, 'dist'),
     publicPath: './dist/',
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
   },
   watch: options.watch,
   plugins: [
     definePlugin,
-    new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'vendor.bundle.js'}),
     // new BrowserSyncPlugin({
     //   host: process.env.IP || 'localhost',
     //   port: process.env.PORT || 3000,
@@ -52,6 +52,9 @@ const config = {
     //   }
     // }),
   ],
+  optimization: {
+    minimize: false,
+  },
   module: {
     rules: [
       { test: /pixi\.js/, use: ['expose-loader?PIXI'] },
@@ -59,11 +62,7 @@ const config = {
       { test: /p2\.js/, use: ['expose-loader?p2'] },
     ],
   },
-  node: {
-    fs: 'empty',
-    net: 'empty',
-    tls: 'empty',
-  },
+  node: false,
   resolve: {
     alias: {
       'phaser': phaser,
@@ -71,7 +70,8 @@ const config = {
       'p2': p2,
       // 'tilemap-walker': tilemapWalker,
       // 'phasetips': phasetips,
-    }
+    },
+    preferRelative: true,
   }
 };
 
