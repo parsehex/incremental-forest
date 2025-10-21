@@ -2,7 +2,7 @@ import getChance from '../../../game-data/chances';
 import { clamp, tryChance } from '../../../utils';
 import objectPool from '../../../object-pool';
 import devtools from '../../../devtools';
-import ProgressBar from './ProgressBar';
+import ProgressBar from '../../Common/ProgressBar';
 
 import Log from '../Log';
 import PineCone from '../PineCone';

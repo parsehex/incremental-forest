@@ -12,5 +12,5 @@ export default function draw() {
   this.graphic.x += 2;
   this.graphic.y += 22;
 
-  this.tree.addChild(this.graphic);
+  this.sprite.addChild(this.graphic);
 }
